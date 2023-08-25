@@ -55,7 +55,8 @@ public class ProductDAO implements DAO <ProductModel>{
                          "from product p "+
                          "join invoice_product ip ON (p.productId = ip.productId)"+
                          "group by p.productId "+
-                         "order by recaudo desc ";
+                         "order by recaudo desc "+
+						 "limit 1";
 
         PreparedStatement query = connection.prepareStatement(product);
         ResultSet result = query.executeQuery();
