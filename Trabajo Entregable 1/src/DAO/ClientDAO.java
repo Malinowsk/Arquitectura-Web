@@ -54,7 +54,6 @@ public class ClientDAO implements DAO <ClientModel> {
                        "FROM client c JOIN invoice i ON (c.clientId = i.clientId) "+
                        "JOIN invoice_product ip ON(i.invoiceId = ip.invoiceId) "+
                        "JOIN product p ON (p.productId = ip.productId) "+
-                       "WHERE c.clientId = i.clientId "+ 
                        "GROUP BY c.clientId "+  
                        "ORDER BY Facturado DESC ";
         
