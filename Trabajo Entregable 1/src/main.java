@@ -2,7 +2,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import Model.ClientModel;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 
@@ -54,10 +56,13 @@ public class main {
         daoProduct.cargar(product);
         daoInvoiceProduct.cargar(invoiceProduct);
 
-        System.out.println("Producto que mas recaudo: ");
-		System.out.println(daoProduct.highestGrossingProduct());
+        System.out.println("Producto que mas recaudo: " + "\n");
+		System.out.println("\t" + daoProduct.highestGrossingProduct() + "\n");
 
-        System.out.println("Listado de  clientes ordenado por mayor facturacion: ");
-		System.out.println(daoClient.getListClientThatInvoiceTheMost());
+        System.out.println("Listado de  clientes ordenado por mayor facturacion: " + "\n");
+        for (ClientModel clientAux : daoClient.getListClientThatInvoiceTheMost() ) {
+            System.out.println("\t" + clientAux);
+        }
+
     }
 }

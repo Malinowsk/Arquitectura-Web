@@ -40,8 +40,7 @@ public class ClientModel {
     @Override
 
     public String toString() {
-        return "ClientModel [clientEmail=" + clientEmail + ", clientId=" + clientId + ", clientName=" + clientName
-                + "]";
+        return  "Id= " + clientId + " , Name= " + clientName + " , Email= " + clientEmail;
     }
 
 }

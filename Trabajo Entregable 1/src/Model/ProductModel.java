@@ -38,6 +38,6 @@ public class ProductModel {
 
     @Override
     public String toString() {
-        return "ProductModel [name=" + name + ", productId=" + productId + ", value=" + value + "]";
+        return "Product Id= " + productId + ", Name= " + name + ", Value= " + value ;
     }
 }

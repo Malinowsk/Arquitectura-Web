@@ -7,10 +7,6 @@ import DAO.InvoiceDAO;
 import DAO.InvoiceProductDAO;
 import DAO.ProductDAO;
 
-/**
- * AbstractFactory
- * The AbstractFactory class is used to create the DAOs.
- */
 public abstract class AbstractFactory {
 
 	public abstract ClientDAO getDAOClient() throws SQLException;
