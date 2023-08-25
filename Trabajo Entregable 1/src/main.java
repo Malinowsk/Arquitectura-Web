@@ -56,10 +56,10 @@ public class main {
         daoProduct.cargar(product);
         daoInvoiceProduct.cargar(invoiceProduct);
 
-        System.out.println("Producto que mas recaudo: " + "\n");
+        System.out.println("Producto que más recaudo: " + "\n");
 		System.out.println("\t" + daoProduct.highestGrossingProduct() + "\n");
 
-        System.out.println("Listado de  clientes ordenado por mayor facturacion: " + "\n");
+        System.out.println("Listado de  clientes ordenado por mayor facturación: " + "\n");
         for (ClientModel clientAux : daoClient.getListClientThatInvoiceTheMost() ) {
             System.out.println("\t" + clientAux);
         }

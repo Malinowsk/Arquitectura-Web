@@ -53,10 +53,9 @@ public class ProductDAO implements DAO <ProductModel>{
 
         String product = "select p.productId, p.name, sum(p.value * ip.quantity) as recaudo "+
                          "from product p "+
-                         "inner join invoice_product ip "+
+                         "join invoice_product ip ON (p.productId = ip.productId)"+
                          "group by p.productId "+
-                         "order by recaudo desc "+
-                         "limit 1 ";
+                         "order by recaudo desc ";
 
         PreparedStatement query = connection.prepareStatement(product);
         ResultSet result = query.executeQuery();
