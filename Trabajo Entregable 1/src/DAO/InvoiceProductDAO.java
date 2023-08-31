@@ -12,7 +12,7 @@ public class InvoiceProductDAO implements DAO <InvoiceProductModel>{
 
     @Override
     public void cargar(CSVParser datos) throws SQLException {
-        connection = ConexionMySQL.conectar();
+        connection = ConexionMySQL.getInstance().conectar();
 		String insert = "INSERT INTO invoice_product "+
                         "(invoiceId, productId, quantity) "+ 
                         "VALUES (?, ?, ?)"; 
@@ -30,7 +30,7 @@ public class InvoiceProductDAO implements DAO <InvoiceProductModel>{
 
     @Override
     public void createTable() throws SQLException {
-        connection = ConexionMySQL.conectar();
+        connection = ConexionMySQL.getInstance().conectar();
  
 		String invoiceProduct = "CREATE TABLE invoice_product(" +
                                 "invoiceId INT," +

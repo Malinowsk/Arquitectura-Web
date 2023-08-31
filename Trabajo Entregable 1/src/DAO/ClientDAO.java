@@ -15,7 +15,7 @@ public class ClientDAO implements DAO <ClientModel> {
 
     @Override
     public void cargar(CSVParser datos) throws SQLException {
-        connection = ConexionMySQL.conectar();
+        connection = ConexionMySQL.getInstance().conectar();
 		String insert = "INSERT INTO client "+
                         "(clientId, clientName, clientEmail) "+ 
                         "VALUES (?, ?, ?)"; 
@@ -33,7 +33,7 @@ public class ClientDAO implements DAO <ClientModel> {
 
     @Override
     public void createTable() throws SQLException {
-        connection = ConexionMySQL.conectar();
+        connection = ConexionMySQL.getInstance().conectar();
       
 		String client = "CREATE TABLE client( "+
                         "clientId INT, "+
@@ -46,7 +46,7 @@ public class ClientDAO implements DAO <ClientModel> {
     }
 
     public ArrayList<ClientModel> getListClientThatInvoiceTheMost() throws SQLException{
-        connection = ConexionMySQL.conectar();
+        connection = ConexionMySQL.getInstance().conectar();
 
         ArrayList<ClientModel> clients = new ArrayList<ClientModel>();
 
@@ -66,7 +66,7 @@ public class ClientDAO implements DAO <ClientModel> {
         }
 
         connection.commit();
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
 		ps.close();
 		result.close();
 

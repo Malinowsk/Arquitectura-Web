@@ -18,7 +18,15 @@ public class ConexionMySQL extends AbstractFactory{
 	private static final String USER = "root";
 	private static final String PASS = "";
 
-	public static Connection conectar() {
+	private static ConexionMySQL instance = new ConexionMySQL();
+	
+	private ConexionMySQL() {};
+	
+	public static synchronized ConexionMySQL getInstance() {
+		return instance;
+	}
+	
+	public Connection conectar() {
 		try {
 			Class.forName(DRIVER).getDeclaredConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -29,7 +37,7 @@ public class ConexionMySQL extends AbstractFactory{
 		
 		try {
 			conn = DriverManager.getConnection(URI, USER, PASS);
-			conn.setAutoCommit(false);
+			conn.setAutoCommit(false);	
 			return conn;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,6 +45,17 @@ public class ConexionMySQL extends AbstractFactory{
 		return null;
 	}
 	
+	public void cerrarConn() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void ejecutarQuery(String query) {
+		
+	}
 	
 	@Override
 	public ClientDAO getDAOClient() throws SQLException {

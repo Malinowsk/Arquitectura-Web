@@ -23,7 +23,7 @@ public class main {
     private static InvoiceProductDAO daoInvoiceProduct;
     private static ProductDAO daoProduct;
 
-    private static AbstractFactory factory = new ConexionMySQL();
+    private static AbstractFactory factory = ConexionMySQL.getInstance();
 
     public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
 
@@ -32,7 +32,7 @@ public class main {
         daoInvoiceProduct = factory.getDAOInvoiceProduct();
         daoProduct = factory.getDAOProduct();
 
-        daoClient.createTable();
+        /*daoClient.createTable();
         daoInvoice.createTable();
         daoProduct.createTable();
         daoInvoiceProduct.createTable();
@@ -50,11 +50,10 @@ public class main {
         @SuppressWarnings("deprecation")
         CSVParser product = CSVFormat.DEFAULT.withHeader().parse(new FileReader("./src/Csv/productos.csv"));
 
-
         daoClient.cargar(client);
         daoInvoice.cargar(invoice);
         daoProduct.cargar(product);
-        daoInvoiceProduct.cargar(invoiceProduct);
+        daoInvoiceProduct.cargar(invoiceProduct);*/
 
         System.out.println("Producto que más recaudo: " + "\n");
 		System.out.println("\t" + daoProduct.highestGrossingProduct() + "\n");

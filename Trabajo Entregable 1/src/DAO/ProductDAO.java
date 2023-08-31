@@ -13,7 +13,7 @@ public class ProductDAO implements DAO <ProductModel>{
 
     @Override
     public void cargar(CSVParser datos) throws SQLException {
-        connection = ConexionMySQL.conectar();
+        connection = ConexionMySQL.getInstance().conectar();
 		String insert = "INSERT INTO product "+
                         "(productId, name, value) "+ 
                         "VALUES (?, ?, ?)"; 
@@ -32,7 +32,7 @@ public class ProductDAO implements DAO <ProductModel>{
 
     @Override
     public void createTable() throws SQLException {
-        connection = ConexionMySQL.conectar();
+        connection = ConexionMySQL.getInstance().conectar();
 
 		String product = "CREATE TABLE product(" +
                                 "productId INT," +
@@ -46,7 +46,7 @@ public class ProductDAO implements DAO <ProductModel>{
 
     public ProductModel highestGrossingProduct () throws SQLException{
         //we established the connection
-        connection = ConexionMySQL.conectar();
+        connection = ConexionMySQL.getInstance().conectar();
 
         //I create a variable to save the product that I collect the most
         ProductModel highestGrossingProduct = null;
