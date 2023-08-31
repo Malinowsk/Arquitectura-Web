@@ -7,4 +7,7 @@ public interface DAO<T>{
 
     void cargar(CSVParser datos) throws SQLException;
 	void createTable() throws SQLException;
+
+
+
 }
