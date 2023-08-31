@@ -28,7 +28,7 @@ public class ClientDAO implements DAO <ClientModel> {
 			connection.commit();
 			ps.close();
 		}
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ClientDAO implements DAO <ClientModel> {
                         "PRIMARY KEY (clientId)) ";
 		connection.prepareStatement(client).execute();
 		connection.commit();
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
     }
 
     public ArrayList<ClientModel> getListClientThatInvoiceTheMost() throws SQLException{

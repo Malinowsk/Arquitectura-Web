@@ -25,7 +25,7 @@ public class InvoiceProductDAO implements DAO <InvoiceProductModel>{
 			connection.commit();
 			ps.close();
 		}
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
     }
 
     @Override
@@ -43,6 +43,6 @@ public class InvoiceProductDAO implements DAO <InvoiceProductModel>{
                                 "references product(productId))";
 		connection.prepareStatement(invoiceProduct).execute();
 		connection.commit();
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
     }
 }

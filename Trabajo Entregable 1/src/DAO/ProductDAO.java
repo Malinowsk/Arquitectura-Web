@@ -26,7 +26,7 @@ public class ProductDAO implements DAO <ProductModel>{
 			connection.commit();
 			ps.close();
 		}
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
     }
 
 
@@ -41,7 +41,7 @@ public class ProductDAO implements DAO <ProductModel>{
                                 "PRIMARY KEY (productId))";
 		connection.prepareStatement(product).execute();
 		connection.commit();
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
     }
 
     public ProductModel highestGrossingProduct () throws SQLException{
@@ -69,7 +69,7 @@ public class ProductDAO implements DAO <ProductModel>{
 		
 		query.close();
 		result.close();
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
 		return highestGrossingProduct;
     }
 } 

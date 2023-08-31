@@ -25,7 +25,7 @@ public class InvoiceDAO implements DAO <InvoiceModel>{
 			connection.commit();
 			ps.close();
 		}
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
     }
 
     @Override
@@ -39,6 +39,6 @@ public class InvoiceDAO implements DAO <InvoiceModel>{
                         "references client(clientId)) ";
 		connection.prepareStatement(invoice).execute();
 		connection.commit();
-		connection.close();
+		ConexionMySQL.getInstance().cerrarConn();
     }    
 }
