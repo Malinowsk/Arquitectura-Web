@@ -16,11 +16,10 @@ public abstract class AbstractFactory {
 	public abstract InvoiceProductDAO getDAOInvoiceProduct() throws SQLException;
 	public abstract ProductDAO getDAOProduct() throws SQLException;
 
-	private static ConexionMySQL factoryMySQL = new ConexionMySQL();
 	public static AbstractFactory getDAOFactory(int factory){
 		switch (factory)
 		{
-			case MYSQL_DB: return factoryMySQL.getInstance();
+			case MYSQL_DB: return ConexionMySQL.getInstance();
 			default:return null;
 		}
 	}

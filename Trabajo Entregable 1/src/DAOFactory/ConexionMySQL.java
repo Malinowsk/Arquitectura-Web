@@ -20,7 +20,7 @@ public class ConexionMySQL extends AbstractFactory{
 
 	private static ConexionMySQL instance = new ConexionMySQL();
 	
-	ConexionMySQL() {};
+	private ConexionMySQL() {};
 	
 	public static synchronized ConexionMySQL getInstance() {
 		return instance;
@@ -55,7 +55,7 @@ public class ConexionMySQL extends AbstractFactory{
 	
 	@Override
 	public ClientDAO getDAOClient() throws SQLException {
-		return new ClientDAO(); // ver si tiene q ser un singleton
+		return new ClientDAO();
 	}
 
 	@Override
