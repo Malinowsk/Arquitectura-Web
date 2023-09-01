@@ -1,4 +1,5 @@
 package DAO;
+import DTO.TotalCollectedByProductDTO;
 import Model.ProductModel;
 import DAOFactory.ConexionMySQL;
 import java.sql.Connection;
@@ -44,12 +45,12 @@ public class ProductDAO implements DAO <ProductModel>{
 		ConexionMySQL.getInstance().cerrarConn();
     }
 
-    public ProductModel highestGrossingProduct () throws SQLException{
+    public TotalCollectedByProductDTO highestGrossingProduct () throws SQLException{
         //we established the connection
         connection = ConexionMySQL.getInstance().conectar();
 
         //I create a variable to save the product that I collect the most
-        ProductModel highestGrossingProduct = null;
+		TotalCollectedByProductDTO highestGrossingProduct = null;
 
         String product = "select p.productId, p.name, sum(p.value * ip.quantity) as recaudo "+
                          "from product p "+
@@ -62,7 +63,7 @@ public class ProductDAO implements DAO <ProductModel>{
         ResultSet result = query.executeQuery();
 
         while(result.next()) {
-			      highestGrossingProduct = new ProductModel(result.getInt(1), 
+			      highestGrossingProduct = new TotalCollectedByProductDTO(result.getInt(1),
                                                       result.getString(2), 
                                                       result.getFloat(3));
 		    }

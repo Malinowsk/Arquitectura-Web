@@ -1,4 +1,5 @@
 package DAO;
+import DTO.TotalInvoicedByTheClientDTO;
 import Model.ClientModel;
 import DAOFactory.ConexionMySQL;
 import java.sql.Connection;
@@ -45,10 +46,10 @@ public class ClientDAO implements DAO <ClientModel> {
 		ConexionMySQL.getInstance().cerrarConn();
     }
 
-    public ArrayList<ClientModel> getListClientThatInvoiceTheMost() throws SQLException{
+    public ArrayList<TotalInvoicedByTheClientDTO> getListClientThatInvoiceTheMost() throws SQLException{
         connection = ConexionMySQL.getInstance().conectar();
 
-        ArrayList<ClientModel> clients = new ArrayList<ClientModel>();
+        ArrayList<TotalInvoicedByTheClientDTO> clients = new ArrayList<TotalInvoicedByTheClientDTO>();
 
         String query = "SELECT c.*, SUM(p.value * ip.quantity) as Facturado "+
                        "FROM client c JOIN invoice i ON (c.clientId = i.clientId) "+
@@ -61,7 +62,7 @@ public class ClientDAO implements DAO <ClientModel> {
         ResultSet result = ps.executeQuery();
 
         while(result.next()){
-            ClientModel client = new ClientModel (result.getInt(1), result.getString(2), result.getString(3));
+            TotalInvoicedByTheClientDTO client = new TotalInvoicedByTheClientDTO(result.getInt(1), result.getString(2), result.getFloat(4));
             clients.add(client);
         }
 

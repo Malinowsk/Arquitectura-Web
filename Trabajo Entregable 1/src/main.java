@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import DTO.TotalInvoicedByTheClientDTO;
 import Model.ClientModel;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -54,11 +55,11 @@ public class main {
         daoProduct.cargar(product);
         daoInvoiceProduct.cargar(invoiceProduct);
 
-        System.out.println("Producto que más recaudo: " + "\n");
+        System.out.println("\n" + "Producto que más recaudo: " + "\n");
 		System.out.println("\t" + daoProduct.highestGrossingProduct() + "\n");
 
-        System.out.println("Listado de  clientes ordenado por mayor facturación: " + "\n");
-        for (ClientModel clientAux : daoClient.getListClientThatInvoiceTheMost() ) {
+        System.out.println("\n" + "Listado de clientes ordenado por mayor facturación: " + "\n");
+        for (TotalInvoicedByTheClientDTO clientAux : daoClient.getListClientThatInvoiceTheMost() ) {
             System.out.println("\t" + clientAux);
         }
 

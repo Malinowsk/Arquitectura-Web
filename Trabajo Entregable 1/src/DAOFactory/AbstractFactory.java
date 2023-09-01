@@ -10,7 +10,7 @@ import DAO.ProductDAO;
 public abstract class AbstractFactory {
 
 	public static final int MYSQL_DB = 1;
-	public static final int DERBY_DB = 2;
+
 	public abstract ClientDAO getDAOClient() throws SQLException;
 	public abstract InvoiceDAO getDAOInvoice() throws SQLException;
 	public abstract InvoiceProductDAO getDAOInvoiceProduct() throws SQLException;
