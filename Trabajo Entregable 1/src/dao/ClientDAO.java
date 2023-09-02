@@ -1,7 +1,7 @@
-package DAO;
-import DTO.TotalInvoicedByTheClientDTO;
-import Model.ClientModel;
-import DAOFactory.ConexionMySQL;
+package dao;
+import dto.TotalInvoicedByTheClientDTO;
+import entity.ClientModel;
+import factory.ConexionMySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class ClientDAO implements DAO <ClientModel> {
 
     @Override
     public void cargar(CSVParser datos) throws SQLException {
-        connection = ConexionMySQL.getInstance().conectar();
+        connection = ConexionMySQL.getInstance().connect();
 		String insert = "INSERT INTO client "+
                         "(clientId, clientName, clientEmail) "+ 
                         "VALUES (?, ?, ?)"; 
@@ -29,12 +29,12 @@ public class ClientDAO implements DAO <ClientModel> {
 			connection.commit();
 			ps.close();
 		}
-		ConexionMySQL.getInstance().cerrarConn();
+		ConexionMySQL.getInstance().closeConn();
     }
 
     @Override
     public void createTable() throws SQLException {
-        connection = ConexionMySQL.getInstance().conectar();
+        connection = ConexionMySQL.getInstance().connect();
       
 		String client = "CREATE TABLE client( "+
                         "clientId INT, "+
@@ -43,11 +43,11 @@ public class ClientDAO implements DAO <ClientModel> {
                         "PRIMARY KEY (clientId)) ";
 		connection.prepareStatement(client).execute();
 		connection.commit();
-		ConexionMySQL.getInstance().cerrarConn();
+		ConexionMySQL.getInstance().closeConn();
     }
 
     public ArrayList<TotalInvoicedByTheClientDTO> getListClientThatInvoiceTheMost() throws SQLException{
-        connection = ConexionMySQL.getInstance().conectar();
+        connection = ConexionMySQL.getInstance().connect();
 
         ArrayList<TotalInvoicedByTheClientDTO> clients = new ArrayList<TotalInvoicedByTheClientDTO>();
 
@@ -67,7 +67,7 @@ public class ClientDAO implements DAO <ClientModel> {
         }
 
         connection.commit();
-		ConexionMySQL.getInstance().cerrarConn();
+		ConexionMySQL.getInstance().closeConn();
 		ps.close();
 		result.close();
 

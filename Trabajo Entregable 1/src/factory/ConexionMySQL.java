@@ -1,20 +1,20 @@
-package DAOFactory;
+package factory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import DAO.ClientDAO;
-import DAO.InvoiceDAO;
-import DAO.InvoiceProductDAO;
-import DAO.ProductDAO;
+import dao.ClientDAO;
+import dao.InvoiceDAO;
+import dao.InvoiceProductDAO;
+import dao.ProductDAO;
 
 public class ConexionMySQL extends AbstractFactory{
 
 	private static Connection conn;
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String URI = "jdbc:mysql://localhost/integrador_1";
+	private static final String URI = "jdbc:mysql://localhost:3306/integrador_1";
 	private static final String USER = "root";
 	private static final String PASS = "";
 
@@ -26,7 +26,7 @@ public class ConexionMySQL extends AbstractFactory{
 		return instance;
 	}
 	
-	public Connection conectar() {
+	public Connection connect() {
 		try {
 			Class.forName(DRIVER).getDeclaredConstructor().newInstance();
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -45,7 +45,7 @@ public class ConexionMySQL extends AbstractFactory{
 		return null;
 	}
 	
-	public void cerrarConn() {
+	public void closeConn() {
 		try {
 			conn.close();
 		} catch (SQLException e) {

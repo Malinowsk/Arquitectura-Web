@@ -1,7 +1,7 @@
-package DAO;
-import DTO.TotalCollectedByProductDTO;
-import Model.ProductModel;
-import DAOFactory.ConexionMySQL;
+package dao;
+import dto.TotalCollectedByProductDTO;
+import entity.ProductModel;
+import factory.ConexionMySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ public class ProductDAO implements DAO <ProductModel>{
 
     @Override
     public void cargar(CSVParser datos) throws SQLException {
-        connection = ConexionMySQL.getInstance().conectar();
+        connection = ConexionMySQL.getInstance().connect();
 		String insert = "INSERT INTO product "+
                         "(productId, name, value) "+ 
                         "VALUES (?, ?, ?)"; 
@@ -27,13 +27,13 @@ public class ProductDAO implements DAO <ProductModel>{
 			connection.commit();
 			ps.close();
 		}
-		ConexionMySQL.getInstance().cerrarConn();
+		ConexionMySQL.getInstance().closeConn();
     }
 
 
     @Override
     public void createTable() throws SQLException {
-        connection = ConexionMySQL.getInstance().conectar();
+        connection = ConexionMySQL.getInstance().connect();
 
 		String product = "CREATE TABLE product(" +
                                 "productId INT," +
@@ -42,12 +42,12 @@ public class ProductDAO implements DAO <ProductModel>{
                                 "PRIMARY KEY (productId))";
 		connection.prepareStatement(product).execute();
 		connection.commit();
-		ConexionMySQL.getInstance().cerrarConn();
+		ConexionMySQL.getInstance().closeConn();
     }
 
     public TotalCollectedByProductDTO highestGrossingProduct () throws SQLException{
         //we established the connection
-        connection = ConexionMySQL.getInstance().conectar();
+        connection = ConexionMySQL.getInstance().connect();
 
         //I create a variable to save the product that I collect the most
 		TotalCollectedByProductDTO highestGrossingProduct = null;
@@ -70,7 +70,7 @@ public class ProductDAO implements DAO <ProductModel>{
 		
 		query.close();
 		result.close();
-		ConexionMySQL.getInstance().cerrarConn();
+		ConexionMySQL.getInstance().closeConn();
 		return highestGrossingProduct;
     }
 } 

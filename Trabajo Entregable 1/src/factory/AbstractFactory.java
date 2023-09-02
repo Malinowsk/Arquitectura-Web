@@ -1,11 +1,11 @@
-package DAOFactory;
+package factory;
 
 import java.sql.SQLException;
 
-import DAO.ClientDAO;
-import DAO.InvoiceDAO;
-import DAO.InvoiceProductDAO;
-import DAO.ProductDAO;
+import dao.ClientDAO;
+import dao.InvoiceDAO;
+import dao.InvoiceProductDAO;
+import dao.ProductDAO;
 
 public abstract class AbstractFactory {
 

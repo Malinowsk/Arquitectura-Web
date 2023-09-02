@@ -1,4 +1,4 @@
-package DAO;
+package dao;
 
 import java.sql.SQLException;
 import org.apache.commons.csv.CSVParser;

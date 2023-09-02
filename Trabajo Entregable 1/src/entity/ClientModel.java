@@ -1,4 +1,4 @@
-package Model;
+package entity;
 
 public class ClientModel {
     //Attributes
@@ -38,7 +38,6 @@ public class ClientModel {
     }
 
     @Override
-
     public String toString() {
         return  "Id= " + clientId + " , Name= " + clientName + " , Email= " + clientEmail;
     }

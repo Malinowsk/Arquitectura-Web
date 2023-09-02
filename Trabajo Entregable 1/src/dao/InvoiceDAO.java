@@ -1,6 +1,6 @@
-package DAO;
-import Model.InvoiceModel;
-import DAOFactory.ConexionMySQL;
+package dao;
+import entity.InvoiceModel;
+import factory.ConexionMySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,7 +12,7 @@ public class InvoiceDAO implements DAO <InvoiceModel>{
 
     @Override
     public void cargar(CSVParser datos) throws SQLException {
-        connection = ConexionMySQL.getInstance().conectar();
+        connection = ConexionMySQL.getInstance().connect();
   
 		String insert = "INSERT INTO invoice "+
                         "(invoiceId, clientId) "+ 
@@ -25,12 +25,12 @@ public class InvoiceDAO implements DAO <InvoiceModel>{
 			connection.commit();
 			ps.close();
 		}
-		ConexionMySQL.getInstance().cerrarConn();
+		ConexionMySQL.getInstance().closeConn();
     }
 
     @Override
     public void createTable() throws SQLException {
-        connection = ConexionMySQL.getInstance().conectar();
+        connection = ConexionMySQL.getInstance().connect();
 		String invoice = "CREATE TABLE invoice ( "+
                         "invoiceId INT, "+
                         "clientId INT, "+
@@ -39,6 +39,6 @@ public class InvoiceDAO implements DAO <InvoiceModel>{
                         "references client(clientId)) ";
 		connection.prepareStatement(invoice).execute();
 		connection.commit();
-		ConexionMySQL.getInstance().cerrarConn();
+		ConexionMySQL.getInstance().closeConn();
     }    
 }
