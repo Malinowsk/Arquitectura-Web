@@ -21,7 +21,7 @@ public class main {
     private static AbstractFactory factory = AbstractFactory.getDAOFactory(AbstractFactory.MYSQL_DB);
     public static void main(String[] args) throws SQLException, IOException {
 
-        initializeDAOs();
+        instantiationDAOs();
         createTables();
         populateTables();
 
@@ -36,7 +36,7 @@ public class main {
     }
 
 
-    public static void initializeDAOs() throws SQLException {
+    public static void instantiationDAOs() throws SQLException {
         daoClient = factory.getDAOClient();
         daoInvoice = factory.getDAOInvoice();
         daoInvoiceProduct = factory.getDAOInvoiceProduct();
