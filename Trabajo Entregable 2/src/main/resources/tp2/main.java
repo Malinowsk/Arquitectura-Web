@@ -26,12 +26,21 @@ public class main {
         CareerRepository carrerRepo = new CareerRepository(em);
         InscriptionRepository inscriptionRepo = new InscriptionRepository(em);
 
+        // 2A) Dar de alta un estudiante
+        System.out.println("\n 2.A) Dar de alta un estudiante");
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         Date date = dateFormat.parse("31/03/1995");
         Student nicolas = new Student(41969641, "Nicolas", "Rodriguez", new Timestamp(date.getTime()), "m", "Rauch");
+        date = dateFormat.parse("11/03/1999");
+        Student pedro = new Student(34969641, "Pedro", "Albino", new Timestamp(date.getTime()), "m", "Tandil");
+        date = dateFormat.parse("20/08/1989");
+        Student ana = new Student(34648616, "Ana", "Martinez", new Timestamp(date.getTime()), "f", "Mar del Plata");
+
         studentRepo.save(nicolas);
+        studentRepo.save(pedro);
+        studentRepo.save(ana);
 
 
         Career tudai = new Career("TUDAI");
@@ -41,9 +50,40 @@ public class main {
         //carrerRepo.save(contador);
         //carrerRepo.save(sistemas);
 
+        // 2B) Matricular un estudiante en una carrera
+        System.out.println("\n 2.B) Matricular un estudiante en una carrera");
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
         inscriptionRepo.save(i1);
+
+        System.out.println("------------------------------------------------------------------------------------");
+
+        // 2C) Recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
+        // Se ordena por apellido A-Z
+        System.out.println("\n 2.C) Listado completo de estudiantes ordenado por apellido:");
+        em.getTransaction().begin();
+        System.out.println(studentRepo.getAll());
+        em.getTransaction().commit();
+
+        System.out.println("------------------------------------------------------------------------------------");
+
+        // 2D) Recuperar un estudiante, en base a su número de libreta universitaria
+        System.out.println("\n 2.D) Estudiante cuyo numero de libreta es 2:");
+        em.getTransaction().begin();
+        System.out.println(studentRepo.getById(2));
+        em.getTransaction().commit();
+
+        System.out.println("------------------------------------------------------------------------------------");
+
+        // 2E) Recuperar todos los estudiantes, en base a su género.
+        System.out.println("\n 2.E) Estudiantes cuyo genero es masculino:");
+        em.getTransaction().begin();
+        System.out.println(studentRepo.getByGender("m"));
+        em.getTransaction().commit();
+
+        System.out.println("------------------------------------------------------------------------------------");
+
+
 
     }
 

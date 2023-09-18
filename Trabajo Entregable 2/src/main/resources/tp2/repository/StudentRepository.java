@@ -2,6 +2,9 @@ package main.resources.tp2.repository;
 
 import main.resources.tp2.entity.Student;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class StudentRepository implements JPARepository<Student> {
     private EntityManager em;
@@ -21,6 +24,16 @@ public class StudentRepository implements JPARepository<Student> {
         }
     }
 
+    public List<Student> getAll() {
+        Query query = em.createQuery("SELECT s FROM Student s ORDER BY s.surname");
+        List<Student> students = query.getResultList();
+        return students;
+    }
+
+    public Student getById(long id) {
+        return em.find(Student.class, id);
+    }
+
     /*
     *
      * Obtiene un estudiante por su libretaUniversitaria
@@ -37,27 +50,21 @@ public class StudentRepository implements JPARepository<Student> {
      * @param gender
      * @return retorna una lista de estudiantes de un genero
      */
-    /*
-    public List<Estudiante> getByGender(String gender) {
-        TypedQuery<Estudiante> tq = this.em.createNamedQuery(Estudiante.FIND_BY_GENDER, Estudiante.class)
-                .setParameter("genero", gender);
-        return tq.getResultList();
+
+    public List<Student> getByGender(String gender) {
+        return this.em.createQuery("SELECT s FROM Student s WHERE s.gender = :gender")
+                .setParameter("gender", gender)
+                .getResultList();
     }
 
-    public List<Estudiante> getAll() {
-        TypedQuery<Estudiante> tq = this.em.createNamedQuery(Estudiante.ORDER_BY_LASTNAME, Estudiante.class);
-        return tq.getResultList();
-    }
+/*
 
-    public List<Estudiante> getById(int id) {
-        TypedQuery<Estudiante> tq = this.em.createNamedQuery(Estudiante.FIND_BY_LU, Estudiante.class).setParameter("lu", id);
-        return tq.getResultList();
-    }
 
     public List<Estudiante> getByCarrerAndCity(int idCarrera, String ciudad) {
         TypedQuery<Estudiante> tq = this.em.createNamedQuery(Estudiante.FIND_BY_CARREER_CITY, Estudiante.class)
                 .setParameter("carrera", idCarrera).setParameter("ciudad", ciudad);
         return tq.getResultList();
-    }*/
+    }
+*/
 
 }
