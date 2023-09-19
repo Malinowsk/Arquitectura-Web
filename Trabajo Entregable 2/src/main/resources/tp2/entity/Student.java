@@ -128,7 +128,7 @@ public class Student {
                 ", Apellido: '" + surname + '\'' +
                 ", Fecha de nacimiento: " + birthdate +
                 ", Sexo: '" + gender + '\'' +
-                ", Ciudad: '" + city;
+                ", Ciudad: '" + city+"'";
     }
 
 }
