@@ -67,7 +67,7 @@ public class StudentRepository implements JPARepository<Student> {
     }
 */
 
-    public List<Student> getByCarrerAndCity(int idCarrera, String ciudad) {
+    public List<Student> getByCarrerAndCity(Long idCarrera, String ciudad) {
         Query q = em.createQuery("SELECT s FROM Student s, IN(s.registrations) r WHERE r.career.id = :idCarrera AND s.city = :ciudadOrigen");
         q.setParameter("idCarrera", idCarrera);
         q.setParameter("ciudadOrigen", ciudad);
