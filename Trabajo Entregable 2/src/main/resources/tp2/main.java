@@ -83,6 +83,21 @@ public class main {
 
         System.out.println("------------------------------------------------------------------------------------");
 
+        // 2F) Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
+        em.getTransaction().begin();
+        System.out.println("\n 2.F) Carreras con estudiantes inscriptos ordenadas por cantidad de inscriptos:");
+        System.out.println(carrerRepo.getCareerOrderByQuantityStudent());
+        em.getTransaction().commit();
+
+        System.out.println("------------------------------------------------------------------------------------");
+
+        // 2G) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
+        em.getTransaction().begin();
+        System.out.println("\n 2.G) Estudiantes de la carrera de sistemas que viven en Rauch:");
+        System.out.println(studentRepo.getByCarrerAndCity(3, "Rauch"));
+        em.getTransaction().commit();
+
+        System.out.println("------------------------------------------------------------------------------------");
 
 
     }

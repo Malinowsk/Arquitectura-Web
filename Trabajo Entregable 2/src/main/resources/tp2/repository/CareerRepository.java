@@ -4,6 +4,9 @@ import main.resources.tp2.entity.Career;
 import main.resources.tp2.entity.Student;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class CareerRepository implements JPARepository<Career> {
 
@@ -24,4 +27,10 @@ public class CareerRepository implements JPARepository<Career> {
             em.merge(c);
         }
     }
+
+
+    public List<Career> getCareerOrderByQuantityStudent() {
+        return em.createQuery("SELECT i.career FROM Inscription i GROUP BY i.career ORDER BY COUNT(i.student) DESC").getResultList();
+    }
+
 }
