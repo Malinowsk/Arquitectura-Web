@@ -22,6 +22,10 @@ public class Career {
         this.name = name;
     }
 
+    public Career() {
+
+    }
+
     public long getId() {
         return id;
     }
