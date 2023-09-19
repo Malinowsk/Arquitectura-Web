@@ -30,7 +30,7 @@ public class CareerRepository implements JPARepository<Career> {
 
 
     public List<Career> getCareerOrderByQuantityStudent() {
-        return em.createQuery("SELECT i.career FROM Inscription i GROUP BY i.career ORDER BY COUNT(i.student) DESC").getResultList();
+       return em.createQuery("SELECT i.career FROM Inscription i GROUP BY i.career ORDER BY COUNT(i.student) DESC").getResultList();
     }
 
 }

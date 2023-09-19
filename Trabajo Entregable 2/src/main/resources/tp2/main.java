@@ -14,10 +14,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class main {
 
     public static void main(String[] args) throws ParseException {
-
+        Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Entregable2");
         EntityManager em = emf.createEntityManager();
 
@@ -93,8 +95,9 @@ public class main {
 
         // 2G) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
         em.getTransaction().begin();
-        System.out.println("\n 2.G) Estudiantes de la carrera de sistemas que viven en Rauch:");
-        System.out.println(studentRepo.getByCarrerAndCity(3, "Rauch"));
+        Long idCarrera = 2L;
+        System.out.println("\n 2.G) Estudiantes de la carrera de TUDAI que viven en Rauch:");
+        System.out.println(studentRepo.getByCarrerAndCity(idCarrera, "Rauch"));
         em.getTransaction().commit();
 
         System.out.println("------------------------------------------------------------------------------------");

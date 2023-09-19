@@ -122,15 +122,13 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "universityNotebook=" + universityNotebook +
-                ", documentNumber=" + documentNumber +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birthdate=" + birthdate +
-                ", gender='" + gender + '\'' +
-                ", city='" + city + '\'' +
-                '}';
+        return "\n Libreta Universitaria: " + universityNotebook +
+                ", DNI: " + documentNumber +
+                ", Nombre: '" + name + '\'' +
+                ", Apellido: '" + surname + '\'' +
+                ", Fecha de nacimiento: " + birthdate +
+                ", Sexo: '" + gender + '\'' +
+                ", Ciudad: '" + city+"'";
     }
 
 }

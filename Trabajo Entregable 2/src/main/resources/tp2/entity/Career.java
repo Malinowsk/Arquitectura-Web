@@ -22,6 +22,10 @@ public class Career {
         this.name = name;
     }
 
+    public Career() {
+
+    }
+
     public long getId() {
         return id;
     }
@@ -41,5 +45,12 @@ public class Career {
 
     public void setStudents(List<Inscription> students) {
         this.students = students;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "\n id:" + id +
+                ", Nombre:'" + name;
     }
 }
