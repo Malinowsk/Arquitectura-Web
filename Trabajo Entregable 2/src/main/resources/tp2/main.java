@@ -14,10 +14,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class main {
 
     public static void main(String[] args) throws ParseException {
-
+        Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Entregable2");
         EntityManager em = emf.createEntityManager();
 
