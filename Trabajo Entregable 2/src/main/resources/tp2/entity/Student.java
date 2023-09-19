@@ -53,6 +53,10 @@ public class Student {
         this.registrations = registrations;
     }
 
+    public Student() {
+
+    }
+
     public long getUniversityNotebook() {
         return universityNotebook;
     }
@@ -115,5 +119,18 @@ public class Student {
     }
 
 
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "universityNotebook=" + universityNotebook +
+                ", documentNumber=" + documentNumber +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthdate=" + birthdate +
+                ", gender='" + gender + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 
 }
