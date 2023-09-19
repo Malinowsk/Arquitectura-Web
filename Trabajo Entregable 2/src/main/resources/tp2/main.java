@@ -21,7 +21,6 @@ public class main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Entregable2");
         EntityManager em = emf.createEntityManager();
 
-
         StudentRepository studentRepo = new StudentRepository(em);
         CareerRepository carrerRepo = new CareerRepository(em);
         InscriptionRepository inscriptionRepo = new InscriptionRepository(em);
@@ -55,6 +54,7 @@ public class main {
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
         inscriptionRepo.save(i1);
+
 
         System.out.println("------------------------------------------------------------------------------------");
 
