@@ -24,7 +24,17 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.4.20.Final</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.8</version>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+    </dependencies>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>

@@ -34,6 +34,10 @@ public class Student {
     @OneToMany (mappedBy = "student")
     private List<Inscription> registrations;
 
+    public Student(long id) {
+        this.universityNotebook = id;
+    }
+
     public Student(int documentNumber, String name, String surname, Timestamp birthdate, String gender, String city) {
         this.documentNumber = documentNumber;
         this.name = name;
@@ -122,11 +126,11 @@ public class Student {
 
     @Override
     public String toString() {
-        return "\n Libreta Universitaria: " + universityNotebook +
+        return "\n Nro LU: " + universityNotebook +
                 ", DNI: " + documentNumber +
                 ", Nombre: '" + name + '\'' +
                 ", Apellido: '" + surname + '\'' +
-                ", Fecha de nacimiento: " + birthdate +
+                ", Edad: 22 " +
                 ", Sexo: '" + gender + '\'' +
                 ", Ciudad: '" + city+"'";
     }

@@ -22,6 +22,10 @@ public class Career {
         this.name = name;
     }
 
+    public Career(long id) {
+        this.id = id;
+    }
+
     public Career() {
 
     }
@@ -53,4 +57,6 @@ public class Career {
                 "\n id:" + id +
                 ", Nombre:'" + name;
     }
+
+
 }
