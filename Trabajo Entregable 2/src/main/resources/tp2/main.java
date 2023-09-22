@@ -101,7 +101,7 @@ public class main {
 
         // 2G) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
 
-        Long idCarrera = 54L;
+        Long idCarrera = 251L;
         System.out.println("\n 2.G) Estudiantes de la carrera de TUDAI que viven en Rauch:");
         System.out.println(studentRepo.getByCarrerAndCity(idCarrera, "Rauch"));
 
