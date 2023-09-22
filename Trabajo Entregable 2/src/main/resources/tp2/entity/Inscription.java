@@ -3,6 +3,8 @@ package main.resources.tp2.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @Entity
@@ -68,13 +70,23 @@ public class Inscription implements Serializable {
         this.fecha_egreso = fecha_egreso;
     }
 
+
+    public int getAntiguedad() {
+        LocalDateTime localDateTime = fecha_ingreso.toLocalDateTime();
+
+        LocalDateTime currentDate = LocalDateTime.now();
+        long monthsDifference = ChronoUnit.MONTHS.between(localDateTime, currentDate);
+
+        return (int) monthsDifference;
+    }
     @Override
     public String toString() {
-        return "Inscription{" +
-                "student=" + student +
-                ", career=" + career +
-                ", fecha_ingreso=" + fecha_ingreso +
-                ", fecha_egreso=" + fecha_egreso +
+        return "\nInscription{" +
+                "Estudiante=" + student +
+                ", Carrera=" + career +
+                ", Fecha de ingreso=" + fecha_ingreso +
+                ", Fecha de egreso=" + fecha_egreso +
+                ", Antiguedad=" + getAntiguedad() + " meses"+
                 '}';
     }
 

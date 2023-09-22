@@ -2,6 +2,8 @@ package main.resources.tp2.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -122,7 +124,12 @@ public class Student {
         this.registrations = registrations;
     }
 
-
+    public int getAge() {
+        LocalDate birthdateLocalDate = birthdate.toLocalDateTime().toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(birthdateLocalDate, currentDate);
+        return period.getYears();
+    }
 
     @Override
     public String toString() {
@@ -130,9 +137,8 @@ public class Student {
                 ", DNI: " + documentNumber +
                 ", Nombre: '" + name + '\'' +
                 ", Apellido: '" + surname + '\'' +
-                ", Edad: 22 " +
+                ", Edad: " + getAge() +
                 ", Sexo: '" + gender + '\'' +
                 ", Ciudad: '" + city+"'";
     }
-
 }

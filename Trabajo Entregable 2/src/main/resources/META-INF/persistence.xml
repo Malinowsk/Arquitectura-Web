@@ -3,7 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
-	<persistence-unit name="Entregable2">
+	<persistence-unit name="MYSQL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<class>main.resources.tp2.entity.Student</class>
@@ -11,9 +11,6 @@
 		<class>main.resources.tp2.entity.Inscription</class>
 
 		<properties>
-			<!-- Propiedades de configuracion de JDBC para Derby /-->
-			<!-- <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/> -->
-			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:derby:exampleDBEjemplo;create=true"/> -->
 
 			<!-- Propiedades de configuracion de JDBC para MySQL -->
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />

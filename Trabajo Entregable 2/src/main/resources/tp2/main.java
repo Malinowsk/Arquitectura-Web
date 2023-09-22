@@ -4,18 +4,16 @@ import main.resources.tp2.csvReader.*;
 import main.resources.tp2.entity.Career;
 import main.resources.tp2.entity.Inscription;
 import main.resources.tp2.entity.Student;
+import main.resources.tp2.factory.*;
 import main.resources.tp2.repository.CareerRepository;
 import main.resources.tp2.repository.InscriptionRepository;
 import main.resources.tp2.repository.StudentRepository;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.LinkedList;
@@ -24,19 +22,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class main {
 
-    public static void main(String[] args) throws ParseException, IOException {
+    private static CareerRepository careerRepo;
+    private static StudentRepository studentRepo;
+    private static InscriptionRepository inscriptionRepo;
+
+    public static void main(String[] args) throws ParseException, IOException, SQLException {
         Logger.getLogger("org.hibernate").setLevel(Level.SEVERE); // no imprime por consola las query del hibernate
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Entregable2");
-        EntityManager em = emf.createEntityManager();
 
-        StudentRepository studentRepo = new StudentRepository(em);
-        CareerRepository careerRepo = new CareerRepository(em);
-        InscriptionRepository inscriptionRepo = new InscriptionRepository(em);
+        FactoryEntityManager mysqlFactory = FactoryEntityManager.getDAOFactory(FactoryEntityManager.MYSQL);
 
-       /* csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
+        careerRepo = mysqlFactory.getCareerRepository();
+        studentRepo = mysqlFactory.getStudentRepository();
+        inscriptionRepo = mysqlFactory.getInscriptionRepository();
 
-        System.out.println("------------------------------------------------------------------------------------");
+        csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
+
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         // 2A) Dar de alta un estudiante
         System.out.println("\n 2.A) Dar de alta un estudiante");
@@ -51,22 +52,16 @@ public class main {
         studentRepo.save(pedro);
         studentRepo.save(ana);
 
-
         Career tudai = new Career("TUDAI");
-        //Career contador = new Career("Contador Publico");
-        //Career sistemas = new Career("Ingenieria en Sistemas");
         careerRepo.save(tudai);
-        //careerRepo.save(contador);
-        //careerRepo.save(sistemas);
 
-        System.out.println("------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         // 2B) Matricular un estudiante en una carrera
         System.out.println("\n 2.B) Matricular un estudiante en una carrera");
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
         inscriptionRepo.save(i1);
-*/
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
@@ -74,48 +69,40 @@ public class main {
         // 2C) Recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.
         // Se ordena por apellido A-Z
         System.out.println("\n 2.C) Listado completo de estudiantes ordenado por apellido:");
-        em.getTransaction().begin();
+
         for (Student s : studentRepo.getAll()){
             System.out.println(s);
         }
-        em.getTransaction().commit();
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         // 2D) Recuperar un estudiante, en base a su número de libreta universitaria
         System.out.println("\n 2.D) Estudiante cuyo numero de libreta es 3:");
-        em.getTransaction().begin();
         System.out.println(studentRepo.getById(3));
-        em.getTransaction().commit();
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         // 2E) Recuperar todos los estudiantes, en base a su género.
         System.out.println("\n 2.E) Estudiantes cuyo genero es masculino:");
-        em.getTransaction().begin();
         for (Student s : studentRepo.getByGender("m")){
             System.out.println(s);
         }
-        em.getTransaction().commit();
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         // 2F) Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
-        em.getTransaction().begin();
         System.out.println("\n 2.F) Carreras con estudiantes inscriptos ordenadas por cantidad de inscriptos:");
         for (List<Career> c : careerRepo.getCareerOrderByQuantityStudent()){
             System.out.println(c.get(0) + ", Cant inscriptos: " + c.get(1));
         }
-        em.getTransaction().commit();
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         // 2G) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
-        em.getTransaction().begin();
+
         Long idCarrera = 54L;
         System.out.println("\n 2.G) Estudiantes de la carrera de TUDAI que viven en Rauch:");
         System.out.println(studentRepo.getByCarrerAndCity(idCarrera, "Rauch"));
-        em.getTransaction().commit();
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
