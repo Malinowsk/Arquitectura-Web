@@ -34,7 +34,7 @@ public class main {
         CareerRepository careerRepo = new CareerRepository(em);
         InscriptionRepository inscriptionRepo = new InscriptionRepository(em);
 
-       /* csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
+       csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
 
         System.out.println("------------------------------------------------------------------------------------");
 
@@ -66,7 +66,7 @@ public class main {
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
         inscriptionRepo.save(i1);
-*/
+
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
