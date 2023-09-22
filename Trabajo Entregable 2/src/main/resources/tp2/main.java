@@ -31,7 +31,6 @@ public class main {
 
         FactoryEntityManager mysqlFactory = FactoryEntityManager.getDAOFactory(FactoryEntityManager.MYSQL);
 
-
         careerRepo = mysqlFactory.getCareerRepository();
         studentRepo = mysqlFactory.getStudentRepository();
         inscriptionRepo = mysqlFactory.getInscriptionRepository();
