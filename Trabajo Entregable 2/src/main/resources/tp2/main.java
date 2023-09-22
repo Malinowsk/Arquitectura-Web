@@ -31,9 +31,13 @@ public class main {
 
         FactoryEntityManager mysqlFactory = FactoryEntityManager.getDAOFactory(FactoryEntityManager.MYSQL);
 
+<<<<<<< HEAD
         careerRepo = mysqlFactory.getCareerRepository();
         studentRepo = mysqlFactory.getStudentRepository();
         inscriptionRepo = mysqlFactory.getInscriptionRepository();
+=======
+       csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
+>>>>>>> 6cb77b7b73f13b1e7b2b40e6d8ec00159babe742
 
         csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
 
@@ -62,6 +66,10 @@ public class main {
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
         inscriptionRepo.save(i1);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6cb77b7b73f13b1e7b2b40e6d8ec00159babe742
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
