@@ -1,6 +1,7 @@
 package main.resources.tp2;
 
 import main.resources.tp2.csvReader.*;
+import main.resources.tp2.dto.DTOReport;
 import main.resources.tp2.entity.Career;
 import main.resources.tp2.entity.Inscription;
 import main.resources.tp2.entity.Student;
@@ -34,9 +35,9 @@ public class main {
         careerRepo = mysqlFactory.getCareerRepository();
         studentRepo = mysqlFactory.getStudentRepository();
         inscriptionRepo = mysqlFactory.getInscriptionRepository();
-/*
-       csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
 
+
+       csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -55,7 +56,7 @@ public class main {
         studentRepo.save(ana);
 
         Career tudai = new Career("TUDAI");
-        careerRepo.save(tudai);
+        //careerRepo.save(tudai);
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
@@ -63,7 +64,7 @@ public class main {
         System.out.println("\n 2.B) Matricular un estudiante en una carrera");
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
-        inscriptionRepo.save(i1);
+        //inscriptionRepo.save(i1);
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
@@ -89,7 +90,7 @@ public class main {
         for (Student s : studentRepo.getByGender("m")){
             System.out.println(s);
         }
-*/
+
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
@@ -103,12 +104,19 @@ public class main {
 
         // 2G) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
 
-        Long idCarrera = 46L;
+        Long idCarrera = 6L;
         System.out.println("\n 2.G) Estudiantes de la carrera de TUDAI que viven en Rauch:");
         System.out.println(studentRepo.getByCarrerAndCity(idCarrera, "Rauch"));
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
+        
+        // 3) Generar un reporte de las carreras, que para cada carrera incluya informaci�n de los
+        // inscriptos y egresados por a�o. Se deben ordenar las carreras alfab�ticamente, y presentar
+        // los a�os de manera cronol�gica
+        
+        List<DTOReport> report = inscriptionRepo.createReport();
+        System.out.println(report);
     }
 
     private static void csvUpload(StudentRepository studentRepo, CareerRepository careerRepo, InscriptionRepository inscriptionRepo) throws IOException, ParseException {
@@ -128,5 +136,4 @@ public class main {
             inscriptionRepo.save(inscription);
         }
     }
-
 }
