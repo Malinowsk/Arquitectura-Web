@@ -2,6 +2,7 @@ package main.resources.tp2;
 
 import main.resources.tp2.csvReader.*;
 import main.resources.tp2.dto.DTOReport;
+import main.resources.tp2.dto.DTOStudent;
 import main.resources.tp2.entity.Career;
 import main.resources.tp2.entity.Inscription;
 import main.resources.tp2.entity.Student;
@@ -73,7 +74,7 @@ public class main {
         // Se ordena por apellido A-Z
         System.out.println("\n 2.C) Listado completo de estudiantes ordenado por apellido:");
 
-        for (Student s : studentRepo.getAll()){
+        for (DTOStudent s : studentRepo.getAll()){
             System.out.println(s);
         }
 
@@ -87,7 +88,7 @@ public class main {
 
         // 2E) Recuperar todos los estudiantes, en base a su género.
         System.out.println("\n 2.E) Estudiantes cuyo genero es masculino:");
-        for (Student s : studentRepo.getByGender("m")){
+        for (DTOStudent s : studentRepo.getByGender("m")){
             System.out.println(s);
         }
 
@@ -107,7 +108,7 @@ public class main {
         Long idCarrera = 6L;
         System.out.println("\n 2.G) Estudiantes de la carrera de TUDAI que viven en Rauch:");
         System.out.println();
-        for (Student s : studentRepo.getByCarrerAndCity(idCarrera, "Rauch")){
+        for (DTOStudent s : studentRepo.getByCareerAndCity(idCarrera, "Rauch")){
             System.out.println(s);
         }
 

@@ -1,9 +1,13 @@
 package main.resources.tp2.repository;
 
+import main.resources.tp2.dto.DTOStudent;
 import main.resources.tp2.entity.Student;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentRepositoryImp implements StudentRepository {
@@ -36,12 +40,14 @@ public class StudentRepositoryImp implements StudentRepository {
         em.close();
     }
     @Override
-    public List<Student> getAll() {
+    public List<DTOStudent> getAll() {
         em = emf.createEntityManager();
         Query query = em.createQuery("SELECT s FROM Student s ORDER BY s.surname");
-        List<Student> students = query.getResultList();
+        //List<Student> students = query.getResultList();
+        List<Student> studentList = query.getResultList();
+        List<DTOStudent> studentsDTOList = this.buildDTOStudentList(studentList);
         em.close();
-        return students;
+        return studentsDTOList;
     }
     @Override
     public Student getById(long id) {
@@ -51,23 +57,52 @@ public class StudentRepositoryImp implements StudentRepository {
         return s;
     }
     @Override
-    public List<Student> getByGender(String gender) {
+    public List<DTOStudent> getByGender(String gender) {
         em = emf.createEntityManager();
-        List<Student> retorno = this.em.createQuery("SELECT s FROM Student s WHERE s.gender = :gender")
+        List<Student> studentList = this.em.createQuery("SELECT s FROM Student s WHERE s.gender = :gender")
                 .setParameter("gender", gender)
                 .getResultList();
+        List<DTOStudent> studentsByGender = this.buildDTOStudentList(studentList);
         em.close();
-        return retorno;
+        return studentsByGender;
     }
     @Override
-    public List<Student> getByCarrerAndCity(Long idCarrera, String ciudad) {
+    public List<DTOStudent> getByCareerAndCity(Long idCarrera, String ciudad) {
         em = emf.createEntityManager();
         Query q = em.createQuery("SELECT s FROM Student s, IN(s.registrations) r WHERE r.career.id = :idCarrera AND s.city = :ciudadOrigen");
         q.setParameter("idCarrera", idCarrera);
         q.setParameter("ciudadOrigen", ciudad);
-        List<Student> students = q.getResultList();
+        List<Student> studentList = q.getResultList();
+        List<DTOStudent> studentsByCareerAndCity = this.buildDTOStudentList(studentList);
         em.close();
-        return students;
+        return studentsByCareerAndCity;
+    }
+    
+    /*private DTOStudent createDTOStudent(long l, Integer docNumber, String fullName,
+    		String gender, String city, Timestamp birthdate) {
+    	String fullName = (String) row[5] + ", " + (String) row[6]; 
+    	DTOStudent s = new DTOStudent(
+				(Integer) row[0], 
+				(Integer) row[3], 
+				fullName, 
+				(String) row[4],
+				(String) row[2], 
+				(Timestamp) row[1]);
+    	return s;
+    }*/
+    
+    private List<DTOStudent> buildDTOStudentList (List<Student> studentList) {
+    	List<DTOStudent> DTOStudentList = new ArrayList<DTOStudent>();
+    	for (Student student : studentList) {
+    		DTOStudentList.add(new DTOStudent(
+        			(int) student.getUniversityNotebook(),
+        			(int) student.getDocumentNumber(),
+        			student.getSurname() + ", " + student.getName(),
+        			student.getGender(),
+        			student.getCity(),
+        			student.getBirthdate()));        	
+        }
+    	return DTOStudentList;
     }
 
 }
