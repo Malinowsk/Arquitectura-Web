@@ -37,7 +37,7 @@ public class main {
         inscriptionRepo = mysqlFactory.getInscriptionRepository();
 
 
-       csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
+        //csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -51,9 +51,9 @@ public class main {
         Student pedro = new Student(34969641, "Pedro", "Albino", new Timestamp(date.getTime()), "m", "Tandil");
         date = dateFormat.parse("20/08/1989");
         Student ana = new Student(34648616, "Ana", "Martinez", new Timestamp(date.getTime()), "f", "Mar del Plata");
-        studentRepo.save(nicolas);
-        studentRepo.save(pedro);
-        studentRepo.save(ana);
+        //studentRepo.save(nicolas);
+        //studentRepo.save(pedro);
+        //studentRepo.save(ana);
 
         Career tudai = new Career("TUDAI");
         //careerRepo.save(tudai);
@@ -119,7 +119,7 @@ public class main {
         System.out.println(report);
     }
 
-    private static void csvUpload(StudentRepository studentRepo, CareerRepository careerRepo, InscriptionRepository inscriptionRepo) throws IOException, ParseException {
+    /*private static void csvUpload(StudentRepository studentRepo, CareerRepository careerRepo, InscriptionRepository inscriptionRepo) throws IOException, ParseException {
 
         String filePath = new File("").getAbsolutePath();
         LinkedList<Student> students = new CSVStudentReader(filePath + "./src/main/resources/tp2/csv/student.csv").getStudents();
@@ -135,5 +135,5 @@ public class main {
         for (Inscription inscription : inscriptions) {
             inscriptionRepo.save(inscription);
         }
-    }
+    }*/
 }

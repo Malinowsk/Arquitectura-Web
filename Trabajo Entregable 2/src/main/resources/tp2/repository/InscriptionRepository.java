@@ -44,19 +44,19 @@ public class InscriptionRepository implements JPARepository<Inscription>{
     	em = emf.createEntityManager();
     	
     	String query = 
-    			"SELECT fj.name as Carrera, fj.año as Año, SUM(fj.inscriptos) as Inscriptos, SUM(fj.egresos) as Egresos\r\n"
+    			"SELECT fj.name, fj.year, SUM(fj.enrolled), SUM(fj.graduated)\r\n"
     			+ "FROM\r\n"
     			+ "    (\r\n"
-    			+ "        SELECT c.name, YEAR(i.fecha_inscripcion) as año, COUNT(*) as inscriptos, '0' as egresos\r\n"
+    			+ "        SELECT c.name, YEAR(i.fecha_inscripcion) as year, COUNT(*) as enrolled, '0' as graduated\r\n"
     			+ "        FROM inscription i LEFT JOIN career c ON c.id = i.career_id\r\n"
-    			+ "        GROUP BY c.name, año\r\n"
+    			+ "        GROUP BY c.name, year\r\n"
     			+ "        UNION\r\n"
-    			+ "        SELECT c.name, YEAR(i.fecha_egreso) AS año, '0' as inscriptos, COUNT(*) AS egresos\r\n"
+    			+ "        SELECT c.name, YEAR(i.fecha_egreso) AS year, '0' as enrolled, COUNT(*) AS graduated\r\n"
     			+ "        FROM inscription i RIGHT JOIN career c ON c.id = i.career_id\r\n"
-    			+ "        GROUP BY c.name, año HAVING año IS NOT NULL\r\n"
+    			+ "        GROUP BY c.name, year HAVING year IS NOT NULL\r\n"
     			+ "    ) as fj\r\n"
-    			+ "GROUP BY fj.name, fj.año\r\n"
-    			+ "ORDER BY fj.name, fj.año";
+    			+ "GROUP BY fj.name, fj.year\r\n"
+    			+ "ORDER BY fj.name, fj.year";
     	
     	List<Object[]> queryList = this.em.createNativeQuery(query).getResultList();
     	List<DTOReport> report = new ArrayList<DTOReport>();
