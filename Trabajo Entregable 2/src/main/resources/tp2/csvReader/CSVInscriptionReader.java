@@ -18,18 +18,28 @@ public class CSVInscriptionReader extends CSVReader {
     }
 
     public LinkedList<Inscription> getInscriptions() throws IOException, ParseException {
-        Iterable<CSVRecord> records =  this.read();
+        Iterable<CSVRecord> records = this.read();
         LinkedList<Inscription> inscriptions = new LinkedList<>();
         for (CSVRecord record : records) {
             Student student = new Student(Integer.parseInt(record.get(0)));
             Career career = new Career(Integer.parseInt(record.get(1)));
+
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date initDate = dateFormat.parse(record.get(2));
-            Date dueDate = dateFormat.parse(record.get(3));
-            inscriptions.add(new Inscription(career,student,new Timestamp(initDate.getTime()), new Timestamp(initDate.getTime())));
+            Date initDate = parseDateOrNull(record.get(2), dateFormat);
+            Date dueDate = parseDateOrNull(record.get(3), dateFormat);
+
+            inscriptions.add(new Inscription(career, student, initDate != null ? new Timestamp(initDate.getTime()) : null, dueDate != null ? new Timestamp(dueDate.getTime()) : null));
         }
         return inscriptions;
     }
+
+    private Date parseDateOrNull(String dateStr, SimpleDateFormat dateFormat) throws ParseException {
+        if (dateStr == null || dateStr.equalsIgnoreCase("null")) {
+            return null;
+        }
+        return dateFormat.parse(dateStr);
+    }
+
 }
 
 /*
