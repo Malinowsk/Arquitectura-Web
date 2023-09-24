@@ -25,7 +25,7 @@ public class Inscription implements Serializable {
     private Timestamp fecha_ingreso;
 
 
-    @Column(name = "fecha_egreso")
+    @Column(name = "fecha_egreso", nullable = true)
     private Timestamp fecha_egreso;
 
     public Inscription() {
