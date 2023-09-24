@@ -114,10 +114,10 @@ public class main {
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         
-        // 3) Generar un reporte de las carreras, que para cada carrera incluya informaci�n de los
-        // inscriptos y egresados por a�o. Se deben ordenar las carreras alfab�ticamente, y presentar
-        // los a�os de manera cronol�gica
-
+        // 3) Generar un reporte de las carreras, que para cada carrera incluya información de los
+        // inscriptos y egresados por año. Se deben ordenar las carreras alfabeticamente, y presentar
+        // los años de manera cronológica
+        System.out.println("\n 3) Reporte de las carreras ordenadas alfabeticamente, con cantidad de inscriptos y egresados por año.");
         for (DTOReport i : inscriptionRepo.createReport()){
             System.out.println(i);
         }
