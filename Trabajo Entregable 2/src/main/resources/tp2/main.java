@@ -56,7 +56,7 @@ public class main {
         //studentRepo.save(ana);
 
         Career tudai = new Career("TUDAI");
-        careerRepo.save(tudai);
+        //careerRepo.save(tudai);
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
@@ -64,7 +64,7 @@ public class main {
         System.out.println("\n 2.B) Matricular un estudiante en una carrera");
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
-        inscriptionRepo.save(i1);
+        //inscriptionRepo.save(i1);
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
@@ -106,7 +106,10 @@ public class main {
 
         Long idCarrera = 6L;
         System.out.println("\n 2.G) Estudiantes de la carrera de TUDAI que viven en Rauch:");
-        System.out.println(studentRepo.getByCarrerAndCity(idCarrera, "Rauch"));
+        System.out.println();
+        for (Student s : studentRepo.getByCarrerAndCity(idCarrera, "Rauch")){
+            System.out.println(s);
+        }
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
