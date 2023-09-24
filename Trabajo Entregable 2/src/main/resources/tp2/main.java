@@ -56,7 +56,7 @@ public class main {
         studentRepo.save(ana);
 
         Career tudai = new Career("TUDAI");
-        //careerRepo.save(tudai);
+        careerRepo.save(tudai);
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
@@ -64,7 +64,7 @@ public class main {
         System.out.println("\n 2.B) Matricular un estudiante en una carrera");
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
-        //inscriptionRepo.save(i1);
+        inscriptionRepo.save(i1);
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
@@ -114,9 +114,10 @@ public class main {
         // 3) Generar un reporte de las carreras, que para cada carrera incluya informaci�n de los
         // inscriptos y egresados por a�o. Se deben ordenar las carreras alfab�ticamente, y presentar
         // los a�os de manera cronol�gica
-        
-        List<DTOReport> report = inscriptionRepo.createReport();
-        System.out.println(report);
+
+        for (DTOReport i : inscriptionRepo.createReport()){
+            System.out.println(i);
+        }
     }
 
     private static void csvUpload(StudentRepository studentRepo, CareerRepository careerRepo, InscriptionRepository inscriptionRepo) throws IOException, ParseException {
