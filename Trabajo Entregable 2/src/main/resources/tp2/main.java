@@ -6,9 +6,9 @@ import main.resources.tp2.entity.Career;
 import main.resources.tp2.entity.Inscription;
 import main.resources.tp2.entity.Student;
 import main.resources.tp2.factory.*;
-import main.resources.tp2.repository.CareerRepository;
-import main.resources.tp2.repository.InscriptionRepository;
-import main.resources.tp2.repository.StudentRepository;
+import main.resources.tp2.repository.CareerRepositoryImp;
+import main.resources.tp2.repository.InscriptionRepositoryImp;
+import main.resources.tp2.repository.StudentRepositoryImp;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,9 +23,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class main {
 
-    private static CareerRepository careerRepo;
-    private static StudentRepository studentRepo;
-    private static InscriptionRepository inscriptionRepo;
+    private static CareerRepositoryImp careerRepo;
+    private static StudentRepositoryImp studentRepo;
+    private static InscriptionRepositoryImp inscriptionRepo;
 
     public static void main(String[] args) throws ParseException, IOException, SQLException {
         Logger.getLogger("org.hibernate").setLevel(Level.SEVERE); // no imprime por consola las query del hibernate
@@ -123,7 +123,7 @@ public class main {
         }
     }
 
-    private static void csvUpload(StudentRepository studentRepo, CareerRepository careerRepo, InscriptionRepository inscriptionRepo) throws IOException, ParseException {
+    private static void csvUpload(StudentRepositoryImp studentRepo, CareerRepositoryImp careerRepo, InscriptionRepositoryImp inscriptionRepo) throws IOException, ParseException {
 
         String filePath = new File("").getAbsolutePath();
         LinkedList<Student> students = new CSVStudentReader(filePath + "./src/main/resources/tp2/csv/student.csv").getStudents();

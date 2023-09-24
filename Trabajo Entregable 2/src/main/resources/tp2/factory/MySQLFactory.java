@@ -1,8 +1,8 @@
 package main.resources.tp2.factory;
 
-import main.resources.tp2.repository.CareerRepository;
-import main.resources.tp2.repository.InscriptionRepository;
-import main.resources.tp2.repository.StudentRepository;
+import main.resources.tp2.repository.CareerRepositoryImp;
+import main.resources.tp2.repository.InscriptionRepositoryImp;
+import main.resources.tp2.repository.StudentRepositoryImp;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -23,16 +23,16 @@ public class MySQLFactory extends FactoryEntityManager {
         this.emf = Persistence.createEntityManagerFactory("MYSQL");
     }
     @Override
-    public CareerRepository getCareerRepository() {
-        return CareerRepository.getInstance(emf);
+    public CareerRepositoryImp getCareerRepository() {
+        return CareerRepositoryImp.getInstance(emf);
     }
     @Override
-    public StudentRepository getStudentRepository() {
-        return StudentRepository.getInstance(emf);
+    public StudentRepositoryImp getStudentRepository() {
+        return StudentRepositoryImp.getInstance(emf);
     }
     @Override
-    public InscriptionRepository getInscriptionRepository() {
-        return InscriptionRepository.getInstance(emf);
+    public InscriptionRepositoryImp getInscriptionRepository() {
+        return InscriptionRepositoryImp.getInstance(emf);
     }
 
     public void closeEntityManagerFactory() {
