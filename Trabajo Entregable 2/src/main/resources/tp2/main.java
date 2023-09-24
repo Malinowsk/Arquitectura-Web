@@ -38,7 +38,7 @@ public class main {
         inscriptionRepo = mysqlFactory.getInscriptionRepository();
 
 
-        csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
+        //csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -52,12 +52,12 @@ public class main {
         Student pedro = new Student(34969641, "Pedro", "Albino", new Timestamp(date.getTime()), "m", "Tandil");
         date = dateFormat.parse("20/08/1989");
         Student ana = new Student(34648616, "Ana", "Martinez", new Timestamp(date.getTime()), "f", "Mar del Plata");
-        studentRepo.save(nicolas);
-        studentRepo.save(pedro);
-        studentRepo.save(ana);
+        //studentRepo.save(nicolas);
+        //studentRepo.save(pedro);
+        //studentRepo.save(ana);
 
         Career tudai = new Career("TUDAI");
-        careerRepo.save(tudai);
+        //careerRepo.save(tudai);
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
@@ -65,7 +65,7 @@ public class main {
         System.out.println("\n 2.B) Matricular un estudiante en una carrera");
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
-        inscriptionRepo.save(i1);
+        //inscriptionRepo.save(i1);
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");

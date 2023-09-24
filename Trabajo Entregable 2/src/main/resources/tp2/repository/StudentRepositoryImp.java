@@ -43,18 +43,16 @@ public class StudentRepositoryImp implements StudentRepository {
     public List<DTOStudent> getAll() {
         em = emf.createEntityManager();
         Query query = em.createQuery("SELECT s FROM Student s ORDER BY s.surname");
-        //List<Student> students = query.getResultList();
         List<Student> studentList = query.getResultList();
         List<DTOStudent> studentsDTOList = this.buildDTOStudentList(studentList);
         em.close();
         return studentsDTOList;
     }
     @Override
-    public Student getById(long id) {
+    public DTOStudent getById(long id) {
         em = emf.createEntityManager();
         Student s = em.find(Student.class, id);
-        em.close();
-        return s;
+        return this.buildDTOStudent(s);
     }
     @Override
     public List<DTOStudent> getByGender(String gender) {
@@ -78,31 +76,23 @@ public class StudentRepositoryImp implements StudentRepository {
         return studentsByCareerAndCity;
     }
     
-    /*private DTOStudent createDTOStudent(long l, Integer docNumber, String fullName,
-    		String gender, String city, Timestamp birthdate) {
-    	String fullName = (String) row[5] + ", " + (String) row[6]; 
-    	DTOStudent s = new DTOStudent(
-				(Integer) row[0], 
-				(Integer) row[3], 
-				fullName, 
-				(String) row[4],
-				(String) row[2], 
-				(Timestamp) row[1]);
-    	return s;
-    }*/
-    
     private List<DTOStudent> buildDTOStudentList (List<Student> studentList) {
     	List<DTOStudent> DTOStudentList = new ArrayList<DTOStudent>();
     	for (Student student : studentList) {
-    		DTOStudentList.add(new DTOStudent(
-        			(int) student.getUniversityNotebook(),
-        			(int) student.getDocumentNumber(),
-        			student.getSurname() + ", " + student.getName(),
-        			student.getGender(),
-        			student.getCity(),
-        			student.getBirthdate()));        	
+    		DTOStudentList.add(buildDTOStudent(student));        	
         }
     	return DTOStudentList;
+    }
+    
+    private DTOStudent buildDTOStudent (Student student) {
+    	DTOStudent studentDTO = new DTOStudent(
+    			(int) student.getUniversityNotebook(),
+    			(int) student.getDocumentNumber(),
+    			student.getSurname() + ", " + student.getName(),
+    			student.getGender(),
+    			student.getCity(),
+    			student.getBirthdate());  
+    	return studentDTO;
     }
 
 }
