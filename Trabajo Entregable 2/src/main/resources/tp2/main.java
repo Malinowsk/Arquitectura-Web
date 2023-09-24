@@ -106,7 +106,10 @@ public class main {
 
         Long idCarrera = 6L;
         System.out.println("\n 2.G) Estudiantes de la carrera de TUDAI que viven en Rauch:");
-        System.out.println(studentRepo.getByCarrerAndCity(idCarrera, "Rauch"));
+        System.out.println();
+        for (Student s : studentRepo.getByCarrerAndCity(idCarrera, "Rauch")){
+            System.out.println(s);
+        }
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 

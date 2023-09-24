@@ -16,8 +16,8 @@ public class DTOReport {
 
 	@Override
 	public String toString() {
-		return "Carrera: " + career_name + " , A�o: " + year + " , Cantidad Inscriptos: " + cant_inscriptos
-				+ " , Cantidad Egresos: " + cant_egresos + " \n";
+		return "Carrera: " + career_name + " , A�o: " + year + " , Cantidad Inscriptos: " + cant_inscriptos.intValue()
+				+ " , Cantidad Egresos: " + cant_egresos.intValue() + " \n";
 	}
 	
 }
