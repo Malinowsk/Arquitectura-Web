@@ -68,7 +68,7 @@ public class InscriptionRepository implements JPARepository<Inscription>{
     						(Double) queryListRow[3]);
     		report.add(r);
     	}
-    	em.close();
+    	em.close();	
     	return report;
     	
     }
