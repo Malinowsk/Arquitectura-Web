@@ -23,7 +23,7 @@ public class CSVStudentReader extends CSVReader{
             int documentNumber = Integer.parseInt(record.get(1));
             String name = (record.get(2));
             String surname = (record.get(3));
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date birthdate = dateFormat.parse(record.get(4));
             String gender = (record.get(5));
             String city = (record.get(6));

@@ -34,8 +34,9 @@ public class main {
         careerRepo = mysqlFactory.getCareerRepository();
         studentRepo = mysqlFactory.getStudentRepository();
         inscriptionRepo = mysqlFactory.getInscriptionRepository();
-
+/*
        csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
+
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -88,6 +89,7 @@ public class main {
         for (Student s : studentRepo.getByGender("m")){
             System.out.println(s);
         }
+*/
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
@@ -101,7 +103,7 @@ public class main {
 
         // 2G) recuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia.
 
-        Long idCarrera = 251L;
+        Long idCarrera = 46L;
         System.out.println("\n 2.G) Estudiantes de la carrera de TUDAI que viven en Rauch:");
         System.out.println(studentRepo.getByCarrerAndCity(idCarrera, "Rauch"));
 

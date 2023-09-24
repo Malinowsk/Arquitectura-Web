@@ -23,7 +23,7 @@ public class CSVInscriptionReader extends CSVReader {
         for (CSVRecord record : records) {
             Student student = new Student(Integer.parseInt(record.get(0)));
             Career career = new Career(Integer.parseInt(record.get(1)));
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date initDate = dateFormat.parse(record.get(2));
             Date dueDate = dateFormat.parse(record.get(3));
             inscriptions.add(new Inscription(career,student,new Timestamp(initDate.getTime()), new Timestamp(initDate.getTime())));

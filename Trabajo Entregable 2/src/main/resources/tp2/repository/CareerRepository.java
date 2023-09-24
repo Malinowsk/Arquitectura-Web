@@ -52,9 +52,11 @@ public class CareerRepository implements JPARepository<Career> {
 
     public List<List<Career>> getCareerOrderByQuantityStudent() {
         em = emf.createEntityManager();
-        List<List<Career>> retorno = em.createQuery("SELECT new List(i.career, COUNT(i.student)) FROM Inscription i GROUP BY i.career ORDER BY COUNT(i.student) DESC").getResultList();
+        List retorno = em.createQuery("SELECT new List(i.career, COUNT(i.student)) FROM Inscription i GROUP BY i.career ORDER BY COUNT(i.student) DESC").getResultList();
         em.close();
         return retorno;
     }
+
+
 
 }
