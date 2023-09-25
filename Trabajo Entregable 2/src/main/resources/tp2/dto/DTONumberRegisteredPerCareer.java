@@ -20,7 +20,7 @@ public class DTONumberRegisteredPerCareer {
 
 	@Override
 	public String toString() {
-		return "Nombre Carrera: " + career_name
+		return "\n Carrera: " + career_name
 				+ ", Cantidad Inscriptos: " + enrolled_qty;
 	}
 	

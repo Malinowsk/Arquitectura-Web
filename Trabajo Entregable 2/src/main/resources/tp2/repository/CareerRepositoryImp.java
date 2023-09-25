@@ -56,7 +56,7 @@ public class CareerRepositoryImp implements CareerRepository {
         				+ " FROM Career c "
         				+ " JOIN c.students s "
         				+ " GROUP BY c.name "
-        				+ " ORDER BY c.name, COUNT(s) DESC ", DTONumberRegisteredPerCareer.class).getResultList();
+        				+ " ORDER BY COUNT(s) DESC ", DTONumberRegisteredPerCareer.class).getResultList();
         em.close();
         return careerList;
     }
