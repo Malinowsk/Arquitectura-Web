@@ -4,8 +4,6 @@ import main.resources.tp2.dto.DTONumberRegisteredPerCareer;
 import main.resources.tp2.entity.Career;
 
 import javax.persistence.EntityManager;
-
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 
@@ -49,12 +47,18 @@ public class CareerRepositoryImp implements CareerRepository {
     }
 
     @Override
-    public List<List<Career>> getCareerOrderByQuantityStudent() {
+    public List<DTONumberRegisteredPerCareer> getCareerOrderByQuantityStudent() {
         em = emf.createEntityManager();
-        List retorno = em.createQuery("SELECT new List(i.career, COUNT(i.student)) FROM Inscription i GROUP BY i.career ORDER BY COUNT(i.student) DESC").getResultList();
-        //List<DTONumberRegisteredPerCareer> DTOList = new ArrayList<DTONumberRegisteredPerCareer>();
+        @SuppressWarnings("unchecked")
+		List<DTONumberRegisteredPerCareer> careerList = 
+        		em.createQuery(
+        				" SELECT new main.resources.tp2.dto.DTONumberRegisteredPerCareer(c.name, COUNT(s)) "
+        				+ " FROM Career c "
+        				+ " JOIN c.students s "
+        				+ " GROUP BY c.name "
+        				+ " ORDER BY c.name, COUNT(s) DESC ", DTONumberRegisteredPerCareer.class).getResultList();
         em.close();
-        return retorno;
+        return careerList;
     }
 
 }

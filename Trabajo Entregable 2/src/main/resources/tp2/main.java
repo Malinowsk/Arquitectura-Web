@@ -1,6 +1,7 @@
 package main.resources.tp2;
 
 import main.resources.tp2.csvReader.*;
+import main.resources.tp2.dto.DTONumberRegisteredPerCareer;
 import main.resources.tp2.dto.DTOReport;
 import main.resources.tp2.dto.DTOStudent;
 import main.resources.tp2.entity.Career;
@@ -97,8 +98,8 @@ public class main {
 
         // 2F) Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
         System.out.println("\n 2.F) Carreras con estudiantes inscriptos ordenadas por cantidad de inscriptos:");
-        for (List<Career> c : careerRepo.getCareerOrderByQuantityStudent()){
-            System.out.println(c.get(0) + ", Cant inscriptos: " + c.get(1));
+        for (DTONumberRegisteredPerCareer c : careerRepo.getCareerOrderByQuantityStudent()){
+            System.out.println(c);
         }
 
         System.out.println("\n------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
