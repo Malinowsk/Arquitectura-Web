@@ -1,4 +1,4 @@
-package entity;
+package com.example.trabajoentregable3.entity;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;

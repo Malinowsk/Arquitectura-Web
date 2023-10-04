@@ -1,12 +1,11 @@
-package repository;
+package com.example.trabajoentregable3.repository;
 
-import dto.DTOStudent;
-import entity.Student;
+import com.example.trabajoentregable3.dto.DTOStudent;
+import com.example.trabajoentregable3.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 

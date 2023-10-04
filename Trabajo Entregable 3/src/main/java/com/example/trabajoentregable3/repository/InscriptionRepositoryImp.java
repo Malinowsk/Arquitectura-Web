@@ -1,7 +1,7 @@
-package repository;
+package com.example.trabajoentregable3.repository;
 
-import dto.DTOReport;
-import entity.Inscription;
+import com.example.trabajoentregable3.dto.DTOReport;
+import com.example.trabajoentregable3.entity.Inscription;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

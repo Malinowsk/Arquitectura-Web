@@ -1,7 +1,7 @@
-package repository;
+package com.example.trabajoentregable3.repository;
 
-import dto.DTOStudent;
-import entity.Student;
+import com.example.trabajoentregable3.dto.DTOStudent;
+import com.example.trabajoentregable3.entity.Student;
 
 import java.util.List;
 

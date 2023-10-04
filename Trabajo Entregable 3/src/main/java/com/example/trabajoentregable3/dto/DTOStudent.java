@@ -1,4 +1,4 @@
-package dto;
+package com.example.trabajoentregable3.dto;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;

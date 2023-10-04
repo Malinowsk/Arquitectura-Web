@@ -1,7 +1,7 @@
-package repository;
+package com.example.trabajoentregable3.repository;
 
-import dto.DTONumberRegisteredPerCareer;
-import entity.Career;
+import com.example.trabajoentregable3.dto.DTONumberRegisteredPerCareer;
+import com.example.trabajoentregable3.entity.Career;
 
 import jakarta.persistence.EntityManager;
 import java.util.List;

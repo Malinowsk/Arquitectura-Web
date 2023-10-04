@@ -1,4 +1,4 @@
-package dto;
+package com.example.trabajoentregable3.dto;
 
 public class DTOReport {
 	private String career_name;
