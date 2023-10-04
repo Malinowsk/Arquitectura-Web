@@ -1,6 +1,6 @@
 package com.example.trabajoentregable3.service;
 
-/*
+
 import com.example.trabajoentregable3.entity.Inscription;
 import com.example.trabajoentregable3.repository.InscriptionRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,4 +19,3 @@ public class InscriptionService {
         return this.inscriptionRepository.findAll();
     }
 }
-*/

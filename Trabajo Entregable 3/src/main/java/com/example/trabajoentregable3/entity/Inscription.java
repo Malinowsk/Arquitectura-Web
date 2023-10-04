@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -13,22 +12,23 @@ import java.util.Objects;
 @Entity
 @Data  // genera automáticamente los métodos getter, setter, toString(), equals(), y hashCode()
 @NoArgsConstructor // genera automáticamente el contructor vacio
-public class Inscription implements Serializable {
+public class Inscription{
 
-    @Id
-    @ManyToOne
-    @JoinColumn
+    @EmbeddedId
+    private InscriptionId id;
+
+    @ManyToOne(targetEntity = Student.class)
+    @MapsId("universityNotebook")
+    @JoinColumn(name = "student_id")
     private Student student;
 
-    @Id
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne (targetEntity = 	Career.class)
+    @MapsId("idCareer")
+    @JoinColumn(name = "career_id")
     private Career career;
-
 
     @Column (name = "fecha_inscripcion")
     private Timestamp fecha_ingreso;
-
 
     @Column(name = "fecha_egreso", nullable = true)
     private Timestamp fecha_egreso;
