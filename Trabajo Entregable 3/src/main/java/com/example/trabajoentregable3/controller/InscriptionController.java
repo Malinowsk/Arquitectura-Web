@@ -1,13 +1,11 @@
 package com.example.trabajoentregable3.controller;
 
-/*
 import com.example.trabajoentregable3.entity.Inscription;
 import com.example.trabajoentregable3.service.InscriptionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
@@ -23,4 +21,3 @@ public class InscriptionController {
     }
 
 }
-*/

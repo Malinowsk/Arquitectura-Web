@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -30,7 +29,6 @@ public class Inscription{
 
     @Column (name = "fecha_inscripcion")
     private Timestamp fecha_ingreso;
-
 
     @Column(name = "fecha_egreso", nullable = true)
     private Timestamp fecha_egreso;
