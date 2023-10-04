@@ -14,7 +14,11 @@ public class CareerService {
     private final CareerRepository careerRepository;
 
     public List<DTOCareer> findAll() {
-        return this.careerRepository.findAll().stream().map(career -> new DTOCareer(career.getName())).toList();
+        return this.careerRepository
+                .findAll()
+                .stream()
+                .map(career -> new DTOCareer(career.getName()))
+                .toList();
     }
 
 }
