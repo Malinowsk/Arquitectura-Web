@@ -1,12 +1,13 @@
 package com.example.trabajoentregable3.repository;
 
-import com.example.trabajoentregable3.dto.DTOReport;
+/*
 import com.example.trabajoentregable3.entity.Inscription;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
-public interface InscriptionRepository{
+@Repository
+public interface InscriptionRepository extends JpaRepository<Inscription, Long> {
 
-    public void save(Inscription i);
-    public List<DTOReport> createReport();
 }
+*/

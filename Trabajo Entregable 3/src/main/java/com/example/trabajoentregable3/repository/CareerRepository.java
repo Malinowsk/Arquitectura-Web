@@ -1,14 +1,10 @@
 package com.example.trabajoentregable3.repository;
 
-import com.example.trabajoentregable3.dto.DTONumberRegisteredPerCareer;
 import com.example.trabajoentregable3.entity.Career;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface CareerRepository {
-
-    public void save(Career c);
-    public Career getById(long id);
-    public List<DTONumberRegisteredPerCareer> getCareerOrderByQuantityStudent();
+@Repository
+public interface CareerRepository extends JpaRepository<Career, Long> {
 
 }
