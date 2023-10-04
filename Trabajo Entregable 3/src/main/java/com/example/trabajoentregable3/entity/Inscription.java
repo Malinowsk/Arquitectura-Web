@@ -1,6 +1,9 @@
 package com.example.trabajoentregable3.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -8,6 +11,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 @Entity
+@Data  // genera automáticamente los métodos getter, setter, toString(), equals(), y hashCode()
+@NoArgsConstructor // genera automáticamente el contructor vacio
 public class Inscription implements Serializable {
 
     @Id
@@ -28,48 +33,12 @@ public class Inscription implements Serializable {
     @Column(name = "fecha_egreso", nullable = true)
     private Timestamp fecha_egreso;
 
-    public Inscription() {
-    }
-
     public Inscription(Career career, Student student, Timestamp fecha_ingreso, Timestamp fecha_egreso) {
         this.career = career;
         this.student = student;
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_egreso = fecha_egreso;
     }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Career getCareer() {
-        return career;
-    }
-
-    public void setCareer(Career career) {
-        this.career = career;
-    }
-
-    public Timestamp getFecha_ingreso() {
-        return fecha_ingreso;
-    }
-
-    public void setFecha_ingreso(Timestamp fecha_ingreso) {
-        this.fecha_ingreso = fecha_ingreso;
-    }
-
-    public Timestamp getFecha_egreso() {
-        return fecha_egreso;
-    }
-
-    public void setFecha_egreso(Timestamp fecha_egreso) {
-        this.fecha_egreso = fecha_egreso;
-    }
-
 
     public int getAntiguedad() {
         LocalDateTime localDateTime = fecha_ingreso.toLocalDateTime();

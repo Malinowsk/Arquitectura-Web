@@ -1,6 +1,10 @@
 package com.example.trabajoentregable3.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
@@ -9,6 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
+@Data  // genera automáticamente los métodos getter, setter, toString(), equals(), y hashCode()
+@NoArgsConstructor // genera automáticamente el contructor vacio
 public class Student {
 
     @Id
@@ -27,9 +33,11 @@ public class Student {
     @Column
     private Timestamp birthdate;
 
+    @Getter
     @Column
     private String gender;
 
+    @Getter
     @Column
     private String city;
 
@@ -46,72 +54,6 @@ public class Student {
         this.surname = surname;
         this.birthdate = birthdate;
         this.gender = gender;
-        this.city = city;
-
-    }
-    public Student(int documentNumber, String name, String surname, Timestamp birthdate, String gender, String city, List<Inscription> registrations) {
-        this.documentNumber = documentNumber;
-        this.name = name;
-        this.surname = surname;
-        this.birthdate = birthdate;
-        this.gender = gender;
-        this.city = city;
-        this.registrations = registrations;
-    }
-
-    public Student() {
-
-    }
-
-    public long getUniversityNotebook() {
-        return universityNotebook;
-    }
-
-    public int getDocumentNumber() {
-        return documentNumber;
-    }
-
-    public void setDocumentNumber(int documentNumber) {
-        this.documentNumber = documentNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Timestamp getBirthdate() {
-        return birthdate;  // devolver la edad
-    }
-
-    public void setBirthdate(Timestamp birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
         this.city = city;
     }
 
