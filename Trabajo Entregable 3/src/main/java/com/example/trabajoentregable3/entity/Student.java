@@ -1,5 +1,6 @@
 package com.example.trabajoentregable3.entity;
 
+import com.example.trabajoentregable3.dto.DTOStudent;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
