@@ -27,7 +27,13 @@ public class CareerController {
         return this.careerService.findAll();
     }
 
-    @PostMapping("/")
+
+    @PostMapping("")
+    public ResponseEntity save(@RequestBody @Valid DTORequestCareer cdto){
+        return careerService.save(cdto);
+    }
+
+ /*   @PostMapping("/")
     public ResponseEntity<?> save(@RequestBody Career career){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.careerService.save(career));
@@ -36,5 +42,5 @@ public class CareerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
-    }
+    }*/
 }

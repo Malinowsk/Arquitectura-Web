@@ -16,7 +16,7 @@ public class Career {
 
     @Getter
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -25,7 +25,8 @@ public class Career {
     @OneToMany(mappedBy = "career")
     private List<Inscription> students;
 
-    public Career(String name) {
+    public Career(long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
