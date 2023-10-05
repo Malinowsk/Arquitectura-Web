@@ -19,7 +19,7 @@ public class Inscription{
 
     @ManyToOne(targetEntity = Student.class)
     @MapsId("universityNotebook")
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "student_notebook_number")
     private Student student;
 
     @ManyToOne (targetEntity = 	Career.class)
