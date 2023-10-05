@@ -1,6 +1,7 @@
 package com.example.trabajoentregable3.service;
 
 import com.example.trabajoentregable3.dto.DTOCareer;
+import com.example.trabajoentregable3.dto.DTORequestCareer;
 import com.example.trabajoentregable3.entity.Career;
 import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.repository.CareerRepository;
@@ -25,7 +26,7 @@ public class CareerService {
     }
 
     @Transactional
-    public Career save(Career request) {
+    public Career save(DTORequestCareer request) {
         return careerRepository.save(new Career(request.getName()));
     }
 
