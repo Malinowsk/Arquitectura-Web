@@ -7,6 +7,8 @@ import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.service.CareerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CareerController {
 
+    @Autowired
     private final CareerService careerService;
 
     @GetMapping("/")
@@ -24,10 +27,14 @@ public class CareerController {
         return this.careerService.findAll();
     }
 
-
     @PostMapping("/")
-    public ResponseEntity<Career> save(@RequestBody @Valid DTORequestCareer request ){
-        System.out.println("dsfsdf");
-        return ResponseEntity.accepted().body( this.careerService.save( request ) );
+    public ResponseEntity<?> save(@RequestBody Career career){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.careerService.save(career));
+        } catch (Exception e2) {
+            System.out.println("error " + e2.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
     }
 }

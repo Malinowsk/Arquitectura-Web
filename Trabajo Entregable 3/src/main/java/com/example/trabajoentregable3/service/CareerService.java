@@ -6,6 +6,7 @@ import com.example.trabajoentregable3.entity.Career;
 import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.repository.CareerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +27,12 @@ public class CareerService {
     }
 
     @Transactional
-    public Career save(DTORequestCareer request) {
-        return careerRepository.save(new Career(request.getName()));
+    public Career save(Career entity) throws Exception {
+        try {
+            return careerRepository.save(entity);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
 }
