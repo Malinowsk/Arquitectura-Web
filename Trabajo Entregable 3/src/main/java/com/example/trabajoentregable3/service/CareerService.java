@@ -40,7 +40,7 @@ public class CareerService {
         return this.careerRepository
                 .getCareerOrderByQuantityStudent()
                 .stream()
-                .map(obj -> new DTONumberRegisteredPerCareer(obj.getCareer_name(), obj.getEnrolled_qty()))
+                .map(obj -> new DTONumberRegisteredPerCareer((String) obj[0], (long) obj[1]))
                 .toList();
 
     }
