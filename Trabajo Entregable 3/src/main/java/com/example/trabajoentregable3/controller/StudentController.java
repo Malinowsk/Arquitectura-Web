@@ -22,6 +22,16 @@ public class StudentController {
         return this.studentService.findAll();
     }
 
+    @GetMapping("/sortBySurname")
+    public List<DTOStudent> findAllOrderBySurname() {
+        return this.studentService.findAllOrderBySurname();
+    }
+
+    @GetMapping("/gender/{g}")
+    public List<DTOStudent> findByGender(@PathVariable String g) {
+        return this.studentService.findByGender(g);
+    }
+
     @PostMapping("")
     public ResponseEntity<Student> save(@RequestBody Student request ){
         return ResponseEntity.accepted().body( this.studentService.save( request ) );
