@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface CareerRepository extends JpaRepository<Career, Long> {
 
-    @Query(value = "SELECT new DTONumberRegisteredPerCareer(c.name, COUNT(s)) FROM Career c JOIN c.students s GROUP BY c.name ORDER BY COUNT(s) DESC", nativeQuery = true)
+    @Query(value = "SELECT new DTONumberRegisteredPerCareer(c.name, COUNT(s)) FROM Career c LEFT JOIN c.students s GROUP BY c.name ORDER BY COUNT(s) DESC", nativeQuery = true)
     public List<DTONumberRegisteredPerCareer> getCareerOrderByQuantityStudent();
 }
