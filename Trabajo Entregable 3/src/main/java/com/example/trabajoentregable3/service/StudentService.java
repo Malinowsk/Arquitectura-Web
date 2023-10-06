@@ -6,8 +6,8 @@ import com.example.trabajoentregable3.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.trabajoentregable3.service.exception.NotFoundException;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -20,20 +20,48 @@ public class StudentService {
         return this.studentRepository
                 .findAll()
                 .stream()
-                .map(s -> new DTOStudent(
-                        (int) s.getUniversityNotebook(),
-                        s.getDocumentNumber(),
-                        s.getName(),
-                        s.getSurname(),
-                        s.getGender(),
-                        s.getCity(),
-                        s.getBirthdate()))
+                .map(this::buildDTOStudent)
                 .toList();
+    }
+
+    public List<DTOStudent> findAllOrderBySurname() {
+        return this.studentRepository
+                .findAllByOrderBySurnameAsc()
+                .stream()
+                .map(this::buildDTOStudent)
+                .toList();
+    }
+
+    public DTOStudent findById(int id) {
+        return this.studentRepository.findById((long) id)
+                .map(this::buildDTOStudent)
+                .orElseThrow(() -> new NotFoundException("Student", (long) id));
+    }
+
+    public List<DTOStudent> findByGender(String gender) {
+        return this.studentRepository
+                .getStudentsByGender(gender)
+                .stream()
+                .map(this::buildDTOStudent)
+                .toList();
+
     }
 
     @Transactional
     public Student save(Student request) {
         return studentRepository.save(new Student(request.getDocumentNumber(), request.getName(), request.getSurname(), request.getBirthdate(), request.getGender(), request.getCity()));
+    }
+
+    private DTOStudent buildDTOStudent(Student s) {
+        return new DTOStudent(
+                (int) s.getUniversityNotebook(),
+                s.getDocumentNumber(),
+                s.getName(),
+                s.getSurname(),
+                s.getGender(),
+                s.getCity(),
+                s.getBirthdate()
+        );
     }
 
 }
