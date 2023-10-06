@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 
 
@@ -41,24 +42,23 @@ public class InscriptionService {
 
     @Transactional
     public ResponseEntity save(DTORequestInscription instription ) {
-        if(studentRepository.existsById(instription.getStudent_notebook_number())){
-            if(careerRepository.existsById(instription.getCareer_id())){
-                //if(inscriptionRepository.existsByIdCompuesta(instription.getStudent_notebook_number(),instription.getCareer_id())){
-                    Inscription i = this.inscriptionRepository.save(new Inscription(careerRepository.getReferenceById(instription.getCareer_id()),studentRepository.getReferenceById(instription.getStudent_notebook_number()),instription.getFecha_ingreso(),instription.getFecha_egreso()));
-                    DTOInscription DTOi = new DTOInscription(i.getFecha_ingreso(),i.getFecha_egreso(),(int)i.getStudent().getUniversityNotebook(),(int)i.getCareer().getId());
+        if (studentRepository.existsById(instription.getStudent_notebook_number())) {
+            if (careerRepository.existsById(instription.getCareer_id())) {
+                if (!inscriptionRepository.existsByStudentIdAndCareerId(instription.getStudent_notebook_number(), instription.getCareer_id())) {
+                   System.out.println("ALUMNO NO ESTA INSCRIPTO, SE AGREGA");
+                    Inscription i = this.inscriptionRepository.save(new Inscription(careerRepository.getReferenceById(instription.getCareer_id()), studentRepository.getReferenceById(instription.getStudent_notebook_number()), instription.getFecha_ingreso(), instription.getFecha_egreso()));
+                    DTOInscription DTOi = new DTOInscription(i.getFecha_ingreso(), i.getFecha_egreso(), (int) i.getStudent().getUniversityNotebook(), (int) i.getCareer().getId());
                     return new ResponseEntity(DTOi, HttpStatus.CREATED);
-                //}
-                //else{
-                //    return (ResponseEntity) ResponseEntity.status(HttpStatus.NOT_FOUND);
-                //}
+                }else{
+                    System.out.println("ALUMNO YA ESTA INSCRIPTO, NO SE AGREGA");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-            else{
-                return (ResponseEntity) ResponseEntity.status(HttpStatus.NOT_FOUND);
-            }
-        }
-        else{
+        } else {
             //throw new ConflictExistException("Student","ID", (long) instription.getStudent_notebook_number());
-            return (ResponseEntity) ResponseEntity.status(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
