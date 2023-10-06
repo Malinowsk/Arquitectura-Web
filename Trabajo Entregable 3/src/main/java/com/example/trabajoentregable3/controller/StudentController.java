@@ -1,8 +1,10 @@
 package com.example.trabajoentregable3.controller;
 
+import com.example.trabajoentregable3.dto.DTORequestCareer;
 import com.example.trabajoentregable3.dto.DTOStudent;
 import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.service.StudentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +40,8 @@ public class StudentController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Student> save(@RequestBody Student request ){
-        return ResponseEntity.accepted().body( this.studentService.save( request ) );
+    public ResponseEntity save(@RequestBody @Valid Student request){
+        return studentService.save(request);
     }
 
 }
