@@ -1,6 +1,5 @@
 package com.example.trabajoentregable3.controller;
 
-import com.example.trabajoentregable3.dto.DTORequestCareer;
 import com.example.trabajoentregable3.dto.DTOStudent;
 import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.service.StudentService;
@@ -37,6 +36,11 @@ public class StudentController {
     @GetMapping("/gender/{g}")
     public List<DTOStudent> findByGender(@PathVariable String g) {
         return this.studentService.findByGender(g);
+    }
+
+    @GetMapping("/findByCareerAndCity")
+    public List<DTOStudent> findByCareerAndCity(@RequestParam long careerId, @RequestParam String city) {
+        return this.studentService.findByCareerAndCity(careerId, city);
     }
 
     @PostMapping("")

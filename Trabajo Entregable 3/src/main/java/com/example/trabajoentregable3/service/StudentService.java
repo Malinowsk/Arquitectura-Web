@@ -1,10 +1,6 @@
 package com.example.trabajoentregable3.service;
 
-import com.example.trabajoentregable3.dto.DTOCareer;
-import com.example.trabajoentregable3.dto.DTONumberRegisteredPerCareer;
-import com.example.trabajoentregable3.dto.DTORequestCareer;
 import com.example.trabajoentregable3.dto.DTOStudent;
-import com.example.trabajoentregable3.entity.Career;
 import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,6 +47,14 @@ public class StudentService {
                 .map(this::buildDTOStudent)
                 .toList();
 
+    }
+
+    public List<DTOStudent> findByCareerAndCity(long careerId, String city) {
+        return this.studentRepository
+                .getStudentByCityAndCareer(careerId, city)
+                .stream()
+                .map(this::buildDTOStudent)
+                .toList();
     }
 
     @Transactional
