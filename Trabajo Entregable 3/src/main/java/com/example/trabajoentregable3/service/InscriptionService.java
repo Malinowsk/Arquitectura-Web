@@ -41,16 +41,11 @@ public class InscriptionService {
 
     @Transactional
     public ResponseEntity save(DTORequestInscription instription ) {
-        System.out.println(!studentRepository.existsById(instription.getStudent_notebook_number()));
-        System.out.println(!careerRepository.existsById(instription.getCareer_id()));
         if(studentRepository.existsById(instription.getStudent_notebook_number())){
             if(careerRepository.existsById(instription.getCareer_id())){
-                System.out.println("fsdfd");
                 //if(inscriptionRepository.existsByIdCompuesta(instription.getStudent_notebook_number(),instription.getCareer_id())){
                     Inscription i = this.inscriptionRepository.save(new Inscription(careerRepository.getReferenceById(instription.getCareer_id()),studentRepository.getReferenceById(instription.getStudent_notebook_number()),instription.getFecha_ingreso(),instription.getFecha_egreso()));
-                System.out.println("fsdfd");
                     DTOInscription DTOi = new DTOInscription(i.getFecha_ingreso(),i.getFecha_egreso(),(int)i.getStudent().getUniversityNotebook(),(int)i.getCareer().getId());
-                System.out.println("fsdfd");
                     return new ResponseEntity(DTOi, HttpStatus.CREATED);
                 //}
                 //else{

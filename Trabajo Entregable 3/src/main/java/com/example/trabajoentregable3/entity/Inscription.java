@@ -38,6 +38,7 @@ public class Inscription{
         this.student = student;
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_egreso = fecha_egreso;
+        this.id = new InscriptionId(career.getId(), student.getUniversityNotebook());
     }
 
     public int getAntiguedad() {

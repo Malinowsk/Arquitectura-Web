@@ -19,4 +19,9 @@ public class InscriptionId implements Serializable {
     @Column(name = "university_notebook")
     private Long universityNotebook;
 
+    public InscriptionId(Long idCareer,Long universityNotebook){
+        this.idCareer=idCareer;
+        this.universityNotebook=universityNotebook;
+    }
+
 }
