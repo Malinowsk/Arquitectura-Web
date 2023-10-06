@@ -83,6 +83,8 @@ Para recuperar un estudiante específico en base a su número de libreta univers
 
 En este caso traeremos el estudiante con universityNotebookNumber = 8, el que previamente fue añadido.
 
+```http://localhost:8080/students/8```
+
 ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/04c43722-7c59-4626-81a2-6f36070f2d61)
 
 
@@ -94,9 +96,10 @@ Analizamos la respuesta para verificar que se haya recuperado el estudiante corr
 ### Recuperar estudiantes por genero
 Para recuperar estudiantes en base a su género, realizamos una solicitud GET a la URL ```http://localhost:8080/students/gender/{gender}```, donde `{gender}` es el género deseado.
 
-```http://localhost:8080/students/gender/{gender}```
-
 En este caso vamos a filtrar for genero 'f' (femenino)
+
+```http://localhost:8080/students/gender/f```
+
 
 ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/5735cff2-3d5b-4ac3-9586-f0b3abdbd77d)
 
