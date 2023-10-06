@@ -7,10 +7,11 @@ import java.sql.Timestamp;
 @Data
 public class DTOInscription {
 
+    private int career_id;
+    private int student_notebook_number;
     private Timestamp fecha_ingreso;
     private Timestamp fecha_egreso;
-    private int student_notebook_number;
-    private int career_id;
+
 
     public DTOInscription(Timestamp fecha_ingreso, Timestamp fecha_egreso, int student_notebook_number, int career_id) {
         this.fecha_ingreso = fecha_ingreso;
