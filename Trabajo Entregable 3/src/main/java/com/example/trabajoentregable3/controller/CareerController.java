@@ -1,14 +1,10 @@
 package com.example.trabajoentregable3.controller;
 
-import com.example.trabajoentregable3.dto.DTOCareer;
 import com.example.trabajoentregable3.dto.DTORequestCareer;
-import com.example.trabajoentregable3.entity.Career;
-import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.service.CareerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
