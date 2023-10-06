@@ -23,7 +23,7 @@ public class CareerService {
         return this.careerRepository
                 .findAll()
                 .stream()
-                .map(career -> new DTOCareer(career.getName()))
+                .map(career -> new DTOCareer((int) career.getId(), career.getName()))
                 .toList();
     }
 
@@ -31,8 +31,9 @@ public class CareerService {
     @Transactional
     public ResponseEntity save(DTORequestCareer career) {
         /*if the career does not exist then I persist*/
-            this.careerRepository.save(new Career(career.getId(), career.getName()));
-            return new ResponseEntity(career, HttpStatus.CREATED);
+            Career c = this.careerRepository.save(new Career(career.getId(), career.getName()));
+            DTOCareer DTOc = new DTOCareer((int) c.getId(), c.getName());
+            return new ResponseEntity(DTOc, HttpStatus.CREATED);
     }
 
 /*    @Transactional

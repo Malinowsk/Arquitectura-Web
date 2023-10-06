@@ -7,9 +7,13 @@ import lombok.Data;
 public class DTOCareer {
 
     @Column
+    private int id;
+
+    @Column
     private String name;
 
-    public DTOCareer(String name){
+    public DTOCareer(int id, String name){
+        this.id = id;
         this.name = name;
     }
 
