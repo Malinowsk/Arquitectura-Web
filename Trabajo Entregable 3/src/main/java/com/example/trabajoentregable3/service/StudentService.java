@@ -6,6 +6,7 @@ import com.example.trabajoentregable3.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.trabajoentregable3.service.exception.NotFoundException;
 
 import java.util.List;
 
@@ -29,6 +30,12 @@ public class StudentService {
                 .stream()
                 .map(this::buildDTOStudent)
                 .toList();
+    }
+
+    public DTOStudent findById(int id) {
+        return this.studentRepository.findById((long) id)
+                .map(this::buildDTOStudent)
+                .orElseThrow(() -> new NotFoundException("Student", (long) id));
     }
 
     public List<DTOStudent> findByGender(String gender) {

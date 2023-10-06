@@ -27,6 +27,11 @@ public class StudentController {
         return this.studentService.findAllOrderBySurname();
     }
 
+    @GetMapping("/{id}")
+    public DTOStudent findById(@PathVariable int id) {
+        return this.studentService.findById(id);
+    }
+
     @GetMapping("/gender/{g}")
     public List<DTOStudent> findByGender(@PathVariable String g) {
         return this.studentService.findByGender(g);
