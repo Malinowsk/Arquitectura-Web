@@ -1,5 +1,6 @@
 package com.example.trabajoentregable3.controller;
 
+import com.example.trabajoentregable3.dto.DTONumberRegisteredPerCareer;
 import com.example.trabajoentregable3.dto.DTORequestCareer;
 import com.example.trabajoentregable3.service.CareerService;
 import jakarta.validation.Valid;
@@ -21,6 +22,11 @@ public class CareerController {
     @GetMapping("")
     public List<DTORequestCareer> findAll() {
         return this.careerService.findAll();
+    }
+
+    @GetMapping("/sortByCantInsc")
+    public List<DTONumberRegisteredPerCareer> findAllOrderByQuantityStudent() {
+        return this.careerService.findAllOrderByQuantityStudent();
     }
 
 

@@ -1,6 +1,7 @@
 package com.example.trabajoentregable3.service;
 
 import com.example.trabajoentregable3.dto.DTOCareer;
+import com.example.trabajoentregable3.dto.DTONumberRegisteredPerCareer;
 import com.example.trabajoentregable3.dto.DTORequestCareer;
 import com.example.trabajoentregable3.dto.DTOStudent;
 import com.example.trabajoentregable3.entity.Career;

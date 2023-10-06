@@ -1,6 +1,7 @@
 package com.example.trabajoentregable3.service;
 
 import com.example.trabajoentregable3.dto.DTOCareer;
+import com.example.trabajoentregable3.dto.DTONumberRegisteredPerCareer;
 import com.example.trabajoentregable3.dto.DTORequestCareer;
 import com.example.trabajoentregable3.entity.Career;
 import com.example.trabajoentregable3.repository.CareerRepository;
@@ -35,13 +36,13 @@ public class CareerService {
             return new ResponseEntity<>(DTOc, HttpStatus.CREATED);
     }
 
-/*    @Transactional
-    public Career save(Career entity) throws Exception {
-        try {
-            return careerRepository.save(entity);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
-    }*/
+    public List<DTONumberRegisteredPerCareer> findAllOrderByQuantityStudent() {
+        return this.careerRepository
+                .getCareerOrderByQuantityStudent()
+                .stream()
+                .map(obj -> new DTONumberRegisteredPerCareer(obj.getCareer_name(), obj.getEnrolled_qty()))
+                .toList();
+
+    }
 
 }
