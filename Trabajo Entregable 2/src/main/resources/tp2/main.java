@@ -58,6 +58,8 @@ public class main {
 
         Career tudai = new Career("TUDAI");
         careerRepo.save(tudai);
+        Career ing_electronica = new Career("Ingeniería Electrónica");
+        careerRepo.save(ing_electronica);
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
