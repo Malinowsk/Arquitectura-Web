@@ -17,7 +17,7 @@ public class StudentController {
     private final StudentService studentService;
 
     //TODO: Usar DTOStudent en vez de Entity Student
-    @GetMapping("/")
+    @GetMapping("")
     public List<DTOStudent> findAll() {
         return this.studentService.findAll();
     }

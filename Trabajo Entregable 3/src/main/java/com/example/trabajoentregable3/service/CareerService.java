@@ -19,11 +19,11 @@ public class CareerService {
 
     private final CareerRepository careerRepository;
 
-    public List<DTOCareer> findAll() {
+    public List<DTORequestCareer> findAll() {
         return this.careerRepository
                 .findAll()
                 .stream()
-                .map(career -> new DTOCareer((int) career.getId(), career.getName()))
+                .map(career -> new DTORequestCareer((int) career.getId(), career.getName()))
                 .toList();
     }
 

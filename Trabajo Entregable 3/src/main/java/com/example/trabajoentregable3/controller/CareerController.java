@@ -22,8 +22,8 @@ public class CareerController {
     @Autowired
     private final CareerService careerService;
 
-    @GetMapping("/")
-    public List<DTOCareer> findAll() {
+    @GetMapping("")
+    public List<DTORequestCareer> findAll() {
         return this.careerService.findAll();
     }
 
