@@ -29,7 +29,6 @@ public class CareerController {
         return this.careerService.findAllOrderByQuantityStudent();
     }
 
-
     @PostMapping("")
     public ResponseEntity save(@RequestBody @Valid DTORequestCareer cdto){
         return careerService.save(cdto);

@@ -42,7 +42,7 @@ public class CareerService {
                 .stream()
                 .map(obj -> new DTONumberRegisteredPerCareer((String) obj[0], (long) obj[1]))
                 .toList();
-
     }
+
 
 }
