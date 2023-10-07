@@ -45,20 +45,17 @@ public class InscriptionService {
         if (studentRepository.existsById(instription.getStudent_notebook_number())) {
             if (careerRepository.existsById(instription.getCareer_id())) {
                 if (!inscriptionRepository.existsByStudentIdAndCareerId(instription.getStudent_notebook_number(), instription.getCareer_id())) {
-                   System.out.println("ALUMNO NO ESTA INSCRIPTO, SE AGREGA");
                     Inscription i = this.inscriptionRepository.save(new Inscription(careerRepository.getReferenceById(instription.getCareer_id()), studentRepository.getReferenceById(instription.getStudent_notebook_number()), instription.getFecha_ingreso(), instription.getFecha_egreso()));
                     DTOInscription DTOi = new DTOInscription(i.getFecha_ingreso(), i.getFecha_egreso(), (int) i.getStudent().getUniversityNotebook(), (int) i.getCareer().getId());
                     return new ResponseEntity(DTOi, HttpStatus.CREATED);
                 }else{
-                    System.out.println("ALUMNO YA ESTA INSCRIPTO, NO SE AGREGA");
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                    return new ResponseEntity<>("El estudiante que quiere inscribir ya existe matriculado a la carrera",HttpStatus.NOT_FOUND);
                 }
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                return new ResponseEntity<>("No existe carrera que quiere inscribir",HttpStatus.NOT_FOUND);
             }
         } else {
-            //throw new ConflictExistException("Student","ID", (long) instription.getStudent_notebook_number());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return new ResponseEntity<>("No existe estudiante que quiere inscribir",HttpStatus.NOT_FOUND);
         }
     }
 
