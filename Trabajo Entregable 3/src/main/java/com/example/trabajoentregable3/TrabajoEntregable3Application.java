@@ -30,7 +30,7 @@ public class TrabajoEntregable3Application {
     private InscriptionRepository inscriptionRepository;
 
     private Student student1, student2, student3, student4, student5, student6, student7;
-    private Career ingenieria, tudai, mate;
+    private Career ingenieria, tudai, mate, fisica;
     private Inscription inscription1, inscription2, inscription3, inscription4, inscription5, inscription6, inscription7, inscription8;
 
 
@@ -40,13 +40,15 @@ public class TrabajoEntregable3Application {
         ingenieria = new Career(1,"Ingeniería de Sistemas");
         tudai = new Career(2,"TUDAI");
         mate = new Career(3,"Matematicas");
+        mate = new Career(4,"Fisica");
         careerRepository.save(ingenieria);
         careerRepository.save(tudai);
         careerRepository.save(mate);
+        careerRepository.save(fisica);
 
         // Crear y guardar estudiantes
         student1 = new Student(43344543, "Juan", "Marquez", parseDateToTimestamp("10/05/1997"), "m", "Tandil");
-        student2 = new Student(39856762, "Carlos", "Bilardo", parseDateToTimestamp("15/08/1996"), "f", "Mar del Plata");
+        student2 = new Student(39856762, "Maria", "Antoñeta", parseDateToTimestamp("15/08/1996"), "f", "Mar del Plata");
         student3 = new Student(37654231, "Pedro", "Perez", parseDateToTimestamp("20/11/1998"), "m", "Tandil");
         student4 = new Student(40345543, "David", "Martinez", parseDateToTimestamp("25/03/1999"), "m", "Tandil");
         student5 = new Student(42444555, "Martina", "Rodriguez", parseDateToTimestamp("05/09/1995"), "f", "Tandil");
