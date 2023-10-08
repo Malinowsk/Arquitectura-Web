@@ -40,7 +40,7 @@ public class TrabajoEntregable3Application {
         ingenieria = new Career(1,"Ingeniería de Sistemas");
         tudai = new Career(2,"TUDAI");
         mate = new Career(3,"Matematicas");
-        mate = new Career(4,"Fisica");
+        fisica = new Career(4,"Fisica");
         careerRepository.save(ingenieria);
         careerRepository.save(tudai);
         careerRepository.save(mate);
