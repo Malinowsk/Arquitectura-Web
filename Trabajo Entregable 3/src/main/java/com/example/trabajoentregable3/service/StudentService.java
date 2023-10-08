@@ -1,6 +1,6 @@
 package com.example.trabajoentregable3.service;
 
-import com.example.trabajoentregable3.dto.DTOStudent;
+import com.example.trabajoentregable3.dto.DTOResponseStudent;
 import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
 
-    public List<DTOStudent> findAll() {
+    public List<DTOResponseStudent> findAll() {
         return this.studentRepository
                 .findAll()
                 .stream()
@@ -26,7 +26,7 @@ public class StudentService {
                 .toList();
     }
 
-    public List<DTOStudent> findAllOrderBySurname() {
+    public List<DTOResponseStudent> findAllOrderBySurname() {
         return this.studentRepository
                 .findAllByOrderBySurnameAsc()
                 .stream()
@@ -34,13 +34,13 @@ public class StudentService {
                 .toList();
     }
 
-    public DTOStudent findById(int id) {
+    public DTOResponseStudent findById(int id) {
         return this.studentRepository.findById((long) id)
                 .map(this::buildDTOStudent)
                 .orElseThrow(() -> new NotFoundException("Student", (long) id));
     }
 
-    public List<DTOStudent> findByGender(String gender) {
+    public List<DTOResponseStudent> findByGender(String gender) {
         return this.studentRepository
                 .getStudentsByGender(gender)
                 .stream()
@@ -49,7 +49,7 @@ public class StudentService {
 
     }
 
-    public List<DTOStudent> findByCareerAndCity(long careerId, String city) {
+    public List<DTOResponseStudent> findByCareerAndCity(long careerId, String city) {
         return this.studentRepository
                 .getStudentByCityAndCareer(careerId, city)
                 .stream()
@@ -58,15 +58,15 @@ public class StudentService {
     }
 
     @Transactional
-    public ResponseEntity<DTOStudent> save(Student request) {
+    public ResponseEntity<DTOResponseStudent> save(Student request) {
         Student s = this.studentRepository.save(new Student(request.getDocumentNumber(), request.getName(), request.getSurname(), request.getBirthdate(), request.getGender(), request.getCity()));
-        DTOStudent DTOs = new DTOStudent((int)s.getUniversityNotebook(), s.getDocumentNumber(), s.getName(), s.getSurname(), s.getGender(), s.getCity(),s.getBirthdate());
+        DTOResponseStudent DTOs = new DTOResponseStudent((int)s.getUniversityNotebook(), s.getDocumentNumber(), s.getName(), s.getSurname(), s.getGender(), s.getCity(),s.getBirthdate());
         return new ResponseEntity<>(DTOs, HttpStatus.CREATED);
     }
 
 
-    private DTOStudent buildDTOStudent(Student s) {
-        return new DTOStudent(
+    private DTOResponseStudent buildDTOStudent(Student s) {
+        return new DTOResponseStudent(
                 (int) s.getUniversityNotebook(),
                 s.getDocumentNumber(),
                 s.getName(),
