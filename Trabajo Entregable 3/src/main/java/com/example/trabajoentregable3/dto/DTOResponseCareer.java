@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
-public class DTOCareer {
+public class DTOResponseCareer {
 
     @Column
     private int id;
@@ -12,7 +12,7 @@ public class DTOCareer {
     @Column
     private String name;
 
-    public DTOCareer(int id, String name){
+    public DTOResponseCareer(int id, String name){
         this.id = id;
         this.name = name;
     }

@@ -34,14 +34,4 @@ public class CareerController {
         return careerService.save(cdto);
     }
 
- /*   @PostMapping("/")
-    public ResponseEntity<?> save(@RequestBody Career career){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(this.careerService.save(career));
-        } catch (Exception e2) {
-            System.out.println("error " + e2.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-        }
-    }*/
 }

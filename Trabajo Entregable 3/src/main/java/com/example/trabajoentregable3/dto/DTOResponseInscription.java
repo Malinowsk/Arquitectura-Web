@@ -5,7 +5,7 @@ import lombok.Data;
 import java.sql.Timestamp;
 
 @Data
-public class DTOInscription {
+public class DTOResponseInscription {
 
     private int career_id;
     private int student_notebook_number;
@@ -13,7 +13,7 @@ public class DTOInscription {
     private Timestamp fecha_egreso;
 
 
-    public DTOInscription(Timestamp fecha_ingreso, Timestamp fecha_egreso, int student_notebook_number, int career_id) {
+    public DTOResponseInscription(Timestamp fecha_ingreso, Timestamp fecha_egreso, int student_notebook_number, int career_id) {
         this.fecha_ingreso = fecha_ingreso;
         this.fecha_egreso = fecha_egreso;
         this.student_notebook_number = student_notebook_number;

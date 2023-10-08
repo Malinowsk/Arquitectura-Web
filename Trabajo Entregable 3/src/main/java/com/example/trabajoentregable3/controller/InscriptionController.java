@@ -1,7 +1,6 @@
 package com.example.trabajoentregable3.controller;
 
-import com.example.trabajoentregable3.dto.DTOInscription;
-import com.example.trabajoentregable3.dto.DTORequestCareer;
+import com.example.trabajoentregable3.dto.DTOResponseInscription;
 import com.example.trabajoentregable3.dto.DTORequestInscription;
 import com.example.trabajoentregable3.service.InscriptionService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,7 @@ public class InscriptionController {
     private final InscriptionService inscriptionService;
 
     @GetMapping("")
-    public List<DTOInscription> findAll() {
+    public List<DTOResponseInscription> findAll() {
         return this.inscriptionService.findAll();
     }
 

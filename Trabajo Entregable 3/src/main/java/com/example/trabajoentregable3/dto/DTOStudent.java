@@ -3,6 +3,8 @@ package com.example.trabajoentregable3.dto;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Period;
 
 @Data
 public class DTOStudent {

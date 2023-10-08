@@ -1,11 +1,8 @@
 package com.example.trabajoentregable3.service;
 
 
-import com.example.trabajoentregable3.dto.DTOCareer;
-import com.example.trabajoentregable3.dto.DTOInscription;
-import com.example.trabajoentregable3.dto.DTORequestCareer;
+import com.example.trabajoentregable3.dto.DTOResponseInscription;
 import com.example.trabajoentregable3.dto.DTORequestInscription;
-import com.example.trabajoentregable3.entity.Career;
 import com.example.trabajoentregable3.entity.Inscription;
 import com.example.trabajoentregable3.repository.CareerRepository;
 import com.example.trabajoentregable3.repository.InscriptionRepository;
@@ -27,12 +24,12 @@ public class InscriptionService {
     private final InscriptionRepository inscriptionRepository;
     private final StudentRepository studentRepository;
     private final CareerRepository careerRepository;
-    public List<DTOInscription> findAll() {
+    public List<DTOResponseInscription> findAll() {
 
         return this.inscriptionRepository
                 .findAll()
                 .stream()
-                .map(i -> new DTOInscription(i.getFecha_ingreso(),
+                .map(i -> new DTOResponseInscription(i.getFecha_ingreso(),
                         i.getFecha_egreso(),
                         (int) i.getStudent().getUniversityNotebook(),
                         (int) i.getCareer().getId()
@@ -46,7 +43,7 @@ public class InscriptionService {
             if (careerRepository.existsById(instription.getCareer_id())) {
                 if (!inscriptionRepository.existsByStudentIdAndCareerId(instription.getStudent_notebook_number(), instription.getCareer_id())) {
                     Inscription i = this.inscriptionRepository.save(new Inscription(careerRepository.getReferenceById(instription.getCareer_id()), studentRepository.getReferenceById(instription.getStudent_notebook_number()), instription.getFecha_ingreso(), instription.getFecha_egreso()));
-                    DTOInscription DTOi = new DTOInscription(i.getFecha_ingreso(), i.getFecha_egreso(), (int) i.getStudent().getUniversityNotebook(), (int) i.getCareer().getId());
+                    DTOResponseInscription DTOi = new DTOResponseInscription(i.getFecha_ingreso(), i.getFecha_egreso(), (int) i.getStudent().getUniversityNotebook(), (int) i.getCareer().getId());
                     return new ResponseEntity(DTOi, HttpStatus.CREATED);
                 }else{
                     return new ResponseEntity<>("El estudiante que quiere inscribir ya existe matriculado a la carrera",HttpStatus.NOT_FOUND);

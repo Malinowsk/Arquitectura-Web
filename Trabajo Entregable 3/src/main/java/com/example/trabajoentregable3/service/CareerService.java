@@ -1,6 +1,6 @@
 package com.example.trabajoentregable3.service;
 
-import com.example.trabajoentregable3.dto.DTOCareer;
+import com.example.trabajoentregable3.dto.DTOResponseCareer;
 import com.example.trabajoentregable3.dto.DTONumberRegisteredPerCareer;
 import com.example.trabajoentregable3.dto.DTORequestCareer;
 import com.example.trabajoentregable3.entity.Career;
@@ -29,10 +29,10 @@ public class CareerService {
 
 
     @Transactional
-    public ResponseEntity<DTOCareer> save(DTORequestCareer career) {
+    public ResponseEntity<DTOResponseCareer> save(DTORequestCareer career) {
         /*if the career does not exist then I persist*/
             Career c = this.careerRepository.save(new Career(career.getId(), career.getName()));
-            DTOCareer DTOc = new DTOCareer((int) c.getId(), c.getName());
+            DTOResponseCareer DTOc = new DTOResponseCareer((int) c.getId(), c.getName());
             return new ResponseEntity<>(DTOc, HttpStatus.CREATED);
     }
 
