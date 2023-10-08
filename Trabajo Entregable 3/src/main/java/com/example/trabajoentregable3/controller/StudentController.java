@@ -1,5 +1,6 @@
 package com.example.trabajoentregable3.controller;
 
+import com.example.trabajoentregable3.dto.DTORequestStudent;
 import com.example.trabajoentregable3.dto.DTOResponseStudent;
 import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.service.StudentService;
@@ -44,7 +45,7 @@ public class StudentController {
     }
 
     @PostMapping("")
-    public ResponseEntity save(@RequestBody @Valid Student request){
+    public ResponseEntity save(@RequestBody @Valid DTORequestStudent request){
         return studentService.save(request);
     }
 

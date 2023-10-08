@@ -1,5 +1,6 @@
 package com.example.trabajoentregable3.service;
 
+import com.example.trabajoentregable3.dto.DTORequestStudent;
 import com.example.trabajoentregable3.dto.DTOResponseStudent;
 import com.example.trabajoentregable3.entity.Student;
 import com.example.trabajoentregable3.repository.StudentRepository;
@@ -58,7 +59,7 @@ public class StudentService {
     }
 
     @Transactional
-    public ResponseEntity<DTOResponseStudent> save(Student request) {
+    public ResponseEntity<DTOResponseStudent> save(DTORequestStudent request) {
         Student s = this.studentRepository.save(new Student(request.getDocumentNumber(), request.getName(), request.getSurname(), request.getBirthdate(), request.getGender(), request.getCity()));
         DTOResponseStudent DTOs = new DTOResponseStudent((int)s.getUniversityNotebook(), s.getDocumentNumber(), s.getName(), s.getSurname(), s.getGender(), s.getCity(),s.getBirthdate());
         return new ResponseEntity<>(DTOs, HttpStatus.CREATED);
