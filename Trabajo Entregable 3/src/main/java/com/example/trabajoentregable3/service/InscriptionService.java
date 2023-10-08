@@ -1,6 +1,7 @@
 package com.example.trabajoentregable3.service;
 
 
+import com.example.trabajoentregable3.dto.DTOReport;
 import com.example.trabajoentregable3.dto.DTOResponseInscription;
 import com.example.trabajoentregable3.dto.DTORequestInscription;
 import com.example.trabajoentregable3.entity.Inscription;
@@ -25,7 +26,6 @@ public class InscriptionService {
     private final StudentRepository studentRepository;
     private final CareerRepository careerRepository;
     public List<DTOResponseInscription> findAll() {
-
         return this.inscriptionRepository
                 .findAll()
                 .stream()
@@ -34,6 +34,14 @@ public class InscriptionService {
                         (int) i.getStudent().getUniversityNotebook(),
                         (int) i.getCareer().getId()
                 ))
+                .toList();
+    }
+
+    public List<DTOReport> generateReport() {
+        return this.inscriptionRepository
+                .getReport()
+                .stream()
+                .map(obj -> new DTOReport((String) obj[0], (Integer) obj[1], (Double) obj[2], (Double) obj[3]))
                 .toList();
     }
 

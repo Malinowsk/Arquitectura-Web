@@ -62,14 +62,14 @@ public class TrabajoEntregable3Application {
         studentRepository.save(student7);
 
         // Crear y guardar inscripciones
-        inscription1 = new Inscription(ingenieria, student1, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2020"));
-        inscription2 = new Inscription(tudai, student2, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2020"));
-        inscription3 = new Inscription(mate, student3, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2020"));
-        inscription4 = new Inscription(tudai, student4, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2020"));
-        inscription5 = new Inscription(ingenieria, student5, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2020"));
-        inscription6 = new Inscription(tudai, student6, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2020"));
+        inscription1 = new Inscription(ingenieria, student1, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2021"));
+        inscription2 = new Inscription(tudai, student2, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2021"));
+        inscription3 = new Inscription(mate, student3, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2019"));
+        inscription4 = new Inscription(tudai, student4, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2019"));
+        inscription5 = new Inscription(ingenieria, student5, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2018"));
+        inscription6 = new Inscription(tudai, student6, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2017"));
         inscription7 = new Inscription(tudai, student7, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2020"));
-        inscription8 = new Inscription(tudai, student1, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2020"));
+        inscription8 = new Inscription(tudai, student1, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2016"));
 
 
         inscriptionRepository.save(inscription1);
