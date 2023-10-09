@@ -38,7 +38,7 @@ Con la insercion del estudiante en la tabla students:
 
 --------------------------------------------------------------------------------------------------------------------
 ### Matricular un estudiante en una carrera
-Para matricular un estudiante en una carrera, utilizamos una solicitud POST a la URL ```http://localhost:8080/inscriptions```.
+Para matricular un estudiante en una carrera, utilizamos una solicitud POST a la URL ```http://localhost:8080/inscriptions```
 
 En el cuerpo de la solicitud, especificamos el ID de la carrera en la que deseamos matricularlo, el numero de libreta universitaria (id del alumno) y la fecha de ingreso. 
 ```
@@ -58,7 +58,7 @@ Con la insercion del estudiante en la tabla students:
 
 --------------------------------------------------------------------------------------------------------------------
 ### Recuperar todos los estudiantes ordenados por apellido
-Para recuperar todos los estudiantes registrados en el sistema, realizamos una solicitud GET a la URL ```[http://localhost:8080/students](http://localhost:8080/students/sortBySurname)```
+Para recuperar todos los estudiantes registrados en el sistema, realizamos una solicitud GET a la URL ```http://localhost:8080/students/sortBySurname```
 
  ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/5ed06b44-3d3a-4955-885f-54a3c1ffb0ac)
 
@@ -114,6 +114,8 @@ Obtendremos como resultado:
 --------------------------------------------------------------------------------------------------------------------
 ### Recuperar estudiantes de una carrera por ciudad de residencia
 Para recuperar los estudiantes de una carrera específica filtrados por ciudad de residencia, utilizamos una solicitud GET a la URL ```http://localhost:8080/students/findByCareerAndCity/{careerId}/{city}```, donde `{careerId}` es el ID de la carrera y `{city}` es la ciudad deseada.
+
+```http://localhost:8080/students/findByCareerAndCity/2/tandil```
 
 ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/34e8b902-34d5-4620-9c64-9124753942ea)
 
