@@ -3,6 +3,7 @@ package com.example.trabajoentregable3.service;
 import com.example.trabajoentregable3.dto.DTORequestStudent;
 import com.example.trabajoentregable3.dto.DTOResponseStudent;
 import com.example.trabajoentregable3.entity.Student;
+import com.example.trabajoentregable3.repository.CareerRepository;
 import com.example.trabajoentregable3.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.List;
 public class StudentService {
 
     private final StudentRepository studentRepository;
+    private final CareerRepository careerRepository;
 
     public List<DTOResponseStudent> findAll() {
         return this.studentRepository
@@ -50,12 +52,15 @@ public class StudentService {
 
     }
 
-    public List<DTOResponseStudent> findByCareerAndCity(long careerId, String city) {
-        return this.studentRepository
-                .getStudentByCityAndCareer(careerId, city)
-                .stream()
-                .map(this::buildDTOStudent)
-                .toList();
+    public ResponseEntity findByCareerAndCity(long careerId, String city) {
+        if (careerRepository.existsById(careerId)) {
+            List<DTOResponseStudent> s = this.studentRepository.getStudentByCityAndCareer(careerId, city).stream().map(this::buildDTOStudent).toList();
+            return new ResponseEntity<>(s, HttpStatus.CREATED);
+        }
+        else
+        {
+            return new ResponseEntity<>("No existe carrera que quiere inscribir",HttpStatus.NOT_FOUND);
+        }
     }
 
     @Transactional

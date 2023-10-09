@@ -39,8 +39,8 @@ public class StudentController {
         return this.studentService.findByGender(g);
     }
 
-    @GetMapping("/findByCareerAndCity")
-    public List<DTOResponseStudent> findByCareerAndCity(@RequestParam long careerId, @RequestParam String city) {
+    @GetMapping("/findByCareerAndCity/{careerId}/{city}")
+    public ResponseEntity findByCareerAndCity(@PathVariable long careerId, @PathVariable String city) {
         return this.studentService.findByCareerAndCity(careerId, city);
     }
 
