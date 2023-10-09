@@ -4,7 +4,7 @@
  ## 3) Testear la invocación a los servicios REST mediante Postman, o cliente similar.
    - **2a-** [Dar de alta un Estudiante](#dar-de-alta-un-estudiante)
    - **2b-** [Matricular un estudiante en una carrera](#matricular-un-estudiante-en-una-carrera)
-   - **2c-** [Recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple.](#recuperar-todos-los-estudiantes)
+   - **2c-** [Recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple](#recuperar-todos-los-estudiantes-ordenados-por-apellido)
    - **2d-** [Recuperar un estudiante, en base a su número de libreta universitaria.](#recuperar-un-estudiante-por-numero-de-libreta-universitaria)
    - **2e-** [Recuperar estudiantes en base a su genero](#recuperar-estudiantes-por-genero)
    - **2f-** [Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos](#recuperar-carreras-con-estudiantes-inscriptos)
@@ -30,13 +30,12 @@ Para dar de alta un estudiante en el sistema, realizamos una solicitud POST a la
 ```  
 Y obtendremos como resultado:
 
-![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/9822c88e-b9f9-440e-a8c1-7d20cf5a51de)
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/11d8ca0d-e23e-4792-b08a-2dc6789f9491)
 
 Con la insercion del estudiante en la tabla students:
 
-![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/f663b279-3239-4a8a-804a-d2b6217478a6)
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/a3b7a7e6-435f-4a3c-ba23-c2d851666716)
 
-    
 --------------------------------------------------------------------------------------------------------------------
 ### Matricular un estudiante en una carrera
 Para matricular un estudiante en una carrera, utilizamos una solicitud POST a la URL ```http://localhost:8080/inscriptions```.
@@ -53,28 +52,19 @@ Verificamos la respuesta para asegurarnos de que la matriculación se haya reali
 
 ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/6d29ff68-5aa2-4bf9-8328-92213cec9af9)
 
-
-
 Con la insercion del estudiante en la tabla students:
 
-![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/5bdb4456-b1d8-4481-8900-aee143d1330b)
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/71817eaf-9202-4b06-b854-ab89c9835db8)
 
 --------------------------------------------------------------------------------------------------------------------
-### Recuperar todos los estudiantes
-* Para recuperar todos los estudiantes registrados en el sistema, realizamos una solicitud GET a la URL ```http://localhost:8080/students```.
-  ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/afb18523-3c88-428c-8558-fc5a6e225a03)
+### Recuperar todos los estudiantes ordenados por apellido
+Para recuperar todos los estudiantes registrados en el sistema, realizamos una solicitud GET a la URL ```[http://localhost:8080/students](http://localhost:8080/students/sortBySurname)```
 
-Si enviamos esa solicitud, nos devolvera la lista de estudiantes, ordenadas por numero de libreta universitaria (universityNotebookNumber).
+ ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/5ed06b44-3d3a-4955-885f-54a3c1ffb0ac)
 
-Si esta solicitud la ejecutamos desde internet, obtendremos como resultado el siguiente arreglo:
+Si enviamos esa solicitud, nos devolvera la lista de estudiantes, ordenadas por su apellido:
 
-![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/b5801f61-cdbb-4c36-bdb6-c49a46d37275)
-
-Con los siguientes datos:
-
-![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/d1929e3b-d5e5-4224-9ec5-2046312a3aaf)
-
-etc...
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/97c06147-8ac4-4e8a-903a-3844cfd29af1)
 
 --------------------------------------------------------------------------------------------------------------------
 ### Recuperar un estudiante por numero de libreta universitaria
@@ -83,7 +73,7 @@ Para recuperar un estudiante específico en base a su número de libreta univers
 
 En este caso traeremos el estudiante con universityNotebookNumber = 8, el que previamente fue añadido.
 
-```http://localhost:8080/students/8```
+GET ```http://localhost:8080/students/8```
 
 ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/04c43722-7c59-4626-81a2-6f36070f2d61)
 
@@ -94,22 +84,21 @@ Analizamos la respuesta para verificar que se haya recuperado el estudiante corr
 
 --------------------------------------------------------------------------------------------------------------------
 ### Recuperar estudiantes por genero
-Para recuperar estudiantes en base a su género, realizamos una solicitud GET a la URL ```http://localhost:8080/students/gender/{gender}```, donde `{gender}` es el género deseado.
+Para recuperar estudiantes en base a su género, realizamos una solicitud GET a la URL ```http://localhost:8080/students/gender/{gender}``` donde `{gender}` es el género deseado.
 
 En este caso vamos a filtrar for genero 'f' (femenino)
 
-```http://localhost:8080/students/gender/f```
-
+GET ```http://localhost:8080/students/gender/f```
 
 ![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/5735cff2-3d5b-4ac3-9586-f0b3abdbd77d)
 
 Y obtendremos como resultado:
 
-![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/50fb58f9-9a2a-4646-9ffa-d4fa3e1e785b)
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/e3ce8f19-cefb-4e5e-a52d-81333950eec4)
 
 Podemos observar que la respuesta obtenida de la Query, coincide con la base de datos
 
-![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/ad3580f3-dcc9-4f00-8640-1c3a64948c73)
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/8028321f-9d63-41ca-b26b-6ae840d44c99)
 
 --------------------------------------------------------------------------------------------------------------------
 ### Recuperar carreras con estudiantes inscriptos
@@ -120,11 +109,35 @@ Para recuperar las carreras con estudiantes inscriptos, efectuamos una solicitud
 
 Obtendremos como resultado:
 
-![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/8f085e70-6aca-455f-bbc8-718d1a667678)
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/3461909b-8d36-43bf-a064-957ce840fca3)
 
 --------------------------------------------------------------------------------------------------------------------
 ### Recuperar estudiantes de una carrera por ciudad de residencia
-* Para recuperar los estudiantes de una carrera específica filtrados por ciudad de residencia, utilizamos una solicitud GET a la URL `/careers/"{careerId]/students/byCity/{city}`, donde `{careerId}` es el ID de la carrera y `{city}` es la ciudad deseada. Examinamos la respuesta para obtener la lista de estudiantes que cumplen con ambos criterios.
+Para recuperar los estudiantes de una carrera específica filtrados por ciudad de residencia, utilizamos una solicitud GET a la URL ```http://localhost:8080/students/findByCareerAndCity/{careerId}/{city}```, donde `{careerId}` es el ID de la carrera y `{city}` es la ciudad deseada.
+
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/34e8b902-34d5-4620-9c64-9124753942ea)
+
+En este caso, vamos a obtener una lista de estudiantes, que estudien la carrera Tudai(careerId=2) y que sean de la ciudad de Tandil (city).
+
+Examinamos la respuesta para obtener la lista de estudiantes que cumplen con ambos criterios:
+
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/f2218acc-b349-440d-9d01-96ba2c7e7e21)
+
+Podemos observar que el JSON nos devuelve al estudiante que ingresamos en el punto 2a, y luego inscribimos en el 2b.
+
 --------------------------------------------------------------------------------------------------------------------
 ### Generar un reporte de carreras
-*Finalmente, para generar un reporte de carreras que incluya información sobre los inscritos y egresados por año, realizamos una solicitud GET a la URL `/careers/report`. Analizamos la respuesta para obtener el informe deseado, que está ordenado alfabéticamente y presenta los años de manera cronológica.
+Finalmente, para generar un reporte de carreras que incluya información sobre los inscritos y egresados por año, realizamos una solicitud GET a la URL `http://localhost:8080/inscriptions/report`. Analizamos la respuesta para obtener el informe deseado, que está ordenado alfabéticamente y presenta los años de manera cronológica.
+
+GET ```http://localhost:8080/inscriptions/report```
+
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/e82e5905-2e3f-4b80-b9f0-2467bfa81fb4)
+
+Al ejecuitarlo, obtendremos como resultado:
+
+![image](https://github.com/Malinowsk/Arquitectura-Web/assets/70240593/06b83392-8ebb-4377-81fc-3cb640730b2e)
+
+El JSON nos devolvera los resultados, ordenados por carrera y año, junto con la cantidad de inscriptos y egresados que tiene ese año.
+
+--------------------------------------------------------------------------------------------------------------------
+
