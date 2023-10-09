@@ -33,7 +33,7 @@ public class TrabajoEntregable3Application {
     private Career ingenieria, tudai, mate, fisica;
     private Inscription inscription1, inscription2, inscription3, inscription4, inscription5, inscription6, inscription7, inscription8;
 
-/*
+
     @PostConstruct
     public void setUp() {
         // Crear y guardar carreras
@@ -64,8 +64,8 @@ public class TrabajoEntregable3Application {
         studentRepository.save(student7);
 
         // Crear y guardar inscripciones
-        inscription1 = new Inscription(ingenieria, student1, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2021"));
-        inscription2 = new Inscription(tudai, student2, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2021"));
+        inscription1 = new Inscription(ingenieria, student1, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2018"));
+        inscription2 = new Inscription(tudai, student2, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2015"));
         inscription3 = new Inscription(mate, student3, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2019"));
         inscription4 = new Inscription(tudai, student4, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2019"));
         inscription5 = new Inscription(ingenieria, student5, parseDateToTimestamp("12/04/2020"), parseDateToTimestamp("12/04/2018"));
@@ -93,7 +93,7 @@ public class TrabajoEntregable3Application {
         } catch (ParseException e) {
             throw new IllegalArgumentException("Fecha no válida: " + s, e);
         }
-    }*/
+    }
 
 
     public static void main(String[] args) {

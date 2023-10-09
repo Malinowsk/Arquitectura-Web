@@ -55,7 +55,7 @@ public class StudentService {
     public ResponseEntity findByCareerAndCity(long careerId, String city) {
         if (careerRepository.existsById(careerId)) {
             List<DTOResponseStudent> s = this.studentRepository.getStudentByCityAndCareer(careerId, city).stream().map(this::buildDTOStudent).toList();
-            return new ResponseEntity<>(s, HttpStatus.CREATED);
+            return new ResponseEntity<>(s, HttpStatus.OK);
         }
         else
         {

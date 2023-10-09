@@ -16,7 +16,6 @@ public class DTORequestStudent {
     @NotNull(message = "ID cannot be null")
     private long  universityNotebook;
     @NotNull(message = "Cannot be null")
-    @NotEmpty(message = "the name cannot be empty")
     private int documentNumber;
     @NotNull(message = "Cannot be null")
     @NotEmpty(message = "the name cannot be empty")
@@ -25,7 +24,6 @@ public class DTORequestStudent {
     @NotEmpty(message = "the name cannot be empty")
     private String surname;
     @NotNull(message = "Cannot be null")
-    @NotEmpty(message = "the name cannot be empty")
     private Timestamp birthdate;
     @NotNull(message = "Cannot be null")
     @NotEmpty(message = "the name cannot be empty")
