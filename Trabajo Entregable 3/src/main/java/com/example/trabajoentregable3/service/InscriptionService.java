@@ -50,9 +50,13 @@ public class InscriptionService {
         if (studentRepository.existsById(instription.getStudent_notebook_number())) {
             if (careerRepository.existsById(instription.getCareer_id())) {
                 if (!inscriptionRepository.existsByStudentIdAndCareerId(instription.getStudent_notebook_number(), instription.getCareer_id())) {
-                    Inscription i = this.inscriptionRepository.save(new Inscription(careerRepository.getReferenceById(instription.getCareer_id()), studentRepository.getReferenceById(instription.getStudent_notebook_number()), instription.getFecha_ingreso(), instription.getFecha_egreso()));
-                    DTOResponseInscription DTOi = new DTOResponseInscription(i.getFecha_ingreso(), i.getFecha_egreso(), (int) i.getStudent().getUniversityNotebook(), (int) i.getCareer().getId());
-                    return new ResponseEntity(DTOi, HttpStatus.CREATED);
+                    if (instription.getFecha_egreso()!=null && instription.getFecha_ingreso().after(instription.getFecha_egreso())){
+                        return new ResponseEntity<>("La fecha de egreso no puede ser anterior a la fecha de ingreso, hay una inconsistencia",HttpStatus.NOT_FOUND);
+                    } else {
+                        Inscription i = this.inscriptionRepository.save(new Inscription(careerRepository.getReferenceById(instription.getCareer_id()), studentRepository.getReferenceById(instription.getStudent_notebook_number()), instription.getFecha_ingreso(), instription.getFecha_egreso()));
+                        DTOResponseInscription DTOi = new DTOResponseInscription(i.getFecha_ingreso(), i.getFecha_egreso(), (int) i.getStudent().getUniversityNotebook(), (int) i.getCareer().getId());
+                        return new ResponseEntity(DTOi, HttpStatus.CREATED);
+                    }
                 }else{
                     return new ResponseEntity<>("El estudiante que quiere inscribir ya existe matriculado a la carrera",HttpStatus.NOT_FOUND);
                 }

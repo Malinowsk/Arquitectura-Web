@@ -33,7 +33,7 @@ public class TrabajoEntregable3Application {
     private Career ingenieria, tudai, mate, fisica;
     private Inscription inscription1, inscription2, inscription3, inscription4, inscription5, inscription6, inscription7, inscription8;
 
-
+/*
     @PostConstruct
     public void setUp() {
         // Crear y guardar carreras
@@ -93,7 +93,7 @@ public class TrabajoEntregable3Application {
         } catch (ParseException e) {
             throw new IllegalArgumentException("Fecha no válida: " + s, e);
         }
-    }
+    }*/
 
 
     public static void main(String[] args) {

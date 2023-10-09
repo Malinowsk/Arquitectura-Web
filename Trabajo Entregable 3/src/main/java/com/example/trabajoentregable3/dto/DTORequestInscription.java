@@ -15,6 +15,5 @@ public class DTORequestInscription {
     private final long student_notebook_number;
     @NotNull(message = "The inscription cannot be null")
     private final Timestamp fecha_ingreso;
-    @NotNull(message = "The graduation cannot be null")
     private final Timestamp fecha_egreso;
 }
