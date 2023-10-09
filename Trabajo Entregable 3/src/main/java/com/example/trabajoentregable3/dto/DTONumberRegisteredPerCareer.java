@@ -23,11 +23,4 @@ public class DTONumberRegisteredPerCareer {
 		return "\n Carrera: " + career_name
 				+ ", Cantidad Inscriptos: " + enrolled_qty;
 	}
-	
-	
-
-
-
-
-
 }
