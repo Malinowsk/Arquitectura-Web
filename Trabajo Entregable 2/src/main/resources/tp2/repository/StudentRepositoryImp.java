@@ -88,7 +88,7 @@ public class StudentRepositoryImp implements StudentRepository {
     	DTOStudent studentDTO = new DTOStudent(
     			(int) student.getUniversityNotebook(),
     			(int) student.getDocumentNumber(),
-    			student.getSurname() + ", " + student.getName(),
+                student.getName() + " " + student.getSurname(),
     			student.getGender(),
     			student.getCity(),
     			student.getBirthdate());  

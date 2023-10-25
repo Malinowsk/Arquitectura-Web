@@ -86,7 +86,7 @@ public class DTOStudent {
 	public String toString() {
 		return "\n Nro LU: " + universityNotebookNumber +
                 ", DNI: " + documentNumber +
-                ", Nombre: '" + fullName + '\'' +
+                ", Nombre y Apellido: '" + fullName + '\'' +
                 ", Edad: " + getAge() +
                 ", Sexo: '" + gender + '\'' +
                 ", Ciudad: '" + city+"'";

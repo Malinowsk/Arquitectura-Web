@@ -6,9 +6,9 @@
 	<persistence-unit name="MYSQL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-		<class>main.resources.tp2.entity.Student</class>
-		<class>main.resources.tp2.entity.Career</class>
-		<class>main.resources.tp2.entity.Inscription</class>
+		<class>com.example.trabajoentregable3.entity.Student</class>
+		<class>com.example.trabajoentregable3.entity.Career</class>
+		<class>com.example.trabajoentregable3.entity.Inscription</class>
 
 		<properties>
 

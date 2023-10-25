@@ -20,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.Timestamp;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class main {
@@ -39,7 +38,7 @@ public class main {
         inscriptionRepo = mysqlFactory.getInscriptionRepository();
 
 
-        //csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
+        csvUpload(studentRepo,careerRepo,inscriptionRepo); // se carga los datos de los csv a las tablas
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -53,12 +52,14 @@ public class main {
         Student pedro = new Student(34969641, "Pedro", "Albino", new Timestamp(date.getTime()), "m", "Tandil");
         date = dateFormat.parse("20/08/1989");
         Student ana = new Student(34648616, "Ana", "Martinez", new Timestamp(date.getTime()), "f", "Mar del Plata");
-        //studentRepo.save(nicolas);
-        //studentRepo.save(pedro);
-        //studentRepo.save(ana);
+        studentRepo.save(nicolas);
+        studentRepo.save(pedro);
+        studentRepo.save(ana);
 
         Career tudai = new Career("TUDAI");
-        //careerRepo.save(tudai);
+        careerRepo.save(tudai);
+        Career ing_electronica = new Career("Ingenier�a Electr�nica");
+        careerRepo.save(ing_electronica);
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
@@ -66,7 +67,7 @@ public class main {
         System.out.println("\n 2.B) Matricular un estudiante en una carrera");
         date = dateFormat.parse("31/03/2020");
         Inscription i1 = new Inscription(tudai, nicolas, new Timestamp(date.getTime()), null);
-        //inscriptionRepo.save(i1);
+        inscriptionRepo.save(i1);
 
 
         System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
@@ -119,7 +120,7 @@ public class main {
         // 3) Generar un reporte de las carreras, que para cada carrera incluya información de los
         // inscriptos y egresados por año. Se deben ordenar las carreras alfabeticamente, y presentar
         // los años de manera cronológica
-        System.out.println("\n 3) Reporte de las carreras ordenadas alfabeticamente, con cantidad de inscriptos y egresados por año.");
+        System.out.println("\n 3) Reporte de las carreras ordenadas alfabeticamente, con cantidad de inscriptos y egresados por año.\n");
         for (DTOReport i : inscriptionRepo.createReport()){
             System.out.println(i);
         }

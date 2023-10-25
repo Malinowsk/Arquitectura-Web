@@ -54,9 +54,9 @@ public class CareerRepositoryImp implements CareerRepository {
         		em.createQuery(
         				" SELECT new main.resources.tp2.dto.DTONumberRegisteredPerCareer(c.name, COUNT(s)) "
         				+ " FROM Career c "
-        				+ " JOIN c.students s "
+        				+ " LEFT JOIN c.students s "
         				+ " GROUP BY c.name "
-        				+ " ORDER BY c.name, COUNT(s) DESC ", DTONumberRegisteredPerCareer.class).getResultList();
+        				+ " ORDER BY COUNT(s) DESC ", DTONumberRegisteredPerCareer.class).getResultList();
         em.close();
         return careerList;
     }

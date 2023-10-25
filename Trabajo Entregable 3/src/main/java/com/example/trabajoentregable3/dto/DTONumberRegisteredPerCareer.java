@@ -1,4 +1,4 @@
-package main.resources.tp2.dto;
+package com.example.trabajoentregable3.dto;
 
 public class DTONumberRegisteredPerCareer {
 	
@@ -23,11 +23,4 @@ public class DTONumberRegisteredPerCareer {
 		return "\n Carrera: " + career_name
 				+ ", Cantidad Inscriptos: " + enrolled_qty;
 	}
-	
-	
-
-
-
-
-
 }
