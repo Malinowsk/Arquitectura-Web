@@ -18,6 +18,6 @@ public class Scooter {
     @Column
     private String state;
 
-    @OneToMany (mappedBy = "id")
+    @OneToMany
     private List<Ride> rides;
 }

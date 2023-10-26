@@ -16,7 +16,7 @@ public class Station {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long  id;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany
     private List<Scooter> skateboards;
 
 }
