@@ -20,8 +20,8 @@ public class Scooter implements Serializable {
     @Column
     private String state;
 
-    //@Embedded
-    //private GPS ubicacion;
+    @Embedded
+    private GPS location;
 
     //@Column
     //private boolean disponible;

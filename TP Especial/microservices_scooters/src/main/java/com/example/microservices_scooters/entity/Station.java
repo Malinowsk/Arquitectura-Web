@@ -19,8 +19,8 @@ public class Station {
     @Column
     private String name;
 
-    //@Embedded
-    //private GPS ubicacion;
+    @Embedded
+    private GPS location;
 
     @OneToMany
     private List<Scooter> skateboards;
