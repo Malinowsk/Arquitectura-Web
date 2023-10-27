@@ -1,5 +1,7 @@
 package com.example.microservices_scooters.controller;
 
+import com.example.microservices_scooters.dto.DTORequestScooter;
+import com.example.microservices_scooters.dto.DTOResponseScooter;
 import com.example.microservices_scooters.entity.Scooter;
 import com.example.microservices_scooters.service.ServiceScooter;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/monopatines")
@@ -19,7 +23,7 @@ public class ControllerScooter {
 
 
     @GetMapping("")
-    public List<MonopatinResponseDto> findAll(){
+    public List<DTOResponseScooter> findAll(){
         return this.serviceScooter.findAll();
     }
 
@@ -36,7 +40,7 @@ public class ControllerScooter {
 
 
     @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody @Validated MonopatinRequestDto request ){
+    public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ){
         System.out.println(request);
         try {
             return ResponseEntity.status(HttpStatus.OK).body(serviceScooter.save(request));
@@ -58,12 +62,12 @@ public class ControllerScooter {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated MonopatinRequestDto request) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestScooter request) {
         System.out.println("up"+request);
 
         try {
             Scooter scooter = serviceScooter.update(id, request);
-            MonopatinResponseDto response = new MonopatinResponseDto(scooter);
+            DTOResponseScooter response = new DTOResponseScooter(scooter);
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
 

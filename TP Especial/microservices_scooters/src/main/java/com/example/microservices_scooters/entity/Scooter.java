@@ -1,5 +1,6 @@
 package com.example.microservices_scooters.entity;
 
+import com.example.microservices_scooters.dto.DTORequestScooter;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,6 +49,8 @@ public class Scooter implements Serializable {
     @Column
     private Long numberOfTrips;
 
+public Scooter(DTORequestScooter dto){
 
+}
 
 }
