@@ -3,7 +3,7 @@ package com.example.microservices_scooters.controller;
 import com.example.microservices_scooters.dto.DTORequestScooter;
 import com.example.microservices_scooters.dto.DTOResponseScooter;
 import com.example.microservices_scooters.entity.Scooter;
-import com.example.microservices_scooters.service.ServiceScooter;
+import com.example.microservices_scooters.service.ScooterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,20 +16,20 @@ import java.util.List;
 @RestController
 @RequestMapping("api/monopatines")
 @RequiredArgsConstructor
-public class ControllerScooter {
+public class ScooterController {
 
     @Autowired
-    private final ServiceScooter serviceScooter;
+    private final ScooterService scooterService;
 
     @GetMapping("")
     public List<DTOResponseScooter> findAll(){
-        return this.serviceScooter.findAll();
+        return this.scooterService.findAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(serviceScooter.findById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.findById(id));
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Monopatin inexistente");
         }
@@ -40,7 +40,7 @@ public class ControllerScooter {
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(serviceScooter.save(request));
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.save(request));
         }catch(Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Ocurrio un error, revise los campos ingresados");
         }
@@ -51,7 +51,7 @@ public class ControllerScooter {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
-            this.serviceScooter.delete(id);
+            this.scooterService.delete(id);
             return ResponseEntity.status(HttpStatus.OK).body("Se elimino correctamente monopatin con el id: " + id);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo eliminar el monopatin con id: " + id);
@@ -61,7 +61,7 @@ public class ControllerScooter {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestScooter request) {
         try {
-            Scooter scooter = serviceScooter.update(id, request);
+            Scooter scooter = scooterService.update(id, request);
             DTOResponseScooter response = new DTOResponseScooter(scooter);
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
