@@ -1,4 +1,4 @@
-package com.example.microservices_stations.entity;
+package com.example.microservices_scooters.entity;
 
 
 import com.example.microservices_scooters.entity.Scooter;
@@ -16,7 +16,16 @@ public class Station {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long  id;
 
+    @Column
+    private String name;
+
+    //@Embedded
+    //private GPS ubicacion;
+
     @OneToMany
     private List<Scooter> skateboards;
 
+    public Station(String name) {
+        this.name = name;
+    }
 }
