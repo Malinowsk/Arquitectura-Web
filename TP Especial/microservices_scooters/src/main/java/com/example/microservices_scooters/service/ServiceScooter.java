@@ -15,14 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class ServiceScooter {
     
     private final RepositoryScooter repositoryScooter;
-
-    @Transactional
-    public DTOResponseScooter save(DTORequestScooter request ){
-        System.out.println(request);
-        Scooter scooter = new Scooter(request);
-        Scooter result = this.repositoryScooter.save(scooter);
-        return new DTOResponseScooter(result);
-    }
     
     @Transactional
     public List<DTOResponseScooter> findAll(){
@@ -34,6 +26,13 @@ public class ServiceScooter {
         return this.repositoryScooter.findById( id )
                 .map( DTOResponseScooter::new )
                 .orElseThrow( () -> new NotFoundException("scooter", id ) );
+    }
+
+    @Transactional
+    public DTOResponseScooter save(DTORequestScooter request ){
+        Scooter scooter = new Scooter(request);
+        Scooter result = this.repositoryScooter.save(scooter);
+        return new DTOResponseScooter(result);
     }
 
     @Transactional

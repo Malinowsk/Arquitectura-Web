@@ -21,12 +21,10 @@ public class ControllerScooter {
     @Autowired
     private final ServiceScooter serviceScooter;
 
-
     @GetMapping("")
     public List<DTOResponseScooter> findAll(){
         return this.serviceScooter.findAll();
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
@@ -41,7 +39,6 @@ public class ControllerScooter {
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ){
-        System.out.println(request);
         try {
             return ResponseEntity.status(HttpStatus.OK).body(serviceScooter.save(request));
         }catch(Exception e) {
@@ -63,8 +60,6 @@ public class ControllerScooter {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestScooter request) {
-        System.out.println("up"+request);
-
         try {
             Scooter scooter = serviceScooter.update(id, request);
             DTOResponseScooter response = new DTOResponseScooter(scooter);
