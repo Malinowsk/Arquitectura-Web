@@ -1,13 +1,13 @@
-package com.example.microservice_users;
+package com.example.microservices_users;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroserviceUsersApplication {
+public class MicroservicesUsersApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MicroserviceUsersApplication.class, args);
+        SpringApplication.run(MicroservicesUsersApplication.class, args);
     }
 
 }
