@@ -1,5 +1,6 @@
 package com.example.microservices_users.entity;
 
+import com.example.microservices_users.dto.DTORequestUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,5 +39,12 @@ public class User implements Serializable {
         this.surname = surname;
         this.phone_number = phone_number;
         this.email = email;
+    }
+
+    public User(DTORequestUser dto) {
+        this.name = dto.getName();
+        this.surname = dto.getSurname();
+        this.phone_number = dto.getPhone_number();
+        this.email = dto.getEmail();
     }
 }
