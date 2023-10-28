@@ -1,6 +1,8 @@
 package com.example.microservices_users.entity;
 
 
+import com.example.microservices_users.dto.DTORequestAccount;
+import com.example.microservices_users.dto.DTORequestUser;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -18,15 +20,26 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id_account")
     private Long id;
-
     @Column
     private Double money;
-
     @Column
     private Timestamp date_of_creation;
-
     @ManyToMany(mappedBy = "account_list")
     private List<User> users;
+
+
+
+    public Account(Double money, Timestamp date_of_creation, List<User> users) {
+        this.money = money;
+        this.date_of_creation = date_of_creation;
+        this.users = users;
+    }
+
+    public Account(DTORequestAccount dto) {
+        this.money = dto.getMoney();
+        this.date_of_creation = dto.getDate_of_creation();
+        this.users = dto.getUsers();
+    }
 
 
 }
