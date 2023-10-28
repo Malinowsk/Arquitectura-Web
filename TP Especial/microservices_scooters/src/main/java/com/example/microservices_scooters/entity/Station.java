@@ -1,6 +1,8 @@
 package com.example.microservices_scooters.entity;
 
 
+import com.example.microservices_scooters.dto.DTORequestScooter;
+import com.example.microservices_scooters.dto.DTORequestStation;
 import com.example.microservices_scooters.entity.Scooter;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -25,7 +27,23 @@ public class Station {
     @OneToMany
     private List<Scooter> skateboards;
 
-    public Station(String name) {
-        this.name = name;
+    @Column
+    private int cantMaxSkateboards;
+
+    public Station(DTORequestStation s){
+        this.id = s.getId();
+        this.name = s.getName();
+        this.location = s.getLocation();
+        this.cantMaxSkateboards = s.getCantMaxSkateboards();
+    }
+
+    public boolean addScooterToStation( Scooter s){
+        if (s.getLocation().equals(this.location) && !skateboards.contains(s)) {
+            this.skateboards.add(s);
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
