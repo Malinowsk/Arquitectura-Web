@@ -1,10 +1,8 @@
 package com.example.microservices_admin_maintenance.exception;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
 public class NotFoundException extends RuntimeException {
 
     private final String message;
