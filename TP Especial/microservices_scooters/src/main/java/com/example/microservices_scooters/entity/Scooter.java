@@ -49,8 +49,15 @@ public class Scooter implements Serializable {
     @Column
     private Long numberOfTrips;
 
-public Scooter(DTORequestScooter dto){
-
+public Scooter(DTORequestScooter s){
+    this.id = s.getId();
+    this.location = s.getLocation();
+    this.state = s.getState();
+    this.kmsTraveled = s.getKmsTraveled();
+    this.kmsMant = s.getKmsMant();
+    this.totalUsageTime = s.getTotalUsageTime();
+    this.pausedTime = s.getPausedTime();
+    this.numberOfTrips = s.getNumberOfTrips();
 }
 
 }

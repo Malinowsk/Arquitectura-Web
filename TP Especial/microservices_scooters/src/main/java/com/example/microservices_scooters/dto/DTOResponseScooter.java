@@ -2,9 +2,6 @@ package com.example.microservices_scooters.dto;
 
 import com.example.microservices_scooters.entity.GPS;
 import com.example.microservices_scooters.entity.Scooter;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class DTOResponseScooter {
     private Long  id;
