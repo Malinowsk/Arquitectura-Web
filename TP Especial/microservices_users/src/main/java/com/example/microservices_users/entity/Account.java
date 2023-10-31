@@ -24,15 +24,14 @@ public class Account implements Serializable {
     private Double money;
     @Column
     private Timestamp date_of_creation;
-    @ManyToMany(mappedBy = "account_list")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "account_list")
     private List<User> users;
 
 
 
-    public Account(Double money, Timestamp date_of_creation, List<User> users) {
+    public Account(Double money, Timestamp date_of_creation) {
         this.money = money;
         this.date_of_creation = date_of_creation;
-        this.users = users;
     }
 
     public Account(DTORequestAccount dto) {

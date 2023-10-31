@@ -17,14 +17,12 @@ public class DTOResponseAccount {
     private Long id;
     private double money;
     private Timestamp date_of_creation;
-    private List<User> users;
 
 
     public DTOResponseAccount(Account a) {
         this.id = a.getId();
         this.money = a.getMoney();
         this.date_of_creation = a.getDate_of_creation();
-        this.users = a.getUsers();
     }
 }
 

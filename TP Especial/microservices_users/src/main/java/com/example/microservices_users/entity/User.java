@@ -30,7 +30,7 @@ public class User implements Serializable {
     @Column
     private String email;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.LAZY)
     private List<Account> account_list;
 
 
