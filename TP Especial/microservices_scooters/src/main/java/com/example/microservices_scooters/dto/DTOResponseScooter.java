@@ -14,6 +14,7 @@ public class DTOResponseScooter {
     private long totalUsageTime;
     private long pausedTime;
     private int numberOfTrips;
+    private String model;
 
     public DTOResponseScooter(Scooter s ) {
         this.id = s.getId();
@@ -24,5 +25,6 @@ public class DTOResponseScooter {
         this.totalUsageTime = s.getTotalUsageTime();
         this.pausedTime = s.getPausedTime();
         this.numberOfTrips = s.getNumberOfTrips();
+        this.model = s.getModel();
     }
 }

@@ -36,21 +36,21 @@ public class MicroservicesScootersApplication {
     public void setUp() {
 
     //Crear monopatines
-    scooter1 = new Scooter();
-    scooter2 = new Scooter();
-    scooter3 = new Scooter();
-    scooter4 = new Scooter();
-    scooter5 = new Scooter();
-    scooter6 = new Scooter();
-    scooter7 = new Scooter();
-    scooter8 = new Scooter();
-    scooter9 = new Scooter();
-    scooter10 = new Scooter();
-    scooter11 = new Scooter();
-    scooter12 = new Scooter();
-    scooter13 = new Scooter();
-    scooter14 = new Scooter();
-    scooter15 = new Scooter();
+    scooter1 = new Scooter("Toyota");
+    scooter2 = new Scooter("Honda");
+    scooter3 = new Scooter("Ford");
+    scooter4 = new Scooter("Chevrolet");
+    scooter5 = new Scooter("Volkswagen");
+    scooter6 = new Scooter("Nissan");
+    scooter7 = new Scooter("BMW");
+    scooter8 = new Scooter("Mercedes-Benz");
+    scooter9 = new Scooter("Audi");
+    scooter10 = new Scooter("Toyota");
+    scooter11 = new Scooter("Ford");
+    scooter12 = new Scooter("Ford");
+    scooter13 = new Scooter("BMW");
+    scooter14 = new Scooter("Honda");
+    scooter15 = new Scooter("Toyota");
 
     //Guardar monopatines bbdd
     scooterRepo.save(scooter1);

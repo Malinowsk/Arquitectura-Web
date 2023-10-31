@@ -48,7 +48,10 @@ public class Scooter implements Serializable {
     @Column
     private int numberOfTrips;
 
-    public Scooter() {
+    @Column
+    private String model;
+
+    public Scooter(String model) {
         this.state = "disponible";
         this.location = new GPS(0.0,0.0);
         this.kmsTraveled = 0;
@@ -56,6 +59,7 @@ public class Scooter implements Serializable {
         this.totalUsageTime = 0L;
         this.pausedTime = 0L;
         this.numberOfTrips = 0;
+        this.model = model;
     }
 
     public Scooter(DTORequestScooter s){
@@ -67,6 +71,7 @@ public class Scooter implements Serializable {
     this.totalUsageTime = s.getTotalUsageTime();
     this.pausedTime = s.getPausedTime();
     this.numberOfTrips = s.getNumberOfTrips();
+    this.model = s.getModel();
 }
 
 }

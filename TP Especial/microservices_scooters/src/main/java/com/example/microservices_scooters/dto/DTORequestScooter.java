@@ -34,4 +34,7 @@ public class DTORequestScooter {
     @NotNull(message = "Cannot be null")
     @NotEmpty(message = "the name cannot be empty")
     private int numberOfTrips;
+    @NotNull(message = "Cannot be null")
+    @NotEmpty(message = "the name cannot be empty")
+    private String model;
 }
