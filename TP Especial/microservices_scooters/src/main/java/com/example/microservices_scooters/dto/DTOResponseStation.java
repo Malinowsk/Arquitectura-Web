@@ -5,7 +5,11 @@ import com.example.microservices_scooters.entity.Scooter;
 import com.example.microservices_scooters.entity.Station;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
+@Data
 public class DTOResponseStation {
     private long  id;
     private String name;

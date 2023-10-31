@@ -80,6 +80,7 @@ public class StationController {
         }
     }
 
+  /*
     @PutMapping("/{id}/add-scooter")
     public ResponseEntity<?> parkScooterAtStation(@PathVariable Long id, @RequestBody @Validated Long id_monopatin) {
         try {
@@ -92,6 +93,8 @@ public class StationController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la parada con el ID proporcionado.");
         }
     }
+
+   */
 
 }
 
