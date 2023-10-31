@@ -36,6 +36,15 @@ public class ScooterController {
 
     }
 
+    @GetMapping("reportes/ordenado-por/{ordering}")
+    public ResponseEntity<?> getReport(@PathVariable String ordering){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.getReport(ordering));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo generar el reporte");
+        }
+    }
+
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ){
