@@ -4,7 +4,10 @@ import com.example.microservices_admin_maintenance.dto.DTORequestScooter;
 import com.example.microservices_admin_maintenance.dto.DTOResponseScooter;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,7 +20,8 @@ public class AdminService {
         String url = "//localhost:8003/api/monopatines";
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        //TODO: Terminar mañana (31/10/23), para testear antes que esto: chequear como hacer un GET y como pasar DTO a String JSON
+        HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(scooter, headers);
+        System.out.print(requestEntity);
         return null;
     }
 

@@ -33,9 +33,7 @@ public class ScooterController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Monopatin inexistente");
         }
-
     }
-
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ){
