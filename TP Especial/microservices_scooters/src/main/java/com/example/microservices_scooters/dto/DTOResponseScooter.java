@@ -9,9 +9,9 @@ public class DTOResponseScooter {
     private GPS location;
     private double kmsTraveled;
     private double kmsMant;
-    private Long totalUsageTime;
-    private Long pausedTime;
-    private Long numberOfTrips;
+    private long totalUsageTime;
+    private long pausedTime;
+    private int numberOfTrips;
 
     public DTOResponseScooter(Scooter s ) {
         this.id = s.getId();

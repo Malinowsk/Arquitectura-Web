@@ -30,6 +30,13 @@ public class Station {
     @Column
     private int cantMaxSkateboards;
 
+    public Station(String name, GPS location, List<Scooter> skateboards, int cantMaxSkateboards) {
+        this.name = name;
+        this.location = location;
+        this.skateboards = skateboards;
+        this.cantMaxSkateboards = cantMaxSkateboards;
+    }
+
     public Station(DTORequestStation s){
         this.id = s.getId();
         this.name = s.getName();

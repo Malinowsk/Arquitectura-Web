@@ -47,13 +47,12 @@ public class ScooterService {
                 () -> new NotFoundException("ID de monopatín inválido: " + id));
 
         scooter.setNumberOfTrips(request.getNumberOfTrips());
-        //scooter.setEstado(request.getEstado());
-        //scooter.setDisponible(request.isDisponible());
-        //scooter.setKmsMant(request.getkmsMantenimiento());
-        //scooter.setKmsRecorridos(request.getKmsRecorridos());
-        //scooter.setTiempoPausado(request.getTiempoPausado());
-        //scooter.setTiempoUsoTotal(request.getTiempoUsoTotal());
-        //scooter.setUbicacion(request.getUbicacion());
+        scooter.setState(request.getState());
+        scooter.setKmsMant(request.getKmsMant());
+        scooter.setKmsTraveled(request.getKmsTraveled());
+        scooter.setPausedTime(request.getPausedTime());
+        scooter.setTotalUsageTime(request.getTotalUsageTime());
+        scooter.setLocation(request.getLocation());
         return this.scooterRepository.save(scooter);
     }
 
