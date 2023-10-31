@@ -33,5 +33,5 @@ public class DTORequestScooter {
     private Long pausedTime;
     @NotNull(message = "Cannot be null")
     @NotEmpty(message = "the name cannot be empty")
-    private Long numberOfTrips;
+    private int numberOfTrips;
 }

@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 @Entity
 @Data  // genera automáticamente los métodos getter, setter, toString(), equals(), y hashCode()
-@NoArgsConstructor // genera automáticamente el contructor vacio
 public class Scooter implements Serializable {
 
     @Id
@@ -40,16 +39,26 @@ public class Scooter implements Serializable {
 
     //va aumentando a cada viaje
     @Column
-    private Long totalUsageTime; //en segundos
+    private long totalUsageTime; //en segundos
 
     //iria un tiempo pausado???
     @Column
-    private Long pausedTime; //en segundos
+    private long pausedTime; //en segundos
 
     @Column
-    private Long numberOfTrips;
+    private int numberOfTrips;
 
-public Scooter(DTORequestScooter s){
+    public Scooter() {
+        this.state = "disponible";
+        this.location = new GPS(0.0,0.0);
+        this.kmsTraveled = 0;
+        this.kmsMant = 0;
+        this.totalUsageTime = 0L;
+        this.pausedTime = 0L;
+        this.numberOfTrips = 0;
+    }
+
+    public Scooter(DTORequestScooter s){
     this.id = s.getId();
     this.location = s.getLocation();
     this.state = s.getState();

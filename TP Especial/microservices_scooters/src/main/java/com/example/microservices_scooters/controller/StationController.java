@@ -80,5 +80,18 @@ public class StationController {
         }
     }
 
+    @PutMapping("/{id}/add-scooter")
+    public ResponseEntity<?> parkScooterAtStation(@PathVariable Long id, @RequestBody @Validated Long id_monopatin) {
+        try {
+            Station station = stationService.addScooterToStation(id, id_monopatin);
+            DTOResponseStation response = new DTOResponseStation(station);
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la parada con el ID proporcionado.");
+        }
+    }
+
 }
 

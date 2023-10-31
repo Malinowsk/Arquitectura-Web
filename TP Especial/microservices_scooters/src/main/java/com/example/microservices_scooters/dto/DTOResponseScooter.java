@@ -2,16 +2,18 @@ package com.example.microservices_scooters.dto;
 
 import com.example.microservices_scooters.entity.GPS;
 import com.example.microservices_scooters.entity.Scooter;
+import lombok.Getter;
 
+@Getter
 public class DTOResponseScooter {
     private Long  id;
     private String state;
     private GPS location;
     private double kmsTraveled;
     private double kmsMant;
-    private Long totalUsageTime;
-    private Long pausedTime;
-    private Long numberOfTrips;
+    private long totalUsageTime;
+    private long pausedTime;
+    private int numberOfTrips;
 
     public DTOResponseScooter(Scooter s ) {
         this.id = s.getId();

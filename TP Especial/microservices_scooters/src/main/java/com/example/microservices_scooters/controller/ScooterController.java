@@ -33,7 +33,6 @@ public class ScooterController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Monopatin inexistente");
         }
-
     }
 
     @GetMapping("reportes/ordenado-por/{ordering}")
@@ -44,7 +43,6 @@ public class ScooterController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo generar el reporte");
         }
     }
-
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ){
