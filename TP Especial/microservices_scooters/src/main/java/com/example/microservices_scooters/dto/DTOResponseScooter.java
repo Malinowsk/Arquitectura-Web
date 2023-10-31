@@ -2,7 +2,9 @@ package com.example.microservices_scooters.dto;
 
 import com.example.microservices_scooters.entity.GPS;
 import com.example.microservices_scooters.entity.Scooter;
+import lombok.Getter;
 
+@Getter
 public class DTOResponseScooter {
     private Long  id;
     private String state;
