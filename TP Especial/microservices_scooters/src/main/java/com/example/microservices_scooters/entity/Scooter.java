@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Data  // genera automáticamente los métodos getter, setter, toString(), equals(), y hashCode()
+@NoArgsConstructor // genera automáticamente el contructor vacio
 public class Scooter implements Serializable {
 
     @Id
@@ -73,5 +74,6 @@ public class Scooter implements Serializable {
     this.numberOfTrips = s.getNumberOfTrips();
     this.model = s.getModel();
 }
+
 
 }

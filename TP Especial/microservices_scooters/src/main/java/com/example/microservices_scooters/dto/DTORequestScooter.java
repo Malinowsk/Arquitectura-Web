@@ -15,26 +15,20 @@ public class DTORequestScooter {
     @Min(value = 0, message = "ID must be greater than 0")
     @NotNull(message = "ID cannot be null")
     private Long  id;
-    @NotNull(message = "Cannot be null")
+
     private String state;
-    @NotNull(message = "Cannot be null")
-    @NotEmpty(message = "the name cannot be empty")
+
     private GPS location;
-    @NotNull(message = "Cannot be null")
-    @NotEmpty(message = "the name cannot be empty")
+
     private double kmsTraveled;
-    @NotNull(message = "Cannot be null")
+
     private double kmsMant;
-    @NotNull(message = "Cannot be null")
-    @NotEmpty(message = "the name cannot be empty")
+
     private Long totalUsageTime;
-    @NotNull(message = "Cannot be null")
-    @NotEmpty(message = "the name cannot be empty")
+
     private Long pausedTime;
-    @NotNull(message = "Cannot be null")
-    @NotEmpty(message = "the name cannot be empty")
+
     private int numberOfTrips;
-    @NotNull(message = "Cannot be null")
-    @NotEmpty(message = "the name cannot be empty")
+
     private String model;
 }

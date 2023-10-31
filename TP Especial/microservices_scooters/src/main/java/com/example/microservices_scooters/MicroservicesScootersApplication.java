@@ -52,6 +52,27 @@ public class MicroservicesScootersApplication {
     scooter14 = new Scooter("Honda");
     scooter15 = new Scooter("Toyota");
 
+
+    scooter1.setLocation(new GPS(-34.6099, -58.3923 ));
+    scooter2.setLocation(new GPS(-34.6099, -58.3923 ));
+    scooter3.setLocation(new GPS(-34.6099, -58.3923 ));
+    scooter4.setLocation(new GPS(-34.6099, -58.3923 ));
+    scooter5.setLocation(new GPS(-34.6099, -58.3923 ));
+
+
+    scooter6.setLocation(new GPS(-44.5732, -58.4578));
+    scooter7.setLocation(new GPS(-44.5732, -58.4578));
+    scooter8.setLocation(new GPS(-44.5732, -58.4578));
+    scooter9.setLocation(new GPS(-44.5732, -58.4578));
+    scooter10.setLocation(new GPS(-44.5732, -58.4578));
+
+
+    scooter11.setLocation(new GPS(-14.6221, -28.7375 ));
+    scooter12.setLocation(new GPS(-14.6221, -28.7375 ));
+    scooter13.setLocation(new GPS(-14.6221, -28.7375 ));
+    scooter14.setLocation(new GPS(-14.6221, -28.7375 ));
+    scooter15.setLocation(new GPS(-14.6221, -28.7375 ));
+
     //Guardar monopatines bbdd
     scooterRepo.save(scooter1);
     scooterRepo.save(scooter2);
@@ -93,6 +114,7 @@ public class MicroservicesScootersApplication {
     scooters3.add(scooter13);
     scooters3.add(scooter14);
     scooters3.add(scooter15);
+
 
 
     //Crear estaciones
