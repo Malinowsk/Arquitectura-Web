@@ -16,7 +16,7 @@ public class DTOResponseMaintenance {
 
     private final Timestamp start_date;
 
-    private Timestamp end_date;
+    private final Timestamp end_date;
 
 
     public DTOResponseMaintenance(Long id, Long scooter_id, Long scooter_station_id, Timestamp start_date, Timestamp end_date) {
@@ -35,7 +35,4 @@ public class DTOResponseMaintenance {
         this.end_date = result.getEnd_date();
     }
 
-    public void setEnd_date(Timestamp end_date) {
-        this.end_date = end_date;
-    }
 }

@@ -46,8 +46,6 @@ public class ScooterController {
         }
     }
 
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{

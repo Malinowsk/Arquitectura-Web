@@ -53,7 +53,11 @@ public class MaintenanceService {
         Maintenance maintenance = this.maintenanceRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Maintenance", id));
 
+        maintenance.setScooter_id(request.getScooter_id());
+        maintenance.setScooter_station_id(request.getScooter_station_id());
+        maintenance.setStart_date(request.getStart_date());
         maintenance.setEnd_date(request.getEnd_date());
+
         this.maintenanceRepository.save(maintenance);
         return buildMaintenanceDTO(maintenance);
     }

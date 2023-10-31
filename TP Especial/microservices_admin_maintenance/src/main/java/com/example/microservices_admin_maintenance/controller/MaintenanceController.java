@@ -27,7 +27,6 @@ public class MaintenanceController {
             return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.findById(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Orden de mantenimiento inexistente");
-
         }
     }
 
@@ -59,5 +58,15 @@ public class MaintenanceController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
         }
     }
+
+    /*@PatchMapping("/{id}")
+    public ResponseEntity<?> finishMaintenance(@PathVariable Long id) {
+        try {
+            DTOResponseMaintenance response = maintenanceService.update(id);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
+        }
+    }*/
 
 }
