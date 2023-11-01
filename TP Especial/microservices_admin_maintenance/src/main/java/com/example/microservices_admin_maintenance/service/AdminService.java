@@ -72,4 +72,23 @@ public class AdminService {
         return this.restTemplate.exchange(user_microservice_uri, HttpMethod.PUT, requestEntity, String.class).getBody();
     }
 
+    @Transactional
+    public String scooterReportByAmountOfTripsAndYear(int trip_qty, int year) {
+        String scooter_microservice_uri = "http://localhost:8003/api/monopatines/cantidad-viajes/"+trip_qty+"/anio/"+year;
+        return restTemplate.getForObject(scooter_microservice_uri, String.class);
+    }
+
+    @Transactional
+    public String amountEarnedInTimePeriod(int year, int starting_month, int ending_month) {
+        String scooter_microservice_uri = "http://localhost:8003/api/viajes/facturado/anio/"+year+"/mes-desde/"+starting_month+"/mes-hasta/"+ending_month;
+        return restTemplate.getForObject(scooter_microservice_uri, String.class);
+    }
+
+    @Transactional
+    public String quantityOfScootersInOperation() {
+        String scooter_microservice_uri = "http://localhost:8003/api/monopatines/operacion-vs-mantenimiento";
+        return restTemplate.getForObject(scooter_microservice_uri, String.class);
+    }
+
+
 }

@@ -2,12 +2,10 @@ package com.example.microservices_scooters.controller;
 
 import com.example.microservices_scooters.dto.DTORequestScooter;
 import com.example.microservices_scooters.dto.DTORequestStation;
-import com.example.microservices_scooters.dto.DTOResponseScooter;
 import com.example.microservices_scooters.dto.DTOResponseStation;
 import com.example.microservices_scooters.entity.Station;
 import com.example.microservices_scooters.service.StationService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -78,12 +76,10 @@ public class StationController {
             return ResponseEntity.status(HttpStatus.OK).body(response);
 
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
-
 
 
 
