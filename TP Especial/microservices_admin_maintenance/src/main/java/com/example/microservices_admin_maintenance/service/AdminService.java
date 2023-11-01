@@ -1,22 +1,15 @@
 package com.example.microservices_admin_maintenance.service;
 
-import com.example.microservices_admin_maintenance.dto.DTOFareRequest;
-import com.example.microservices_admin_maintenance.dto.DTOFareResponse;
-import com.example.microservices_admin_maintenance.dto.DTORequestScooter;
-import com.example.microservices_admin_maintenance.dto.DTORequestScooterModel;
+import com.example.microservices_admin_maintenance.dto.*;
 import com.example.microservices_admin_maintenance.entity.Fare;
-import com.example.microservices_admin_maintenance.exception.NotFoundException;
 import com.example.microservices_admin_maintenance.repository.FareRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,23 +33,6 @@ public class AdminService {
         HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(scooterDTO, headers);
         String station_microservice_uri = "http://localhost:8003/api/paradas/"+station_id+"/scooters";
         return this.restTemplate.exchange(station_microservice_uri, HttpMethod.PUT, requestEntity, String.class).getBody();
-    }
-
-    @Transactional
-    public DTOFareResponse findById(Long id) {
-        return this.fareRepository
-                .findById(id)
-                .map(DTOFareResponse::new)
-                .orElseThrow( () -> new NotFoundException("Maintenance", id));
-    }
-
-    @Transactional
-    public List<DTOFareResponse> findAll() {
-        return this.fareRepository
-                .findAll()
-                .stream()
-                .map(DTOFareResponse::new)
-                .toList();
     }
 
     @Transactional
@@ -89,12 +65,30 @@ public class AdminService {
     }*/
 
     @Transactional
-    public String changeAccountStatus(Long id) {
+    public String changeAccountStatus(Long accID, DTORequestStatusAccount accDTO) {
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<Long> requestEntity = new HttpEntity<>(id, headers);
-        //String station_microservice_uri = "http://localhost:8003/api/paradas/"+id+"/scooters";
-        //return this.restTemplate.exchange(station_microservice_uri, HttpMethod.PUT, requestEntity, String.class).getBody();
-        return null;
+        HttpEntity<DTORequestStatusAccount> requestEntity = new HttpEntity<>(accDTO, headers);
+        String user_microservice_uri = "http://localhost:8007/api/accounts/"+accID+"/status";
+        return this.restTemplate.exchange(user_microservice_uri, HttpMethod.PUT, requestEntity, String.class).getBody();
     }
+
+    @Transactional
+    public String scooterReportByAmountOfTripsAndYear(int trip_qty, int year) {
+        String scooter_microservice_uri = "http://localhost:8003/api/monopatines/cantidad-viajes/"+trip_qty+"/anio/"+year;
+        return restTemplate.getForObject(scooter_microservice_uri, String.class);
+    }
+
+    @Transactional
+    public String amountEarnedInTimePeriod(int year, int starting_month, int ending_month) {
+        String scooter_microservice_uri = "http://localhost:8003/api/viajes/facturado/anio/"+year+"/mes-desde/"+starting_month+"/mes-hasta/"+ending_month;
+        return restTemplate.getForObject(scooter_microservice_uri, String.class);
+    }
+
+    @Transactional
+    public String quantityOfScootersInOperation() {
+        String scooter_microservice_uri = "http://localhost:8003/api/monopatines/operacion-vs-mantenimiento";
+        return restTemplate.getForObject(scooter_microservice_uri, String.class);
+    }
+
 
 }
