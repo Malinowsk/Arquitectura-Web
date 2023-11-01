@@ -1,5 +1,6 @@
 package com.example.microservices_scooters.repository;
 
+import com.example.microservices_scooters.dto.DTOResponseCharged;
 import com.example.microservices_scooters.entity.Ride;
 import com.example.microservices_scooters.entity.Scooter;
 import com.example.microservices_scooters.entity.Station;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public interface RideRepository extends JpaRepository<Ride,Long> {
 
-    @Query("SELECT sum(r.totalPrice)FROM Ride r WHERE year(r.initiated) = :anio and month (r.initiated) <= :mesInicio and month (r.finalized) >= :mesFin")
-    float getTotalCharged(int anio, int mesInicio, int mesFin);
+    @Query(value = "SELECT sum(r.total_price) FROM Ride r WHERE year(r.initiated) = :anio AND month(r.initiated) >= :mesInicio AND month(r.initiated) <= :mesFin",nativeQuery = true)
+    List<Float> getTotalCharged(int anio, int mesInicio, int mesFin);
 
 }
