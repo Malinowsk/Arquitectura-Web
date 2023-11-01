@@ -16,19 +16,21 @@ public class DTORequestScooter {
     @NotNull(message = "ID cannot be null")
     private Long  id;
 
-    private String state;
+    private String state = "disponible";
 
     private GPS location;
 
-    private double kmsTraveled;
+    private double kmsTraveled = 0;
 
-    private double kmsMant;
+    private double kmsMant = 0;
 
-    private Long totalUsageTime;
+    private Long totalUsageTime = 0L;
 
-    private Long pausedTime;
+    private Long pausedTime = 0L;
 
-    private int numberOfTrips;
+    private int numberOfTrips = 0;
 
     private String model;
+
+
 }

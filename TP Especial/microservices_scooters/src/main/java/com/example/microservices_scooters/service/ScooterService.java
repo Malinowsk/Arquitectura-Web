@@ -29,7 +29,7 @@ public class ScooterService {
     }
 
     @Transactional
-    public DTOResponseScooter save(DTORequestScooter request ){
+    public DTOResponseScooter save(DTORequestScooter request){
         Scooter scooter = new Scooter(request);
         Scooter result = this.scooterRepository.save(scooter);
         return new DTOResponseScooter(result);

@@ -1,6 +1,7 @@
 package com.example.microservices_admin_maintenance.controller;
 
 import com.example.microservices_admin_maintenance.dto.DTORequestScooter;
+import com.example.microservices_admin_maintenance.dto.DTORequestScooterModel;
 import com.example.microservices_admin_maintenance.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,11 @@ public class AdministrationController {
     private final AdminService adminService;
 
     @PostMapping("/scooters")
-    public ResponseEntity<?> addScooter(@RequestBody @Validated DTORequestScooter dtoScooter) {
+    public ResponseEntity<?> createScooter(@RequestBody @Validated DTORequestScooterModel scooterModel) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.saveScooter(dtoScooter));
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.createScooter(scooterModel));
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }

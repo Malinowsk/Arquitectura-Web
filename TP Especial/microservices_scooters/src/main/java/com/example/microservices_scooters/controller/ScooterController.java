@@ -49,6 +49,7 @@ public class ScooterController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.save(request));
         }catch(Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Ocurrio un error, revise los campos ingresados");
         }
     }

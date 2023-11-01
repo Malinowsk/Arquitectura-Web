@@ -65,7 +65,7 @@ public class Scooter implements Serializable {
 
     public Scooter(DTORequestScooter s){
     this.id = s.getId();
-    this.location = s.getLocation();
+    this.location = new GPS(0.0,0.0);
     this.state = s.getState();
     this.kmsTraveled = s.getKmsTraveled();
     this.kmsMant = s.getKmsMant();
