@@ -28,6 +28,13 @@ public class Maintenance {
     @Column (nullable = false)
     private Long scooter_station_id;
 
+    public Maintenance(Timestamp start_date, Timestamp end_date, Long scooter_id, Long scooter_station_id) {
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.scooter_id = scooter_id;
+        this.scooter_station_id = scooter_station_id;
+    }
+
     public Maintenance(DTORequestMaintenance request) {
         this.id = request.getId();
         this.start_date = request.getStart_date();
