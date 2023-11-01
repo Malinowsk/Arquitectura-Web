@@ -34,6 +34,8 @@ public class Ride implements Serializable {
     @Column
     private Timestamp pauseTime; //en segundos
     @Column
+    private long id_tarifa;
+    @Column
     private boolean activePause;
     //ver
     @ManyToOne
@@ -52,6 +54,18 @@ public class Ride implements Serializable {
         this.idUser = idUser;
         this.idAccount = idAccount;
         this.initiated = new Timestamp(System.currentTimeMillis());
+    }
+
+    public Ride(Scooter scooter, long idUser, long idAccount, double kilometersTraveled, float totalPrice, Station finalStation, Long id_tarifa , Timestamp initiated, Timestamp finalized) {
+        this.scooter = scooter;
+        this.idUser = idUser;
+        this.idAccount = idAccount;
+        this.initiated = initiated;
+        this.finalized = finalized;
+        this.kilometersTraveled = kilometersTraveled;
+        this.totalPrice = totalPrice;
+        this.finalStation = finalStation;
+        this.id_tarifa = id_tarifa;
     }
 
     public Ride(DTORequestRide r) {

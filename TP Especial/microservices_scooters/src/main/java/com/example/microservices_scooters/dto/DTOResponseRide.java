@@ -23,6 +23,7 @@ public class DTOResponseRide {
     private float totalPrice;
     private Timestamp pauseTime;
     private boolean activePause;
+    private long id_tarifa;
 
     public DTOResponseRide(Ride r ) {
         this.id = r.getId();
@@ -35,6 +36,7 @@ public class DTOResponseRide {
         this.totalPrice = r.getTotalPrice();
         this.pauseTime = r.getPauseTime();
         this.activePause = r.isActivePause();
+        this.id_tarifa = r.getId_tarifa();
     }
 
 }

@@ -39,4 +39,6 @@ public class DTORequestRide {
     private Timestamp pauseTime;
 
     private boolean activePause = false;
+
+    private long id_tarifa;
 }
