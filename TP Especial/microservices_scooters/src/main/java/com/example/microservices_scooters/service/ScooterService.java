@@ -77,10 +77,26 @@ public class ScooterService {
         Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("ID de monopatín inválido: " + id));
         Station station = this.stationRepository.findById(id_station).orElseThrow(
-                () -> new NotFoundException("ID de parada inválido: " + id));
+                () -> new NotFoundException("ID de parada inválido: " + id_station));
         scooter.setState(request.getState());
         if (!station.removeScooterToStation(scooter)){
             throw new NotFoundException("El monopatín que quiere elimina no se encuentra en la estación");
+        }
+        else{
+            this.stationRepository.save(station);
+            return this.scooterRepository.save(scooter);
+        }
+    }
+
+    @Transactional
+    public Scooter endMaintenance(Long id_station, DTORequestScooter request) {
+        Scooter scooter = this.scooterRepository.findById(request.getId()).orElseThrow(
+                () -> new NotFoundException("ID de monopatín inválido: " + request.getId()));
+        Station station = this.stationRepository.findById(id_station).orElseThrow(
+                () -> new NotFoundException("ID de parada inválido: " + id_station));
+        scooter.setState(request.getState());
+        if (!station.addScooterToStation(scooter)){
+            throw new NotFoundException("El monopatín que quiere agregar tiene una ubicacion diferente a la estación");
         }
         else{
             this.stationRepository.save(station);
@@ -102,4 +118,5 @@ public class ScooterService {
                 () -> new NotFoundException("ID de monopatín inválido: " + id));
         return this.scooterRepository.getScootersSurroundings(scooter.getLocation().getLongitud(),scooter.getLocation().getLatitud()).stream().map(DTOResponseScooter::new).toList();
     }
+
 }

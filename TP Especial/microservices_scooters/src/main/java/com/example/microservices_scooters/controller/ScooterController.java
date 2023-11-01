@@ -86,6 +86,19 @@ public class ScooterController {
         }
     }
 
+    @PutMapping("finalizar-mantenimiento/paradas/{id_station}")
+    public ResponseEntity<?> endMaintenance(@PathVariable Long id_station, @RequestBody @Validated DTORequestScooter request) {
+        try {
+            Scooter scooter = scooterService.endMaintenance(id_station, request);
+            DTOResponseScooter response = new DTOResponseScooter(scooter);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
+        }
+    }
+
+
+
     @GetMapping("/cantidad-viajes/{cant}/anio/{anio}")
     public ResponseEntity<?> getBySearch(@PathVariable int cant, @PathVariable int anio){
         try{
