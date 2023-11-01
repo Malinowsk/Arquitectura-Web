@@ -37,10 +37,15 @@ public class MicroservicesScootersApplication {
 
     //Crear monopatines
     scooter1 = new Scooter("Toyota");
+    scooter1.setKmsTraveled(1000.88);
     scooter2 = new Scooter("Honda");
+    scooter2.setKmsTraveled(1020.88);
     scooter3 = new Scooter("Ford");
+    scooter3.setKmsTraveled(100.88);
     scooter4 = new Scooter("Chevrolet");
+    scooter4.setKmsTraveled(9.88);
     scooter5 = new Scooter("Volkswagen");
+    scooter5.setKmsTraveled(856.0);
     scooter6 = new Scooter("Nissan");
     scooter7 = new Scooter("BMW");
     scooter8 = new Scooter("Mercedes-Benz");

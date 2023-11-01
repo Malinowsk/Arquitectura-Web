@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface ScooterRepository extends JpaRepository<Scooter,Long> {
 
-    @Query("SELECT s FROM Scooter s ORDER BY :ordering DESC")
+    @Query("SELECT s FROM Scooter s ORDER BY CASE WHEN :ordering = 'kilometros' THEN s.kmsTraveled ELSE s.totalUsageTime END DESC")
     List<DTOResponseScooter> getReport(String ordering);
+
+    //List<DTOResponseScooter> getReportWithoutPause();
 }

@@ -1,5 +1,6 @@
 package com.example.microservices_scooters.entity;
 
+import com.example.microservices_scooters.dto.DTORequestRide;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -51,4 +52,10 @@ public class Ride implements Serializable {
         this.idUser = idUser;
         this.idAccount = idAccount;
     }
+
+    public Ride(DTORequestRide r) {
+
+    }
+
+
 }

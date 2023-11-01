@@ -58,12 +58,10 @@ public class ScooterService {
 
     @Transactional
     public List<DTOResponseScooter> getReport(String ordering) {
-        if(ordering.equals("kilometros")){
-            return scooterRepository.getReport("kmsTraveled");
-        } else if (ordering.equals("tiempo-con-pausa")) {
-            return scooterRepository.getReport("totalUsageTime");
+        if(ordering.equals("kilometros")||ordering.equals("tiempo-con-pausa")){
+            return scooterRepository.getReport(ordering);
         } else if (ordering.equals("tiempo-sin-pausa")) {
-            return scooterRepository.getReport("pausedTime");
+            return scooterRepository.getReport(ordering);
         } else {
             //return new NotFoundException("ordenamiento invalido: " + ordering);
             return null; // ver que onda se devuelve
