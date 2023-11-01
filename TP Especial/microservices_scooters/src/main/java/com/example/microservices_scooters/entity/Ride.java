@@ -51,6 +51,7 @@ public class Ride implements Serializable {
         this.scooter = scooter;
         this.idUser = idUser;
         this.idAccount = idAccount;
+        this.initiated = new Timestamp(System.currentTimeMillis());
     }
 
     public Ride(DTORequestRide r) {
