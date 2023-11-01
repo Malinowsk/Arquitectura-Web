@@ -75,11 +75,10 @@ public class StationController {
         try {
             Station station = stationService.addScooterToStation(id, id_scooter.getId());
             DTOResponseStation response = new DTOResponseStation(station);
-
             return ResponseEntity.status(HttpStatus.OK).body(response);
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la parada con el ID proporcionado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 

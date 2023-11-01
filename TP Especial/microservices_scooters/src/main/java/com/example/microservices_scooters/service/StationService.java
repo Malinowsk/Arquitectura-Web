@@ -57,11 +57,11 @@ public class StationService {
         station.setLocation(request.getLocation());
         return this.stationRepository.save(station);
     }
-
+    @Transactional
     public Station addScooterToStation(Long id, Long idScooter) {
         Scooter scooter = this.scooterRepository.findById(idScooter).orElseThrow(() -> new NotFoundException("ID de monopatín inválido: " + id));
         Station station = this.stationRepository.findById(id).orElseThrow(() -> new NotFoundException("ID de parada inválido: " + id));
-        if (station.getCantMaxSkateboards() >= station.getSkateboards().size()){
+        if (station.getCantMaxSkateboards() <= station.getSkateboards().size()){
             throw new NotFoundException("La estación no puede agregar un monopatín. Está llena");
         }
         else{
@@ -69,7 +69,6 @@ public class StationService {
                 throw new NotFoundException("El monopatín que quiere agregar no se encuentra en la misma ubicación que la estación");
             }
             else{
-                //realizarSolicitudPOST("{id_station:"+id+" , id_scooter:"+idScooter+"}");
                 return this.stationRepository.save(station);
             }
 
