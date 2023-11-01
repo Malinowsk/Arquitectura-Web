@@ -4,6 +4,7 @@ import com.example.microservices_admin_maintenance.dto.*;
 import com.example.microservices_admin_maintenance.entity.Maintenance;
 import com.example.microservices_admin_maintenance.exception.NotFoundException;
 import com.example.microservices_admin_maintenance.repository.MaintenanceRepository;
+import com.sun.tools.javac.Main;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -81,16 +84,26 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public String endScooterMaintenance(Long id) {
-        DTORequestScooter sDTO = new DTORequestScooter();
-        sDTO.setState("disponible");
+    public DTOResponseMaintenance endScooterMaintenance(Long id) {
+        Maintenance maintenance = this.maintenanceRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Maintenance", id));
 
-        //DTORequestScooter con estado en disponible
+        maintenance.setEnd_date(Timestamp.valueOf(LocalDateTime.now()));
+
+        DTORequestScooter sDTO = new DTORequestScooter();
+        sDTO.setId(maintenance.getScooter_id());
+        sDTO.setState("disponible");
+        System.out.println(maintenance.getScooter_id());
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(sDTO, headers);
-        return null;
+        String uri = "http://localhost:8003/api/monopatines/finalizar-mantenimiento/paradas/"+maintenance.getScooter_station_id();
+        ResponseEntity<String> exchangeResult = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, String.class);
+        System.out.println(exchangeResult);
 
+        Maintenance result = this.maintenanceRepository.save(maintenance);
+
+        return new DTOResponseMaintenance(result);
     }
 
     private DTOResponseMaintenance buildMaintenanceDTO(Maintenance m) {

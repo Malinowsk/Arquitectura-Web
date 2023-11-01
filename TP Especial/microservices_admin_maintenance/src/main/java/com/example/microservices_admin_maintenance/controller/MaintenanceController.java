@@ -51,6 +51,7 @@ public class MaintenanceController {
         }
     }
 
+    /*
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestMaintenance rDTO) {
         try {
@@ -59,16 +60,17 @@ public class MaintenanceController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
         }
-    }
+    }*/
 
-    /*@PatchMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<?> finishMaintenance(@PathVariable Long id) {
         try {
-            DTOResponseMaintenance response = maintenanceService.update(id);
+            DTOResponseMaintenance response = maintenanceService.endScooterMaintenance(id);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
         }
-    }*/
+    }
 
 }
