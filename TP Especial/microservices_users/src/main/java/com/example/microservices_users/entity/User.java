@@ -1,6 +1,7 @@
 package com.example.microservices_users.entity;
 
 import com.example.microservices_users.dto.DTORequestUser;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class User implements Serializable {
     private String email;
 
     @ManyToMany (fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Account> account_list;
 
 

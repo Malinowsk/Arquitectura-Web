@@ -3,6 +3,7 @@ package com.example.microservices_users.entity;
 
 import com.example.microservices_users.dto.DTORequestAccount;
 import com.example.microservices_users.dto.DTORequestUser;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,10 @@ public class Account implements Serializable {
     private Double money;
     @Column
     private Timestamp date_of_creation;
+    @Column
+    private boolean active = true; // 1 = true |  0 = false
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "account_list")
+    @JsonBackReference
     private List<User> users;
 
 
@@ -38,6 +42,11 @@ public class Account implements Serializable {
         this.money = dto.getMoney();
         this.date_of_creation = dto.getDate_of_creation();
         this.users = dto.getUsers();
+        this.active = dto.isActive();
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 

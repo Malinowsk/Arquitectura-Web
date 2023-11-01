@@ -58,5 +58,14 @@ public class AccountService {
     }
 
 
+    @Transactional
+    public Account updateAccountStatus(Long id, boolean active) {
+        Account account = this.accountRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("No se encontró la cuenta con ID: " + id));
+
+        account.setActive(active);
+        return this.accountRepository.save(account);
+    }
+
 
 }

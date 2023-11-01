@@ -1,6 +1,7 @@
 package com.example.microservices_users.controller;
 
 import com.example.microservices_users.dto.DTORequestAccount;
+import com.example.microservices_users.dto.DTORequestStatusAccount;
 import com.example.microservices_users.dto.DTOResponseAccount;
 import com.example.microservices_users.entity.Account;
 import com.example.microservices_users.entity.User;
@@ -71,6 +72,17 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la cuenta con el ID: "+id);
+        }
+    }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<?> updateAccountStatus(@PathVariable Long id, @RequestBody DTORequestStatusAccount request) {
+        try {
+            Account account = accountService.updateAccountStatus(id, request.isActive());
+            DTOResponseAccount response = new DTOResponseAccount(account);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la cuenta con el ID: " + id);
         }
     }
 

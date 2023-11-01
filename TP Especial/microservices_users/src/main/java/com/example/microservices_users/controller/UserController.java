@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @Data
-@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
 
@@ -37,7 +36,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No existe el Usuario con el ID: "+id);
         }
     }
-
 
 
     /**

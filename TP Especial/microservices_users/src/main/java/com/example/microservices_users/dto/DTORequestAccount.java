@@ -10,6 +10,7 @@ public class DTORequestAccount {
     private Double money;
     private Timestamp date_of_creation;
     private String phone_number;
+    private boolean active;
     private List<User> users;
 }
 
