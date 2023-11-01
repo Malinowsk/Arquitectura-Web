@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @Data
-@RequestMapping("/users")
+@RequestMapping("api/users")
 public class UserController {
 
     @Autowired
