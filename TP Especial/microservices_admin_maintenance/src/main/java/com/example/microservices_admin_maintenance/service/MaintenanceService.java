@@ -1,16 +1,15 @@
 package com.example.microservices_admin_maintenance.service;
 
-import com.example.microservices_admin_maintenance.dto.DTORequestScooterModel;
+import com.example.microservices_admin_maintenance.dto.*;
 import com.example.microservices_admin_maintenance.entity.Maintenance;
 import com.example.microservices_admin_maintenance.exception.NotFoundException;
 import com.example.microservices_admin_maintenance.repository.MaintenanceRepository;
-import com.example.microservices_admin_maintenance.dto.DTORequestMaintenance;
-import com.example.microservices_admin_maintenance.dto.DTOResponseMaintenance;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -43,17 +42,18 @@ public class MaintenanceService {
 
     @Transactional
     public DTOResponseMaintenance save(DTORequestMaintenance request) {
-        //Asumo que me mandan un ID de monopatin correcto o chequeo con el servicio de monopatines?
         Maintenance maintenance = new Maintenance(request);
         Maintenance result = this.maintenanceRepository.save(maintenance);
 
+        DTORequestScooter sDTO = new DTORequestScooter();
+        sDTO.setState("en mantenimiento");
+
         HttpHeaders headers = new HttpHeaders();
-        String newStatus = "en mantenimiento";
-        //TODO: Revisar, o bien mando un DTORequestScooter con el nuevo estado o hago otra cosa para actualizar el estado del monopatin
-        //      en el otro microservicio
-        HttpEntity<String> requestEntity = new HttpEntity<>(newStatus, headers);
-        String uri = "http://localhost:8003/api/monopatines/"+request.getScooter_id();
-        restTemplate.exchange(uri, HttpMethod.POST, requestEntity,String.class);
+        HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(sDTO, headers);
+        String uri = "http://localhost:8003/api/monopatines/"+request.getScooter_id()+"/paradas/"+request.getScooter_station_id();
+        ResponseEntity<String> exchangeResult = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, String.class);
+
+        System.out.println(exchangeResult);
 
         return new DTOResponseMaintenance(result);
     }
@@ -81,10 +81,14 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public String changeScooterStatus(Long id) {
+    public String endScooterMaintenance(Long id) {
+        DTORequestScooter sDTO = new DTORequestScooter();
+        sDTO.setState("disponible");
+
+        //DTORequestScooter con estado en disponible
+
         HttpHeaders headers = new HttpHeaders();
-        String newStatus = "en mantenimiento";
-        HttpEntity<String> requestEntity = new HttpEntity<>(newStatus, headers);
+        HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(sDTO, headers);
         return null;
 
     }

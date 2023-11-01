@@ -30,11 +30,13 @@ public class MaintenanceController {
         }
     }
 
+    //Agregar Monopatín a Mantenimiento, Comunicarse con Mic Monopatines para cambiar su estado y removerlo de la parada
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestMaintenance rDTO) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.save(rDTO));
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
