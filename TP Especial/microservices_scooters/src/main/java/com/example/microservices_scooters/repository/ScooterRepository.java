@@ -19,7 +19,7 @@ public interface ScooterRepository extends JpaRepository<Scooter,Long> {
 
     //@Query("SELECT s.id,s.model, (s.totalUsageTime-s.) FROM Scooter s ORDER BY CASE WHEN :ordering = 'kilometros' THEN s.kmsTraveled ELSE s.totalUsageTime END DESC")
     //List<DTOResponseReport> getReportTimeWithoutPause();
-    @Query("SELECT s FROM Scooter s JOIN Ride r ON (r.scooter.id = s.id) WHERE s.numberOfTrips >= :cant and r.initiated = :anio GROUP BY s.id")
+    @Query("SELECT s FROM Scooter s JOIN Ride r ON (r.scooter.id = s.id) WHERE s.numberOfTrips >= :cant and YEAR(r.initiated) = :anio GROUP BY s.id")
     List<Scooter> getBySearch(int cant, int anio);
     @Query("SELECT s.state, count(*)FROM Scooter s WHERE s.state = :en_uso or s.state = :mantenimiento group by s.state")
     DTORespondeStatusQualityScooter getQuantityBasedOnStatus(String en_uso, String mantenimiento);
