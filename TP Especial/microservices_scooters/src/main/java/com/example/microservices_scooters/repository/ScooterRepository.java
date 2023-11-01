@@ -21,5 +21,6 @@ public interface ScooterRepository extends JpaRepository<Scooter,Long> {
 
     @Query("SELECT s.state, count(*)FROM Scooter s WHERE s.state = :en_uso or s.state = :mantenimiento group by s.state")
     DTORespondeStatusQualityScooter getQuantityBasedOnStatus(String en_uso, String mantenimiento);
-
+    @Query("SELECT s FROM Scooter s WHERE s.location.latitud-30 <= :latitud and s.location.latitud+30 <= :latitud and s.location.longitud-30 <= :longitud and s.location.longitud+30 <= :longitud")
+    List<Scooter> getScootersSurroundings(double longitud, double latitud);
 }

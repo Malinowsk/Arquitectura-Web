@@ -106,5 +106,15 @@ public class ScooterController {
 
     }
 
+    @GetMapping("/alrededores/{id}")
+    public ResponseEntity<?> getScootersSurroundings(@PathVariable Long id){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.getScootersSurroundings(id));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.");
+        }
+
+    }
+
 
 }

@@ -97,5 +97,9 @@ public class ScooterService {
     public DTORespondeStatusQualityScooter getQuantityBasedOnStatus() {
         return this.scooterRepository.getQuantityBasedOnStatus("en_uso","mantenimiento");
     }
-
+    public List<DTOResponseScooter> getScootersSurroundings(Long id) {
+        Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("ID de monopatín inválido: " + id));
+        return this.scooterRepository.getScootersSurroundings(scooter.getLocation().getLongitud(),scooter.getLocation().getLatitud()).stream().map(DTOResponseScooter::new).toList();
+    }
 }
