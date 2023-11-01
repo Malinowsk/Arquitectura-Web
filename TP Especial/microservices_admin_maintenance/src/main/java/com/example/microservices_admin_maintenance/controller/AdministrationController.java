@@ -50,7 +50,7 @@ public class AdministrationController {
 
     /*
     TODO: por ahora quedan comentados los metodos de PUT y DELETE de tarifas, discutir donde deben ir las tarifas para
-          calcular el costo del viaje
+          calcular el costo del viaje y que pasa al editar una tarifa en uso
     @PutMapping("/fare/{id}")
     public ResponseEntity<?> updateFare(@PathVariable Long id, @RequestBody @Validated DTOFareRequest fDTO) {
         try {
@@ -75,6 +75,36 @@ public class AdministrationController {
     public ResponseEntity<?> changeAccountStatus(@PathVariable Long id, @RequestBody @Validated DTORequestStatusAccount accDTO) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(adminService.changeAccountStatus(id, accDTO));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+    }
+
+    @GetMapping("/scooters/amountOfTripsGreaterThan/{trip_qty}/year/{year}")
+    public ResponseEntity<?> scooterReportByAmountOfTripsAndYear(@PathVariable int trip_qty, @PathVariable int year) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.scooterReportByAmountOfTripsAndYear(trip_qty, year));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+    }
+
+    @GetMapping("/rides/totalMoneyEarnedIn/year/{year}/from_month/{start}/to_month/{end}")
+    public ResponseEntity<?> amountEarnedInTimePeriod(@PathVariable int year, @PathVariable int start, @PathVariable int end) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.amountEarnedInTimePeriod(year, start, end));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+    }
+
+    @GetMapping("/scooters/quantity-in-operation")
+    public ResponseEntity<?> quantityOfScootersInOperation() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.quantityOfScootersInOperation());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");

@@ -2,9 +2,7 @@ package com.example.microservices_scooters.controller;
 
 import com.example.microservices_scooters.dto.*;
 import com.example.microservices_scooters.entity.Ride;
-import com.example.microservices_scooters.entity.Station;
 import com.example.microservices_scooters.service.RideService;
-import com.example.microservices_scooters.service.StationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,7 +65,7 @@ public class RideController {
         }
     }
 
-    @GetMapping("facturado/anio/{anio}/mes-desde/{mes_inicio}/mes-hasta/{mes_fin}")
+    @GetMapping("/facturado/anio/{anio}/mes-desde/{mes_inicio}/mes-hasta/{mes_fin}")
     public ResponseEntity<?> getTotalCharged(@PathVariable int anio, @PathVariable int mes_inicio, @PathVariable int mes_fin){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(rideService.getTotalCharged(anio,mes_inicio,mes_fin));
