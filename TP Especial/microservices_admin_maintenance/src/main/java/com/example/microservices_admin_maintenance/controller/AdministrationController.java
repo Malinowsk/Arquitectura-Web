@@ -3,9 +3,9 @@ package com.example.microservices_admin_maintenance.controller;
 import com.example.microservices_admin_maintenance.dto.DTOFareRequest;
 import com.example.microservices_admin_maintenance.dto.DTORequestScooter;
 import com.example.microservices_admin_maintenance.dto.DTORequestScooterModel;
+import com.example.microservices_admin_maintenance.dto.DTORequestStatusAccount;
 import com.example.microservices_admin_maintenance.service.AdminService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +23,7 @@ public class AdministrationController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(adminService.createScooter(scooterModel));
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
@@ -33,7 +33,7 @@ public class AdministrationController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(adminService.assignScooterToStation(station_id, scooterDTO));
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
@@ -43,6 +43,7 @@ public class AdministrationController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(adminService.addFare(fDTO));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
@@ -70,11 +71,12 @@ public class AdministrationController {
     }
     */
 
-    @PatchMapping("/accounts/{id}/account-status")
-    public ResponseEntity<?> changeAccountStatus(@PathVariable Long id) {
+    @PutMapping("/accounts/{id}/account-status")
+    public ResponseEntity<?> changeAccountStatus(@PathVariable Long id, @RequestBody @Validated DTORequestStatusAccount accDTO) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.changeAccountStatus(id));
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.changeAccountStatus(id, accDTO));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
