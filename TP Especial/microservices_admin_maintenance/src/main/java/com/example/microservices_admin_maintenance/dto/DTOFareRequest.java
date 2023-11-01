@@ -9,13 +9,13 @@ public class DTOFareRequest {
 
     private String name;
 
-    private double cost;
+    private double cost_per_min;
 
     private double extended_pause_cost;
 
     public DTOFareRequest(String name, double cost, double extendedPauseCost) {
         this.name = name;
-        this.cost = cost;
+        this.cost_per_min = cost;
         extended_pause_cost = extendedPauseCost;
     }
 

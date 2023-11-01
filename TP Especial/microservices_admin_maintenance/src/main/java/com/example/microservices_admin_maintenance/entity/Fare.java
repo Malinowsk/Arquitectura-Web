@@ -22,14 +22,20 @@ public class Fare {
     private String name;
 
     @Column
-    private double cost;
+    private double cost_per_min;
 
     @Column
     private double extended_pause_cost;
 
+    public Fare(String name, double cost, double extended_pause_cost) {
+        this.name = name;
+        this.cost_per_min = cost;
+        this.extended_pause_cost = extended_pause_cost;
+    }
+
     public Fare(DTOFareRequest fDTO) {
         this.name = fDTO.getName();
-        this.cost = fDTO.getCost();
+        this.cost_per_min = fDTO.getCost_per_min();
         this.extended_pause_cost = fDTO.getExtended_pause_cost();
     }
 }
