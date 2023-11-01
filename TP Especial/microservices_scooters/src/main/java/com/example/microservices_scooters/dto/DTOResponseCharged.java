@@ -5,9 +5,9 @@ import lombok.Getter;
 @Getter
 public class DTOResponseCharged {
 
-    private float charged;
+    private float charged = 0;
 
     public DTOResponseCharged(float charged) {
-        this.charged = charged;
+            this.charged = charged;
     }
 }

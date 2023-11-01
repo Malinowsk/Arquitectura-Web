@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface RideRepository extends JpaRepository<Ride,Long> {
 
-    @Query(value = "SELECT sum(r.total_price) FROM Ride r WHERE year(r.initiated) = :anio AND month(r.initiated) >= :mesInicio AND month(r.initiated) <= :mesFin",nativeQuery = true)
+    @Query(value = "SELECT coalesce(sum(r.total_price),0) FROM Ride r WHERE year(r.initiated) = :anio AND month(r.initiated) >= :mesInicio AND month(r.initiated) <= :mesFin",nativeQuery = true)
     List<Float> getTotalCharged(int anio, int mesInicio, int mesFin);
 
 }
