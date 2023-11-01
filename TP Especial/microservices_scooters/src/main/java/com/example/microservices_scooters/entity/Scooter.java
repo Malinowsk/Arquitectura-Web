@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Data  // genera automáticamente los métodos getter, setter, toString(), equals(), y hashCode()
@@ -75,5 +76,12 @@ public class Scooter implements Serializable {
     this.model = s.getModel();
 }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Scooter scooter = (Scooter) o;
+        return Objects.equals(id, scooter.id);
+    }
 
 }

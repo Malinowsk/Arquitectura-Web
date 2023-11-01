@@ -75,5 +75,36 @@ public class ScooterController {
         }
     }
 
+    @PutMapping("{id}/paradas/{id_station}")
+    public ResponseEntity<?> maintenance(@PathVariable Long id,@PathVariable Long id_station, @RequestBody @Validated DTORequestScooter request) {
+        try {
+            Scooter scooter = scooterService.maintenance(id_station,id, request);
+            DTOResponseScooter response = new DTOResponseScooter(scooter);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
+        }
+    }
+
+    @GetMapping("/cantidad-viajes/{cant}/anio/{anio}")
+    public ResponseEntity<?> getBySearch(@PathVariable int cant, @PathVariable int anio){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.getBySearch(cant,anio));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Viaje inexistente");
+        }
+
+    }
+
+    @GetMapping("/operacion-vs-mantenimiento")
+    public ResponseEntity<?> getQuantityBasedOnStatus(){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.getQuantityBasedOnStatus());
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.");
+        }
+
+    }
+
 
 }

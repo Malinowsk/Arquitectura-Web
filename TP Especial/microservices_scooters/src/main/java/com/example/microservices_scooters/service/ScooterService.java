@@ -1,10 +1,13 @@
 package com.example.microservices_scooters.service;
 
 import com.example.microservices_scooters.dto.DTORequestScooter;
+import com.example.microservices_scooters.dto.DTORespondeStatusQualityScooter;
 import com.example.microservices_scooters.dto.DTOResponseScooter;
 import com.example.microservices_scooters.entity.Scooter;
+import com.example.microservices_scooters.entity.Station;
 import com.example.microservices_scooters.exception.NotFoundException;
 import com.example.microservices_scooters.repository.ScooterRepository;
+import com.example.microservices_scooters.repository.StationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -15,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ScooterService {
     
     private final ScooterRepository scooterRepository;
+    private final StationRepository stationRepository;
     
     @Transactional
     public List<DTOResponseScooter> findAll(){
@@ -67,4 +71,31 @@ public class ScooterService {
             return null; // ver que onda se devuelve
         }
     }
+
+    @Transactional
+    public Scooter maintenance(Long id_station, Long id, DTORequestScooter request) {
+        Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("ID de monopatín inválido: " + id));
+        Station station = this.stationRepository.findById(id_station).orElseThrow(
+                () -> new NotFoundException("ID de parada inválido: " + id));
+        scooter.setState(request.getState());
+        if (!station.removeScooterToStation(scooter)){
+            throw new NotFoundException("El monopatín que quiere elimina no se encuentra en la estación");
+        }
+        else{
+            this.stationRepository.save(station);
+            return this.scooterRepository.save(scooter);
+        }
+    }
+
+    @Transactional
+    public List<DTOResponseScooter> getBySearch( int cant, int anio ) {
+        return this.scooterRepository.getBySearch(cant, anio).stream().map(DTOResponseScooter::new).toList();
+    }
+
+    @Transactional
+    public DTORespondeStatusQualityScooter getQuantityBasedOnStatus() {
+        return this.scooterRepository.getQuantityBasedOnStatus("en_uso","mantenimiento");
+    }
+
 }

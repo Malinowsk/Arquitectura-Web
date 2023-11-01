@@ -1,15 +1,11 @@
 package com.example.microservices_scooters.service;
 
 import com.example.microservices_scooters.dto.DTORequestRide;
-import com.example.microservices_scooters.dto.DTORequestStation;
 import com.example.microservices_scooters.dto.DTOResponseRide;
-import com.example.microservices_scooters.dto.DTOResponseStation;
+import com.example.microservices_scooters.dto.DTOResponseScooter;
 import com.example.microservices_scooters.entity.Ride;
-import com.example.microservices_scooters.entity.Station;
 import com.example.microservices_scooters.exception.NotFoundException;
 import com.example.microservices_scooters.repository.RideRepository;
-import com.example.microservices_scooters.repository.ScooterRepository;
-import com.example.microservices_scooters.repository.StationRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -53,5 +49,10 @@ public class RideService {
 
         //station.setLocation(request.getLocation());
         return this.rideRepository.save(ride);
+    }
+
+    @Transactional
+    public float getTotalCharged(int anio, int mesInicio, int mesFin ) {
+        return this.rideRepository.getTotalCharged(anio,mesInicio,mesFin);
     }
 }

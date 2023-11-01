@@ -67,4 +67,14 @@ public class RideController {
         }
     }
 
+    @GetMapping("facturado/anio/{anio}/mes-desde/{mes_inicio}/mes-hasta/{mes_fin}")
+    public ResponseEntity<?> getTotalCharged(@PathVariable int anio, @PathVariable int mes_inicio, @PathVariable int mes_fin){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(rideService.getTotalCharged(anio,mes_inicio,mes_fin));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo calcular lo facturado");
+        }
+
+    }
+
 }

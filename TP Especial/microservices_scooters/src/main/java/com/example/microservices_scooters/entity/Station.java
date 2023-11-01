@@ -53,4 +53,8 @@ public class Station {
             return false;
         }
     }
+
+    public boolean removeScooterToStation( Scooter s){
+            return this.skateboards.remove(s);
+    }
 }

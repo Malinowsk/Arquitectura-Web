@@ -70,7 +70,7 @@ public class StationController {
     }
 
     //Agregamos scooter a parada
-    @PutMapping("/{id}/scooters")
+    @PutMapping("/{id}/monopatines")
     public ResponseEntity<?> addScooterToStation(@PathVariable Long id, @RequestBody @Validated DTORequestScooter id_scooter) {
         try {
             Station station = stationService.addScooterToStation(id, id_scooter.getId());
@@ -82,6 +82,7 @@ public class StationController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
 
 
 
