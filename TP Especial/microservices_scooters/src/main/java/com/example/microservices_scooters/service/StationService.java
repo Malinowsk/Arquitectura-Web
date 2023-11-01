@@ -71,17 +71,7 @@ public class StationService {
             else{
                 return this.stationRepository.save(station);
             }
-
         }
-    }
-    private String realizarSolicitudPOST(String body) {
-        String url = "//localhost:3306/mantenimientos"; // Cambia la URL según tu entorno
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> requestEntity = new HttpEntity<>(body, headers);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
-        return response.getBody();
     }
 
 }

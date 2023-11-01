@@ -8,8 +8,6 @@ import com.example.microservices_users.entity.Account;
 import com.example.microservices_users.exception.NotFoundException;
 import com.example.microservices_users.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

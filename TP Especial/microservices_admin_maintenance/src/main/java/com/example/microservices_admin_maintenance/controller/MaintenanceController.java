@@ -30,11 +30,13 @@ public class MaintenanceController {
         }
     }
 
+    //Agregar Monopatín a Mantenimiento, Comunicarse con Mic Monopatines para cambiar su estado y removerlo de la parada
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestMaintenance rDTO) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.save(rDTO));
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
@@ -49,6 +51,7 @@ public class MaintenanceController {
         }
     }
 
+    /*
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestMaintenance rDTO) {
         try {
@@ -57,16 +60,17 @@ public class MaintenanceController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
         }
-    }
+    }*/
 
-    /*@PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> finishMaintenance(@PathVariable Long id) {
         try {
-            DTOResponseMaintenance response = maintenanceService.update(id);
+            DTOResponseMaintenance response = maintenanceService.endScooterMaintenance(id);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
         }
-    }*/
+    }
 
 }

@@ -4,7 +4,6 @@ import com.example.microservices_users.dto.DTORequestAccount;
 import com.example.microservices_users.dto.DTORequestStatusAccount;
 import com.example.microservices_users.dto.DTOResponseAccount;
 import com.example.microservices_users.entity.Account;
-import com.example.microservices_users.entity.User;
 import com.example.microservices_users.service.AccountService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,7 @@ public class AccountController {
         }
     }
 
-    @PutMapping("/status/{id}")
+    @PutMapping("/{id}/status")
     public ResponseEntity<?> updateAccountStatus(@PathVariable Long id, @RequestBody DTORequestStatusAccount request) {
         try {
             Account account = accountService.updateAccountStatus(id, request.isActive());

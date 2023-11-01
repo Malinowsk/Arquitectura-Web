@@ -2,6 +2,7 @@ package com.example.microservices_scooters.service;
 
 import com.example.microservices_scooters.dto.DTORequestScooter;
 import com.example.microservices_scooters.dto.DTORespondeStatusQualityScooter;
+import com.example.microservices_scooters.dto.DTOResponseReport;
 import com.example.microservices_scooters.dto.DTOResponseScooter;
 import com.example.microservices_scooters.entity.Scooter;
 import com.example.microservices_scooters.entity.Station;
@@ -49,7 +50,6 @@ public class ScooterService {
     public Scooter update(Long id, DTORequestScooter request) {
         Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("ID de monopatín inválido: " + id));
-
         scooter.setNumberOfTrips(request.getNumberOfTrips());
         scooter.setState(request.getState());
         scooter.setKmsMant(request.getKmsMant());
@@ -61,14 +61,12 @@ public class ScooterService {
     }
 
     @Transactional
-    public List<DTOResponseScooter> getReport(String ordering) {
-        if(ordering.equals("kilometros")||ordering.equals("tiempo-con-pausa")){
-            return scooterRepository.getReport(ordering);
-        } else if (ordering.equals("tiempo-sin-pausa")) {
-            return scooterRepository.getReport(ordering);
+    public List<DTOResponseReport> getReport(String ordering) {
+        if(ordering.equals("kilometros")||ordering.equals("tiempo-con-pausa")||ordering.equals("tiempo-sin-pausa")){
+            return scooterRepository.getReportKmsOrTt(ordering);
         } else {
             //return new NotFoundException("ordenamiento invalido: " + ordering);
-            return null; // ver que onda se devuelve
+            throw new NotFoundException("El tipo de odenamiento es invalido");
         }
     }
 
