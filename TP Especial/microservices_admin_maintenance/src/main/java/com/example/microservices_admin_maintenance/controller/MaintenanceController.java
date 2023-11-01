@@ -62,7 +62,7 @@ public class MaintenanceController {
         }
     }*/
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> finishMaintenance(@PathVariable Long id) {
         try {
             DTOResponseMaintenance response = maintenanceService.endScooterMaintenance(id);

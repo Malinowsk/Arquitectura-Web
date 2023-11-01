@@ -70,7 +70,7 @@ public class AdministrationController {
     }
     */
 
-    @PutMapping("/accounts/{id}/account-status")
+    @PatchMapping("/accounts/{id}/account-status")
     public ResponseEntity<?> changeAccountStatus(@PathVariable Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(adminService.changeAccountStatus(id));
