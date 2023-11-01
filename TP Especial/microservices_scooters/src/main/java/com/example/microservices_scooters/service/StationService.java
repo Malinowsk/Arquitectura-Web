@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -61,11 +62,11 @@ public class StationService {
         Scooter scooter = this.scooterRepository.findById(idScooter).orElseThrow(() -> new NotFoundException("ID de monopatín inválido: " + id));
         Station station = this.stationRepository.findById(id).orElseThrow(() -> new NotFoundException("ID de parada inválido: " + id));
         if (station.getCantMaxSkateboards() >= station.getSkateboards().size()){
-            return null; // ver que onda se devuelve
+            throw new NotFoundException("La estación no puede agregar un monopatín. Está llena");
         }
         else{
             if (!station.addScooterToStation(scooter)){
-                return null;  // ver que onda se devuelve
+                throw new NotFoundException("El monopatín que quiere agregar no se encuentra en la misma ubicación que la estación");
             }
             else{
                 //realizarSolicitudPOST("{id_station:"+id+" , id_scooter:"+idScooter+"}");

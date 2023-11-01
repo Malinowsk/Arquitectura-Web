@@ -22,7 +22,7 @@ public class MicroservicesScootersApplication {
     @Autowired
     private StationRepository stationRepo;
 
-    private Scooter scooter1, scooter2, scooter3, scooter4, scooter5, scooter6, scooter7, scooter8, scooter9, scooter10, scooter11, scooter12, scooter13, scooter14, scooter15;
+    private Scooter scooter1, scooter2, scooter3, scooter4, scooter5, scooter6, scooter7, scooter8, scooter9, scooter10, scooter11, scooter12, scooter13, scooter14, scooter15, scooter16;
     private Station station1, station2, station3;
     public static void main(String[] args) {
         SpringApplication.run(MicroservicesScootersApplication.class, args);
@@ -51,6 +51,7 @@ public class MicroservicesScootersApplication {
     scooter13 = new Scooter("BMW");
     scooter14 = new Scooter("Honda");
     scooter15 = new Scooter("Toyota");
+    scooter16 = new Scooter("Toyota");//monopatin sin estar en ninguna parada
 
 
     scooter1.setLocation(new GPS(-34.6099, -58.3923 ));
@@ -58,6 +59,7 @@ public class MicroservicesScootersApplication {
     scooter3.setLocation(new GPS(-34.6099, -58.3923 ));
     scooter4.setLocation(new GPS(-34.6099, -58.3923 ));
     scooter5.setLocation(new GPS(-34.6099, -58.3923 ));
+    scooter16.setLocation(new GPS(-34.6099, -58.3923 )); //monopatin sin estar en ninguna parada
 
 
     scooter6.setLocation(new GPS(-44.5732, -58.4578));
@@ -72,6 +74,7 @@ public class MicroservicesScootersApplication {
     scooter13.setLocation(new GPS(-14.6221, -28.7375 ));
     scooter14.setLocation(new GPS(-14.6221, -28.7375 ));
     scooter15.setLocation(new GPS(-14.6221, -28.7375 ));
+
 
     //Guardar monopatines bbdd
     scooterRepo.save(scooter1);
@@ -89,6 +92,7 @@ public class MicroservicesScootersApplication {
     scooterRepo.save(scooter13);
     scooterRepo.save(scooter14);
     scooterRepo.save(scooter15);
+    scooterRepo.save(scooter16); //monopatin sin estar en ninguna parada
 
 
 

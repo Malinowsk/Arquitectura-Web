@@ -1,11 +1,13 @@
 package com.example.microservices_scooters.controller;
 
+import com.example.microservices_scooters.dto.DTORequestScooter;
 import com.example.microservices_scooters.dto.DTORequestStation;
 import com.example.microservices_scooters.dto.DTOResponseScooter;
 import com.example.microservices_scooters.dto.DTOResponseStation;
 import com.example.microservices_scooters.entity.Station;
 import com.example.microservices_scooters.service.StationService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -67,10 +69,11 @@ public class StationController {
         }
     }
 
-    @PutMapping("/{id}/add-scooter")
-    public ResponseEntity<?> addScooterToStation(@PathVariable Long id, @RequestBody @Validated Long id_monopatin) {
+    //Agregamos scooter a parada
+    @PutMapping("/{id}/agregar-monopatin")
+    public ResponseEntity<?> addScooterToStation(@PathVariable Long id, @RequestBody @Validated DTORequestScooter id_scooter) {
         try {
-            Station station = stationService.addScooterToStation(id, id_monopatin);
+            Station station = stationService.addScooterToStation(id, id_scooter.getId());
             DTOResponseStation response = new DTOResponseStation(station);
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -80,8 +83,12 @@ public class StationController {
         }
     }
 
-  /*
-    @PutMapping("/{id}/add-scooter")
+
+
+
+ /* 2da ENTREGA
+    //Estacionamos scooter
+    @PutMapping("/{id}/park-scooter")
     public ResponseEntity<?> parkScooterAtStation(@PathVariable Long id, @RequestBody @Validated Long id_monopatin) {
         try {
             Station station = stationService.addScooterToStation(id, id_monopatin);
@@ -94,7 +101,9 @@ public class StationController {
         }
     }
 
-   */
+     */
+
+
 
 }
 
