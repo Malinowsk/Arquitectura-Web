@@ -82,6 +82,7 @@ public class ScooterController {
             DTOResponseScooter response = new DTOResponseScooter(scooter);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
         }
     }
@@ -93,7 +94,7 @@ public class ScooterController {
             DTOResponseScooter response = new DTOResponseScooter(scooter);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
         }
     }
@@ -105,6 +106,7 @@ public class ScooterController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.getBySearch(cant,anio));
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Viaje inexistente");
         }
 
@@ -115,6 +117,7 @@ public class ScooterController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.getQuantityBasedOnStatus());
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.");
         }
 
@@ -125,6 +128,7 @@ public class ScooterController {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.getScootersSurroundings(id));
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.");
         }
 
