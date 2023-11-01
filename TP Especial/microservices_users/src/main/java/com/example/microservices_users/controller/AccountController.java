@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @Data
-@RequestMapping("/accounts")
+@RequestMapping("api/accounts")
 public class AccountController {
 
     @Autowired
