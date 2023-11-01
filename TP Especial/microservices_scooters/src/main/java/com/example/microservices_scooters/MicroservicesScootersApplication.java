@@ -1,8 +1,10 @@
 package com.example.microservices_scooters;
 
 import com.example.microservices_scooters.entity.GPS;
+import com.example.microservices_scooters.entity.Ride;
 import com.example.microservices_scooters.entity.Scooter;
 import com.example.microservices_scooters.entity.Station;
+import com.example.microservices_scooters.repository.RideRepository;
 import com.example.microservices_scooters.repository.ScooterRepository;
 import com.example.microservices_scooters.repository.StationRepository;
 import jakarta.annotation.PostConstruct;
@@ -21,9 +23,13 @@ public class MicroservicesScootersApplication {
     private ScooterRepository scooterRepo;
     @Autowired
     private StationRepository stationRepo;
+    @Autowired
+    private RideRepository rideRepo;
 
     private Scooter scooter1, scooter2, scooter3, scooter4, scooter5, scooter6, scooter7, scooter8, scooter9, scooter10, scooter11, scooter12, scooter13, scooter14, scooter15, scooter16;
     private Station station1, station2, station3;
+
+    private Ride ride1, ride2, ride3, ride4, ride5, ride6, ride7, ride8, ride9, ride10;
     public static void main(String[] args) {
         SpringApplication.run(MicroservicesScootersApplication.class, args);
     }
@@ -136,6 +142,40 @@ public class MicroservicesScootersApplication {
     stationRepo.save(station1);
     stationRepo.save(station2);
     stationRepo.save(station3);
+
+
+
+
+    //Se inicializan viajes
+    //Datos del microservicio users
+    //Usuarios de la cuenta 1
+    ride1 = new Ride(scooter1, 1, 1);
+    ride2 = new Ride(scooter2, 2, 1);
+    ride3 = new Ride(scooter3, 3, 1);
+    ride4 = new Ride(scooter4, 4, 1);
+    ride5 = new Ride(scooter5, 5, 1);
+
+    //Usuarios de la cuenta 2
+    ride6 = new Ride(scooter6, 6, 2);
+    ride7 = new Ride(scooter7, 7, 2);
+
+    //Usuarios de la cuenta 3
+    ride8 = new Ride(scooter8, 8, 3);
+    ride9 = new Ride(scooter9, 9, 3);
+    ride10 = new Ride(scooter10, 10, 3);
+
+    //Guardamos los viajes en la ddbb
+    rideRepo.save(ride1);
+    rideRepo.save(ride2);
+    rideRepo.save(ride3);
+    rideRepo.save(ride4);
+    rideRepo.save(ride5);
+    rideRepo.save(ride6);
+    rideRepo.save(ride7);
+    rideRepo.save(ride8);
+    rideRepo.save(ride9);
+    rideRepo.save(ride10);
+
 
 
 
