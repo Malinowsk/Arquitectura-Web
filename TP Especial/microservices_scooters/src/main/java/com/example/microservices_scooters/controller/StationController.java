@@ -70,7 +70,7 @@ public class StationController {
     }
 
     //Agregamos scooter a parada
-    @PutMapping("/{id}/agregar-monopatin")
+    @PutMapping("/{id}/scooters")
     public ResponseEntity<?> addScooterToStation(@PathVariable Long id, @RequestBody @Validated DTORequestScooter id_scooter) {
         try {
             Station station = stationService.addScooterToStation(id, id_scooter.getId());
@@ -78,6 +78,7 @@ public class StationController {
             return ResponseEntity.status(HttpStatus.OK).body(response);
 
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
