@@ -63,9 +63,8 @@ public class ScooterService {
     @Transactional
     public List<DTOResponseReport> getReport(String ordering) {
         if(ordering.equals("kilometros")||ordering.equals("tiempo-con-pausa")||ordering.equals("tiempo-sin-pausa")){
-            return scooterRepository.getReportKmsOrTt(ordering);
+            return scooterRepository.getReport(ordering);
         } else {
-            //return new NotFoundException("ordenamiento invalido: " + ordering);
             throw new NotFoundException("El tipo de odenamiento es invalido");
         }
     }

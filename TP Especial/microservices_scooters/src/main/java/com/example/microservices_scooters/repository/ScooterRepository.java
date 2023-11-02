@@ -15,7 +15,7 @@ import java.util.List;
 public interface ScooterRepository extends JpaRepository<Scooter,Long> {
 
     @Query("SELECT s.id,s.model, CASE WHEN :ordering = 'kilometros' THEN s.kmsTraveled WHEN :ordering = 'tiempo-sin-pausa' THEN (s.totalUsageTime-s.pausedTime) ELSE s.totalUsageTime END FROM Scooter s ORDER BY 3 DESC")
-    List<DTOResponseReport> getReportKmsOrTt(String ordering);
+    List<DTOResponseReport> getReport(String ordering);
 
     //@Query("SELECT s.id,s.model, (s.totalUsageTime-s.) FROM Scooter s ORDER BY CASE WHEN :ordering = 'kilometros' THEN s.kmsTraveled ELSE s.totalUsageTime END DESC")
     //List<DTOResponseReport> getReportTimeWithoutPause();
