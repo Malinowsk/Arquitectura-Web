@@ -63,7 +63,11 @@ public class ScooterService {
     @Transactional
     public List<DTOResponseReport> getReport(String ordering) {
         if(ordering.equals("kilometros")||ordering.equals("tiempo-con-pausa")||ordering.equals("tiempo-sin-pausa")){
-            return scooterRepository.getReport(ordering);
+            return this.scooterRepository
+                    .getReport(ordering)
+                    .stream()
+                    .map(obj -> new DTOResponseReport((long) obj[0], (String) obj[1], (double)obj[2]))
+                    .toList();
         } else {
             throw new NotFoundException("El tipo de odenamiento es invalido");
         }
@@ -107,13 +111,22 @@ public class ScooterService {
     }
 
     @Transactional
-    public DTORespondeStatusQualityScooter getQuantityBasedOnStatus() {
-        return this.scooterRepository.getQuantityBasedOnStatus("en_uso","mantenimiento");
+    public List<DTORespondeStatusQualityScooter> getQuantityBasedOnStatus() {
+        return this.scooterRepository
+                .getQuantityBasedOnStatus("en_uso","mantenimiento")
+                .stream()
+                .map(obj -> new DTORespondeStatusQualityScooter((String) obj[0], (long)obj[1]))
+                .toList();
     }
     public List<DTOResponseScooter> getScootersSurroundings(Long id) {
         Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("ID de monopatín inválido: " + id));
-        return this.scooterRepository.getScootersSurroundings(scooter.getLocation().getLongitud(),scooter.getLocation().getLatitud()).stream().map(DTOResponseScooter::new).toList();
+        return this.scooterRepository
+                .getScootersSurroundings(scooter.getLocation().getLongitud(),scooter.getLocation().getLatitud())
+                .stream()
+                .map(DTOResponseScooter::new)
+                .toList();
+        //return this.scooterRepository.getScootersSurroundings(scooter.getLocation().getLongitud(),scooter.getLocation().getLatitud()).stream().map(DTOResponseScooter::new).toList();
     }
 
 }

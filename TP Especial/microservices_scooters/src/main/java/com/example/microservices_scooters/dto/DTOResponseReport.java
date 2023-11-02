@@ -14,11 +14,11 @@ public class DTOResponseReport {
 
     private Long  id;
     private String model;
-    private  Object valor;
+    private  Long valor;
 
-    public DTOResponseReport(Long id, String model, Object valor) {
+    public DTOResponseReport(Long id, String model, Double valor) {
         this.id = id;
         this.model = model;
-        this.valor = valor;
+        this.valor = Double.valueOf(valor).longValue();
     }
 }

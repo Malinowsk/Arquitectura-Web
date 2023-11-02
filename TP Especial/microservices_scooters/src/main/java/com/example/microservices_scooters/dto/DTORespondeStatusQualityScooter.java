@@ -6,9 +6,9 @@ import lombok.Getter;
 public class DTORespondeStatusQualityScooter {
 
     private String status ;
-    private int quatity;
+    private long quatity;
 
-    public DTORespondeStatusQualityScooter(String status, int quatity) {
+    public DTORespondeStatusQualityScooter(String status, long quatity) {
         this.status = status;
         this.quatity = quatity;
     }

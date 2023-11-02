@@ -100,8 +100,6 @@ public class ScooterController {
         }
     }
 
-
-
     @GetMapping("/cantidad-viajes/{cant}/anio/{anio}")
     public ResponseEntity<?> getBySearch(@PathVariable int cant, @PathVariable int anio){
         try{
