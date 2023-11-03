@@ -1,8 +1,6 @@
 package com.example.microservices_admin_maintenance.dto;
 
-import com.example.microservices_admin_maintenance.entity.GPS;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
