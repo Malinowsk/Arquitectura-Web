@@ -1,6 +1,7 @@
 package com.example.microservices_admin_maintenance.controller;
 
 import com.example.microservices_admin_maintenance.dto.DTORequestMaintenance;
+import com.example.microservices_admin_maintenance.dto.DTOResponseScootersOfKms;
 import com.example.microservices_admin_maintenance.service.MaintenanceService;
 import com.example.microservices_admin_maintenance.dto.DTOResponseMaintenance;
 import lombok.RequiredArgsConstructor;
@@ -88,7 +89,7 @@ public class MaintenanceController {
     @GetMapping("/reporte-monopatines-por-km/con-pausas/{stringBoolean}")
     public ResponseEntity<?> getReportByKmOptionalPauseTime(@PathVariable String stringBoolean) {
         try {
-            String response = maintenanceService.getReportByKmOptionalPauseTime(stringBoolean);
+            DTOResponseScootersOfKms[] response = maintenanceService.getReportByKmOptionalPauseTime(stringBoolean);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             System.out.println(e.getMessage());

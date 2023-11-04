@@ -106,9 +106,10 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public String getReportByKmOptionalPauseTime(String pauseBool) {
+    public DTOResponseScootersOfKms[] getReportByKmOptionalPauseTime(String pauseBool) {
         String scooter_service_uri = "http://localhost:8003/api/monopatines/reporte-monopatines-por-km/con-pausas/"+pauseBool;
-        return restTemplate.getForObject(scooter_service_uri, String.class);
+        return restTemplate.getForEntity(scooter_service_uri, DTOResponseScootersOfKms[].class).getBody();
+
     }
 
     @Transactional
