@@ -1,6 +1,7 @@
 package com.example.microservices_admin_maintenance.controller;
 
 import com.example.microservices_admin_maintenance.dto.DTORequestMaintenance;
+import com.example.microservices_admin_maintenance.dto.DTOResponseReport;
 import com.example.microservices_admin_maintenance.dto.DTOResponseScootersOfKms;
 import com.example.microservices_admin_maintenance.service.MaintenanceService;
 import com.example.microservices_admin_maintenance.dto.DTOResponseMaintenance;
@@ -78,7 +79,7 @@ public class MaintenanceController {
     @GetMapping("/reporte-monopatines-por/{campo}")
     public ResponseEntity<?> getReportBy(@PathVariable String campo) {
         try {
-            String response = maintenanceService.getReportBy(campo);
+            DTOResponseReport[] response = maintenanceService.getReportBy(campo);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             System.out.println(e.getMessage());

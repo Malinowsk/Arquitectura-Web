@@ -113,9 +113,9 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public String getReportBy(String reportVariable) {
+    public DTOResponseReport[] getReportBy(String reportVariable) {
         String scooter_service_uri = "http://localhost:8003/api/monopatines/reportes/ordenado-por/"+reportVariable;
-        return restTemplate.getForObject(scooter_service_uri, String.class);
+        return restTemplate.getForEntity(scooter_service_uri, DTOResponseReport[].class).getBody();
     }
 
     private DTOResponseMaintenance buildMaintenanceDTO(Maintenance m) {
