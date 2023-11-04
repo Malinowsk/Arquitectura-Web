@@ -8,23 +8,25 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+//@Entity
+@Document(collection = "Fare")
 @Data  // genera automáticamente los métodos getter, setter, toString(), equals(), y hashCode()
 @NoArgsConstructor // genera automáticamente el contructor vacio
 public class Fare {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    //@GeneratedValue
+    private String id;
 
-    @Column
+  //  @Column
     private String name;
 
-    @Column
+    //@Column
     private double cost_per_min;
 
-    @Column
+    //@Column
     private double extended_pause_cost;
 
     public Fare(String name, double cost, double extended_pause_cost) {

@@ -37,7 +37,7 @@ public class MaintenanceService {
     @Transactional
     public DTOResponseMaintenance findById(Long id) {
         return this.maintenanceRepository
-                .findById(id)
+                .findById(String.valueOf(id))
                 .map(this::buildMaintenanceDTO)
                 .orElseThrow( () -> new NotFoundException("Maintenance", id));
     }
@@ -63,18 +63,18 @@ public class MaintenanceService {
     @Transactional
     public void delete(Long id) {
         this.maintenanceRepository.delete(
-                this.maintenanceRepository.findById(id)
+                this.maintenanceRepository.findById(String.valueOf(id))
                         .orElseThrow( () -> new NotFoundException("Maintenance", id)));
     }
 
     @Transactional
     public DTOResponseMaintenance update(Long id, DTORequestMaintenance request) {
-        Maintenance maintenance = this.maintenanceRepository.findById(id).orElseThrow(
+        Maintenance maintenance = this.maintenanceRepository.findById(String.valueOf(id)).orElseThrow(
                 () -> new NotFoundException("Maintenance", id));
 
         //Falta chequear que no vengan datos null
-        maintenance.setScooter_id(request.getScooter_id());
-        maintenance.setScooter_station_id(request.getScooter_station_id());
+        maintenance.setScooter_id(String.valueOf(request.getScooter_id()));
+        maintenance.setScooter_station_id(String.valueOf(request.getScooter_station_id()));
         maintenance.setStart_date(request.getStart_date());
         maintenance.setEnd_date(request.getEnd_date());
 
@@ -84,13 +84,13 @@ public class MaintenanceService {
 
     @Transactional
     public DTOResponseMaintenance endScooterMaintenance(Long id) {
-        Maintenance maintenance = this.maintenanceRepository.findById(id).orElseThrow(
+        Maintenance maintenance = this.maintenanceRepository.findById(String.valueOf(id)).orElseThrow(
                 () -> new NotFoundException("Maintenance", id));
 
-        maintenance.setEnd_date(Timestamp.valueOf(LocalDateTime.now()));
+        maintenance.setEnd_date(String.valueOf(LocalDateTime.now()));
 
         DTORequestScooter sDTO = new DTORequestScooter();
-        sDTO.setId(maintenance.getScooter_id());
+        sDTO.setId(Long.valueOf(maintenance.getScooter_id()));
         sDTO.setState("disponible");
         System.out.println(maintenance.getScooter_id());
 
@@ -120,11 +120,11 @@ public class MaintenanceService {
 
     private DTOResponseMaintenance buildMaintenanceDTO(Maintenance m) {
         return new DTOResponseMaintenance(
-                m.getId(),
-                m.getScooter_id(),
-                m.getScooter_station_id(),
-                m.getStart_date(),
-                m.getEnd_date()
+                Long.valueOf(m.getId()),
+                Long.valueOf(m.getScooter_id()),
+                Long.valueOf(m.getScooter_station_id()),
+                String.valueOf(m.getStart_date()),
+                String.valueOf(m.getEnd_date())
         );
     }
 

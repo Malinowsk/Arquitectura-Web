@@ -14,12 +14,12 @@ public class DTOResponseMaintenance {
 
     private final Long scooter_station_id;
 
-    private final Timestamp start_date;
+    private final String start_date;
 
-    private final Timestamp end_date;
+    private final String end_date;
 
 
-    public DTOResponseMaintenance(Long id, Long scooter_id, Long scooter_station_id, Timestamp start_date, Timestamp end_date) {
+    public DTOResponseMaintenance(Long id, Long scooter_id, Long scooter_station_id, String start_date, String end_date) {
         this.id = id;
         this.scooter_id = scooter_id;
         this.scooter_station_id = scooter_station_id;
@@ -28,9 +28,9 @@ public class DTOResponseMaintenance {
     }
 
     public DTOResponseMaintenance(Maintenance result) {
-        this.id = result.getId();
-        this.scooter_id = result.getScooter_id();
-        this.scooter_station_id = result.getScooter_station_id();
+        this.id = Long.valueOf(result.getId());
+        this.scooter_id = Long.valueOf(result.getScooter_id());
+        this.scooter_station_id = Long.valueOf(result.getScooter_station_id());
         this.start_date = result.getStart_date();
         this.end_date = result.getEnd_date();
     }

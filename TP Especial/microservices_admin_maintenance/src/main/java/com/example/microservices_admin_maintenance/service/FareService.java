@@ -18,7 +18,7 @@ public class FareService {
     @Transactional
     public DTOFareResponse findById(Long id) {
         return this.fareRepository
-                .findById(id)
+                .findById(String.valueOf(id))
                 .map(DTOFareResponse::new)
                 .orElseThrow( () -> new NotFoundException("Maintenance", id));
     }
