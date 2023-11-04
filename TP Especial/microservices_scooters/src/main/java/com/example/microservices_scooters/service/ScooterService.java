@@ -1,9 +1,6 @@
 package com.example.microservices_scooters.service;
 
-import com.example.microservices_scooters.dto.DTORequestScooter;
-import com.example.microservices_scooters.dto.DTORespondeStatusQualityScooter;
-import com.example.microservices_scooters.dto.DTOResponseReport;
-import com.example.microservices_scooters.dto.DTOResponseScooter;
+import com.example.microservices_scooters.dto.*;
 import com.example.microservices_scooters.entity.Scooter;
 import com.example.microservices_scooters.entity.Station;
 import com.example.microservices_scooters.exception.NotFoundException;
@@ -71,6 +68,15 @@ public class ScooterService {
         } else {
             throw new NotFoundException("El tipo de odenamiento es invalido");
         }
+    }
+
+    @Transactional
+    public List<DTOResponseScootersOfKms> getScootersOfKms(boolean with_pause) {
+        return this.scooterRepository
+                .getScootersOfKms(with_pause)
+                .stream()
+                .map(obj -> new DTOResponseScootersOfKms((long) obj[0], (String) obj[1], (double)obj[2], (long)obj[3]))
+                .toList();
     }
 
     @Transactional

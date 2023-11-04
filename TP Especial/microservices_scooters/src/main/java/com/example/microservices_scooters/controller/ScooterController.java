@@ -45,6 +45,16 @@ public class ScooterController {
         }
     }
 
+    @GetMapping("/reporte-monopatines-por-km/con-pausas/{boolValue}")
+    public ResponseEntity<?> getScootersOfKms(@PathVariable boolean with_pause){
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.getScootersOfKms(with_pause));
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo generar el reporte");
+        }
+    }
+
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ){
         try {
