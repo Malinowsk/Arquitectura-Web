@@ -17,8 +17,6 @@ public class DTORequestScooter {
 
     private String state = "disponible";
 
-    private GPS location;
-
     private double kmsTraveled = 0;
 
     private double kmsMant = 0;

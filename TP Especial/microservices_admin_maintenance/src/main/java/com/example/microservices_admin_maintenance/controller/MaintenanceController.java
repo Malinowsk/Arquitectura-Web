@@ -1,9 +1,11 @@
 package com.example.microservices_admin_maintenance.controller;
 
 import com.example.microservices_admin_maintenance.dto.DTORequestMaintenance;
+import com.example.microservices_admin_maintenance.dto.DTOResponseScooter;
 import com.example.microservices_admin_maintenance.service.MaintenanceService;
 import com.example.microservices_admin_maintenance.dto.DTOResponseMaintenance;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -68,8 +70,30 @@ public class MaintenanceController {
             DTOResponseMaintenance response = maintenanceService.endScooterMaintenance(id);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
+        }
+    }
+
+    @GetMapping("/reporte-monopatines-por/{campo}")
+    public ResponseEntity<?> getReportBy(@PathVariable String campo) {
+        try {
+            List<DTOResponseScooter> response = maintenanceService.getReportBy(campo);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo generar el reporte.");
+        }
+    }
+
+    @GetMapping("/reporte-monopatines-por-km/con-pausas/{pauseBool}")
+    public ResponseEntity<?> getReportByKmOptionalPauseTime(@PathVariable boolean pauseBool) {
+        try {
+            List<DTOResponseScooter> response = maintenanceService.getReportByKmOptionalPauseTime(pauseBool);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo generar el reporte.");
         }
     }
 

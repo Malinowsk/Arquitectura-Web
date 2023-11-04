@@ -106,6 +106,20 @@ public class MaintenanceService {
         return new DTOResponseMaintenance(result);
     }
 
+    @Transactional
+    public List<DTOResponseScooter> getReportByKmOptionalPauseTime(boolean pauseBool) {
+        String scooter_service_uri = "http://localhost:8003/api/monopatines/";
+        return null;
+        //return restTemplate.getForObject(scooter_service_uri, String.class);
+    }
+
+    @Transactional
+    public List<DTOResponseScooter> getReportBy(String reportVariable) {
+        String scooter_service_uri = "http://localhost:8003/api/monopatines/";
+        return null;
+        //return restTemplate.getForObject(scooter_service_uri, String.class);
+    }
+
     private DTOResponseMaintenance buildMaintenanceDTO(Maintenance m) {
         return new DTOResponseMaintenance(
                 m.getId(),
