@@ -46,7 +46,7 @@ public class ScooterController {
     }
 
     @GetMapping("/reporte-monopatines-por-km/con-pausas/{boolValue}")
-    public ResponseEntity<?> getScootersOfKms(@PathVariable boolean with_pause){
+    public ResponseEntity<?> getScootersOfKms(@PathVariable("boolValue") String with_pause){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.getScootersOfKms(with_pause));
         }catch (Exception e){
@@ -60,7 +60,7 @@ public class ScooterController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.save(request));
         }catch(Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Ocurrio un error, revise los campos ingresados");
         }
     }

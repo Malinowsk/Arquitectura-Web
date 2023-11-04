@@ -4,7 +4,6 @@ import com.example.microservices_admin_maintenance.dto.*;
 import com.example.microservices_admin_maintenance.entity.Maintenance;
 import com.example.microservices_admin_maintenance.exception.NotFoundException;
 import com.example.microservices_admin_maintenance.repository.MaintenanceRepository;
-import com.sun.tools.javac.Main;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -107,17 +106,15 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public List<DTOResponseScooter> getReportByKmOptionalPauseTime(boolean pauseBool) {
-        String scooter_service_uri = "http://localhost:8003/api/monopatines/";
-        return null;
-        //return restTemplate.getForObject(scooter_service_uri, String.class);
+    public String getReportByKmOptionalPauseTime(String pauseBool) {
+        String scooter_service_uri = "http://localhost:8003/api/monopatines/reporte-monopatines-por-km/con-pausas/"+pauseBool;
+        return restTemplate.getForObject(scooter_service_uri, String.class);
     }
 
     @Transactional
-    public List<DTOResponseScooter> getReportBy(String reportVariable) {
-        String scooter_service_uri = "http://localhost:8003/api/monopatines/";
-        return null;
-        //return restTemplate.getForObject(scooter_service_uri, String.class);
+    public String getReportBy(String reportVariable) {
+        String scooter_service_uri = "http://localhost:8003/api/monopatines/reportes/ordenado-por/"+reportVariable;
+        return restTemplate.getForObject(scooter_service_uri, String.class);
     }
 
     private DTOResponseMaintenance buildMaintenanceDTO(Maintenance m) {

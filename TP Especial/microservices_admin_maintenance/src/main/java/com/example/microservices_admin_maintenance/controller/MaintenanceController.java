@@ -1,11 +1,9 @@
 package com.example.microservices_admin_maintenance.controller;
 
 import com.example.microservices_admin_maintenance.dto.DTORequestMaintenance;
-import com.example.microservices_admin_maintenance.dto.DTOResponseScooter;
 import com.example.microservices_admin_maintenance.service.MaintenanceService;
 import com.example.microservices_admin_maintenance.dto.DTOResponseMaintenance;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -38,7 +36,7 @@ public class MaintenanceController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.save(rDTO));
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
@@ -49,6 +47,7 @@ public class MaintenanceController {
             this.maintenanceService.delete(id);
             return ResponseEntity.status(HttpStatus.OK).body("Se eliminó correctamente el registro de mantenimiento con id: " + id);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo eliminar el registro de mantenimiento con id: " + id);
         }
     }
@@ -78,7 +77,7 @@ public class MaintenanceController {
     @GetMapping("/reporte-monopatines-por/{campo}")
     public ResponseEntity<?> getReportBy(@PathVariable String campo) {
         try {
-            List<DTOResponseScooter> response = maintenanceService.getReportBy(campo);
+            String response = maintenanceService.getReportBy(campo);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -86,10 +85,10 @@ public class MaintenanceController {
         }
     }
 
-    @GetMapping("/reporte-monopatines-por-km/con-pausas/{pauseBool}")
-    public ResponseEntity<?> getReportByKmOptionalPauseTime(@PathVariable boolean pauseBool) {
+    @GetMapping("/reporte-monopatines-por-km/con-pausas/{stringBoolean}")
+    public ResponseEntity<?> getReportByKmOptionalPauseTime(@PathVariable String stringBoolean) {
         try {
-            List<DTOResponseScooter> response = maintenanceService.getReportByKmOptionalPauseTime(pauseBool);
+            String response = maintenanceService.getReportByKmOptionalPauseTime(stringBoolean);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             System.out.println(e.getMessage());

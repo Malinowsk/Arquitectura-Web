@@ -71,9 +71,9 @@ public class ScooterService {
     }
 
     @Transactional
-    public List<DTOResponseScootersOfKms> getScootersOfKms(boolean with_pause) {
+    public List<DTOResponseScootersOfKms> getScootersOfKms(String with_pause) {
         return this.scooterRepository
-                .getScootersOfKms(with_pause)
+                .getScootersOfKms(Boolean.parseBoolean(with_pause))
                 .stream()
                 .map(obj -> new DTOResponseScootersOfKms((long) obj[0], (String) obj[1], (double)obj[2], (long)obj[3]))
                 .toList();
