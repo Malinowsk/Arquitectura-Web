@@ -1,0 +1,28 @@
+version: '1'
+services:
+  serv_admin:
+    build:
+      context: ./
+      dockerfile: microservices_admin_maintenance.Dockerfire
+    ports:
+      - 8005:80
+    hostname: "serv_admin"
+  serv_scooters:
+    build:
+      context: ./
+      dockerfile: microservices_scooters.Dockerfire
+    ports:
+      - 8003:80
+    hostname: "serv_scooters"
+  serv_users:
+    build:
+      context: ./
+      dockerfile: microservices_users.Dockerfire
+    ports:
+      - 8007:80
+    hostname: "serv_users"
+  proxy:
+    image: nginx
+    ports:
+      - 8080:80
+    hostname: "nginx"
