@@ -5,11 +5,11 @@ import lombok.Getter;
 @Getter
 public class DTORespondeStatusQualityScooter {
 
-    private String status ;
-    private long quatity;
+    private long quatity_in_use;
+    private long quatity_maintenance;
 
-    public DTORespondeStatusQualityScooter(String status, long quatity) {
-        this.status = status;
-        this.quatity = quatity;
+    public DTORespondeStatusQualityScooter(long quatity_in_use, long quatity_maintenance) {
+        this.quatity_in_use = quatity_in_use;
+        this.quatity_maintenance = quatity_maintenance;
     }
 }

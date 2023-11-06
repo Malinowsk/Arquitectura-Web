@@ -117,12 +117,8 @@ public class ScooterService {
     }
 
     @Transactional
-    public List<DTORespondeStatusQualityScooter> getQuantityBasedOnStatus() {
-        return this.scooterRepository
-                .getQuantityBasedOnStatus("en_uso","mantenimiento")
-                .stream()
-                .map(obj -> new DTORespondeStatusQualityScooter((String) obj[0], (long)obj[1]))
-                .toList();
+    public DTORespondeStatusQualityScooter getQuantityBasedOnStatus() {
+        return this.scooterRepository.getQuantityBasedOnStatus("en_uso","mantenimiento");
     }
     public List<DTOResponseScooter> getScootersSurroundings(Long id) {
         Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
