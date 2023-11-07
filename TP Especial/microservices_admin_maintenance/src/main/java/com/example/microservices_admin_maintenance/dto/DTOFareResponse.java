@@ -22,7 +22,7 @@ public class DTOFareResponse {
     }
 
     public DTOFareResponse(Fare fare) {
-        this.id = Long.valueOf(fare.getId());
+        this.id = 0L;
         this.name = fare.getName();
         this.cost_per_min = fare.getCost_per_min();
         this.extended_pause_cost = fare.getExtended_pause_cost();
