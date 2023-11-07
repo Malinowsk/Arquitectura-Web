@@ -1,6 +1,5 @@
 package com.example.microservices_auth.entity;
 
-import com.example.microservices_auth.entity.User;
 import com.example.microservices_auth.dto.DTORequestAccount;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
