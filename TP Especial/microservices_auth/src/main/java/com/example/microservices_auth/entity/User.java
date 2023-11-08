@@ -32,6 +32,10 @@ public class User implements Serializable {
     @Column
     private String email;
 
+    @Column
+    private String password;
+
+
     @ManyToMany (fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Account> account_list;

@@ -14,9 +14,9 @@ public class AuthRequestDTO {
     @NotEmpty( message = "El email es obligatorio." )
     private String email;
 
-    @NotNull( message = "La contraseña es obligatorio." )
-    @NotEmpty( message = "La contraseña es obligatorio." )
-    @Size(min = 4, max = 100, message = "La contraseña debe tener un minimo de 4 y un maximo de 100 caracteres.")
+    @NotNull( message = "La contraseña es obligatoria." )
+    @NotEmpty( message = "La contraseña es obligatoria." )
+    @Size(min = 6, max = 30, message = "La contraseña debe tener un minimo de 6 y un maximo de 30 caracteres.")
     private String password;
 
 }
