@@ -33,6 +33,7 @@ public class MicroservicesUsersApplication {
     @PostConstruct
     public void setUp() {
 
+
         //Creacion de usuarios
         List<User> users = new ArrayList<>();
         users.add(new User("Martín", "Palermo", "3434224523", "martinj@gmail.com"));
@@ -122,7 +123,7 @@ public class MicroservicesUsersApplication {
         users.get(13).setAccount_list(accounts5);
         users.get(14).setAccount_list(accounts5);
 
-        /*
+/*
 
         List<User> usersForAccount6 = new ArrayList<>();
         usersForAccount6.add(users.get(11));
@@ -138,7 +139,8 @@ public class MicroservicesUsersApplication {
         Account account7 = new Account(1700.0, Timestamp.valueOf(LocalDateTime.parse("2023-11-03T17:00:00")));
         accounts.add(account7);
 
-         */
+*/
+
 
         //Guardamos las cuentas en la bbdd
         accountRepo.saveAll(accounts1);
@@ -147,6 +149,8 @@ public class MicroservicesUsersApplication {
         accountRepo.saveAll(accounts4);
         accountRepo.saveAll(accounts5);
         userRepo.saveAll(users);
+
+
 
     }
 }

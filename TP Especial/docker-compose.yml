@@ -1,28 +1,64 @@
-version: '1'
+version: '3.8'
 services:
   serv_admin:
     build:
-      context: ./
-      dockerfile: microservices_admin_maintenance.Dockerfire
+      context: ./microservices_admin_maintenance/
+      dockerfile: Dockerfile
     ports:
       - 8005:80
     hostname: "serv_admin"
-  serv_scooters:
-    build:
-      context: ./
-      dockerfile: microservices_scooters.Dockerfire
+    depends_on:
+      - db_admin
+  db_admin:
+    image: mongo
     ports:
-      - 8003:80
+      - 27017:27017
+  scooters:
+    build:
+      context: ./microservices_scooters/
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: "db1"
+      MYSQL_PORT: "3306"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: ""
+    ports:
+      - "8080:8080"
     hostname: "serv_scooters"
+    networks:
+      - "my-net"
+    depends_on:
+      - "db1"
+  db1:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+       MYSQL_DATABASE: 'scooters'
+       MYSQL_ROOT_PASSWORD: ''
+       MYSQL_PASSWORD: ''
+       MYSQL_USER: 'root'
+    networks:
+      - "my-net"
   serv_users:
     build:
-      context: ./
-      dockerfile: microservices_users.Dockerfire
+      context: ./microservices_users/
+      dockerfile: Dockerfile
     ports:
       - 8007:80
     hostname: "serv_users"
-  proxy:
-    image: nginx
+    depends_on:
+      - db_users
+  db_users:
+    image: mysql
     ports:
-      - 8080:80
-    hostname: "nginx"
+      - 3307:3306
+#  proxy:
+#    image: nginx
+#    ports:
+#      - 8080:80
+#    hostname: "nginx"
+networks:
+  my-net:
+    external: true
+    driver: "bridge"

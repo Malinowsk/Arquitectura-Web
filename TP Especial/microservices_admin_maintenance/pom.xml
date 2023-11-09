@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.example</groupId>
     <artifactId>microservices_admin_maintenance</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1-SNAPSHOT</version>
     <name>microservices_admin_maintenance</name>
     <description>microservices_admin_maintenance</description>
     <properties>

@@ -38,8 +38,7 @@ public class MicroservicesScootersApplication {
 
 
 
-
-
+/*
     @PostConstruct
     public void setUp() {
 
@@ -214,7 +213,7 @@ public class MicroservicesScootersApplication {
 
 
 
-    }
+    }*/
 
 }
 

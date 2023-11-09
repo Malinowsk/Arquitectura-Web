@@ -9,7 +9,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
+
 @Entity
 @NoArgsConstructor
 @Data
@@ -32,7 +32,6 @@ public class User implements Serializable {
     private String email;
 
     @ManyToMany (fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<Account> account_list;
 
 

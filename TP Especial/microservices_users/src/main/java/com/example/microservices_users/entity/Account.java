@@ -28,7 +28,6 @@ public class Account implements Serializable {
     @Column
     private boolean active = true; // 1 = true |  0 = false
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "account_list")
-    @JsonBackReference
     private List<User> users;
 
 

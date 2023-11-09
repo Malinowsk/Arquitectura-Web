@@ -1,4 +1,3 @@
-FROM ubuntu:latest
-LABEL authors="Juan Rago"
-
-ENTRYPOINT ["top", "-b"]
+FROM openjdk:21-jdk
+COPY *.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]
