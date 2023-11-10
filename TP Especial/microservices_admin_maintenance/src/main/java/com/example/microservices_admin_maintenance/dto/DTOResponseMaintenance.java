@@ -3,12 +3,10 @@ package com.example.microservices_admin_maintenance.dto;
 import com.example.microservices_admin_maintenance.entity.Maintenance;
 import lombok.Getter;
 
-import java.sql.Timestamp;
-
 @Getter
 public class DTOResponseMaintenance {
 
-    private final Long id;
+    private final String id;
 
     private final Long scooter_id;
 
@@ -19,7 +17,7 @@ public class DTOResponseMaintenance {
     private final String end_date;
 
 
-    public DTOResponseMaintenance(Long id, Long scooter_id, Long scooter_station_id, String start_date, String end_date) {
+    public DTOResponseMaintenance(String id, Long scooter_id, Long scooter_station_id, String start_date, String end_date) {
         this.id = id;
         this.scooter_id = scooter_id;
         this.scooter_station_id = scooter_station_id;
@@ -28,7 +26,7 @@ public class DTOResponseMaintenance {
     }
 
     public DTOResponseMaintenance(Maintenance result) {
-        this.id = Long.valueOf(result.getId());
+        this.id = result.getId();
         this.scooter_id = Long.valueOf(result.getScooter_id());
         this.scooter_station_id = Long.valueOf(result.getScooter_station_id());
         this.start_date = result.getStart_date();

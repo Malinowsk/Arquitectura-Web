@@ -6,11 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 //@Entity
-@Document(collation = "Maintenance")
+@Document(collection = "Maintenance")
 @Data  // genera automáticamente los métodos getter, setter, toString(), equals(), y hashCode()
 @NoArgsConstructor // genera automáticamente el contructor vacio
 public class Maintenance {

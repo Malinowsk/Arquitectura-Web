@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -120,7 +119,7 @@ public class MaintenanceService {
 
     private DTOResponseMaintenance buildMaintenanceDTO(Maintenance m) {
         return new DTOResponseMaintenance(
-                Long.valueOf(m.getId()),
+                m.getId(),
                 Long.valueOf(m.getScooter_id()),
                 Long.valueOf(m.getScooter_station_id()),
                 String.valueOf(m.getStart_date()),
