@@ -12,6 +12,9 @@ import java.sql.Timestamp;
 public class DTOScheduledFareRequest {
 
     @NotNull
+    private String fare_to_update_id;
+
+    @NotNull
     private double cost_per_min;
 
     @NotNull
@@ -21,9 +24,10 @@ public class DTOScheduledFareRequest {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp scheduled_date;
 
-    public DTOScheduledFareRequest(double costPerMin, double extendedPauseCost, Timestamp scheduledDate) {
-        cost_per_min = costPerMin;
-        extended_pause_cost = extendedPauseCost;
-        scheduled_date = scheduledDate;
+    public DTOScheduledFareRequest(String fare_to_update_id, double cost_per_min, double extended_pause_cost, Timestamp scheduled_date) {
+        this.fare_to_update_id = fare_to_update_id;
+        this.cost_per_min = cost_per_min;
+        this.extended_pause_cost = extended_pause_cost;
+        this.scheduled_date = scheduled_date;
     }
 }
