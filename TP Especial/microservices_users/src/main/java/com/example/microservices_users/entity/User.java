@@ -3,13 +3,15 @@ package com.example.microservices_users.entity;
 import com.example.microservices_users.dto.DTORequestUser;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
-
+@Getter
 @Entity
 @NoArgsConstructor
 @Data
@@ -31,8 +33,16 @@ public class User implements Serializable {
     @Column
     private String email;
 
+    @Column
+    private String password;
+
+
     @ManyToMany (fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Account> account_list;
+
+    @OneToMany
+    private Set<Authority> authorities;
 
 
     public User(String name, String surname, String phone_number, String email) {
@@ -48,4 +58,7 @@ public class User implements Serializable {
         this.phone_number = dto.getPhone_number();
         this.email = dto.getEmail();
     }
+
+    public String getPassword() { return null; }
+
 }

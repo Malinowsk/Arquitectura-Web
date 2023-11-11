@@ -40,6 +40,10 @@ public class User implements Serializable {
     @JsonManagedReference
     private List<Account> account_list;
 
+    @Getter
+    @OneToMany
+    private List<Authority> authorities;
+
 
     public User(String name, String surname, String phone_number, String email) {
         this.name = name;
@@ -54,8 +58,6 @@ public class User implements Serializable {
         this.phone_number = dto.getPhone_number();
         this.email = dto.getEmail();
     }
-
-    public List<Authority> getAuthorities() { return null; }
 
     public String getPassword() { return null; }
 

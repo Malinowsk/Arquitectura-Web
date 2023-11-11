@@ -3,11 +3,14 @@ package com.example.microservices_users.repository;
 import com.example.microservices_users.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findUserByEmailIgnoreCase(String email);
+
+    boolean existsUsersByEmailIgnoreCase(String email );
 
 }
