@@ -2,6 +2,10 @@ package com.example.microservices_admin_maintenance.service;
 
 import com.example.microservices_admin_maintenance.dto.*;
 import com.example.microservices_admin_maintenance.repository.FareRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -16,6 +20,7 @@ public class AdminService {
 
     private final RestTemplate restTemplate;
 
+    // Agregar monopatín
     @Transactional
     public String createScooter(DTORequestScooterModel scooterModel) {
         HttpHeaders headers = new HttpHeaders();
@@ -24,6 +29,7 @@ public class AdminService {
         return this.restTemplate.exchange(scooter_microservice_uri, HttpMethod.POST, requestEntity, String.class).getBody();
     }
 
+    //Ubicar monopatín en parada (opcional)
     @Transactional
     public String assignScooterToStation(Long station_id, DTORequestScooter scooterDTO) {
         HttpHeaders headers = new HttpHeaders();
