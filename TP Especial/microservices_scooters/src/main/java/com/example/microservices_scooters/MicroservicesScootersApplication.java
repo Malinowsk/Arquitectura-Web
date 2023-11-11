@@ -37,8 +37,6 @@ public class MicroservicesScootersApplication {
     }
 
 
-
-/*
     @PostConstruct
     public void setUp() {
 
@@ -206,14 +204,6 @@ public class MicroservicesScootersApplication {
     rideRepo.save(ride19);
     rideRepo.save(ride20);
 
-
-
-
-
-
-
-
-    }*/
+    }
 
 }
-

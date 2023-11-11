@@ -23,7 +23,7 @@ services:
       SPRING_DATASOURCE_USERNAME: "root"
       SPRING_DATASOURCE_PASSWORD: ""
     ports:
-      - "8080:8080"
+      - "8003:8080"
     hostname: "serv_scooters"
     networks:
       - "my-net"

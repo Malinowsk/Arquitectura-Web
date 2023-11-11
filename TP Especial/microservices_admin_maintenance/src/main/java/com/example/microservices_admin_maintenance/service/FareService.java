@@ -18,6 +18,7 @@ import java.util.List;
 public class FareService {
 
     private final FareRepository fareRepository;
+    private DTOScheduledFareRequest sfDTO;
 
     @Transactional
     public DTOFareResponse findById(Long id) {
@@ -40,8 +41,6 @@ public class FareService {
         this.sfDTO = sfDTO;
         return sfDTO;
     }
-
-    private DTOScheduledFareRequest sfDTO;
 
     @Scheduled(cron = "0 0 0 * * ?")
     private void checkDateForPriceChange() {
