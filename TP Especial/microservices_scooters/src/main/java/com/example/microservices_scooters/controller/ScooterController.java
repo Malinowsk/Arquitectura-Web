@@ -1,6 +1,7 @@
 package com.example.microservices_scooters.controller;
 
 import com.example.microservices_scooters.dto.DTORequestScooter;
+import com.example.microservices_scooters.dto.DTORespondeStatusQualityScooter;
 import com.example.microservices_scooters.dto.DTOResponseReport;
 import com.example.microservices_scooters.dto.DTOResponseScooter;
 import com.example.microservices_scooters.entity.Scooter;
@@ -27,7 +28,7 @@ public class ScooterController {
     @Autowired
     private final ScooterService scooterService;
 
-///////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
     @Operation(summary = "Obtener una lista de monopatines",
             description = "Obtiene una lista de todos los monopatines disponibles en el sistema.")
     @ApiResponses(value = {
@@ -124,8 +125,12 @@ public class ScooterController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
         }
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////FUNCIONALIDADES/////////////////////////////////////////////////////////////////////////
+
+    //Generar reporte de uso de monopatines por kilómetros
+    //Generar reporte de uso de monopatines por tiempo con pausas
+    //Generar reporte de uso de monopatines por tiempo sin pausas
     @Operation(summary = "Obtener un informe de monopatines ordenado por algún criterio",
             description = "Obtiene un informe de monopatines ordenado según el criterio especificado en el parámetro 'ordering'.")
     @ApiResponses(value = {
@@ -149,6 +154,59 @@ public class ScooterController {
         }
     }
 
+    //Ubicar monopatín en parada
+    @Operation(summary = "Ubicar un monopatín en una parada",
+            description = "Ubica un monopatín en una parada específica según los identificadores proporcionados en los parámetros.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Monopatín ubicado exitosamente en la parada",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOResponseScooter.class)) }),
+            @ApiResponse(responseCode = "404", description = "Monopatín o parada no encontrados",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
+    @PutMapping("{id}/paradas/{id_station}")
+    public ResponseEntity<?> maintenance(@PathVariable Long id,@PathVariable Long id_station, @RequestBody @Validated DTORequestScooter request) {
+        try {
+            Scooter scooter = scooterService.maintenance(id_station,id, request);
+            DTOResponseScooter response = new DTOResponseScooter(scooter);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
+        }
+    }
+
+    //Registrar fin de mantenimiento de monopatín
+    @Operation(summary = "Registrar fin de mantenimiento de un monopatín en una parada",
+            description = "Registra el fin de mantenimiento de un monopatín en una parada específica según el identificador proporcionado en el parámetro.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Fin de mantenimiento registrado exitosamente",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOResponseScooter.class)) }),
+            @ApiResponse(responseCode = "404", description = "Monopatín o parada no encontrados",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
+    @PutMapping("finalizar-mantenimiento/paradas/{id_station}")
+    public ResponseEntity<?> endMaintenance(@PathVariable Long id_station, @RequestBody @Validated DTORequestScooter request) {
+        try {
+            Scooter scooter = scooterService.endMaintenance(id_station, request);
+            DTOResponseScooter response = new DTOResponseScooter(scooter);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
+        }
+    }
+
+////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
+
+    //3.a. Como encargado de mantenimiento quiero poder generar un reporte de uso de monopatines por
+    //kilómetros para establecer si un monopatín requiere de mantenimiento. Este reporte debe poder
+    //configurarse para incluir (o no) los tiempos de pausa.
     @Operation(summary = "Obtener un informe de monopatines por kilómetros con/sin pausas",
             description = "Obtiene un informe de monopatines ordenado por cantidad de kilometros y basado en la presencia de tiempo con/sin pausas según el valor del parámetro 'with_pause'.")
     @ApiResponses(value = {
@@ -172,30 +230,18 @@ public class ScooterController {
         }
     }
 
-    @PutMapping("{id}/paradas/{id_station}")
-    public ResponseEntity<?> maintenance(@PathVariable Long id,@PathVariable Long id_station, @RequestBody @Validated DTORequestScooter request) {
-        try {
-            Scooter scooter = scooterService.maintenance(id_station,id, request);
-            DTOResponseScooter response = new DTOResponseScooter(scooter);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
-        }
-    }
-
-    @PutMapping("finalizar-mantenimiento/paradas/{id_station}")
-    public ResponseEntity<?> endMaintenance(@PathVariable Long id_station, @RequestBody @Validated DTORequestScooter request) {
-        try {
-            Scooter scooter = scooterService.endMaintenance(id_station, request);
-            DTOResponseScooter response = new DTOResponseScooter(scooter);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
-        }
-    }
-
+    //3.c. Como administrador quiero consultar los monopatines con más de X viajes en un cierto año.
+    @Operation(summary = "Consultar los monopatines con más de X viajes en un año específico",
+            description = "Consulta los monopatines que han realizado más de X viajes en un año determinado.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operación exitosa",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOResponseScooter.class)) }),
+            @ApiResponse(responseCode = "400", description = "Solicitud no válida",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
     @GetMapping("/cantidad-viajes/{cant}/anio/{anio}")
     public ResponseEntity<?> getBySearch(@PathVariable int cant, @PathVariable int anio){
         try{
@@ -206,7 +252,18 @@ public class ScooterController {
         }
 
     }
-
+    //3.e. Como administrador quiero consultar la cantidad de monopatines actualmente en operación, versus la cantidad de monopatines actualmente en mantenimiento
+    @Operation(summary = "Consultar la cantidad de monopatines en operación y en mantenimiento",
+            description = "Consulta la cantidad de monopatines que se encuentran actualmente en operación y en mantenimiento.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operación exitosa",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTORespondeStatusQualityScooter.class)) }),
+            @ApiResponse(responseCode = "400", description = "Solicitud no válida",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
     @GetMapping("/operacion-vs-mantenimiento")
     public ResponseEntity<?> getQuantityBasedOnStatus(){
         try{
@@ -218,6 +275,16 @@ public class ScooterController {
 
     }
 
+    //3.g. Como usuario quiero lun listado de los monopatines cercanos a mi zona, para poder encontrar un monopatín cerca de mi ubicación
+    @Operation(summary = "Obtener un listado de monopatines cercanos a una ubicación",
+            description = "Obtiene un listado de monopatines que están cerca de la ubicación especificada.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operación exitosa",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOResponseScooter.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
     @GetMapping("/alrededores/{id}")
     public ResponseEntity<?> getScootersSurroundings(@PathVariable Long id){
         try{

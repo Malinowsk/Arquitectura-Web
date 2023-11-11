@@ -21,6 +21,7 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
+///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
     @GetMapping("")
     public List<DTOResponseUser> findAll(){
         return this.userService.findAll();
@@ -35,11 +36,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No existe el Usuario con el ID: "+id);
         }
     }
-
-
-    /**
-     *.-.-.-.-.-.-.-.-.-.-.-.-.- ABM USUARIO -.-.-.-.-.-.-.-.-.-.-.
-     */
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestUser request){

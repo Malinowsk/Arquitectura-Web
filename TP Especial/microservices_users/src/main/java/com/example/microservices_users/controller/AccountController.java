@@ -22,6 +22,8 @@ public class AccountController {
     @Autowired
     private final AccountService accountService;
 
+///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
+
     @GetMapping("")
     public List<DTOResponseAccount> findAll(){
         return this.accountService.findAll();
@@ -36,12 +38,6 @@ public class AccountController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No existe la cuenta con el ID: "+id);
         }
     }
-
-
-
-    /**
-     *.-.-.-.-.-.-.-.-.-.-.-.-.- ABM USUARIO -.-.-.-.-.-.-.-.-.-.-.
-     */
 
     @PostMapping("")
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestAccount request){
@@ -74,6 +70,9 @@ public class AccountController {
         }
     }
 
+////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
+
+    //3.b. Como administrador quiero poder anular cuentas para inhabilitar el uso momentáneo de la misma.
     @PutMapping("/{id}/status")
     public ResponseEntity<?> updateAccountStatus(@PathVariable Long id, @RequestBody DTORequestStatusAccount request) {
         try {

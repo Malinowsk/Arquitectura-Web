@@ -20,6 +20,8 @@ public class MaintenanceController {
 
     private final MaintenanceService maintenanceService;
 
+//////////////////////////////////////////// ABM ////////////////////////////////////////////////////////////////////////
+
     @GetMapping("")
     public List<DTOResponseMaintenance> findAll(){ return this.maintenanceService.findAll(); }
 
@@ -65,6 +67,8 @@ public class MaintenanceController {
         }
     }*/
 
+////////////////////////////////////////////FUNCIONALIDADES////////////////////////////////////////////////////////////////////////
+
     @PutMapping("/{id}")
     public ResponseEntity<?> finishMaintenance(@PathVariable Long id) {
         try {
@@ -87,6 +91,11 @@ public class MaintenanceController {
         }
     }
 
+////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
+
+    //3.a. Como encargado de mantenimiento quiero poder generar un reporte de uso de monopatines por
+    //kilómetros para establecer si un monopatín requiere de mantenimiento. Este reporte debe poder
+    //configurarse para incluir (o no) los tiempos de pausa.
     @GetMapping("/reporte-monopatines-por-km/con-pausas/{stringBoolean}")
     public ResponseEntity<?> getReportByKmOptionalPauseTime(@PathVariable String stringBoolean) {
         try {

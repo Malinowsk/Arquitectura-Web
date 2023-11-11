@@ -20,6 +20,8 @@ public class RideController {
     @Autowired
     private RideService rideService;
 
+///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
+
     @GetMapping("")
     public List<DTOResponseRide> findAll(){
         return this.rideService.findAll();
@@ -65,6 +67,9 @@ public class RideController {
         }
     }
 
+///////////////////////////////////////////////// SERVICIOS-REPORTES //////////////////////////////////////////////////////////////////////////
+
+    //3.d. Como administrador quiero consultar el total facturado en un rango de meses de cierto año.
     @GetMapping("/facturado/anio/{anio}/mes-desde/{mes_inicio}/mes-hasta/{mes_fin}")
     public ResponseEntity<?> getTotalCharged(@PathVariable int anio, @PathVariable int mes_inicio, @PathVariable int mes_fin){
         try{

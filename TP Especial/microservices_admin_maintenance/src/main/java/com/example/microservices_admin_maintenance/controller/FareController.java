@@ -20,6 +20,8 @@ public class FareController {
 
     private final FareService fareService;
 
+//////////////////////////////////////////// ABM ////////////////////////////////////////////////////////////////////////
+
     @GetMapping("")
     public List<DTOFareResponse> findAll() { return this.fareService.findAll(); }
 
@@ -66,6 +68,10 @@ public class FareController {
     @GetMapping("/programadas")
     public List<DTOScheduledFareResponse> getScheduledFares() { return this.fareService.findAllScheduledFares(); }
 
+
+////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
+
+    //3.f. Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema habilite los nuevos precios.
     @PostMapping("/programadas")
     public ResponseEntity<?> setScheduledFare(@RequestBody @Validated DTOScheduledFareRequest sfDTO) {
         try {

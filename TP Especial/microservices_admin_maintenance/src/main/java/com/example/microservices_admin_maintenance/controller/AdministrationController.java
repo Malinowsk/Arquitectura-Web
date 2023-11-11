@@ -37,7 +37,9 @@ public class AdministrationController {
         }
     }
 
+////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
 
+    //3.b. Como administrador quiero poder anular cuentas para inhabilitar el uso momentáneo de la misma.
     @PutMapping("/accounts/{id}/account-status")
     public ResponseEntity<?> changeAccountStatus(@PathVariable Long id, @RequestBody @Validated DTORequestStatusAccount accDTO) {
         try {
@@ -48,6 +50,8 @@ public class AdministrationController {
         }
     }
 
+
+    //3.C. Como administrador quiero consultar los monopatines con más de X viajes en un cierto año.
     @GetMapping("/scooters/amountOfTripsGreaterThan/{trip_qty}/year/{year}")
     public ResponseEntity<?> scooterReportByAmountOfTripsAndYear(@PathVariable int trip_qty, @PathVariable int year) {
         try {
@@ -58,6 +62,7 @@ public class AdministrationController {
         }
     }
 
+    //3.d. Como administrador quiero consultar el total facturado en un rango de meses de cierto año.
     @GetMapping("/rides/totalMoneyEarnedIn/year/{year}/from_month/{start}/to_month/{end}")
     public ResponseEntity<?> amountEarnedInTimePeriod(@PathVariable int year, @PathVariable int start, @PathVariable int end) {
         try {
@@ -68,6 +73,7 @@ public class AdministrationController {
         }
     }
 
+    //3.E. Como administrador quiero consultar la cantidad de monopatines actualmente en operación, versus la cantidad de monopatines actualmente en mantenimiento.
     @GetMapping("/scooters/quantity-in-operation")
     public ResponseEntity<?> quantityOfScootersInOperation() {
         try {
@@ -77,5 +83,4 @@ public class AdministrationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
-
 }

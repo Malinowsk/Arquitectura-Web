@@ -43,14 +43,23 @@ public class MicroservicesScootersApplication {
     //Crear monopatines
     scooter1 = new Scooter("Toyota");
     scooter1.setKmsTraveled(1000.88);
+    scooter1.setState("mantenimiento");
+    scooter1.setTotalUsageTime(500L);
+    scooter1.setPausedTime(50L);
     scooter2 = new Scooter("Honda");
     scooter2.setKmsTraveled(1020.88);
+    scooter2.setState("mantenimiento");
     scooter3 = new Scooter("Ford");
     scooter3.setKmsTraveled(100.88);
+    scooter3.setTotalUsageTime(600L);
+    scooter3.setPausedTime(10L);
+    scooter3.setState("mantenimiento");
     scooter4 = new Scooter("Chevrolet");
     scooter4.setKmsTraveled(9.88);
+    scooter4.setState("mantenimiento");
     scooter5 = new Scooter("Volkswagen");
     scooter5.setKmsTraveled(856.0);
+    scooter5.setState("mantenimiento");
     scooter6 = new Scooter("Nissan");
     scooter7 = new Scooter("BMW");
     scooter8 = new Scooter("Mercedes-Benz");
@@ -62,14 +71,14 @@ public class MicroservicesScootersApplication {
     scooter14 = new Scooter("Honda");
     scooter15 = new Scooter("Toyota");
     scooter16 = new Scooter("Toyota");//monopatin sin estar en ninguna parada
-
+    scooter16.setState("en_uso");
 
     scooter1.setLocation(new GPS(-34.6099, -58.3923 ));
     scooter2.setLocation(new GPS(-34.6099, -58.3923 ));
     scooter3.setLocation(new GPS(-34.6099, -58.3923 ));
     scooter4.setLocation(new GPS(-34.6099, -58.3923 ));
     scooter5.setLocation(new GPS(-34.6099, -58.3923 ));
-    scooter16.setLocation(new GPS(-34.6099, -58.3923 )); //monopatin sin estar en ninguna parada
+    scooter16.setLocation(new GPS(3.6099, -58.3923 )); //monopatin sin estar en ninguna parada
 
 
     scooter6.setLocation(new GPS(-44.5732, -58.4578));
