@@ -2,7 +2,6 @@ package com.example.microservices_users.entity;
 
 
 import com.example.microservices_users.dto.DTORequestAccount;
-import com.example.microservices_users.dto.DTORequestUser;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
@@ -27,10 +26,10 @@ public class Account implements Serializable {
     private Timestamp date_of_creation;
     @Column
     private boolean active = true; // 1 = true |  0 = false
+
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "account_list")
+    @JsonBackReference
     private List<User> users;
-
-
 
     public Account(Double money, Timestamp date_of_creation) {
         this.money = money;
