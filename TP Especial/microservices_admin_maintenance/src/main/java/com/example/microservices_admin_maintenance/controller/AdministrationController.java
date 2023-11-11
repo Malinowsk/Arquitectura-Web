@@ -1,6 +1,5 @@
 package com.example.microservices_admin_maintenance.controller;
 
-import com.example.microservices_admin_maintenance.dto.DTOFareRequest;
 import com.example.microservices_admin_maintenance.dto.DTORequestScooter;
 import com.example.microservices_admin_maintenance.dto.DTORequestScooterModel;
 import com.example.microservices_admin_maintenance.dto.DTORequestStatusAccount;
@@ -38,38 +37,6 @@ public class AdministrationController {
         }
     }
 
-    @PostMapping("/fares")
-    public ResponseEntity<?> addFare(@RequestBody @Validated DTOFareRequest fDTO) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(adminService.addFare(fDTO));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
-        }
-    }
-
-    /*
-    TODO: por ahora quedan comentados los metodos de PUT y DELETE de tarifas, discutir donde deben ir las tarifas para
-          calcular el costo del viaje y que pasa al editar una tarifa en uso
-    @PutMapping("/fare/{id}")
-    public ResponseEntity<?> updateFare(@PathVariable Long id, @RequestBody @Validated DTOFareRequest fDTO) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.updateFare(id, fDTO));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
-        }
-    }
-
-    @DeleteMapping("/fare/{id}")
-    public ResponseEntity<?> deleteFare(@PathVariable Long id) {
-        try {
-            this.maintenanceService.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Se eliminó correctamente la tarifa con id: " + id);
-        } catch (Exception e) {
-
-        }
-    }
-    */
 
     @PutMapping("/accounts/{id}/account-status")
     public ResponseEntity<?> changeAccountStatus(@PathVariable Long id, @RequestBody @Validated DTORequestStatusAccount accDTO) {

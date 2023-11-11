@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class DTOFareResponse {
 
-    private final Long id;
+    private final String id;
 
     private final String name;
 
@@ -14,7 +14,7 @@ public class DTOFareResponse {
 
     private final double extended_pause_cost;
 
-    public DTOFareResponse(Long id, String name, double cost, double extended_pause_cost) {
+    public DTOFareResponse(String id, String name, double cost, double extended_pause_cost) {
         this.id = id;
         this.name = name;
         this.cost_per_min = cost;
@@ -22,7 +22,7 @@ public class DTOFareResponse {
     }
 
     public DTOFareResponse(Fare fare) {
-        this.id = 0L;
+        this.id = fare.getId();
         this.name = fare.getName();
         this.cost_per_min = fare.getCost_per_min();
         this.extended_pause_cost = fare.getExtended_pause_cost();
