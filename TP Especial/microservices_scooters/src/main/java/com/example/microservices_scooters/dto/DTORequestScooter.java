@@ -28,8 +28,6 @@ public class DTORequestScooter {
 
     private Long pausedTime = 0L;
 
-    private int numberOfTrips = 0;
-
     private String model;
 
 

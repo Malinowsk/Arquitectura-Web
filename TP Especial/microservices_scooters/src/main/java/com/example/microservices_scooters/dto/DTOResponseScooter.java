@@ -13,7 +13,6 @@ public class DTOResponseScooter {
     private double kmsMant;
     private long totalUsageTime;
     private long pausedTime;
-    private int numberOfTrips;
     private String model;
 
     public DTOResponseScooter(Scooter s ) {
@@ -24,7 +23,6 @@ public class DTOResponseScooter {
         this.kmsMant = s.getKmsMant();
         this.totalUsageTime = s.getTotalUsageTime();
         this.pausedTime = s.getPausedTime();
-        this.numberOfTrips = s.getNumberOfTrips();
         this.model = s.getModel();
     }
 }

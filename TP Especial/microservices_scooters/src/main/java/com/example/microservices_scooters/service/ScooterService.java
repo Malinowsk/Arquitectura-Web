@@ -7,6 +7,7 @@ import com.example.microservices_scooters.exception.NotFoundException;
 import com.example.microservices_scooters.repository.ScooterRepository;
 import com.example.microservices_scooters.repository.StationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -14,8 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class ScooterService {
-    
+    @Autowired
     private final ScooterRepository scooterRepository;
+    @Autowired
     private final StationRepository stationRepository;
     
     @Transactional
@@ -47,7 +49,6 @@ public class ScooterService {
     public Scooter update(Long id, DTORequestScooter request) {
         Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("ID de monopatín inválido: " + id));
-        scooter.setNumberOfTrips(request.getNumberOfTrips());
         scooter.setState(request.getState());
         scooter.setKmsMant(request.getKmsMant());
         scooter.setKmsTraveled(request.getKmsTraveled());

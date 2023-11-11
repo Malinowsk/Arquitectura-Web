@@ -48,9 +48,6 @@ public class Scooter implements Serializable {
     private long pausedTime; //en segundos
 
     @Column
-    private int numberOfTrips;
-
-    @Column
     private String model;
 
     public Scooter(String model) {
@@ -60,7 +57,6 @@ public class Scooter implements Serializable {
         this.kmsMant = 0;
         this.totalUsageTime = 0L;
         this.pausedTime = 0L;
-        this.numberOfTrips = 0;
         this.model = model;
     }
 
@@ -72,7 +68,6 @@ public class Scooter implements Serializable {
     this.kmsMant = s.getKmsMant();
     this.totalUsageTime = s.getTotalUsageTime();
     this.pausedTime = s.getPausedTime();
-    this.numberOfTrips = s.getNumberOfTrips();
     this.model = s.getModel();
 }
 
