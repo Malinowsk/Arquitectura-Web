@@ -60,9 +60,6 @@ public class User implements Serializable {
         this.phone_number = dto.getPhone_number();
         this.email = dto.getEmail();
     }
-
-    public String getPassword() { return null; }
-
     public User(DTOResponseUser dto) {
         this.id = dto.getId();
         this.name = dto.getName();
