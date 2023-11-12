@@ -42,9 +42,9 @@ public class MicroservicesUsersApplication {
 
     @PostConstruct
     public void setUp() {
-        Authority auth1= new Authority("ADMIN");
-        Authority auth2= new Authority("USER");
-        Authority auth3= new Authority("MAINTENANCE");
+        Authority auth1= new Authority("ROLE_ADMIN");
+        Authority auth2= new Authority("ROLE_USER");
+        Authority auth3= new Authority("ROLE_MAINTENANCE");
 
         authRepo.save(auth1);
         authRepo.save(auth2);

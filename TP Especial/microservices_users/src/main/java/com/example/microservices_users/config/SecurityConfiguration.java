@@ -1,11 +1,14 @@
 package com.example.microservices_users.config;
 
+import com.example.microservices_users.security.jwt.JWTFilter;
 import com.example.microservices_users.security.jwt.JwtConfigurer;
 import com.example.microservices_users.security.jwt.TokenProvider;
+import com.example.microservices_users.service.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpMethod;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -16,6 +19,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -24,6 +28,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     private final TokenProvider tokenProvider;
+    private final JWTFilter jwtFilter;
 
 
     /**
@@ -36,19 +41,21 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain( HttpSecurity http ) throws Exception {
-        // AGREGAMOS NUESTRA CONFIG DE JWT.
         http
-                .apply( securityConfigurerAdapter() );
-        http
-            .csrf( AbstractHttpConfigurer::disable )
-            // MANEJAMOS LOS PERMISOS A LOS ENDPOINTS.
-            .authorizeHttpRequests( auth -> auth
-                    .requestMatchers("/api/**").permitAll()
-            )
-            .anonymous( AbstractHttpConfigurer::disable )
-            .sessionManagement( s -> s.sessionCreationPolicy( SessionCreationPolicy.STATELESS ) );
-        http
-            .httpBasic( Customizer.withDefaults() );
+                .csrf(AbstractHttpConfigurer::disable)// descativo el crsf
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(authorize -> {
+                    authorize
+                            .requestMatchers( HttpMethod.POST, "api/users/").permitAll()
+                            .requestMatchers( HttpMethod.DELETE,"api/users/{id}").hasRole(Constants.ADMIN)
+                            .requestMatchers( HttpMethod.PUT,"api/users/{mail}/disable", "api/users/{mail}/enable").hasRole(Constants.ADMIN)
+                            .requestMatchers( HttpMethod.DELETE,"api/users/login/{email}").permitAll()
+                            .anyRequest()
+                            .authenticated();
+                } )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(Customizer.withDefaults());
+
         return http.build();
     }
 
