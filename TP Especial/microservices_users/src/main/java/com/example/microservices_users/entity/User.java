@@ -42,7 +42,7 @@ public class User implements Serializable {
     private List<Account> account_list;
 
     @OneToMany
-    private Set<Authority> authorities;
+    private List<Authority> authorities;
 
 
     public User(String name, String surname, String phone_number, String email) {
