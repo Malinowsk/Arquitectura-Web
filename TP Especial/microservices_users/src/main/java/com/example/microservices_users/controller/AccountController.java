@@ -1,5 +1,6 @@
 package com.example.microservices_users.controller;
 
+import com.example.microservices_users.constant.AuthorityConstant;
 import com.example.microservices_users.dto.DTORequestAccount;
 import com.example.microservices_users.dto.DTORequestStatusAccount;
 import com.example.microservices_users.dto.DTOResponseAccount;
@@ -9,6 +10,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +27,14 @@ public class AccountController {
 ///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
 
     @GetMapping("")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public List<DTOResponseAccount> findAll(){
         return this.accountService.findAll();
     }
 
 
     @GetMapping("/{id}")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.USER + "\" )" )
     public ResponseEntity<?> getAccountByID(@PathVariable Long id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(accountService.findById(id));
@@ -40,6 +44,7 @@ public class AccountController {
     }
 
     @PostMapping("")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestAccount request){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(accountService.save(request));
@@ -50,6 +55,7 @@ public class AccountController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public ResponseEntity<?> deleteAccount(@PathVariable Long id){
         try{
             this.accountService.delete(id);
@@ -60,6 +66,7 @@ public class AccountController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public ResponseEntity<?> editAccount(@PathVariable Long id, @RequestBody @Validated DTORequestAccount request){
         try {
             Account account = accountService.update(id, request);
@@ -74,6 +81,7 @@ public class AccountController {
 
     //3.b. Como administrador quiero poder anular cuentas para inhabilitar el uso momentáneo de la misma.
     @PutMapping("/{id}/status")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public ResponseEntity<?> updateAccountStatus(@PathVariable Long id, @RequestBody DTORequestStatusAccount request) {
         try {
             Account account = accountService.updateAccountStatus(id, request.isActive());

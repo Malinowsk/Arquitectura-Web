@@ -1,5 +1,6 @@
 package com.example.microservices_users.controller;
 
+import com.example.microservices_users.constant.AuthorityConstant;
 import com.example.microservices_users.dto.DTORequestUser;
 import com.example.microservices_users.dto.DTOResponseUser;
 import com.example.microservices_users.entity.User;
@@ -8,6 +9,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,12 +25,14 @@ public class UserController {
 
 ///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
     @GetMapping("")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public List<DTOResponseUser> findAll(){
         return this.userService.findAll();
     }
 
 
     @GetMapping("/{id}")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public ResponseEntity<?> getUserByID(@PathVariable Long id){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
@@ -38,6 +42,7 @@ public class UserController {
     }
 
     @PostMapping("")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public ResponseEntity<?> save(@RequestBody @Validated DTORequestUser request){
         try{
             return ResponseEntity.status(HttpStatus.OK).body(userService.save(request));
@@ -48,6 +53,7 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         try{
             this.userService.delete(id);
@@ -58,6 +64,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize( "hasAuthority( \"" + AuthorityConstant.ADMIN + "\" )" )
     public ResponseEntity<?> editUser(@PathVariable Long id, @RequestBody @Validated DTORequestUser request){
         try {
             User user = userService.update(id, request);
