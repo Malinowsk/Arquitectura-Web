@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,6 +17,9 @@ import java.util.List;
 
 @SpringBootApplication
 public class MicroservicesUsersApplication {
+
+    @Autowired
+    SecurityConfiguration securityConfiguration;
 
     @Autowired
     private AccountRepository accountRepo;
@@ -28,16 +30,8 @@ public class MicroservicesUsersApplication {
     private User user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14, user15;
     private Account cuenta1, cuenta2, cuenta3, cuenta4, cuenta5, cuenta6, cuenta7;
 
-    @Autowired
-    SecurityConfiguration securityConfiguration;
-
     public static void main(String[] args) {
         SpringApplication.run(MicroservicesUsersApplication.class, args);
-    }
-
-    @PostConstruct
-    public void init() throws IOException {
-        securityConfiguration.databasePopulator();
     }
 
     @PostConstruct
