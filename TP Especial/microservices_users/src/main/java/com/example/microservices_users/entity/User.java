@@ -2,6 +2,7 @@ package com.example.microservices_users.entity;
 
 import com.example.microservices_users.dto.DTORequestUser;
 import com.example.microservices_users.dto.DTOResponseUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -72,4 +73,8 @@ public class User implements Serializable {
         this.authorities = dto.getAuthorities();
     }
 
+    @Override
+    public String toString() {
+        return "";
+    }
 }
