@@ -5,6 +5,11 @@ import com.example.microservices_admin_maintenance.dto.DTOFareResponse;
 import com.example.microservices_admin_maintenance.dto.DTOScheduledFareRequest;
 import com.example.microservices_admin_maintenance.dto.DTOScheduledFareResponse;
 import com.example.microservices_admin_maintenance.service.FareService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +27,28 @@ public class FareController {
 
 //////////////////////////////////////////// ABM ////////////////////////////////////////////////////////////////////////
 
-
+    @Operation(summary = "Obtener una lista de tarifas",
+            description = "Obtiene una lista de todas las tarifas disponibles en el sistema.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operación exitosa",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOFareResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
     @GetMapping("")
     public List<DTOFareResponse> findAll() { return this.fareService.findAll(); }
 
+    @Operation(summary = "Obtener una tarifa por su identificación",
+            description = "Obtener una tarifa en base a su identificación proporcionada.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Encontré la tarifa",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOFareResponse.class)) }),
+            @ApiResponse(responseCode = "400", description = "ID proporcionada no válida",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Tarifa no encontrada",
+                    content = @Content) })
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         try {
@@ -35,6 +58,17 @@ public class FareController {
         }
     }
 
+    @Operation(summary = "Crear una nueva tarifa",
+            description = "Crea una nueva tarifa con los datos proporcionados en el cuerpo de la solicitud.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Operación exitosa",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOFareResponse.class)) }),
+            @ApiResponse(responseCode = "406", description = "Datos de tarifa no válidos",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
     @PostMapping("")
     public ResponseEntity<?> addFare(@RequestBody @Validated DTOFareRequest fDTO) {
         try {
@@ -66,6 +100,15 @@ public class FareController {
     }
     */
 
+    @Operation(summary = "Obtener una lista de tarifas programadas",
+            description = "Obtiene una lista de todas las tarifas programadas disponibles en el sistema.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operación exitosa",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOScheduledFareResponse.class))),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
     @GetMapping("/programadas")
     public List<DTOScheduledFareResponse> getScheduledFares() { return this.fareService.findAllScheduledFares(); }
 
@@ -73,6 +116,15 @@ public class FareController {
 ////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
 
     //3.f. Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema habilite los nuevos precios.
+    @Operation(summary = "Establecer ajuste de precios programado",
+            description = "Permite a un administrador establecer un ajuste de precios programado en el sistema a partir de una fecha específica.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Ajuste de precios programado creado exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOScheduledFareResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Error en los datos ingresados",
+                    content = @Content)
+    })
     @PostMapping("/programadas")
     public ResponseEntity<?> setScheduledFare(@RequestBody @Validated DTOScheduledFareRequest sfDTO) {
         try {

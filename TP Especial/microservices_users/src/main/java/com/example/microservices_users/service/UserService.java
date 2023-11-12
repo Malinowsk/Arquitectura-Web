@@ -8,6 +8,7 @@ import com.example.microservices_users.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final RestTemplate restTemplate;
 
     @Transactional
     public List<DTOResponseUser> findAll(){
@@ -55,7 +57,9 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
-
-
-
+    @Transactional
+    public String getScootersSurroundings(Long id) {
+        String scooter_microservice_uri = "http://localhost:8003/api/monopatines/alrededores/" + id;
+        return restTemplate.getForObject(scooter_microservice_uri, String.class);
+    }
 }

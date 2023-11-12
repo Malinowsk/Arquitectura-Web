@@ -5,6 +5,11 @@ import com.example.microservices_users.dto.DTORequestUser;
 import com.example.microservices_users.dto.DTOResponseUser;
 import com.example.microservices_users.entity.User;
 import com.example.microservices_users.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,4 +80,26 @@ public class UserController {
         }
     }
 
+////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
+
+
+    //g. Como usuario quiero lun listado de los monopatines cercanos a mi zona, para poder encontrar un monopatín cerca de mi ubicación
+    @Operation(summary = "Obtener un listado de monopatines cercanos a una ubicación",
+            description = "Obtiene un listado de monopatines que están cerca de la ubicación especificada.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Operación exitosa",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
+    @GetMapping("/alrededores/{id}")
+    public ResponseEntity<?> getScootersSurroundings(@PathVariable Long id){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.getScootersSurroundings(id));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+    }
 }
