@@ -86,9 +86,7 @@ public class UserController {
         }
     }
 
-
 ////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
-
 
     //g. Como usuario quiero lun listado de los monopatines cercanos a mi zona, para poder encontrar un monopatín cerca de mi ubicación
     @Operation(summary = "Obtener un listado de monopatines cercanos a una ubicación",
