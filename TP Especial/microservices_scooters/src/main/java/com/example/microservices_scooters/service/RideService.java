@@ -14,9 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class RideService {
     private final RideRepository rideRepository ;
+
+    public RideService(RideRepository rideRepository) {
+        this.rideRepository = rideRepository;
+    }
 
     @Transactional
     public DTOResponseRide save(DTORequestRide request ){

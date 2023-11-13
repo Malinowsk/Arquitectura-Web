@@ -18,10 +18,15 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class StationService {
     private final StationRepository stationRepository ;
     private final ScooterRepository scooterRepository ;
+
+    public StationService(StationRepository stationRepository, ScooterRepository scooterRepository) {
+        this.stationRepository = stationRepository;
+        this.scooterRepository = scooterRepository;
+    }
+
     @Transactional
     public DTOResponseStation save(DTORequestStation request ){
         Station station= new Station(request);

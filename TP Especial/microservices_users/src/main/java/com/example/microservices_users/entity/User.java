@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
-@Getter
+
 @Entity
 @NoArgsConstructor
 @Data
@@ -70,8 +70,4 @@ public class User implements Serializable {
         this.authorities = dto.getAuthorities();
     }
 
-    @Override
-    public String toString() {
-        return "";
-    }
 }

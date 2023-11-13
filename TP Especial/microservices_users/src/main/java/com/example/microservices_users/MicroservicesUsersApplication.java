@@ -1,9 +1,5 @@
 package com.example.microservices_users;
 
-import com.example.microservices_users.config.SecurityConfiguration;
-import com.example.microservices_users.controller.UserController;
-import com.example.microservices_users.dto.DTORequestUser;
-import com.example.microservices_users.dto.DTOResponseUser;
 import com.example.microservices_users.entity.Account;
 import com.example.microservices_users.entity.Authority;
 import com.example.microservices_users.entity.User;
@@ -11,8 +7,6 @@ import com.example.microservices_users.repository.AccountRepository;
 import com.example.microservices_users.repository.AuthorityRepository;
 import com.example.microservices_users.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,18 +17,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@RequiredArgsConstructor
 public class MicroservicesUsersApplication {
 
     private final PasswordEncoder passwordEncoder;
-    @Autowired
-    SecurityConfiguration securityConfiguration;
-    @Autowired
-    private AccountRepository accountRepo;
-    @Autowired
-    private UserRepository userRepo;
-    @Autowired
-    private AuthorityRepository authRepo;
+    private final AccountRepository accountRepo;
+    private final UserRepository userRepo;
+    private final AuthorityRepository authRepo;
+
+    public MicroservicesUsersApplication(PasswordEncoder passwordEncoder, AccountRepository accountRepo, UserRepository userRepo, AuthorityRepository authRepo) {
+        this.passwordEncoder = passwordEncoder;
+        this.accountRepo = accountRepo;
+        this.userRepo = userRepo;
+        this.authRepo = authRepo;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(MicroservicesUsersApplication.class, args);
@@ -135,13 +130,6 @@ public class MicroservicesUsersApplication {
         u10.setAuthorities(autorizacion10);
         users.add(u10);
 
-        /* users.add(new User("Licha", "Lopez", "4012345678", "agustinl@gmail.com"));
-        users.add(new User("Mariana", "Mendoza", "4056789012", "marianam@gmail.com"));
-        users.add(new User("Lucho", "Gonzalez", "4101122334", "lucasg@gmail.com"));
-        users.add(new User("Mía", "Perez", "4145566778", "miap@gmail.com"));
-        users.add(new User("Felipe", "Peña", "4189001122", "feliper@gmail.com"));
-        */
-
         //Creacion de cuentas
         List<Account> accounts1 = new ArrayList<>();
 
@@ -187,36 +175,6 @@ public class MicroservicesUsersApplication {
         users.get(7).setAccount_list(accounts3);
         users.get(8).setAccount_list(accounts3);
         users.get(9).setAccount_list(accounts3);
-
-/*
-
-        List<Account> accounts4 = new ArrayList<>();
-
-        List<User> usersForAccount4 = new ArrayList<>();
-        usersForAccount4.add(users.get(10));
-        usersForAccount4.add(users.get(11));
-        usersForAccount4.add(users.get(12));
-        Account account4 = new Account(1800.0, Timestamp.valueOf(LocalDateTime.parse("2023-10-30T14:00:00")));
-        account4.setUsers(usersForAccount4);
-        accounts4.add(account4);
-        users.get(10).setAccount_list(accounts4);
-        users.get(11).setAccount_list(accounts4);
-        users.get(12).setAccount_list(accounts4);
-
-
-        List<Account> accounts5 = new ArrayList<>();
-
-        List<User> usersForAccount5 = new ArrayList<>();
-        usersForAccount5.add(users.get(13));
-        usersForAccount5.add(users.get(14));
-        Account account5 = new Account(1400.0, Timestamp.valueOf(LocalDateTime.parse("2023-11-01T15:00:00")));
-        account5.setUsers(usersForAccount5);
-        accounts5.add(account5);
-        users.get(13).setAccount_list(accounts5);
-        users.get(14).setAccount_list(accounts5);
-
-*/
-
 
         //Guardamos las cuentas en la bbdd
         accountRepo.saveAll(accounts1);

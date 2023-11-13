@@ -22,13 +22,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/monopatines")
-@RequiredArgsConstructor
 public class ScooterController {
 
-    @Autowired
     private final ScooterService scooterService;
 
-///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
+    public ScooterController(ScooterService scooterService) {
+        this.scooterService = scooterService;
+    }
+
+    ///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
     @Operation(summary = "Obtener una lista de monopatines",
             description = "Obtiene una lista de todos los monopatines disponibles en el sistema.")
     @ApiResponses(value = {

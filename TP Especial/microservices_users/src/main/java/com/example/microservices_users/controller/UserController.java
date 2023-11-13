@@ -39,7 +39,13 @@ public class UserController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
+    public UserController(UserService userService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
+        this.userService = userService;
+        this.tokenProvider = tokenProvider;
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
+    }
+
+    ///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
     @GetMapping("")
     public List<DTOResponseUser> findAll(){
         return this.userService.findAll();

@@ -19,13 +19,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("api/tarifas")
 public class FareController {
 
     private final FareService fareService;
 
-//////////////////////////////////////////// ABM ////////////////////////////////////////////////////////////////////////
+    public FareController(FareService fareService) {
+        this.fareService = fareService;
+    }
+
+    //////////////////////////////////////////// ABM ////////////////////////////////////////////////////////////////////////
 
     @Operation(summary = "Obtener una lista de tarifas",
             description = "Obtiene una lista de todas las tarifas disponibles en el sistema.")

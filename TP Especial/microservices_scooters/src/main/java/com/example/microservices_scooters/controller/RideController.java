@@ -20,11 +20,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/viajes")
-@RequiredArgsConstructor
 public class RideController {
 
-    @Autowired
-    private RideService rideService;
+    private final RideService rideService;
+
+    public RideController(RideService rideService) {
+        this.rideService = rideService;
+    }
 
 ///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
 

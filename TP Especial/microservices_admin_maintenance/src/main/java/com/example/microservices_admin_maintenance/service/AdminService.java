@@ -15,10 +15,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@RequiredArgsConstructor
 public class AdminService {
 
     private final RestTemplate restTemplate;
+
+    public AdminService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     // Agregar monopatín
     @Transactional

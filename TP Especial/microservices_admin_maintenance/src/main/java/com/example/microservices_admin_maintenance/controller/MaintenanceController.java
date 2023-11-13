@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("api/maintenance")
+@RequestMapping("api/mantenimiento")
 public class MaintenanceController {
 
     private final MaintenanceService maintenanceService;
 
-//////////////////////////////////////////// ABM ////////////////////////////////////////////////////////////////////////
+    public MaintenanceController(MaintenanceService maintenanceService) {
+        this.maintenanceService = maintenanceService;
+    }
+
+    //////////////////////////////////////////// ABM ////////////////////////////////////////////////////////////////////////
 
     @Operation(summary = "Obtener una lista de monopatines en mantenimiento",
             description = "Obtiene una lista de todos los monopatines en mantenimiento disponibles en el sistema.")

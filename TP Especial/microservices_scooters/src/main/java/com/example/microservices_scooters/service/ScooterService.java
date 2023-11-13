@@ -13,13 +13,17 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 @Service
-@RequiredArgsConstructor
 public class ScooterService {
-    @Autowired
+
     private final ScooterRepository scooterRepository;
-    @Autowired
+
     private final StationRepository stationRepository;
-    
+
+    public ScooterService(ScooterRepository scooterRepository, StationRepository stationRepository) {
+        this.scooterRepository = scooterRepository;
+        this.stationRepository = stationRepository;
+    }
+
     @Transactional
     public List<DTOResponseScooter> findAll(){
         return this.scooterRepository.findAll().stream().map( DTOResponseScooter::new ).toList();

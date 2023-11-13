@@ -23,11 +23,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/paradas")
-@RequiredArgsConstructor
 public class StationController {
 
-    @Autowired
-    private StationService stationService;
+    private final StationService stationService;
+
+    public StationController(StationService stationService) {
+        this.stationService = stationService;
+    }
 
     @Operation(summary = "Obtener una lista de estaciones",
             description = "Obtiene una lista de todas las estaciones de monopatín disponibles en el sistema.")

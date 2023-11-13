@@ -8,25 +8,28 @@ import com.example.microservices_scooters.repository.RideRepository;
 import com.example.microservices_scooters.repository.ScooterRepository;
 import com.example.microservices_scooters.repository.StationRepository;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
 public class MicroservicesScootersApplication {
 
 
-    @Autowired
-    private ScooterRepository scooterRepo;
-    @Autowired
-    private StationRepository stationRepo;
-    @Autowired
-    private RideRepository rideRepo;
+    private final ScooterRepository scooterRepo;
+
+    private final StationRepository stationRepo;
+
+    private final RideRepository rideRepo;
+
+    public MicroservicesScootersApplication(ScooterRepository scooterRepo, StationRepository stationRepo, RideRepository rideRepo) {
+        this.scooterRepo = scooterRepo;
+        this.stationRepo = stationRepo;
+        this.rideRepo = rideRepo;
+    }
 
     private Scooter scooter1, scooter2, scooter3, scooter4, scooter5, scooter6, scooter7, scooter8, scooter9, scooter10, scooter11, scooter12, scooter13, scooter14, scooter15, scooter16;
     private Station station1, station2, station3;

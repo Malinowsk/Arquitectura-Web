@@ -17,12 +17,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class MaintenanceService {
 
     private final RestTemplate restTemplate;
-
     private final MaintenanceRepository maintenanceRepository;
+
+    public MaintenanceService(RestTemplate restTemplate, MaintenanceRepository maintenanceRepository) {
+        this.restTemplate = restTemplate;
+        this.maintenanceRepository = maintenanceRepository;
+    }
 
     @Transactional
     public List<DTOResponseMaintenance> findAll() {

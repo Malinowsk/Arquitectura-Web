@@ -47,10 +47,15 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> {
                     authorize
                             .requestMatchers( HttpMethod.POST, "api/users/authenticate", "api/users/register").permitAll()
-                            .requestMatchers( HttpMethod.POST, "api/users/").permitAll()
-                            .requestMatchers( HttpMethod.DELETE,"api/users/{id}").hasRole(Constants.ADMIN)
-                            .requestMatchers( HttpMethod.PUT,"api/users/{mail}/disable", "api/users/{mail}/enable").hasRole(Constants.ADMIN)
-                            .requestMatchers( HttpMethod.DELETE,"api/users/login/{email}").permitAll()
+                            //.requestMatchers( HttpMethod.POST, "api/users/").permitAll()
+                            //.requestMatchers( HttpMethod.DELETE,"api/users/{id}").hasRole(Constants.ADMIN)
+                            //.requestMatchers( HttpMethod.PUT,"api/users/{mail}/disable", "api/users/{mail}/enable").hasRole(Constants.ADMIN)
+                            //.requestMatchers( HttpMethod.DELETE,"api/users/login/{email}").permitAll()
+                            .requestMatchers( HttpMethod.GET, "api/users").hasRole(Constants.ADMIN)
+                            .requestMatchers( HttpMethod.GET, "api/accounts").hasRole(Constants.USER)
+                            .requestMatchers( HttpMethod.GET, "swagger-ui/**").permitAll()
+                            .requestMatchers( HttpMethod.POST, "swagger-ui/**").permitAll()
+
                             .anyRequest()
                             .authenticated();
                 } )

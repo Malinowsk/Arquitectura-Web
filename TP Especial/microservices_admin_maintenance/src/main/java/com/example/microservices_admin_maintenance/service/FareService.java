@@ -18,11 +18,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class FareService {
 
     private final FareRepository fareRepository;
     private final ScheduledFareUpdateRepository scheduledFareUpdateRepository;
+
+    public FareService(FareRepository fareRepository, ScheduledFareUpdateRepository scheduledFareUpdateRepository) {
+        this.fareRepository = fareRepository;
+        this.scheduledFareUpdateRepository = scheduledFareUpdateRepository;
+    }
 
     @Transactional
     public DTOFareResponse findById(Long id) {

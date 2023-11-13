@@ -18,7 +18,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
@@ -27,6 +26,13 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public UserService(UserRepository userRepository, RestTemplate restTemplate, AccountRepository accountRepository, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.restTemplate = restTemplate;
+        this.accountRepository = accountRepository;
+        this.authorityRepository = authorityRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Transactional
     public List<DTOResponseUser> findAll(){

@@ -19,15 +19,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("api/admin")
 public class AdministrationController {
 
-    @Autowired
     private final AdminService adminService;
 
+    public AdministrationController(AdminService adminService) {
+        this.adminService = adminService;
+    }
 
-////////////////////////////////////////////FUNCIONALIDADES////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////FUNCIONALIDADES////////////////////////////////////////////////////////////////////////
 
 
     // Agregar monopatín
