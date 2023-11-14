@@ -91,6 +91,35 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el usuario con el ID: "+id);
         }
     }
+//////////////////////////////////////////// FUNCIONALIDADES ////////////////////////////////////////////////////////////////////////
+
+    // INICIAR SESION
+    @PostMapping("/authenticate")
+    public ResponseEntity<JWTToken> authenticate( @Valid @RequestBody AuthRequestDTO request ) {
+        System.out.println(request);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken( request.getEmail(), request.getPassword() );
+        System.out.println("2da linea de code autenticar");
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        System.out.println("Test para ver si puede realizar la autenticación del managerbuilder");
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        System.out.println("4ta linea context");
+        final var jwt = tokenProvider.createToken (authentication );
+        System.out.println("Luego de crear token de autenticación");
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add( JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt );
+        System.out.println("Antes del return");
+        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
+    }
+
+    // REGISTRARSE
+    @PostMapping("/register")
+    public ResponseEntity<DTOResponseUser> register( @Valid @RequestBody DTORequestUser request ){
+        final var newUser = this.userService.createUser( request );
+        return new ResponseEntity<>( newUser, HttpStatus.CREATED );
+    }
+
+
+
 
 ////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
 
@@ -114,29 +143,6 @@ public class UserController {
         }
     }
 
-    // INICIAR SESION
-    @PostMapping("/authenticate")
-    public ResponseEntity<JWTToken> authenticate( @Valid @RequestBody AuthRequestDTO request ) {
-        System.out.println(request);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken( request.getEmail(), request.getPassword() );
-        System.out.println("2da linea de code autenticar");
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        System.out.println("Test para ver si puede realizar la autenticación del managerbuilder");
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println("4ta linea context");
-        final var jwt = tokenProvider.createToken (authentication );
-        System.out.println("Luego de crear token de autenticación");
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add( JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt );
-        System.out.println("Antes del return");
-        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<DTOResponseUser> register( @Valid @RequestBody DTORequestUser request ){
-        final var newUser = this.userService.createUser( request );
-        return new ResponseEntity<>( newUser, HttpStatus.CREATED );
-    }
 
     static class JWTToken {
         private String idToken;

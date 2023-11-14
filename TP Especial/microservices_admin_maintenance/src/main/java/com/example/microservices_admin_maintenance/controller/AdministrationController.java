@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -43,12 +44,16 @@ public class AdministrationController {
                     content = @Content)
     })
     @PostMapping("/monopatines")
-    public ResponseEntity<?> createScooter(@RequestBody @Validated DTORequestScooterModel scooterModel) {
+    public ResponseEntity<?> createScooter(@RequestBody @Validated DTORequestScooterModel scooterModel,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.createScooter(scooterModel));
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.createScooter(scooterModel,headers));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -64,12 +69,16 @@ public class AdministrationController {
                     content = @Content)
     })
     @PutMapping("/paradas/{station_id}")
-    public ResponseEntity<?> assignScooterToStation(@PathVariable Long station_id, @RequestBody @Validated DTORequestScooter scooterDTO) {
+    public ResponseEntity<?> assignScooterToStation(@PathVariable Long station_id, @RequestBody @Validated DTORequestScooter scooterDTO,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.assignScooterToStation(station_id, scooterDTO));
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.assignScooterToStation(station_id, scooterDTO,headers));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -87,12 +96,16 @@ public class AdministrationController {
                     content = @Content)
     })
     @PutMapping("/cuentas/{id}/estado-cuenta")
-    public ResponseEntity<?> changeAccountStatus(@PathVariable Long id, @RequestBody @Validated DTORequestStatusAccount accDTO) {
+    public ResponseEntity<?> changeAccountStatus(@PathVariable Long id, @RequestBody @Validated DTORequestStatusAccount accDTO,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.changeAccountStatus(id, accDTO));
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.changeAccountStatus(id, accDTO, headers));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -110,12 +123,16 @@ public class AdministrationController {
                     content = @Content)
     })
     @GetMapping("/monopatines/cantidad-de-viajes-mayor-que/{trip_qty}/anio/{year}")
-    public ResponseEntity<?> scooterReportByAmountOfTripsAndYear(@PathVariable int trip_qty, @PathVariable int year) {
+    public ResponseEntity<?> scooterReportByAmountOfTripsAndYear(@PathVariable int trip_qty, @PathVariable int year,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.scooterReportByAmountOfTripsAndYear(trip_qty, year));
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.scooterReportByAmountOfTripsAndYear(trip_qty, year,headers));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -132,12 +149,16 @@ public class AdministrationController {
                     content = @Content)
     })
     @GetMapping("/viajes/dinero-total-ganado-en/anio/{year}/desde-mes/{start}/hasta-mes/{end}")
-    public ResponseEntity<?> amountEarnedInTimePeriod(@PathVariable int year, @PathVariable int start, @PathVariable int end) {
+    public ResponseEntity<?> amountEarnedInTimePeriod(@PathVariable int year, @PathVariable int start, @PathVariable int end, @RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.amountEarnedInTimePeriod(year, start, end));
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.amountEarnedInTimePeriod(year, start, end, headers));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -154,12 +175,17 @@ public class AdministrationController {
                     content = @Content)
     })
     @GetMapping("/monopatines/cantidad-en-operacion-y-mantenimiento")
-    public ResponseEntity<?> quantityOfScootersInOperation() {
+    public ResponseEntity<?> quantityOfScootersInOperation(@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.quantityOfScootersInOperation());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            return ResponseEntity.status(HttpStatus.OK).body(adminService.quantityOfScootersInOperation(headers));
+        }
+        catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 }
