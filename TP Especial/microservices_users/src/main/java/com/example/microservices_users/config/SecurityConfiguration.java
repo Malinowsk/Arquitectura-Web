@@ -46,6 +46,8 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> {
                     authorize
+                            .requestMatchers( HttpMethod.GET, "swagger-ui/**").permitAll()
+                            .requestMatchers( HttpMethod.POST, "swagger-ui/**").permitAll()
                             .requestMatchers( HttpMethod.POST, "api/users/authenticate", "api/users/register").permitAll()
 
                             .requestMatchers( HttpMethod.POST, "api/users").hasRole(Constants.ADMIN)
@@ -59,9 +61,6 @@ public class SecurityConfiguration {
                             .requestMatchers( HttpMethod.GET, "api/auth/admin").hasRole(Constants.ADMIN)
                             .requestMatchers( HttpMethod.GET, "api/auth/usuario").hasRole(Constants.USER)
                             .requestMatchers( HttpMethod.GET, "api/auth/mantenimiento").hasRole(Constants.MAINTENANCE)
-
-                            .requestMatchers( HttpMethod.GET, "swagger-ui/**").permitAll()
-                            .requestMatchers( HttpMethod.POST, "swagger-ui/**").permitAll()
 
                             .anyRequest()
                             .authenticated();

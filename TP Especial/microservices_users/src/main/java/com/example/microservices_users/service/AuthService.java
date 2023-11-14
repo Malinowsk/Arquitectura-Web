@@ -8,7 +8,6 @@ public class AuthService {
     public boolean checkPermissionsAdmin() {
         return true;
     }
-
     public boolean checkPermissionsUser() {
         return true;
     }
