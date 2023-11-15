@@ -5,6 +5,8 @@ import com.example.microservices_admin_maintenance.dto.DTORequestScooterModel;
 import com.example.microservices_admin_maintenance.dto.DTORequestStatusAccount;
 import com.example.microservices_admin_maintenance.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -35,6 +37,7 @@ public class AdministrationController {
     // Agregar monopatín
     @Operation(summary = "Agregar un monopatín",
             description = "Permite agregar coomo administrador un nuevo monopatín al sistema.")
+    @Parameter(name = "Authorization", description = "Token", required = true, example = "Bearer your_access_token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Monopatín agregado exitosamente",
                     content = @Content),
@@ -60,6 +63,7 @@ public class AdministrationController {
     //Ubicar monopatín en parada (opcional)
     @Operation(summary = "Ubicar un monopatín en una parada",
             description = "Permite ubicar como administrador un monopatín en una parada específica.")
+    @Parameter(name = "Authorization", description = "Token", required = true, example = "Bearer your_access_token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Monopatín ubicado exitosamente en la parada",
                     content = @Content),
@@ -87,6 +91,7 @@ public class AdministrationController {
     //3.b. Como administrador quiero poder anular cuentas para inhabilitar el uso momentáneo de la misma.
     @Operation(summary = "Cambiar el estado de una cuenta",
             description = "Permite a un administrador cambiar el estado de una cuenta de usuario.")
+    @Parameter(name = "Authorization", description = "Token", required = true, example = "Bearer your_access_token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Estado de la cuenta cambiado exitosamente",
                     content = @Content),
@@ -113,6 +118,7 @@ public class AdministrationController {
     //3.C. Como administrador quiero consultar los monopatines con más de X viajes en un cierto año.
     @Operation(summary = "Consultar monopatines con más de X viajes en un año",
             description = "Permite a un administrador consultar los monopatines que han tenido más de X viajes en un cierto año.")
+    @Parameter(name = "Authorization", description = "Token", required = true, example = "Bearer your_access_token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Consulta exitosa",
                     content = @Content(mediaType = "application/json",
@@ -139,6 +145,7 @@ public class AdministrationController {
     //3.d. Como administrador quiero consultar el total facturado en un rango de meses de cierto año.
     @Operation(summary = "Consultar el total facturado en un rango de meses de un año",
             description = "Permite a un administrador consultar el monto total facturado en un rango de meses de un año específico.")
+    @Parameter(name = "Authorization", description = "Token", required = true, example = "Bearer your_access_token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Consulta exitosa",
                     content = @Content(mediaType = "application/json",
@@ -165,6 +172,7 @@ public class AdministrationController {
     //3.E. Como administrador quiero consultar la cantidad de monopatines actualmente en operación, versus la cantidad de monopatines actualmente en mantenimiento.
     @Operation(summary = "Consultar cantidad de monopatines en operación y en mantenimiento",
             description = "Permite a un administrador consultar la cantidad de monopatines actualmente en operación y la cantidad de monopatines en mantenimiento.")
+    @Parameter(name = "Authorization", description = "Token", required = true, example = "Bearer your_access_token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Consulta exitosa",
                     content = @Content(mediaType = "application/json",

@@ -61,7 +61,7 @@ public class SecurityConfiguration {
                             .requestMatchers( HttpMethod.GET, "api/auth/admin").hasRole(Constants.ADMIN)
                             .requestMatchers( HttpMethod.GET, "api/auth/usuario").hasRole(Constants.USER)
                             .requestMatchers( HttpMethod.GET, "api/auth/mantenimiento").hasRole(Constants.MAINTENANCE)
-
+                            .requestMatchers( HttpMethod.PUT, "api/accounts/{id}/status").permitAll()
                             .anyRequest()
                             .authenticated();
                 } )
