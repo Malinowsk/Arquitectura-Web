@@ -6,10 +6,7 @@ import com.example.microservices_admin_maintenance.exception.NotFoundException;
 import com.example.microservices_admin_maintenance.repository.MaintenanceRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -108,17 +105,29 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public DTOResponseScootersOfKms[] getReportByKmOptionalPauseTime(String pauseBool) {
-        String scooter_service_uri = "http://localhost:8003/api/monopatines/reporte-monopatines-por-km/con-pausas/"+pauseBool;
-        return restTemplate.getForEntity(scooter_service_uri, DTOResponseScootersOfKms[].class).getBody();
-
-    }
-
-    @Transactional
     public DTOResponseReport[] getReportBy(String reportVariable) {
         String scooter_service_uri = "http://localhost:8003/api/monopatines/reportes/ordenado-por/"+reportVariable;
         return restTemplate.getForEntity(scooter_service_uri, DTOResponseReport[].class).getBody();
     }
+
+    @Transactional
+    public DTOResponseScootersOfKms[] getReportByKmOptionalPauseTime(String pauseBool,HttpHeaders headers) {
+        if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
+            String scooter_service_uri = "http://localhost:8003/api/monopatines/reporte-monopatines-por-km/con-pausas/"+pauseBool;
+            return restTemplate.getForEntity(scooter_service_uri, DTOResponseScootersOfKms[].class).getBody();
+        }
+        else throw new NotFoundException("error 500");
+    }
+
+
+
+    private HttpStatusCode checkPermissions(HttpHeaders headers, String rol) {
+        HttpHeaders headersAux = headers;
+        HttpEntity<DTORequestStatusAccount> requestEntity = new HttpEntity<>(null,headersAux);
+        String user_microservice_uri = "http://localhost:8007/api/auth/" + rol;
+        return this.restTemplate.exchange(user_microservice_uri, HttpMethod.GET, requestEntity, String.class).getStatusCode();
+    }
+
 
     private DTOResponseMaintenance buildMaintenanceDTO(Maintenance m) {
         return new DTOResponseMaintenance(

@@ -49,6 +49,7 @@ public class AdminService {
     @Transactional
     public String changeAccountStatus(Long accID, DTORequestStatusAccount accDTO,HttpHeaders headers) {
         if(checkPermissions(headers).is2xxSuccessful()){
+            System.out.println("sdfsd");
             HttpHeaders auxHeaders = new HttpHeaders();
             HttpEntity<DTORequestStatusAccount> requestEntity = new HttpEntity<>(accDTO, auxHeaders);
             String user_microservice_uri = "http://localhost:8007/api/accounts/"+accID+"/status";

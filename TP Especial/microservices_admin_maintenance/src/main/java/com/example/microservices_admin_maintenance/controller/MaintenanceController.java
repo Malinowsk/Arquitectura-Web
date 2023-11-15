@@ -3,11 +3,13 @@ package com.example.microservices_admin_maintenance.controller;
 import com.example.microservices_admin_maintenance.dto.*;
 import com.example.microservices_admin_maintenance.service.MaintenanceService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/mantenimiento")
+@RequestMapping("api/mantenimientos")
 public class MaintenanceController {
 
     private final MaintenanceService maintenanceService;
@@ -168,6 +170,7 @@ public class MaintenanceController {
     //configurarse para incluir (o no) los tiempos de pausa.
     @Operation(summary = "Obtener un informe de monopatines por kilómetros con/sin pausas",
             description = "Obtiene un informe de monopatines ordenado por cantidad de kilometros y basado en la presencia de tiempo con/sin pausas según el valor del parámetro 'with_pause'.")
+    @Parameter(name = "Authorization", description = "Token", required = true, example = "Bearer your_access_token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Informe generado exitosamente",
                     content = { @Content(mediaType = "application/json",
@@ -180,13 +183,18 @@ public class MaintenanceController {
                     content = @Content)
     })
     @GetMapping("/reporte-monopatines-por-km/con-pausas/{stringBoolean}")
-    public ResponseEntity<?> getReportByKmOptionalPauseTime(@PathVariable String stringBoolean) {
+    public ResponseEntity<?> getReportByKmOptionalPauseTime(@PathVariable String stringBoolean,@RequestHeader HttpHeaders headers) {
         try {
-            DTOResponseScootersOfKms[] response = maintenanceService.getReportByKmOptionalPauseTime(stringBoolean);
+            DTOResponseScootersOfKms[] response = maintenanceService.getReportByKmOptionalPauseTime(stringBoolean,headers);
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo generar el reporte.");
+        }
+        catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 }

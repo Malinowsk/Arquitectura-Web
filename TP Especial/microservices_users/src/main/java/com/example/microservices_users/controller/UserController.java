@@ -93,25 +93,6 @@ public class UserController {
     }
 //////////////////////////////////////////// FUNCIONALIDADES ////////////////////////////////////////////////////////////////////////
 
-    // INICIAR SESION
-    @PostMapping("/authenticate")
-    public ResponseEntity<JWTToken> authenticate( @Valid @RequestBody AuthRequestDTO request ) {
-        System.out.println(request);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken( request.getEmail(), request.getPassword() );
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        final var jwt = tokenProvider.createToken (authentication );
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add( JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt );
-        return new ResponseEntity<>(new JWTToken(jwt), httpHeaders, HttpStatus.OK);
-    }
-
-    // REGISTRARSE
-    @PostMapping("/register")
-    public ResponseEntity<DTOResponseUser> register( @Valid @RequestBody DTORequestUser request ){
-        final var newUser = this.userService.createUser( request );
-        return new ResponseEntity<>( newUser, HttpStatus.CREATED );
-    }
 
 
 
