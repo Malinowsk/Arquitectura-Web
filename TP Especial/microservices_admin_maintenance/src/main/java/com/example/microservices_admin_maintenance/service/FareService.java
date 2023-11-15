@@ -56,28 +56,30 @@ public class FareService {
         return new DTOFareResponse(result);
     }
 
-    /*
+
     @Transactional
-    public DTOFareResponse updateFare(Long id, DTOFareRequest fDTO) {
+    public DTOFareResponse updateFare(String id, DTOFareRequest fDTO) {
         Fare fare = this.fareRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Maintenance", id));
 
-        //Falta chequear que no vengan datos null
-        fare.setName(fDTO.getName());
-        fare.setCost(fDTO.getCost());
-        fare.setExtended_pause_cost(fDTO.getExtended_pause_cost());
+        if (fDTO.getName() != null)
+            fare.setName(fDTO.getName());
+        if (fDTO.getCost_per_min() != -1)
+            fare.setCost_per_min(fDTO.getCost_per_min());
+        if (fDTO.getExtended_pause_cost() != -1)
+            fare.setExtended_pause_cost(fDTO.getExtended_pause_cost());
 
         Fare result = fareRepository.save(fare);
         return new DTOFareResponse(result);
     }
 
     @Transactional
-    public void deleteFare(Long id) {
+    public void deleteFare(String id) {
         this.fareRepository.delete(
                 this.fareRepository.findById(id)
                         .orElseThrow(() -> new NotFoundException("Maintenance", id)));
-    }*/
-
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Transactional
     public List<DTOScheduledFareResponse> findAllScheduledFares() {
         return this.scheduledFareUpdateRepository
@@ -86,6 +88,27 @@ public class FareService {
                 .map(DTOScheduledFareResponse::new)
                 .toList();
     }
+
+    @Transactional
+    public ScheduledFareUpdate updateScheduledFare(String sfID, DTOScheduledFareRequest sfDTO) {
+        ScheduledFareUpdate sfUpdate = this.scheduledFareUpdateRepository.findById(sfID)
+                .orElseThrow(() -> new NotFoundException("ScheduledFareUpdate", sfID));
+
+        sfUpdate.setFare_to_update_id(sfDTO.getFare_to_update_id());
+        sfUpdate.setCost_per_min(sfDTO.getCost_per_min());
+        sfUpdate.setExtended_pause_cost(sfDTO.getExtended_pause_cost());
+        sfUpdate.setDate(String.valueOf(sfDTO.getScheduled_date()));
+
+        return this.scheduledFareUpdateRepository.save(sfUpdate);
+    }
+
+//    @Transactional
+//    public void deleteScheduledFare(String sfID) {
+//        this.scheduledFareUpdateRepository.delete(
+//                this.scheduledFareUpdateRepository.findById(sfID)
+//                        .orElseThrow(() -> new NotFoundException("ScheduledFareUpdate", sfID))
+//        );
+//    }
 
     @Transactional
     public DTOScheduledFareResponse addScheduledFareUpdate(DTOScheduledFareRequest sfDTO, HttpHeaders headers) {
@@ -115,12 +138,12 @@ public class FareService {
                 .toList();
         System.out.println(listSFDTO.size());
         for(DTOScheduledFareResponse sfDTO : listSFDTO) {
-            changeScheduledFarePrice(sfDTO);
+            updateFareWithScheduledFare(sfDTO);
         }
 
     }
 
-    private void changeScheduledFarePrice(DTOScheduledFareResponse sfDTO) {
+    private void updateFareWithScheduledFare(DTOScheduledFareResponse sfDTO) {
         Fare fare = this.fareRepository.findById(sfDTO.getFare_to_update_id())
                 .orElseThrow( () -> new NotFoundException("Fare", sfDTO.getFare_to_update_id()));
 
@@ -130,5 +153,7 @@ public class FareService {
         System.out.println("El precio ha cambiado para la tarifa con ID:" + sfDTO.getFare_to_update_id());
 
     }
+
+
 
 }

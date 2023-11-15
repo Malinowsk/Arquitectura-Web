@@ -83,26 +83,45 @@ public class FareController {
         }
     }
 
-    /*
+    @Operation(summary = "Modificar una tarifa",
+            description = "Modifica una tarifa con los datos proporcionados en el cuerpo de la solicitud.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Tarifa modificada exitosamente",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOFareResponse.class)) }),
+            @ApiResponse(responseCode = "400", description = "Datos de tarifa no válidos",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFare(@PathVariable Long id, @RequestBody @Validated DTOFareRequest fDTO) {
+    public ResponseEntity<?> updateFare(@PathVariable String id, @RequestBody @Validated DTOFareRequest fDTO) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.updateFare(id, fDTO));
+            return ResponseEntity.status(HttpStatus.OK).body(fareService.updateFare(id, fDTO));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
+    @Operation(summary = "Eliminar una tarifa",
+            description = "Elimina una tarifa según la id ingresada en el path")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Tarifa eliminada exitosamente",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "ID proporcionada no válida",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFare(@PathVariable Long id) {
+    public ResponseEntity<?> deleteFare(@PathVariable String id) {
         try {
-            this.maintenanceService.delete(id);
+            this.fareService.deleteFare(id);
             return ResponseEntity.status(HttpStatus.OK).body("Se eliminó correctamente la tarifa con id: " + id);
         } catch (Exception e) {
-
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
-    */
 
     @Operation(summary = "Obtener una lista de tarifas programadas",
             description = "Obtiene una lista de todas las tarifas programadas disponibles en el sistema.")
@@ -141,6 +160,45 @@ public class FareController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
             } else
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+    }
+
+    @Operation(summary = "Modificar entidad de ajuste de precio programado",
+            description = "Permite a un administrador modificar un ajuste de precios programado.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Modificación de tarifa programada exitosa.",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOScheduledFareResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Error en los datos ingresados",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
+    @PutMapping("/programadas/{id}")
+    public ResponseEntity<?> updateScheduledFare(@PathVariable String id, @RequestBody @Validated DTOScheduledFareRequest sfDTO) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.fareService.updateScheduledFare(id, sfDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en datos ingresados.");
+        }
+    }
+
+    @Operation(summary = "Eliminar una entidad de ajuste de precio programado",
+            description = "Permite a un administrador eliminar un ajuste de precios programado.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Eliminación de tarifa programada exitosa."),
+            @ApiResponse(responseCode = "400", description = "Error en los datos ingresados",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
+    @DeleteMapping("/programadas/{id}")
+    public ResponseEntity<?> deleteScheduledFare(@PathVariable String id) {
+        try {
+            this.fareService.deleteFare(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Se eliminó correctamente la tarifa programada con id: " + id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en datos ingresados.");
         }
     }
 
