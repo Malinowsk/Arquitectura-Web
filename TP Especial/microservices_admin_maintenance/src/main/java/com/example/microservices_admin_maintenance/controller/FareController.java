@@ -54,7 +54,7 @@ public class FareController {
             @ApiResponse(responseCode = "404", description = "Tarifa no encontrada",
                     content = @Content) })
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
+    public ResponseEntity<?> findById(@PathVariable String id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(fareService.findById(id));
         } catch (Exception e) {
