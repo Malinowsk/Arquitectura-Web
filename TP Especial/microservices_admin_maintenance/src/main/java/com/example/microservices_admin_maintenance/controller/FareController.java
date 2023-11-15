@@ -135,34 +135,6 @@ public class FareController {
     @GetMapping("/programadas")
     public List<DTOScheduledFareResponse> getScheduledFares() { return this.fareService.findAllScheduledFares(); }
 
-
-////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
-
-    //3.f. Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema habilite los nuevos precios.
-    @Operation(summary = "Establecer ajuste de precios programado",
-            description = "Permite a un administrador establecer un ajuste de precios programado en el sistema a partir de una fecha específica.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Ajuste de precios programado creado exitosamente",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = DTOScheduledFareResponse.class))),
-            @ApiResponse(responseCode = "400", description = "Error en los datos ingresados",
-                    content = @Content)
-    })
-    @PostMapping("/programadas")
-    public ResponseEntity<?> setScheduledFare(@RequestBody @Validated DTOScheduledFareRequest sfDTO,@RequestHeader HttpHeaders headers) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.fareService.addScheduledFareUpdate(sfDTO,headers));
-        }
-        catch (Exception e) {
-            if(e.getMessage().contains("403"))
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
-            else if (e.getMessage().contains("401")) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
-            } else
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
-        }
-    }
-
     @Operation(summary = "Modificar entidad de ajuste de precio programado",
             description = "Permite a un administrador modificar un ajuste de precios programado.")
     @ApiResponses(value = {
@@ -199,6 +171,35 @@ public class FareController {
             return ResponseEntity.status(HttpStatus.OK).body("Se eliminó correctamente la tarifa programada con id: " + id);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en datos ingresados.");
+        }
+    }
+
+
+
+////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
+
+    //3.f. Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema habilite los nuevos precios.
+    @Operation(summary = "Establecer ajuste de precios programado",
+            description = "Permite a un administrador establecer un ajuste de precios programado en el sistema a partir de una fecha específica.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Ajuste de precios programado creado exitosamente",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOScheduledFareResponse.class))),
+            @ApiResponse(responseCode = "400", description = "Error en los datos ingresados",
+                    content = @Content)
+    })
+    @PostMapping("/programadas")
+    public ResponseEntity<?> setScheduledFare(@RequestBody @Validated DTOScheduledFareRequest sfDTO,@RequestHeader HttpHeaders headers) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.fareService.addScheduledFareUpdate(sfDTO,headers));
+        }
+        catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 

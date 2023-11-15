@@ -163,11 +163,13 @@ f) . Como administrador quiero hacer un ajuste de precios, y que a partir de cie
 ```
 
 --------------------------------------------------------------------------------------------------------------------
-g). Como usuario quiero lun listado de los monopatines cercanos a mi zona, para poder encontrar un monopatín cerca de mi ubicación
+g). Como usuario quiero un listado de los monopatines cercanos a mi zona, para poder encontrar un monopatín cerca de mi ubicación
 
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
