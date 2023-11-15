@@ -28,7 +28,7 @@ public class AccountController {
 
     ///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
 
-    @Secured("ADMIN")
+
     @GetMapping("")
     public List<DTOResponseAccount> findAll(){
         return this.accountService.findAll();
