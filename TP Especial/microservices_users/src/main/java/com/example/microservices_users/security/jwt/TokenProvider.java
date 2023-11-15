@@ -53,7 +53,7 @@ public class TokenProvider {
         String authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds );
-        return Jwts
+        return "Bearer " + Jwts
                 .builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
