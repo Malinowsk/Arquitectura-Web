@@ -9,9 +9,9 @@ public class DTOFareRequest {
 
     private String name;
 
-    private double cost_per_min;
+    private double cost_per_min = -1;
 
-    private double extended_pause_cost;
+    private double extended_pause_cost = -1;
 
     public DTOFareRequest(String name, double cost, double extendedPauseCost) {
         this.name = name;
