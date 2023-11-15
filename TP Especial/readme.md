@@ -165,7 +165,20 @@ f) . Como administrador quiero hacer un ajuste de precios, y que a partir de cie
 --------------------------------------------------------------------------------------------------------------------
 g). Como usuario quiero un listado de los monopatines cercanos a mi zona, para poder encontrar un monopatín cerca de mi ubicación
 
+* GET   ```http://localhost:8080/api/users/alrededores/{id}```
 
+Ejemplo:
+
+* POST   ```http://localhost:8080/api/users/alrededores/1```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
 
 --------------------------------------------------------------------------------------------------------------------
 

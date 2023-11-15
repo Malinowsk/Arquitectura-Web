@@ -174,8 +174,6 @@ public class FareController {
         }
     }
 
-
-
 ////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
 
     //3.f. Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema habilite los nuevos precios.
