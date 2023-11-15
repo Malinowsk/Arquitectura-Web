@@ -10,4 +10,9 @@ public class ApiGatewayApplication {
 		SpringApplication.run(ApiGatewayApplication.class, args);
 	}
 
+//	@Bean
+//	public SpringDocConfigProperties springDocConfigProperties() {
+//		return new SpringDocConfigProperties();
+//	}
+
 }
