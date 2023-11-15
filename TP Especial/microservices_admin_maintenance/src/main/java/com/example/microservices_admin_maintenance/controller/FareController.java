@@ -179,9 +179,7 @@ public class FareController {
     @Operation(summary = "Eliminar una entidad de ajuste de precio programado",
             description = "Permite a un administrador eliminar un ajuste de precios programado.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Eliminación de tarifa programada exitosa.",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = DTOScheduledFareResponse.class))),
+            @ApiResponse(responseCode = "200", description = "Eliminación de tarifa programada exitosa."),
             @ApiResponse(responseCode = "400", description = "Error en los datos ingresados",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor",
