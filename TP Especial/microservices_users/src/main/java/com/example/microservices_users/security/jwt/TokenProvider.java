@@ -41,7 +41,7 @@ public class TokenProvider {
     public TokenProvider() {
         byte[] keyBytes = Decoders.BASE64.decode(secret);
         key = Keys.hmacShaKeyFor( keyBytes );
-        jwtParser = Jwts.parser().setSigningKey(secret.getBytes()).build();
+        jwtParser = Jwts.parser().setSigningKey(key).build();
     }
 
     /**
