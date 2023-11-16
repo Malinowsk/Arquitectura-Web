@@ -19,17 +19,6 @@ public class AdminService {
         this.restTemplate = restTemplate;
     }
 
-    // Agregar monopatín
-    @Transactional
-    public String createScooter(DTORequestScooterModel scooterModel,HttpHeaders headers) {
-        if(checkPermissions(headers).is2xxSuccessful()){
-            HttpHeaders auxHeaders = new HttpHeaders();
-            HttpEntity<DTORequestScooterModel> requestEntity = new HttpEntity<>(scooterModel, auxHeaders);
-            String scooter_microservice_uri = "http://localhost:8003/api/monopatines";
-            return this.restTemplate.exchange(scooter_microservice_uri, HttpMethod.POST, requestEntity, String.class).getBody();
-        }
-        else throw new NotFoundException("error 500");
-    }
 
     //Ubicar monopatín en parada (opcional)
     @Transactional
@@ -37,13 +26,12 @@ public class AdminService {
         if(checkPermissions(headers).is2xxSuccessful()){
             HttpHeaders auxHeaders = new HttpHeaders();
             HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(scooterDTO, auxHeaders);
-            String station_microservice_uri = "http://localhost:8003/api/paradas/"+station_id+"/scooters";
+            String station_microservice_uri = "http://localhost:8003/api/paradas/"+station_id+"/monopatines";
             return this.restTemplate.exchange(station_microservice_uri, HttpMethod.PUT, requestEntity, String.class).getBody();
         }
         else throw new NotFoundException("error 500");
 
     }
-
 
 
     @Transactional

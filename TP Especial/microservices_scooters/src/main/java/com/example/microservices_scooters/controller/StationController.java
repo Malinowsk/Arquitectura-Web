@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +42,17 @@ public class StationController {
                     content = @Content)
     })
     @GetMapping("")
-    public List<DTOResponseStation> findAll(){
-        return this.stationService.findAll();
+    public ResponseEntity<?> findAll(@RequestHeader HttpHeaders headers){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.stationService.findAll(headers));
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
     }
 
     @Operation(summary = "Obtener una estación por su identificación",
@@ -56,13 +66,17 @@ public class StationController {
             @ApiResponse(responseCode = "404", description = "Estación no encontrada",
                     content = @Content) })
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(stationService.findById(id));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Parada inexistente");
+    public ResponseEntity<?> getById(@PathVariable Long id,@RequestHeader HttpHeaders headers){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(stationService.findById(id,headers));
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
-
     }
 
     @Operation(summary = "Crear una nueva estación",
@@ -77,11 +91,16 @@ public class StationController {
                     content = @Content)
     })
     @PostMapping("")
-    public ResponseEntity<?> save( @RequestBody @Validated DTORequestStation request ){
+    public ResponseEntity<?> save( @RequestBody @Validated DTORequestStation request ,@RequestHeader HttpHeaders headers){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(stationService.save(request));
-        }catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Ocurrio un error, revise los campos ingresados");
+            return ResponseEntity.status(HttpStatus.OK).body(stationService.save(request,headers));
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -96,12 +115,17 @@ public class StationController {
                     content = @Content)
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
-        try{
-            this.stationService.delete(id);
+    public ResponseEntity<?> delete(@PathVariable Long id,@RequestHeader HttpHeaders headers){
+        try {
+            this.stationService.delete(id,headers);
             return ResponseEntity.status(HttpStatus.OK).body("Se elimino correctamente la parada con el id: " + id);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo eliminar la parada con id: " + id);
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -119,15 +143,19 @@ public class StationController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestStation request) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestStation request,@RequestHeader HttpHeaders headers) {
         try {
-            Station station = stationService.update(id, request);
+            Station station = stationService.update(id, request,headers);
             DTOResponseStation response = new DTOResponseStation(station);
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
-
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró la parada con el ID proporcionado.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 

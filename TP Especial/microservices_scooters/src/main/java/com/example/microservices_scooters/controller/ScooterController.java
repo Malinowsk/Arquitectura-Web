@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -41,8 +42,17 @@ public class ScooterController {
                     content = @Content)
     })
     @GetMapping("")
-    public List<DTOResponseScooter> findAll(){
-        return this.scooterService.findAll();
+    public ResponseEntity<?> findAll(@RequestHeader HttpHeaders headers){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.scooterService.findAll(headers));
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
     }
 
     @Operation(summary = "Obtener un monopatín por su identificación",
@@ -56,11 +66,16 @@ public class ScooterController {
             @ApiResponse(responseCode = "404", description = "Monopatín no encontrado",
                     content = @Content) })
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id){
+    public ResponseEntity<?> getById(@PathVariable Long id,@RequestHeader HttpHeaders headers){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(scooterService.findById(id));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Monopatin inexistente");
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.findById(id,headers));
+        }catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -76,11 +91,16 @@ public class ScooterController {
                     content = @Content)
     })
     @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ){
+    public ResponseEntity<?> save(@RequestBody @Validated DTORequestScooter request ,@RequestHeader HttpHeaders headers){
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(scooterService.save(request));
-        }catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Ocurrio un error, revise los campos ingresados");
+            return ResponseEntity.status(HttpStatus.CREATED).body(scooterService.save(request,headers));
+        }catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -95,12 +115,17 @@ public class ScooterController {
                     content = @Content)
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    public ResponseEntity<?> delete(@PathVariable Long id,@RequestHeader HttpHeaders headers){
         try{
-            this.scooterService.delete(id);
+            this.scooterService.delete(id,headers);
             return ResponseEntity.status(HttpStatus.OK).body("Se elimino correctamente monopatin con el id: " + id);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo eliminar el monopatin con id: " + id);
+        }catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -118,13 +143,18 @@ public class ScooterController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestScooter request) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestScooter request,@RequestHeader HttpHeaders headers) {
         try {
-            Scooter scooter = scooterService.update(id, request);
+            Scooter scooter = scooterService.update(id, request,headers);
             DTOResponseScooter response = new DTOResponseScooter(scooter);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el monopatin con el ID proporcionado.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 

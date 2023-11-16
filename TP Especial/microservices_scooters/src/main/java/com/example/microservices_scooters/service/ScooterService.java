@@ -8,58 +8,82 @@ import com.example.microservices_scooters.repository.ScooterRepository;
 import com.example.microservices_scooters.repository.StationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
+
 @Service
 public class ScooterService {
-
+    private final RestTemplate restTemplate;
     private final ScooterRepository scooterRepository;
 
     private final StationRepository stationRepository;
 
-    public ScooterService(ScooterRepository scooterRepository, StationRepository stationRepository) {
+    public ScooterService(RestTemplate restTemplate, ScooterRepository scooterRepository, StationRepository stationRepository) {
+        this.restTemplate = restTemplate;
         this.scooterRepository = scooterRepository;
         this.stationRepository = stationRepository;
     }
 
     @Transactional
-    public List<DTOResponseScooter> findAll(){
-        return this.scooterRepository.findAll().stream().map( DTOResponseScooter::new ).toList();
+    public List<DTOResponseScooter> findAll(HttpHeaders headers){
+        if(checkPermissions(headers).is2xxSuccessful()){
+            return this.scooterRepository.findAll().stream().map( DTOResponseScooter::new ).toList();
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
-    public DTOResponseScooter findById( Long id ){
-        return this.scooterRepository.findById( id )
-                .map( DTOResponseScooter::new )
-                .orElseThrow( () -> new NotFoundException("scooter", id ) );
+    public DTOResponseScooter findById( Long id,HttpHeaders headers ){
+        if(checkPermissions(headers).is2xxSuccessful()){
+            return this.scooterRepository.findById( id )
+                    .map( DTOResponseScooter::new )
+                    .orElseThrow( () -> new NotFoundException("scooter", id ) );
+        }
+        else throw new NotFoundException("error 500");
+
     }
 
     @Transactional
-    public DTOResponseScooter save(DTORequestScooter request){
-        Scooter scooter = new Scooter(request);
-        Scooter result = this.scooterRepository.save(scooter);
-        return new DTOResponseScooter(result);
+    public DTOResponseScooter save(DTORequestScooter request,HttpHeaders headers){
+        if(checkPermissions(headers).is2xxSuccessful()){
+            Scooter scooter = new Scooter(request);
+            Scooter result = this.scooterRepository.save(scooter);
+            return new DTOResponseScooter(result);
+        }
+        else throw new NotFoundException("error 500");
+
     }
 
     @Transactional
-    public void delete(Long id) {
-        this.scooterRepository.delete(this.scooterRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("ID de scooter invalido:" + id)));
+    public void delete(Long id,HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            this.scooterRepository.delete(this.scooterRepository.findById(id).orElseThrow(
+                    () -> new NotFoundException("ID de scooter invalido:" + id)));
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
-    public Scooter update(Long id, DTORequestScooter request) {
-        Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("ID de monopatín inválido: " + id));
-        scooter.setState(request.getState());
-        scooter.setKmsMant(request.getKmsMant());
-        scooter.setKmsTraveled(request.getKmsTraveled());
-        scooter.setPausedTime(request.getPausedTime());
-        scooter.setTotalUsageTime(request.getTotalUsageTime());
-        scooter.setLocation(request.getLocation());
-        return this.scooterRepository.save(scooter);
+    public Scooter update(Long id, DTORequestScooter request,HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
+                    () -> new NotFoundException("ID de monopatín inválido: " + id));
+            scooter.setState(request.getState());
+            scooter.setKmsMant(request.getKmsMant());
+            scooter.setKmsTraveled(request.getKmsTraveled());
+            scooter.setPausedTime(request.getPausedTime());
+            scooter.setTotalUsageTime(request.getTotalUsageTime());
+            scooter.setLocation(request.getLocation());
+            return this.scooterRepository.save(scooter);
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
@@ -133,7 +157,14 @@ public class ScooterService {
                 .stream()
                 .map(DTOResponseScooter::new)
                 .toList();
-        //return this.scooterRepository.getScootersSurroundings(scooter.getLocation().getLongitud(),scooter.getLocation().getLatitud()).stream().map(DTOResponseScooter::new).toList();
     }
+
+    private HttpStatusCode checkPermissions(HttpHeaders headers) {
+        HttpHeaders headersAux = headers;
+        HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(null,headersAux);
+        String user_microservice_uri = "http://localhost:8007/api/auth/admin";
+        return this.restTemplate.exchange(user_microservice_uri, HttpMethod.GET, requestEntity, String.class).getStatusCode();
+    }
+
 
 }

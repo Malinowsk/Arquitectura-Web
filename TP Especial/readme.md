@@ -226,41 +226,15 @@ Ejemplo:
 ```
 
 --------------------------------------------------------------------------------------------------------------------
-Ubicar monopatín en parada (opcional)
-
-* PUT   ```http://localhost:8080/api/admin/paradas/{station_id}```
-
-Ejemplo:
-
-* PUT   ```http://localhost:8080/api/admin/paradas/1```
-
-#### Request body
-
-```
-    {
-       falta
-    }
-```
-
-#### Token
-
-* ejemplo:
-```
-    {
-        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
-    }
-```
-
---------------------------------------------------------------------------------------------------------------------
 Agregar monopatín
 
-* POST   ```http://localhost:8080/api/admin/monopatines```
+* POST   ```http://localhost:8080/api/monopatines```
 
 #### Request body
 
 ```
     {
-       falta
+       "model":"BMW"
     }
 ```
 
@@ -276,17 +250,137 @@ Agregar monopatín
 --------------------------------------------------------------------------------------------------------------------
 Quitar monopatín
 
+* DELETE   ```http://localhost:8080/api/monopatines/17```
+
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
 --------------------------------------------------------------------------------------------------------------------
 Registrar parada
+
+* POST   ```http://localhost:8080/api/paradas```
+
+#### Request body
+
+```
+    {
+        "name": "movediza",
+        "location": {
+                        "latitud": 0.0,
+                        "longitud": 0.0
+                    },
+        "cantMaxSkateboards": 10
+    }   
+
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
 
 --------------------------------------------------------------------------------------------------------------------
 Quitar parada
 
+* DELETE   ```http://localhost:8080/api/paradas/5```
+
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+Ubicar monopatín en parada (opcional)
+
+* PUT   ```http://localhost:8080/api/admin/paradas/{station_id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/admin/paradas/4```
+
+#### Request body
+* Asegurarnos que la localización del monopatín concida con la de la estación
+```
+    {
+       "id": "16"
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
 --------------------------------------------------------------------------------------------------------------------
 Definir precio
 
+* PUT   ```http://localhost:8080/api/tarifas/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/tarifas/65560eef2837d120b458a62a```
+
+#### Request body
+
+```
+    {
+        "cost_per_min": 19999.0
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
 --------------------------------------------------------------------------------------------------------------------
 Definir tarifa extra para reinicio por pausa extensa
+
+* PUT   ```http://localhost:8080/api/tarifas/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/tarifas/65560eef2837d120b458a62a```
+
+#### Request body
+
+```
+    {
+        "extended_pause_cost": 2550.0
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
 
 --------------------------------------------------------------------------------------------------------------------
 Generar reporte de uso de monopatines por kilómetros

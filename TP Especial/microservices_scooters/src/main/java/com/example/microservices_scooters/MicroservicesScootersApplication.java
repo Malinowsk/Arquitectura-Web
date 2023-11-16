@@ -32,7 +32,7 @@ public class MicroservicesScootersApplication {
     }
 
     private Scooter scooter1, scooter2, scooter3, scooter4, scooter5, scooter6, scooter7, scooter8, scooter9, scooter10, scooter11, scooter12, scooter13, scooter14, scooter15, scooter16;
-    private Station station1, station2, station3;
+    private Station station1, station2, station3, station4;
 
     private Ride ride1, ride2, ride3, ride4, ride5, ride6, ride7, ride8, ride9, ride10, ride11, ride12, ride13, ride14, ride15, ride16, ride17, ride18, ride19,ride20;
     public static void main(String[] args) {
@@ -147,13 +147,13 @@ public class MicroservicesScootersApplication {
     station1 = new Station("Retiro", new GPS(-34.6099, -58.3923 ), scooters1,10);
     station2 = new Station("Constitución", new GPS(-44.5732, -58.4578), scooters2 ,9);
     station3 = new Station("Once", new GPS(-14.6221, -28.7375 ), scooters3 , 5);
-
+    station4 = new Station("Lunghi", new GPS(3.6099, -58.3923 ), null , 5);
 
     //Guardamos estaciones en ddbb
     stationRepo.save(station1);
     stationRepo.save(station2);
     stationRepo.save(station3);
-
+    stationRepo.save(station4);
 
 
 

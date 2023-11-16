@@ -110,9 +110,12 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public DTOResponseReport[] getReportBy(String reportVariable) {
-        String scooter_service_uri = "http://localhost:8003/api/monopatines/reportes/ordenado-por/"+reportVariable;
-        return restTemplate.getForEntity(scooter_service_uri, DTOResponseReport[].class).getBody();
+    public DTOResponseReport[] getReportBy(String reportVariable,HttpHeaders headers) {
+        if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
+            String scooter_service_uri = "http://localhost:8003/api/monopatines/reportes/ordenado-por/"+reportVariable;
+            return restTemplate.getForEntity(scooter_service_uri, DTOResponseReport[].class).getBody();
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional

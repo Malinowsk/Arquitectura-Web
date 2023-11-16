@@ -161,13 +161,17 @@ public class MaintenanceController {
                     content = @Content)
     })
     @GetMapping("/reporte-monopatines-por/{campo}")
-    public ResponseEntity<?> getReportBy(@PathVariable String campo) {
+    public ResponseEntity<?> getReportBy(@PathVariable String campo,@RequestHeader HttpHeaders headers) {
         try {
-            DTOResponseReport[] response = maintenanceService.getReportBy(campo);
+            DTOResponseReport[] response = maintenanceService.getReportBy(campo,headers);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se pudo generar el reporte.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se pudo generar el reporte.");
         }
     }
 

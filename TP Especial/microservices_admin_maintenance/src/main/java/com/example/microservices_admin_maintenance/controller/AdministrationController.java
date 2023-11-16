@@ -33,31 +33,6 @@ public class AdministrationController {
 
     ////////////////////////////////////////////FUNCIONALIDADES////////////////////////////////////////////////////////////////////////
 
-    // Agregar monopatín
-    @Operation(summary = "Agregar un monopatín",
-            description = "Permite agregar coomo administrador un nuevo monopatín al sistema.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Monopatín agregado exitosamente",
-                    content = @Content),
-            @ApiResponse(responseCode = "400", description = "Error en la solicitud",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content)
-    })
-    @PostMapping("/monopatines")
-    public ResponseEntity<?> createScooter(@RequestBody @Validated DTORequestScooterModel scooterModel,@RequestHeader HttpHeaders headers) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(adminService.createScooter(scooterModel,headers));
-        } catch (Exception e) {
-            if(e.getMessage().contains("403"))
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
-            else if (e.getMessage().contains("401")) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
-            } else
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
-        }
-    }
-
     //Ubicar monopatín en parada (opcional)
     @Operation(summary = "Ubicar un monopatín en una parada",
             description = "Permite ubicar como administrador un monopatín en una parada específica.")
