@@ -489,7 +489,7 @@ Ejemplo:
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### editar un viaje por id
+#### Editar un viaje por id
 
 * PUT   ```http://localhost:8080/api/viajes/{id}```
 
@@ -539,7 +539,7 @@ Ejemplo:
 ```
 
 --------------------------------------------------------------------------------------------------------------------
-#### eliminar un viaje por id
+#### Eliminar un viaje por id
 
 * DELETE   ```http://localhost:8080/api/viajes/21```
 
