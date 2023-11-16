@@ -42,21 +42,22 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public DTOResponseMaintenance save(DTORequestMaintenance request) {
-        Maintenance maintenance = new Maintenance(request);
-        Maintenance result = this.maintenanceRepository.save(maintenance);
+    public DTOResponseMaintenance save(DTORequestMaintenance request,HttpHeaders headers) {
+        if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
+            Maintenance maintenance = new Maintenance(request);
+            Maintenance result = this.maintenanceRepository.save(maintenance);
 
-        DTORequestScooter sDTO = new DTORequestScooter();
-        sDTO.setState("en mantenimiento");
+            DTORequestScooter sDTO = new DTORequestScooter();
+            sDTO.setState("en_mantenimiento");
 
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(sDTO, headers);
-        String uri = "http://localhost:8003/api/monopatines/"+request.getScooter_id()+"/paradas/"+request.getScooter_station_id();
-        ResponseEntity<String> exchangeResult = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, String.class);
+            HttpHeaders headersAux = new HttpHeaders();
+            HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(sDTO, headersAux);
+            String uri = "http://localhost:8003/api/monopatines/"+request.getScooter_id()+"/paradas/"+request.getScooter_station_id();
+            ResponseEntity<String> exchangeResult = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, String.class);
 
-        System.out.println(exchangeResult);
-
-        return new DTOResponseMaintenance(result);
+            return new DTOResponseMaintenance(result);
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional

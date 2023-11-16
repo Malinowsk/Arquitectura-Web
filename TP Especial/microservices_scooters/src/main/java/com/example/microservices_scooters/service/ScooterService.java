@@ -123,7 +123,7 @@ public class ScooterService {
 
     @Transactional
     public DTORespondeStatusQualityScooter getQuantityBasedOnStatus() {
-        return this.scooterRepository.getQuantityBasedOnStatus("en_uso","mantenimiento");
+        return this.scooterRepository.getQuantityBasedOnStatus("en_uso","en_mantenimiento");
     }
     public List<DTOResponseScooter> getScootersSurroundings(Long id) {
         Scooter scooter = this.scooterRepository.findById(id).orElseThrow(

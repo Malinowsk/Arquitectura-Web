@@ -61,28 +61,6 @@ public class MaintenanceController {
     }
 
 
-    @Operation(summary = "Crear un nuevo mantenimiento",
-            description = "Crea un nuevo mantenimiento con los datos proporcionados en el cuerpo de la solicitud.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Operación exitosa",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = DTOResponseMaintenance.class)) }),
-            @ApiResponse(responseCode = "406", description = "Datos de mantenimiento no válidos",
-                    content = @Content),
-            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
-                    content = @Content)
-    })
-    //Agregar Monopatín a Mantenimiento, Comunicarse con Mic Monopatines para cambiar su estado y removerlo de la parada
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody @Validated DTORequestMaintenance rDTO) {
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.save(rDTO));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
-        }
-    }
-
     @Operation(summary = "Eliminar un mantenimiento por su identificación",
             description = "Elimina un mantenimiento en base a su identificación proporcionada.")
     @ApiResponses(value = {
@@ -116,6 +94,28 @@ public class MaintenanceController {
     }*/
 
 ////////////////////////////////////////////FUNCIONALIDADES////////////////////////////////////////////////////////////////////////
+
+    //Agregar Monopatín a Mantenimiento, Comunicarse con Mic Monopatines para cambiar su estado y removerlo de la parada
+    @Operation(summary = "Crear un nuevo mantenimiento",
+            description = "Crea un nuevo mantenimiento con los datos proporcionados en el cuerpo de la solicitud.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Operación exitosa",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DTOResponseMaintenance.class)) }),
+            @ApiResponse(responseCode = "406", description = "Datos de mantenimiento no válidos",
+                    content = @Content),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor",
+                    content = @Content)
+    })
+    @PostMapping("")
+    public ResponseEntity<?> save(@RequestBody @Validated DTORequestMaintenance rDTO,@RequestHeader HttpHeaders headers) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.save(rDTO,headers));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+    }
 
     //Registrar fin de mantenimiento de monopatín
     @Operation(summary = "Registrar fin de mantenimiento de monopatín",

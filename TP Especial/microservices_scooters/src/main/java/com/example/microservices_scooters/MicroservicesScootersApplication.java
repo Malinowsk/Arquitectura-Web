@@ -46,23 +46,23 @@ public class MicroservicesScootersApplication {
     //Crear monopatines
     scooter1 = new Scooter("Toyota");
     scooter1.setKmsTraveled(1000.88);
-    scooter1.setState("mantenimiento");
+    scooter1.setState("en_mantenimiento");
     scooter1.setTotalUsageTime(500L);
     scooter1.setPausedTime(50L);
     scooter2 = new Scooter("Honda");
     scooter2.setKmsTraveled(1020.88);
-    scooter2.setState("mantenimiento");
+    scooter2.setState("en_mantenimiento");
     scooter3 = new Scooter("Ford");
     scooter3.setKmsTraveled(100.88);
     scooter3.setTotalUsageTime(600L);
     scooter3.setPausedTime(10L);
-    scooter3.setState("mantenimiento");
+    scooter3.setState("en_mantenimiento");
     scooter4 = new Scooter("Chevrolet");
     scooter4.setKmsTraveled(9.88);
-    scooter4.setState("mantenimiento");
+    scooter4.setState("en_mantenimiento");
     scooter5 = new Scooter("Volkswagen");
     scooter5.setKmsTraveled(856.0);
-    scooter5.setState("mantenimiento");
+    scooter5.setState("en_mantenimiento");
     scooter6 = new Scooter("Nissan");
     scooter7 = new Scooter("BMW");
     scooter8 = new Scooter("Mercedes-Benz");
