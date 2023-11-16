@@ -1,6 +1,7 @@
 package com.example.microservices_scooters.dto;
 
 import com.example.microservices_scooters.entity.Scooter;
+import com.example.microservices_scooters.entity.Station;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -41,4 +42,7 @@ public class DTORequestRide {
     private boolean activePause = false;
 
     private long id_tarifa;
+
+    private long finalStation ;
+
 }

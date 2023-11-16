@@ -69,7 +69,14 @@ public class Ride implements Serializable {
     }
 
     public Ride(DTORequestRide r) {
-
+        this.scooter = r.getScooter();
+        this.idUser = r.getIdUser();
+        this.idAccount = r.getIdAccount();
+        this.initiated = r.getInitiated();
+        this.finalized = r.getFinalized();
+        this.kilometersTraveled = r.getKilometersTraveled();
+        this.totalPrice = r.getTotalPrice();
+        this.id_tarifa = r.getId_tarifa();
     }
 
 

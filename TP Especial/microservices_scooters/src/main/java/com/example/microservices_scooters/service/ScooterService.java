@@ -22,7 +22,6 @@ import org.springframework.web.client.RestTemplate;
 public class ScooterService {
     private final RestTemplate restTemplate;
     private final ScooterRepository scooterRepository;
-
     private final StationRepository stationRepository;
 
     public ScooterService(RestTemplate restTemplate, ScooterRepository scooterRepository, StationRepository stationRepository) {
@@ -81,6 +80,7 @@ public class ScooterService {
             scooter.setPausedTime(request.getPausedTime());
             scooter.setTotalUsageTime(request.getTotalUsageTime());
             scooter.setLocation(request.getLocation());
+            scooter.setModel(request.getModel());
             return this.scooterRepository.save(scooter);
         }
         else throw new NotFoundException("error 500");

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -40,8 +41,17 @@ public class RideController {
                     content = @Content)
     })
     @GetMapping("")
-    public List<DTOResponseRide> findAll(){
-        return this.rideService.findAll();
+    public ResponseEntity<?> findAll(@RequestHeader HttpHeaders headers){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.rideService.findAll(headers));
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
     }
 
     @Operation(summary = "Obtener un viaje por su identificación",
@@ -55,13 +65,17 @@ public class RideController {
             @ApiResponse(responseCode = "404", description = "Viaje no encontrado",
                     content = @Content) })
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(rideService.findById(id));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Viaje inexistente");
+    public ResponseEntity<?> getById(@PathVariable Long id,@RequestHeader HttpHeaders headers){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(rideService.findById(id,headers));
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Viaje inexistente");
         }
-
     }
 
     @Operation(summary = "Crear un nuevo viaje",
@@ -76,12 +90,18 @@ public class RideController {
                     content = @Content)
     })
     @PostMapping("")
-    public ResponseEntity<?> save( @RequestBody @Validated DTORequestRide request ){
+    public ResponseEntity<?> save( @RequestBody @Validated DTORequestRide request,@RequestHeader HttpHeaders headers ){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(rideService.save(request));
-        }catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Ocurrio un error, revise los campos ingresados");
+            return ResponseEntity.status(HttpStatus.OK).body(rideService.save(request,headers));
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Ocurrio un error, revise los campos ingresados.");
         }
+
     }
 
     @Operation(summary = "Eliminar un viaje por su identificación",
@@ -95,12 +115,17 @@ public class RideController {
                     content = @Content)
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    public ResponseEntity<?> delete(@PathVariable Long id,@RequestHeader HttpHeaders headers){
         try{
-            this.rideService.delete(id);
+            this.rideService.delete(id,headers);
             return ResponseEntity.status(HttpStatus.OK).body("Se elimino correctamente el viaje con el id: " + id);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo eliminar el viaje con id: " + id);
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo eliminar el viaje con id: " + id);
         }
     }
 
@@ -118,15 +143,18 @@ public class RideController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestRide request) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestRide request,@RequestHeader HttpHeaders headers) {
         try {
-            Ride ride = rideService.update(id, request);
+            Ride ride = rideService.update(id, request,headers);
             DTOResponseRide response = new DTOResponseRide(ride);
-
             return ResponseEntity.status(HttpStatus.OK).body(response);
-
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el viaje con el ID proporcionado.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se encontró el viaje con el ID proporcionado.");
         }
     }
 

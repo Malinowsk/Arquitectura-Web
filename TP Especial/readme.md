@@ -406,10 +406,154 @@ Ejemplo:
 ## ABMs:
 
 --------------------------------------------------------------------------------------------------------------------
-
-algunos abms
+### ABM Viajes:
 
 --------------------------------------------------------------------------------------------------------------------
+#### Recuperar todos los viajes
+
+* GET   ```http://localhost:8080/api/viajes```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar un viaje por id
+
+* GET   ```http://localhost:8080/api/viajes/{id}```
+
+Ejemplo:
+
+* GET   ```http://localhost:8080/api/viajes/1```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Crear un viaje
+
+* POST   ```http://localhost:8080/api/viajes```
+
+#### Request body
+
+```
+        {
+            "scooter": {
+                "id": 8,
+                "state": "disponible",
+                "location": {
+                                "latitud": -44.5732,
+                                "longitud": -58.4578
+                            },
+                "kmsTraveled": 0.0,
+                "kmsMant": 0.0,
+                "numbKmsForMaint": 100.0,
+                "totalUsageTime": 0,
+                "pausedTime": 0,
+                "model": "Mercedes-Benz"
+            },
+            "idUser": 5,
+            "idAccount": 1,
+            "initiated": "2022-04-29T18:13:00.000+00:00",
+            "finalized": null,
+            "kilometersTraveled": 0.0,
+            "totalPrice": 0.0,
+            "pauseTime": null,
+            "activePause": false,
+            "id_tarifa": 3,
+            "finalStation":1
+        }
+```
+
+#### Token
+
+* ejemplo:
+
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### editar un viaje por id
+
+* PUT   ```http://localhost:8080/api/viajes/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/viajes/21```
+
+#### Token
+
+* ejemplo:
+```
+    {
+            "scooter": {
+            "id": 8,
+            "state": "disponible",
+            "location": {
+            "latitud": -44.5732,
+            "longitud": -58.4578
+            },
+            "kmsTraveled": 0.0,
+            "kmsMant": 0.0,
+            "numbKmsForMaint": 100.0,
+            "totalUsageTime": 0,
+            "pausedTime": 0,
+            "model": "Mercedes-Benz"
+            },
+            "idUser": 5,
+            "idAccount": 1,
+            "initiated": "2022-04-29T18:13:00.000+00:00",
+            "finalized": "2023-04-29T18:13:00.000+00:00",
+            "kilometersTraveled": 1000.0,
+            "totalPrice": 10.0,
+            "pauseTime": null,
+            "activePause": false,
+            "id_tarifa": 3,
+            "finalStation": 1
+    }       
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### eliminar un viaje por id
+
+* DELETE   ```http://localhost:8080/api/viajes/21```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## instalar base de datos mongo db
 
