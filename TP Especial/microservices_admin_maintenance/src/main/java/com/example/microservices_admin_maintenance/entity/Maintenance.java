@@ -37,7 +37,6 @@ public class Maintenance {
     }
 
     public Maintenance(DTORequestMaintenance request) {
-        this.id = String.valueOf(request.getId());
         this.start_date = request.getStart_date();
         this.end_date = request.getEnd_date();
         this.scooter_id = String.valueOf(request.getScooter_id());

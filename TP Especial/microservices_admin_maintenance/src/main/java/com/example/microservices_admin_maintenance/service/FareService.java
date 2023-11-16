@@ -33,7 +33,7 @@ public class FareService {
     }
 
     @Transactional
-    public DTOFareResponse findById(Long id) {
+    public DTOFareResponse findById(String id) {
         return this.fareRepository
                 .findById(String.valueOf(id))
                 .map(DTOFareResponse::new)
