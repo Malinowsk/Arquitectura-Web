@@ -61,16 +61,6 @@ public class UserController {
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> save(@RequestBody @Validated DTORequestUser request){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(userService.save(request));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("El usuario no se pudo crear.");
-        }
-
-    }
-
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         try{

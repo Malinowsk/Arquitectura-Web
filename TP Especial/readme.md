@@ -208,16 +208,114 @@ Registrar monopatín en mantenimiento (debe marcarse como no disponible para su 
 ```
 
 --------------------------------------------------------------------------------------------------------------------
+Registrar fin de mantenimiento de monopatín
 
+* PUT   ```http://localhost:8080/api/mantenimientos/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/mantenimientos/655568a41a12871998c05582```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+Ubicar monopatín en parada (opcional)
+
+* PUT   ```http://localhost:8080/api/admin/paradas/{station_id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/admin/paradas/1```
+
+#### Request body
+
+```
+    {
+       falta
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+Agregar monopatín
+
+* POST   ```http://localhost:8080/api/admin/monopatines```
+
+#### Request body
+
+```
+    {
+       falta
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+Quitar monopatín
+
+--------------------------------------------------------------------------------------------------------------------
+Registrar parada
+
+--------------------------------------------------------------------------------------------------------------------
+Quitar parada
+
+--------------------------------------------------------------------------------------------------------------------
+Definir precio
+
+--------------------------------------------------------------------------------------------------------------------
+Definir tarifa extra para reinicio por pausa extensa
+
+--------------------------------------------------------------------------------------------------------------------
+Generar reporte de uso de monopatines por kilómetros
+Generar reporte de uso de monopatines por tiempo con pausas
+Generar reporte de uso de monopatines por tiempo sin pausas
+
+* GET   ```http://localhost:8080/api/mantenimientos/reporte-monopatines-por/{campo}```
+
+Ejemplo:
+
+* GET   ```http://localhost:8080/api/mantenimientos/reporte-monopatines-por/kilometros```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
 ## ABMs:
 
 --------------------------------------------------------------------------------------------------------------------
 
-
+algunos abms
 
 --------------------------------------------------------------------------------------------------------------------
-
-
 
 ## instalar base de datos mongo db
 

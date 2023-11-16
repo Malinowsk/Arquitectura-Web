@@ -44,8 +44,6 @@ public class MaintenanceService {
     @Transactional
     public DTOResponseMaintenance save(DTORequestMaintenance request,HttpHeaders headers) {
         if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
-            Maintenance maintenance = new Maintenance(request);
-            Maintenance result = this.maintenanceRepository.save(maintenance);
 
             DTORequestScooter sDTO = new DTORequestScooter();
             sDTO.setState("en_mantenimiento");
@@ -54,6 +52,9 @@ public class MaintenanceService {
             HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(sDTO, headersAux);
             String uri = "http://localhost:8003/api/monopatines/"+request.getScooter_id()+"/paradas/"+request.getScooter_station_id();
             ResponseEntity<String> exchangeResult = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, String.class);
+
+            Maintenance maintenance = new Maintenance(request);
+            Maintenance result = this.maintenanceRepository.save(maintenance);
 
             return new DTOResponseMaintenance(result);
         }
@@ -83,26 +84,29 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public DTOResponseMaintenance endScooterMaintenance(Long id) {
-        Maintenance maintenance = this.maintenanceRepository.findById(String.valueOf(id)).orElseThrow(
-                () -> new NotFoundException("Maintenance", id));
+    public DTOResponseMaintenance endScooterMaintenance(String id , HttpHeaders headers) {
+        if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
 
-        maintenance.setEnd_date(String.valueOf(LocalDateTime.now()));
+            Maintenance maintenance = this.maintenanceRepository.findById(id).orElseThrow(
+                    () -> new NotFoundException("Maintenance", id));
 
-        DTORequestScooter sDTO = new DTORequestScooter();
-        sDTO.setId(Long.valueOf(maintenance.getScooter_id()));
-        sDTO.setState("disponible");
-        System.out.println(maintenance.getScooter_id());
+            maintenance.setEnd_date(String.valueOf(LocalDateTime.now()));
 
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(sDTO, headers);
-        String uri = "http://localhost:8003/api/monopatines/finalizar-mantenimiento/paradas/"+maintenance.getScooter_station_id();
-        ResponseEntity<String> exchangeResult = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, String.class);
-        System.out.println(exchangeResult);
+            DTORequestScooter sDTO = new DTORequestScooter();
+            sDTO.setId(Long.valueOf(maintenance.getScooter_id()));
+            sDTO.setState("disponible");
 
-        Maintenance result = this.maintenanceRepository.save(maintenance);
+            HttpHeaders headersAux = new HttpHeaders();
+            HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(sDTO, headersAux);
+            String uri = "http://localhost:8003/api/monopatines/finalizar-mantenimiento/paradas/"+maintenance.getScooter_station_id();
+            ResponseEntity<String> exchangeResult = restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, String.class);
 
-        return new DTOResponseMaintenance(result);
+            Maintenance result = this.maintenanceRepository.save(maintenance);
+
+            return new DTOResponseMaintenance(result);
+        }
+        else throw new NotFoundException("error 500");
+
     }
 
     @Transactional

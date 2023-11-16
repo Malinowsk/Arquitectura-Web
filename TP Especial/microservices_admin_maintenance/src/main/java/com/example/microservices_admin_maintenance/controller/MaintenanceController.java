@@ -112,8 +112,12 @@ public class MaintenanceController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.save(rDTO,headers));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -130,13 +134,17 @@ public class MaintenanceController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<?> finishMaintenance(@PathVariable Long id) {
+    public ResponseEntity<?> finishMaintenance(@PathVariable String id,@RequestHeader HttpHeaders headers) {
         try {
-            DTOResponseMaintenance response = maintenanceService.endScooterMaintenance(id);
+            DTOResponseMaintenance response = maintenanceService.endScooterMaintenance(id,headers);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 

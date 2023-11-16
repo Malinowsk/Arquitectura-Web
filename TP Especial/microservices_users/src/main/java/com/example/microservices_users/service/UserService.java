@@ -41,13 +41,6 @@ public class UserService {
     }
 
     @Transactional
-    public DTOResponseUser save(DTORequestUser request) {
-        User user = new User(request);
-        User result = this.userRepository.save(user);
-        return new DTOResponseUser(result);
-    }
-
-    @Transactional
     public void delete(Long id) {
         this.userRepository.delete(this.userRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("No se pudo eliminar usuario con ID:" + id)));

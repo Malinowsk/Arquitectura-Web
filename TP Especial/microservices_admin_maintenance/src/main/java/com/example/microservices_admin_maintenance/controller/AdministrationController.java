@@ -33,11 +33,9 @@ public class AdministrationController {
 
     ////////////////////////////////////////////FUNCIONALIDADES////////////////////////////////////////////////////////////////////////
 
-
     // Agregar monopatín
     @Operation(summary = "Agregar un monopatín",
             description = "Permite agregar coomo administrador un nuevo monopatín al sistema.")
-    @Parameter(name = "Authorization", description = "Token", required = true, example = "Bearer your_access_token")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Monopatín agregado exitosamente",
                     content = @Content),
