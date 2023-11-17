@@ -32,13 +32,13 @@ public class AdminService {
 
 
     @Transactional
-    public String changeAccountStatus(Long accID, DTORequestStatusAccount accDTO, HttpHeaders headers) {
+    public DTOResponseAccount changeAccountStatus(Long accID, DTORequestStatusAccount accDTO, HttpHeaders headers) {
         if(checkPermissions(headers).is2xxSuccessful()){
             System.out.println("sdfsd");
             HttpHeaders auxHeaders = new HttpHeaders();
             HttpEntity<DTORequestStatusAccount> requestEntity = new HttpEntity<>(accDTO, auxHeaders);
             String user_microservice_uri = "http://localhost:8007/api/accounts/"+accID+"/status";
-            ResponseEntity<String> response = this.restTemplate.exchange(user_microservice_uri, HttpMethod.PUT, requestEntity, String.class);
+            ResponseEntity<DTOResponseAccount> response = this.restTemplate.exchange(user_microservice_uri, HttpMethod.PUT, requestEntity, DTOResponseAccount.class);
             return response.getBody();
         }
         else throw new NotFoundException("error 500");
