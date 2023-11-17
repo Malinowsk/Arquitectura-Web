@@ -497,7 +497,7 @@ Ejemplo:
 
 * PUT   ```http://localhost:8080/api/viajes/21```
 
-#### Token
+#### Request body
 
 * ejemplo:
 ```
@@ -553,7 +553,506 @@ Ejemplo:
 ```
 
 --------------------------------------------------------------------------------------------------------------------
+### ABM Tarifas:
 
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar todos las tarifas
+
+* GET   ```http://localhost:8080/api/tarifas```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar una tarifa por id
+
+* GET   ```http://localhost:8080/api/tarifas/{id}```
+
+Ejemplo:
+
+* GET   ```http://localhost:8080/api/tarifas/655776d7c869bb604d41af8d```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Crear una tarifa
+
+* POST   ```http://localhost:8080/api/tarifas```
+
+#### Request body
+
+```
+    {
+        "name": "Semana santa",
+        "cost_per_min": 15.77,
+        "extended_pause_cost": 30.80
+    }
+```
+
+#### Token
+
+* ejemplo:
+
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editar una tarifa por id
+
+* PUT   ```http://localhost:8080/api/tarifas/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/tarifas/655785ee4658ff0fcad3442e```
+
+#### Request body
+
+* ejemplo:
+```
+    {
+        "name": "Semana1 santa1",
+        "cost_per_min": 15.771,
+        "extended_pause_cost": 301.80
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Eliminar una tarifa por id
+
+* DELETE   ```http://localhost:8080/api/tarifas/655785ee4658ff0fcad3442e```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+### ABM Tarifas Programas:
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar todos las tarifas programas
+
+* GET   ```http://localhost:8080/api/tarifas/programadas```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Crear una tarifa programada
+
+* Ejercicio 3.f ya resuelto más arriba.
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editar una tarifa programa por id
+
+* PUT   ```http://localhost:8080/api/tarifas/programadas/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/tarifas/programadas/655785ee4658ff0fcad3442e```
+
+#### Request body
+
+* ejemplo:
+```
+     {
+        "fare_to_update_id": "654f6d40267df94bb9d181b8",
+        "cost_per_min": 1335,
+        "extended_pause_cost": 2445,
+        "scheduled_date": "2023-11-10 11:12:00.0"
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Eliminar una tarifa programada por id
+
+* DELETE   ```http://localhost:8080/api/tarifas/programadas/655788964658ff0fcad3442f```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+### ABM Monopatin:
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar todos los monopatines
+
+* GET   ```http://localhost:8080/api/monopatines```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar un monopatin por id
+
+* GET   ```http://localhost:8080/api/monopatines/{id}```
+
+Ejemplo:
+
+* GET   ```http://localhost:8080/api/monopatines/1```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Crear un monopatin
+
+* Ejercicio resuelto más arriba en la parte de funcionalidades.
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editar un monopatin por id
+
+* PUT   ```http://localhost:8080/api/monopatines/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/monopatines/1```
+
+#### Request body
+
+* ejemplo:
+
+```
+    {
+        "state": "en_uso",
+        "kmsTraveled": 1020.88,
+        "kmsMant": 1.0,
+        "totalUsageTime": 1,
+        "pausedTime": 1,
+        "model": "Moto"
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Eliminar un monopatin por id
+
+* Ejercicio resuelto más arriba en la parte de funcionalidades.
+
+--------------------------------------------------------------------------------------------------------------------
+### ABM Paradas:
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar todos los paradas
+
+* GET   ```http://localhost:8080/api/paradas```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar una parada por id
+
+* GET   ```http://localhost:8080/api/paradas/{id}```
+
+Ejemplo:
+
+* GET   ```http://localhost:8080/api/paradas/1```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Crear una parada
+
+* Ejercicio resuelto más arriba en la parte de funcionalidades.
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editar una parada por id
+
+* PUT   ```http://localhost:8080/api/paradas/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/paradas/1```
+
+#### Request body
+
+* ejemplo:
+
+```
+{
+    "name": "Lastoninas",
+    "location": {
+        "latitud": -31.6099,
+        "longitud": -18.3923
+    },
+    "cantMaxSkateboards": 20
+}
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Eliminar una parada por id
+
+* Ejercicio resuelto más arriba en la parte de funcionalidades.
+
+--------------------------------------------------------------------------------------------------------------------
+### ABM Usuarios:
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar todos los usuarios
+
+* GET   ```http://localhost:8080/api/users```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar un usuario por id
+
+* GET   ```http://localhost:8080/api/users/{id}```
+
+Ejemplo:
+
+* GET   ```http://localhost:8080/api/users/1```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Crear un usuario
+
+* Ejercicio resuelto más arriba, corresponde al registro.
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editar un usuario por id
+
+* PUT   ```http://localhost:8080/api/users/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/users/1```
+
+#### Request body
+
+* ejemplo:
+
+```
+    {
+        "name": "Martin",
+        "surname": "Varela",
+        "phone_number": "34845-453074",
+        "email": "pp@gmail.com",
+        "accounts": [1,3],
+        "authorities": ["ROLE_ADMIN","ROLE_MAINTENANCE","ROLE_USER"],
+        "password": "123456789"
+    }
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Eliminar un usuario por id
+
+* DELETE   ```http://localhost:8080/api/users/1```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+### ABM Cuentas:
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar todos los cuentas
+
+* GET   ```http://localhost:8080/api/accounts```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar una cuenta por id
+
+* GET   ```http://localhost:8080/api/accounts/{id}```
+
+Ejemplo:
+
+* GET   ```http://localhost:8080/api/accounts/1```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Crear una cuenta
+
+* 
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editar una cuenta por id
+
+* PUT   ```http://localhost:8080/api/accounts/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/accounts/1```
+
+#### Request body
+
+* ejemplo:
+
+```
+   
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Eliminar una cuenta por id
+
+* DELETE   ```http://localhost:8080/api/accounts/1```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## instalar base de datos mongo db
 

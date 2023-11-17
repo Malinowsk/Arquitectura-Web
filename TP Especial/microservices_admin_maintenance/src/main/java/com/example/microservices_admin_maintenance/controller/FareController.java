@@ -41,7 +41,19 @@ public class FareController {
                     content = @Content)
     })
     @GetMapping("")
-    public List<DTOFareResponse> findAll() { return this.fareService.findAll(); }
+    public ResponseEntity<?> findAll(@RequestHeader HttpHeaders headers) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.fareService.findAll(headers));
+        }
+        catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+    }
 
     @Operation(summary = "Obtener una tarifa por su identificación",
             description = "Obtener una tarifa en base a su identificación proporcionada.")
@@ -54,11 +66,16 @@ public class FareController {
             @ApiResponse(responseCode = "404", description = "Tarifa no encontrada",
                     content = @Content) })
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable String id) {
+    public ResponseEntity<?> findById(@PathVariable String id,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(fareService.findById(id));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Tarifa inexistente");
+            return ResponseEntity.status(HttpStatus.OK).body(fareService.findById(id,headers));
+        }catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -74,13 +91,17 @@ public class FareController {
                     content = @Content)
     })
     @PostMapping("")
-    public ResponseEntity<?> addFare(@RequestBody @Validated DTOFareRequest fDTO) {
+    public ResponseEntity<?> addFare(@RequestBody @Validated DTOFareRequest fDTO,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(fareService.addFare(fDTO));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
-        }
+            return ResponseEntity.status(HttpStatus.CREATED).body(fareService.addFare(fDTO,headers));
+        }catch (Exception e) {
+                if(e.getMessage().contains("403"))
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+                else if (e.getMessage().contains("401")) {
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+                } else
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            }
     }
 
     @Operation(summary = "Modificar una tarifa",
@@ -95,11 +116,16 @@ public class FareController {
                     content = @Content)
     })
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateFare(@PathVariable String id, @RequestBody @Validated DTOFareRequest fDTO) {
+    public ResponseEntity<?> updateFare(@PathVariable String id, @RequestBody @Validated DTOFareRequest fDTO,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(fareService.updateFare(id, fDTO));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+            return ResponseEntity.status(HttpStatus.OK).body(fareService.updateFare(id, fDTO, headers));
+        }catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -114,12 +140,18 @@ public class FareController {
                     content = @Content)
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteFare(@PathVariable String id) {
+    public ResponseEntity<?> deleteFare(@PathVariable String id,@RequestHeader HttpHeaders headers) {
         try {
-            this.fareService.deleteFare(id);
+            this.fareService.deleteFare(id,headers);
             return ResponseEntity.status(HttpStatus.OK).body("Se eliminó correctamente la tarifa con id: " + id);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+        catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -133,7 +165,20 @@ public class FareController {
                     content = @Content)
     })
     @GetMapping("/programadas")
-    public List<DTOScheduledFareResponse> getScheduledFares() { return this.fareService.findAllScheduledFares(); }
+    public ResponseEntity<?> getScheduledFares(@RequestHeader HttpHeaders headers) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.fareService.findAllScheduledFares(headers));
+        }
+        catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+
+    }
 
     @Operation(summary = "Modificar entidad de ajuste de precio programado",
             description = "Permite a un administrador modificar un ajuste de precios programado.")
@@ -147,11 +192,17 @@ public class FareController {
                     content = @Content)
     })
     @PutMapping("/programadas/{id}")
-    public ResponseEntity<?> updateScheduledFare(@PathVariable String id, @RequestBody @Validated DTOScheduledFareRequest sfDTO) {
+    public ResponseEntity<?> updateScheduledFare(@PathVariable String id, @RequestBody @Validated DTOScheduledFareRequest sfDTO,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(this.fareService.updateScheduledFare(id, sfDTO));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en datos ingresados.");
+            return ResponseEntity.status(HttpStatus.OK).body(this.fareService.updateScheduledFare(id, sfDTO,headers));
+        }
+        catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
         }
     }
 
@@ -165,13 +216,20 @@ public class FareController {
                     content = @Content)
     })
     @DeleteMapping("/programadas/{id}")
-    public ResponseEntity<?> deleteScheduledFare(@PathVariable String id) {
+    public ResponseEntity<?> deleteScheduledFare(@PathVariable String id,@RequestHeader HttpHeaders headers) {
         try {
-            this.fareService.deleteFare(id);
+            this.fareService.deleteScheduledFare(id,headers);
             return ResponseEntity.status(HttpStatus.OK).body("Se eliminó correctamente la tarifa programada con id: " + id);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error en datos ingresados.");
         }
+        catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+
     }
 
 ////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////

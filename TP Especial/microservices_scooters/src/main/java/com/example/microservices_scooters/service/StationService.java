@@ -77,6 +77,7 @@ public class StationService {
             Station station = this.stationRepository.findById(id).orElseThrow(() -> new NotFoundException("ID de parada inválido: " + id));
             station.setName(request.getName());
             station.setLocation(request.getLocation());
+            station.setCantMaxSkateboards(request.getCantMaxSkateboards());
             return this.stationRepository.save(station);
         }
         else throw new NotFoundException("error 500");

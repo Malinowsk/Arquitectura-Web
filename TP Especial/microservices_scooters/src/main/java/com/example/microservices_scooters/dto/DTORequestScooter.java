@@ -16,7 +16,7 @@ public class DTORequestScooter {
     @NotNull(message = "ID cannot be null")
     private Long  id;
 
-    private String state = "disponible";
+    private String state;
 
     private GPS location;
 

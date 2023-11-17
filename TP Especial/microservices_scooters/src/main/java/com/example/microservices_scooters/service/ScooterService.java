@@ -74,13 +74,22 @@ public class ScooterService {
         if(checkPermissions(headers).is2xxSuccessful()){
             Scooter scooter = this.scooterRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("ID de monopatín inválido: " + id));
-            scooter.setState(request.getState());
-            scooter.setKmsMant(request.getKmsMant());
-            scooter.setKmsTraveled(request.getKmsTraveled());
-            scooter.setPausedTime(request.getPausedTime());
-            scooter.setTotalUsageTime(request.getTotalUsageTime());
-            scooter.setLocation(request.getLocation());
-            scooter.setModel(request.getModel());
+
+            if (request.getState() != null)
+                scooter.setState(request.getState());
+            if (request.getKmsMant() != 0)
+                scooter.setKmsMant(request.getKmsMant());
+            if (request.getKmsTraveled() != 0)
+                scooter.setKmsTraveled(request.getKmsTraveled());
+            if (request.getPausedTime() != 0)
+                scooter.setPausedTime(request.getPausedTime());
+            if (request.getTotalUsageTime() != 0)
+                scooter.setTotalUsageTime(request.getTotalUsageTime());
+            if (request.getLocation() != null)
+                scooter.setLocation(request.getLocation());
+            if (request.getModel() != null)
+                scooter.setModel(request.getModel());
+
             return this.scooterRepository.save(scooter);
         }
         else throw new NotFoundException("error 500");

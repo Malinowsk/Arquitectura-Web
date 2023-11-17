@@ -33,82 +33,106 @@ public class FareService {
     }
 
     @Transactional
-    public DTOFareResponse findById(String id) {
-        return this.fareRepository
-                .findById(String.valueOf(id))
-                .map(DTOFareResponse::new)
-                .orElseThrow( () -> new NotFoundException("Maintenance", id));
+    public List<DTOFareResponse> findAll(HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            return this.fareRepository
+                    .findAll()
+                    .stream()
+                    .map(DTOFareResponse::new)
+                    .toList();
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
-    public List<DTOFareResponse> findAll() {
-        return this.fareRepository
-                .findAll()
-                .stream()
-                .map(DTOFareResponse::new)
-                .toList();
+    public DTOFareResponse findById(String id,HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            return this.fareRepository
+                    .findById(String.valueOf(id))
+                    .map(DTOFareResponse::new)
+                    .orElseThrow( () -> new NotFoundException("Maintenance", id));
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
-    public DTOFareResponse addFare(DTOFareRequest fDTO) {
-        Fare fare = new Fare(fDTO);
-        Fare result = fareRepository.save(fare);
-        return new DTOFareResponse(result);
+    public DTOFareResponse addFare(DTOFareRequest fDTO,HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            Fare fare = new Fare(fDTO);
+            Fare result = fareRepository.save(fare);
+            return new DTOFareResponse(result);
+        }
+        else throw new NotFoundException("error 500");
     }
 
 
     @Transactional
-    public DTOFareResponse updateFare(String id, DTOFareRequest fDTO) {
-        Fare fare = this.fareRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("Maintenance", id));
+    public DTOFareResponse updateFare(String id, DTOFareRequest fDTO,HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            Fare fare = this.fareRepository.findById(id).orElseThrow(
+                    () -> new NotFoundException("Maintenance", id));
 
-        if (fDTO.getName() != null)
-            fare.setName(fDTO.getName());
-        if (fDTO.getCost_per_min() != -1)
-            fare.setCost_per_min(fDTO.getCost_per_min());
-        if (fDTO.getExtended_pause_cost() != -1)
-            fare.setExtended_pause_cost(fDTO.getExtended_pause_cost());
+            if (fDTO.getName() != null)
+                fare.setName(fDTO.getName());
+            if (fDTO.getCost_per_min() != -1)
+                fare.setCost_per_min(fDTO.getCost_per_min());
+            if (fDTO.getExtended_pause_cost() != -1)
+                fare.setExtended_pause_cost(fDTO.getExtended_pause_cost());
 
-        Fare result = fareRepository.save(fare);
-        return new DTOFareResponse(result);
+            Fare result = fareRepository.save(fare);
+            return new DTOFareResponse(result);
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
-    public void deleteFare(String id) {
-        this.fareRepository.delete(
-                this.fareRepository.findById(id)
-                        .orElseThrow(() -> new NotFoundException("Maintenance", id)));
+    public void deleteFare(String id,HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            this.fareRepository.delete(
+                    this.fareRepository.findById(id)
+                            .orElseThrow(() -> new NotFoundException("Maintenance", id)));
+        }
+        else throw new NotFoundException("error 500");
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Transactional
-    public List<DTOScheduledFareResponse> findAllScheduledFares() {
-        return this.scheduledFareUpdateRepository
-                .findAll()
-                .stream()
-                .map(DTOScheduledFareResponse::new)
-                .toList();
+    public List<DTOScheduledFareResponse> findAllScheduledFares(HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            return this.scheduledFareUpdateRepository
+                    .findAll()
+                    .stream()
+                    .map(DTOScheduledFareResponse::new)
+                    .toList();
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
-    public ScheduledFareUpdate updateScheduledFare(String sfID, DTOScheduledFareRequest sfDTO) {
-        ScheduledFareUpdate sfUpdate = this.scheduledFareUpdateRepository.findById(sfID)
-                .orElseThrow(() -> new NotFoundException("ScheduledFareUpdate", sfID));
+    public ScheduledFareUpdate updateScheduledFare(String sfID, DTOScheduledFareRequest sfDTO,HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            ScheduledFareUpdate sfUpdate = this.scheduledFareUpdateRepository.findById(sfID)
+                    .orElseThrow(() -> new NotFoundException("ScheduledFareUpdate", sfID));
 
-        sfUpdate.setFare_to_update_id(sfDTO.getFare_to_update_id());
-        sfUpdate.setCost_per_min(sfDTO.getCost_per_min());
-        sfUpdate.setExtended_pause_cost(sfDTO.getExtended_pause_cost());
-        sfUpdate.setDate(String.valueOf(sfDTO.getScheduled_date()));
+            sfUpdate.setFare_to_update_id(sfDTO.getFare_to_update_id());
+            sfUpdate.setCost_per_min(sfDTO.getCost_per_min());
+            sfUpdate.setExtended_pause_cost(sfDTO.getExtended_pause_cost());
+            sfUpdate.setDate(String.valueOf(sfDTO.getScheduled_date()));
 
-        return this.scheduledFareUpdateRepository.save(sfUpdate);
+            return this.scheduledFareUpdateRepository.save(sfUpdate);
+        }
+        else throw new NotFoundException("error 500");
     }
 
-//    @Transactional
-//    public void deleteScheduledFare(String sfID) {
-//        this.scheduledFareUpdateRepository.delete(
-//                this.scheduledFareUpdateRepository.findById(sfID)
-//                        .orElseThrow(() -> new NotFoundException("ScheduledFareUpdate", sfID))
-//        );
-//    }
+    @Transactional
+    public void deleteScheduledFare(String sfID,HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()){
+            this.scheduledFareUpdateRepository.delete(
+                    this.scheduledFareUpdateRepository.findById(sfID)
+                            .orElseThrow(() -> new NotFoundException("ScheduledFareUpdate", sfID))
+            );
+        }
+        else throw new NotFoundException("error 500");
+    }
 
     @Transactional
     public DTOScheduledFareResponse addScheduledFareUpdate(DTOScheduledFareRequest sfDTO, HttpHeaders headers) {
