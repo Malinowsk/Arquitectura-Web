@@ -1053,6 +1053,88 @@ Ejemplo:
 ```
 
 --------------------------------------------------------------------------------------------------------------------
+### ABM Mantenimientos:
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar todos los mantenimientos
+
+* GET   ```http://localhost:8080/api/mantenimientos```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Recuperar una cuenta por id
+
+* GET   ```http://localhost:8080/api/mantenimientos/{id}```
+
+Ejemplo:
+
+* GET   ```http://localhost:8080/api/mantenimientos/655776d7c869bb604d41af90```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Crear un mantenimiento
+
+* Ejercicio resuelto más arriba en la parte de funcionalidades.
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Editar un mantenimiento por id
+
+* PUT   ```http://localhost:8080/api/mantenimientos/{id}```
+
+Ejemplo:
+
+* PUT   ```http://localhost:8080/api/mantenimientos/655776d7c869bb604d41af90```
+
+#### Request body
+
+* ejemplo:
+
+```
+   
+```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+#### Eliminar un mantenimiento por id
+
+* DELETE   ```http://localhost:8080/api/mantenimientos/655776d7c869bb604d41af90```
+
+#### Token
+
+* ejemplo:
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## instalar base de datos mongo db
 

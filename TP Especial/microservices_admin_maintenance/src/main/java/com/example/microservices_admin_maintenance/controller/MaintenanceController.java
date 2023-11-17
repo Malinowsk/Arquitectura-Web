@@ -39,7 +39,18 @@ public class MaintenanceController {
                     content = @Content)
     })
     @GetMapping("")
-    public List<DTOResponseMaintenance> findAll(){ return this.maintenanceService.findAll(); }
+    public ResponseEntity<?> findAll(@RequestHeader HttpHeaders headers){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.maintenanceService.findAll(headers));
+        } catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error.");
+        }
+    }
 
     @Operation(summary = "Obtener mantenimiento por su identificación",
             description = "Obtener mantenimiento en base a su identificación proporcionada.")
@@ -52,11 +63,16 @@ public class MaintenanceController {
             @ApiResponse(responseCode = "404", description = "Mantenimiento no encontrada",
                     content = @Content) })
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id) {
+    public ResponseEntity<?> findById(@PathVariable String id,@RequestHeader HttpHeaders headers) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.findById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(maintenanceService.findById(id,headers));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Orden de mantenimiento inexistente");
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. Orden de mantenimiento inexistente");
         }
     }
 
@@ -72,19 +88,23 @@ public class MaintenanceController {
                     content = @Content)
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable String id,@RequestHeader HttpHeaders headers) {
         try {
-            this.maintenanceService.delete(id);
+            this.maintenanceService.delete(id,headers);
             return ResponseEntity.status(HttpStatus.OK).body("Se eliminó correctamente el registro de mantenimiento con id: " + id);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo eliminar el registro de mantenimiento con id: " + id);
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error. No se pudo eliminar el registro de mantenimiento con id: " + id);
         }
     }
 
     /*
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Validated DTORequestMaintenance rDTO) {
+    public ResponseEntity<?> update(@PathVariable String id, @RequestBody @Validated DTORequestMaintenance rDTO) {
         try {
             DTOResponseMaintenance response = maintenanceService.update(id, rDTO);
             return ResponseEntity.status(HttpStatus.OK).body(response);

@@ -25,20 +25,26 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public List<DTOResponseMaintenance> findAll() {
-        return this.maintenanceRepository
-                .findAll()
-                .stream()
-                .map(this::buildMaintenanceDTO)
-                .toList();
+    public List<DTOResponseMaintenance> findAll(HttpHeaders headers) {
+        if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
+            return this.maintenanceRepository
+                    .findAll()
+                    .stream()
+                    .map(this::buildMaintenanceDTO)
+                    .toList();
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
-    public DTOResponseMaintenance findById(Long id) {
-        return this.maintenanceRepository
-                .findById(String.valueOf(id))
-                .map(this::buildMaintenanceDTO)
-                .orElseThrow( () -> new NotFoundException("Maintenance", id));
+    public DTOResponseMaintenance findById(String id,HttpHeaders headers) {
+        if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
+            return this.maintenanceRepository
+                    .findById(id)
+                    .map(this::buildMaintenanceDTO)
+                    .orElseThrow( () -> new NotFoundException("Maintenance", id));
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
@@ -62,25 +68,31 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public void delete(Long id) {
-        this.maintenanceRepository.delete(
-                this.maintenanceRepository.findById(String.valueOf(id))
-                        .orElseThrow( () -> new NotFoundException("Maintenance", id)));
+    public void delete(String id,HttpHeaders headers) {
+        if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
+            this.maintenanceRepository.delete(
+                    this.maintenanceRepository.findById(id)
+                            .orElseThrow( () -> new NotFoundException("Maintenance", id)));
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional
-    public DTOResponseMaintenance update(Long id, DTORequestMaintenance request) {
-        Maintenance maintenance = this.maintenanceRepository.findById(String.valueOf(id)).orElseThrow(
-                () -> new NotFoundException("Maintenance", id));
+    public DTOResponseMaintenance update(String id, DTORequestMaintenance request,HttpHeaders headers) {
+        if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
+            Maintenance maintenance = this.maintenanceRepository.findById(id).orElseThrow(
+                    () -> new NotFoundException("Maintenance", id));
 
-        //Falta chequear que no vengan datos null
-        maintenance.setScooter_id(String.valueOf(request.getScooter_id()));
-        maintenance.setScooter_station_id(String.valueOf(request.getScooter_station_id()));
-        maintenance.setStart_date(request.getStart_date());
-        maintenance.setEnd_date(request.getEnd_date());
+            //Falta chequear que no vengan datos null
+            maintenance.setScooter_id(String.valueOf(request.getScooter_id()));
+            maintenance.setScooter_station_id(String.valueOf(request.getScooter_station_id()));
+            maintenance.setStart_date(request.getStart_date());
+            maintenance.setEnd_date(request.getEnd_date());
 
-        this.maintenanceRepository.save(maintenance);
-        return buildMaintenanceDTO(maintenance);
+            this.maintenanceRepository.save(maintenance);
+            return buildMaintenanceDTO(maintenance);
+        }
+        else throw new NotFoundException("error 500");
     }
 
     @Transactional

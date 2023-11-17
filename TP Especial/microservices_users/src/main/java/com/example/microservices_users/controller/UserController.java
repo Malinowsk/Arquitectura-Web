@@ -46,12 +46,24 @@ public class UserController {
     }
 
     ///////////////////////////////////////////////// ABM //////////////////////////////////////////////////////////////////////////
+    @Operation(summary = "Obtener todos los usuarios",
+            description = "Este endpoint devuelve una lista de todos los usuarios registrados.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json"))
+    })
     @GetMapping("")
     public List<DTOResponseUser> findAll(){
         return this.userService.findAll();
     }
 
 
+    @Operation(summary = "Obtener usuario por ID",
+            description = "Este endpoint devuelve un usuario por su ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json"))
+    })
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserByID(@PathVariable Long id){
         try{
@@ -61,6 +73,12 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Eliminar usuario por ID",
+            description = "Este endpoint elimina un usuario por su ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json"))
+    })
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         try{
@@ -71,6 +89,12 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Editar usuario por ID",
+            description = "Este endpoint edita un usuario por su ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Not Found", content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json"))
+    })
     @PutMapping("/{id}")
     public ResponseEntity<?> editUser(@PathVariable Long id, @RequestBody @Validated DTORequestUser request){
         try {
@@ -81,10 +105,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el usuario con el ID: "+id);
         }
     }
-//////////////////////////////////////////// FUNCIONALIDADES ////////////////////////////////////////////////////////////////////////
-
-
-
 
 
 ////////////////////////////////////////////SERVICIOS-REPORTES////////////////////////////////////////////////////////////////////////
