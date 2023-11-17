@@ -2,7 +2,6 @@ package com.example.microservices_admin_maintenance.service;
 
 import com.example.microservices_admin_maintenance.dto.*;
 import com.example.microservices_admin_maintenance.exception.NotFoundException;
-import com.example.microservices_users.dto.DTOResponseAccount;
 import jakarta.transaction.Transactional;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -33,13 +32,13 @@ public class AdminService {
 
 
     @Transactional
-    public DTOResponseAccount changeAccountStatus(Long accID, DTORequestStatusAccount accDTO, HttpHeaders headers) {
+    public String changeAccountStatus(Long accID, DTORequestStatusAccount accDTO, HttpHeaders headers) {
         if(checkPermissions(headers).is2xxSuccessful()){
             System.out.println("sdfsd");
             HttpHeaders auxHeaders = new HttpHeaders();
             HttpEntity<DTORequestStatusAccount> requestEntity = new HttpEntity<>(accDTO, auxHeaders);
             String user_microservice_uri = "http://localhost:8007/api/accounts/"+accID+"/status";
-            ResponseEntity<DTOResponseAccount> response = this.restTemplate.exchange(user_microservice_uri, HttpMethod.PUT, requestEntity, DTOResponseAccount.class);
+            ResponseEntity<String> response = this.restTemplate.exchange(user_microservice_uri, HttpMethod.PUT, requestEntity, String.class);
             return response.getBody();
         }
         else throw new NotFoundException("error 500");
