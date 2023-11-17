@@ -7,6 +7,8 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class AdminService {
 
@@ -19,12 +21,12 @@ public class AdminService {
 
     //Ubicar monopatín en parada (opcional)
     @Transactional
-    public String assignScooterToStation(Long station_id, DTORequestScooter scooterDTO,HttpHeaders headers) {
+    public DTOResponseScooter assignScooterToStation(Long station_id, DTORequestScooter scooterDTO,HttpHeaders headers) {
         if(checkPermissions(headers).is2xxSuccessful()){
             HttpHeaders auxHeaders = new HttpHeaders();
             HttpEntity<DTORequestScooter> requestEntity = new HttpEntity<>(scooterDTO, auxHeaders);
             String station_microservice_uri = "http://localhost:8003/api/paradas/"+station_id+"/monopatines";
-            return this.restTemplate.exchange(station_microservice_uri, HttpMethod.PUT, requestEntity, String.class).getBody();
+            return this.restTemplate.exchange(station_microservice_uri, HttpMethod.PUT, requestEntity, DTOResponseScooter.class).getBody();
         }
         else throw new NotFoundException("error 500");
 
@@ -46,10 +48,10 @@ public class AdminService {
     }
 
     @Transactional
-    public String scooterReportByAmountOfTripsAndYear(int trip_qty, int year,HttpHeaders headers) {
+    public List scooterReportByAmountOfTripsAndYear(int trip_qty, int year, HttpHeaders headers) {
         if(checkPermissions(headers).is2xxSuccessful()){
             String scooter_microservice_uri = "http://localhost:8003/api/monopatines/cantidad-viajes/"+trip_qty+"/anio/"+year;
-            return restTemplate.getForObject(scooter_microservice_uri, String.class);
+            return restTemplate.getForObject(scooter_microservice_uri, List.class);
         }
         else throw new NotFoundException("error 500");
     }

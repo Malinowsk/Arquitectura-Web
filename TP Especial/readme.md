@@ -92,7 +92,7 @@ c) . Como administrador quiero consultar los monopatines con más de X viajes en
 
 Ejemplo:
 
-* GET   ```http://localhost:8080/api/admin/monopatines/cantidad-de-viajes-mayor-que/1/anio/2001```
+* GET   ```http://localhost:8080/api/admin/monopatines/cantidad-de-viajes-mayor-que/1/anio/2023```
 
 #### Token
 
