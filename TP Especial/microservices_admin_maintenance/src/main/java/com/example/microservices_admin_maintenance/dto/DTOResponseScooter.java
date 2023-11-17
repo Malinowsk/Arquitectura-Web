@@ -1,8 +1,11 @@
 package com.example.microservices_admin_maintenance.dto;
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Getter
+@Data
+@NoArgsConstructor
 public class DTOResponseScooter {
     private Long  id;
     private String state;

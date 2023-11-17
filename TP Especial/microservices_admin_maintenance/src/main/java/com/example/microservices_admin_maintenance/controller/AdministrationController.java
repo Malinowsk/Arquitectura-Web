@@ -3,6 +3,7 @@ package com.example.microservices_admin_maintenance.controller;
 import com.example.microservices_admin_maintenance.dto.DTORequestScooter;
 import com.example.microservices_admin_maintenance.dto.DTORequestScooterModel;
 import com.example.microservices_admin_maintenance.dto.DTORequestStatusAccount;
+import com.example.microservices_admin_maintenance.dto.DTORespondeStatusQualityScooter;
 import com.example.microservices_admin_maintenance.service.AdminService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -149,7 +150,7 @@ public class AdministrationController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Consulta exitosa",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Map.class))),
+                            schema = @Schema(implementation = DTORespondeStatusQualityScooter.class))),
             @ApiResponse(responseCode = "400", description = "Error en la solicitud",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Error interno del servidor",
