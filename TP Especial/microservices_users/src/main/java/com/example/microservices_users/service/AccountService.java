@@ -7,8 +7,6 @@ import com.example.microservices_users.dto.DTOResponseAccount;
 import com.example.microservices_users.entity.Account;
 import com.example.microservices_users.exception.NotFoundException;
 import com.example.microservices_users.repository.AccountRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,7 +51,12 @@ public class AccountService {
         Account account = this.accountRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("No se encontro la cuenta con ID: " + id));
 
-        account.setMoney(request.getMoney());
+        if (request.getMoney() != null)
+            account.setMoney(request.getMoney());
+        if (request.getDate_of_creation() != null)
+            account.setDate_of_creation(request.getDate_of_creation());
+        if (!java.util.Objects.equals(request.isActive(), account.isActive()))
+            account.setActive(request.isActive());
 
         return this.accountRepository.save(account);
     }

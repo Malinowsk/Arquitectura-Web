@@ -13,7 +13,6 @@ import java.util.List;
 public class DTORequestAccount {
     private Double money;
     private Timestamp date_of_creation;
-    private String phone_number = null;
     private boolean active = true;
     private List<User> users = new ArrayList<>();
 }
