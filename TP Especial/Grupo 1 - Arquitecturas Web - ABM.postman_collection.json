@@ -1,0 +1,1314 @@
+{
+	"info": {
+		"_postman_id": "9a03b5b9-edc2-4180-b71b-3c38510a14ab",
+		"name": "Grupo 1 - Arquitecturas Web - ABM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18152194"
+	},
+	"item": [
+		{
+			"name": "Get de Viajes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/viajes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"viajes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Viajes por ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/viajes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"viajes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post de Viaje",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "        {\r\n            \"scooter\": {\r\n                \"id\": 8,\r\n                \"state\": \"disponible\",\r\n                \"location\": {\r\n                                \"latitud\": -44.5732,\r\n                                \"longitud\": -58.4578\r\n                            },\r\n                \"kmsTraveled\": 0.0,\r\n                \"kmsMant\": 0.0,\r\n                \"numbKmsForMaint\": 100.0,\r\n                \"totalUsageTime\": 0,\r\n                \"pausedTime\": 0,\r\n                \"model\": \"Mercedes-Benz\"\r\n            },\r\n            \"idUser\": 5,\r\n            \"idAccount\": 1,\r\n            \"initiated\": \"2022-04-29T18:13:00.000+00:00\",\r\n            \"finalized\": null,\r\n            \"kilometersTraveled\": 0.0,\r\n            \"totalPrice\": 0.0,\r\n            \"pauseTime\": null,\r\n            \"activePause\": false,\r\n            \"id_tarifa\": 3,\r\n            \"finalStation\":1\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/viajes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"viajes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put de Viaje",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"scooter\": {\r\n    \"id\": 8,\r\n    \"state\": \"disponible\",\r\n    \"location\": {\r\n    \"latitud\": -44.5732,\r\n    \"longitud\": -58.4578\r\n    },\r\n    \"kmsTraveled\": 0.0,\r\n    \"kmsMant\": 0.0,\r\n    \"numbKmsForMaint\": 100.0,\r\n    \"totalUsageTime\": 0,\r\n    \"pausedTime\": 0,\r\n    \"model\": \"Mercedes-Benz\"\r\n    },\r\n    \"idUser\": 5,\r\n    \"idAccount\": 1,\r\n    \"initiated\": \"2022-04-29T18:13:00.000+00:00\",\r\n    \"finalized\": \"2023-04-29T18:13:00.000+00:00\",\r\n    \"kilometersTraveled\": 1000.0,\r\n    \"totalPrice\": 10.0,\r\n    \"pauseTime\": null,\r\n    \"activePause\": false,\r\n    \"id_tarifa\": 3,\r\n    \"finalStation\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/viajes/21",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"viajes",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de Viaje",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"scooter\": {\r\n    \"id\": 8,\r\n    \"state\": \"disponible\",\r\n    \"location\": {\r\n    \"latitud\": -44.5732,\r\n    \"longitud\": -58.4578\r\n    },\r\n    \"kmsTraveled\": 0.0,\r\n    \"kmsMant\": 0.0,\r\n    \"numbKmsForMaint\": 100.0,\r\n    \"totalUsageTime\": 0,\r\n    \"pausedTime\": 0,\r\n    \"model\": \"Mercedes-Benz\"\r\n    },\r\n    \"idUser\": 5,\r\n    \"idAccount\": 1,\r\n    \"initiated\": \"2022-04-29T18:13:00.000+00:00\",\r\n    \"finalized\": \"2023-04-29T18:13:00.000+00:00\",\r\n    \"kilometersTraveled\": 1000.0,\r\n    \"totalPrice\": 10.0,\r\n    \"pauseTime\": null,\r\n    \"activePause\": false,\r\n    \"id_tarifa\": 3,\r\n    \"finalStation\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/viajes/21",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"viajes",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Tarifas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"scooter\": {\r\n    \"id\": 8,\r\n    \"state\": \"disponible\",\r\n    \"location\": {\r\n    \"latitud\": -44.5732,\r\n    \"longitud\": -58.4578\r\n    },\r\n    \"kmsTraveled\": 0.0,\r\n    \"kmsMant\": 0.0,\r\n    \"numbKmsForMaint\": 100.0,\r\n    \"totalUsageTime\": 0,\r\n    \"pausedTime\": 0,\r\n    \"model\": \"Mercedes-Benz\"\r\n    },\r\n    \"idUser\": 5,\r\n    \"idAccount\": 1,\r\n    \"initiated\": \"2022-04-29T18:13:00.000+00:00\",\r\n    \"finalized\": \"2023-04-29T18:13:00.000+00:00\",\r\n    \"kilometersTraveled\": 1000.0,\r\n    \"totalPrice\": 10.0,\r\n    \"pauseTime\": null,\r\n    \"activePause\": false,\r\n    \"id_tarifa\": 3,\r\n    \"finalStation\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Tarifas por ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas/6546a76d8703784d0d60d935",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas",
+						"6546a76d8703784d0d60d935"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post de Tarifa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Semana santa\",\r\n        \"cost_per_min\": 15.77,\r\n        \"extended_pause_cost\": 30.80\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put de Tarifa",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Semana1 santa1\",\r\n        \"cost_per_min\": 15.771,\r\n        \"extended_pause_cost\": 301.80\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas/6546a76d8703784d0d60d935",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas",
+						"6546a76d8703784d0d60d935"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de Tarifa",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas/6546a76d8703784d0d60d935",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas",
+						"6546a76d8703784d0d60d935"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Tarifas Programadas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas/programadas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas",
+						"programadas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Tarifas Programadas por ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas/programadas/654ee71b6fd48f7ae9dc175b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas",
+						"programadas",
+						"654ee71b6fd48f7ae9dc175b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post de Tarifa Programada",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\r\n    \"fare_to_update_id\": \"654f6d40267df94bb9d181b8\",\r\n    \"cost_per_min\": 133,\r\n    \"extended_pause_cost\": 244,\r\n    \"scheduled_date\": \"2023-11-10 11:12:00.0\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas/programadas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas",
+						"programadas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put de Tarifas Programadas",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "     {\r\n        \"fare_to_update_id\": \"654f6d40267df94bb9d181b8\",\r\n        \"cost_per_min\": 1335,\r\n        \"extended_pause_cost\": 2445,\r\n        \"scheduled_date\": \"2023-11-10 11:12:00.0\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas/programadas/654ee71b6fd48f7ae9dc175b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas",
+						"programadas",
+						"654ee71b6fd48f7ae9dc175b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de Tarifas Programadas",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/tarifas/programadas/654ee71b6fd48f7ae9dc175b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tarifas",
+						"programadas",
+						"654ee71b6fd48f7ae9dc175b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Monopatines",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/monopatines",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"monopatines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Monopatines por ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/monopatines/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"monopatines",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post de Monopatín",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n       \"model\":\"BMW\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/monopatines",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"monopatines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put de Monopatín",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"state\": \"en_uso\",\r\n        \"kmsTraveled\": 1020.88,\r\n        \"kmsMant\": 1.0,\r\n        \"totalUsageTime\": 1,\r\n        \"pausedTime\": 1,\r\n        \"model\": \"Moto\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/monopatines/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"monopatines",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de Monopatín",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n       \"model\":\"BMW\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/monopatines/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"monopatines",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Paradas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n       \"model\":\"BMW\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/paradas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"paradas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Paradas por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n       \"model\":\"BMW\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/paradas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"paradas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post de Parada",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"movediza\",\r\n        \"location\": {\r\n                        \"latitud\": 0.0,\r\n                        \"longitud\": 0.0\r\n                    },\r\n        \"cantMaxSkateboards\": 10\r\n    }   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/paradas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"paradas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put de Parada",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Lastoninas\",\r\n    \"location\": {\r\n        \"latitud\": -31.6099,\r\n        \"longitud\": -18.3923\r\n    },\r\n    \"cantMaxSkateboards\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/paradas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"paradas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de Parada",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/paradas/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"paradas",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Usuarios",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Usuarios por ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post de Usuario (Registrar Usuario)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Pedro\",\r\n        \"surname\": \"Perez\",\r\n        \"phone_number\": \"34845-453074\",\r\n        \"email\": \"pp@gmail.com\",\r\n        \"accounts\": [1,3],\r\n        \"authorities\": [\"ROLE_ADMIN\",\"ROLE_MAINTENANCE\",\"ROLE_USER\"],\r\n        \"password\": \"123456789\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put de Usuario",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI5MzU4N30.ZM1sTkWiet_gqtFwVSW-MeAmv7Y9nAXtjs12YsZ7tJ1HE1Cj18EY8EbwqpPbmKg-kvy6UMHMtUkQPGwQ7g2L6A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Martin\",\r\n        \"surname\": \"Varela\",\r\n        \"phone_number\": \"34845-453074\",\r\n        \"email\": \"pp@gmail.com\",\r\n        \"accounts\": [1,3],\r\n        \"authorities\": [\"ROLE_ADMIN\",\"ROLE_MAINTENANCE\",\"ROLE_USER\"],\r\n        \"password\": \"123456789\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de Usuario",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI5MzU4N30.ZM1sTkWiet_gqtFwVSW-MeAmv7Y9nAXtjs12YsZ7tJ1HE1Cj18EY8EbwqpPbmKg-kvy6UMHMtUkQPGwQ7g2L6A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Martin\",\r\n        \"surname\": \"Varela\",\r\n        \"phone_number\": \"34845-453074\",\r\n        \"email\": \"pp@gmail.com\",\r\n        \"accounts\": [1,3],\r\n        \"authorities\": [\"ROLE_ADMIN\",\"ROLE_MAINTENANCE\",\"ROLE_USER\"],\r\n        \"password\": \"123456789\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/users/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Cuentas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI5MzU4N30.ZM1sTkWiet_gqtFwVSW-MeAmv7Y9nAXtjs12YsZ7tJ1HE1Cj18EY8EbwqpPbmKg-kvy6UMHMtUkQPGwQ7g2L6A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Martin\",\r\n        \"surname\": \"Varela\",\r\n        \"phone_number\": \"34845-453074\",\r\n        \"email\": \"pp@gmail.com\",\r\n        \"accounts\": [1,3],\r\n        \"authorities\": [\"ROLE_ADMIN\",\"ROLE_MAINTENANCE\",\"ROLE_USER\"],\r\n        \"password\": \"123456789\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Cuentas por ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI5MzU4N30.ZM1sTkWiet_gqtFwVSW-MeAmv7Y9nAXtjs12YsZ7tJ1HE1Cj18EY8EbwqpPbmKg-kvy6UMHMtUkQPGwQ7g2L6A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Martin\",\r\n        \"surname\": \"Varela\",\r\n        \"phone_number\": \"34845-453074\",\r\n        \"email\": \"pp@gmail.com\",\r\n        \"accounts\": [1,3],\r\n        \"authorities\": [\"ROLE_ADMIN\",\"ROLE_MAINTENANCE\",\"ROLE_USER\"],\r\n        \"password\": \"123456789\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/accounts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"accounts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post de Cuenta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"money\": 2000.0,\r\n        \"date_of_creation\": \"2023-11-17T22:39:20.140489500\",\r\n        \"phone_number\": \"154-223344\",\r\n        \"active\": true\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put de Cuenta",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"money\": 3000.0,\r\n        \"date_of_creation\": \"2023-10-17T22:39:20.140489500\",\r\n        \"active\": false\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/accounts/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"accounts",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de Cuenta",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI5MzU4N30.ZM1sTkWiet_gqtFwVSW-MeAmv7Y9nAXtjs12YsZ7tJ1HE1Cj18EY8EbwqpPbmKg-kvy6UMHMtUkQPGwQ7g2L6A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/accounts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"accounts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Mantenimientos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI5MzU4N30.ZM1sTkWiet_gqtFwVSW-MeAmv7Y9nAXtjs12YsZ7tJ1HE1Cj18EY8EbwqpPbmKg-kvy6UMHMtUkQPGwQ7g2L6A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/mantenimientos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mantenimientos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get de Mantenimientos por ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI5MzU4N30.ZM1sTkWiet_gqtFwVSW-MeAmv7Y9nAXtjs12YsZ7tJ1HE1Cj18EY8EbwqpPbmKg-kvy6UMHMtUkQPGwQ7g2L6A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/mantenimientos/654d7380a4b8ed4541c20c88",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mantenimientos",
+						"654d7380a4b8ed4541c20c88"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post de Mantenimiento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI4NjQ5Mn0.JBhsdP8ZicL4ha63LlmPgQgUhVseN7vLEE7Keu8CwZK2mX206AdHmyLpzPXV7Mi7XgQ6m_QWJu0-sc5PAv2z6w",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"scooter_id\":12,\r\n        \"scooter_station_id\":3\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/mantenimientos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mantenimientos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put de Mantenimientos",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDMwMDEwMH0.dYEFS1P44pBgrLqC2TJ3xVGrpaWFph3rfWD_E1IzTZ-FfO3G2YWbCMUV7DMAtUcfDgj0x1tC_FNZbjnYsK117A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"scooter_id\": 2,\r\n    \"scooter_station_id\": 1,\r\n    \"start_date\": \"2025-08-10 10:20:00.0\",\r\n    \"end_date\": \"2025-09-29 12:25:00.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/mantenimientos/654d7380a4b8ed4541c20c89",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mantenimientos",
+						"654d7380a4b8ed4541c20c89"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete de Mantenimiento",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDI5MzU4N30.ZM1sTkWiet_gqtFwVSW-MeAmv7Y9nAXtjs12YsZ7tJ1HE1Cj18EY8EbwqpPbmKg-kvy6UMHMtUkQPGwQ7g2L6A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"end_date\": \"2022-09-29 09:30:00.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/mantenimientos/654d7380a4b8ed4541c20c88",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"mantenimientos",
+						"654d7380a4b8ed4541c20c88"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
