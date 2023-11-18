@@ -78,16 +78,17 @@ public class MaintenanceService {
     }
 
     @Transactional
-    public DTOResponseMaintenance update(String id, DTORequestMaintenance request,HttpHeaders headers) {
+    public DTOResponseMaintenance update(String id, DTORequestMaintenance request, HttpHeaders headers) {
         if(checkPermissions(headers,"mantenimiento").is2xxSuccessful()){
             Maintenance maintenance = this.maintenanceRepository.findById(id).orElseThrow(
                     () -> new NotFoundException("Maintenance", id));
 
-            //Falta chequear que no vengan datos null
             maintenance.setScooter_id(String.valueOf(request.getScooter_id()));
             maintenance.setScooter_station_id(String.valueOf(request.getScooter_station_id()));
-            maintenance.setStart_date(request.getStart_date());
-            maintenance.setEnd_date(request.getEnd_date());
+            if (!request.getStart_date().isEmpty())
+                maintenance.setStart_date(request.getStart_date());
+            if (!request.getEnd_date().isEmpty())
+                maintenance.setEnd_date(request.getEnd_date());
 
             this.maintenanceRepository.save(maintenance);
             return buildMaintenanceDTO(maintenance);
