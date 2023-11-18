@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DTORespondeStatusQualityScooter {
 
-    private long quatity_in_use;
-    private long quatity_maintenance;
+    private long quantity_in_use;
+    private long quantity_maintenance;
 }
