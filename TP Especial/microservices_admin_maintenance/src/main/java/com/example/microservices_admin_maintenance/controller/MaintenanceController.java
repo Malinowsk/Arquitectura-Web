@@ -102,16 +102,16 @@ public class MaintenanceController {
         }
     }
 
-    /*
+
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable String id, @RequestBody @Validated DTORequestMaintenance rDTO) {
+    public ResponseEntity<?> update(@PathVariable String id, @RequestBody @Validated DTORequestMaintenance rDTO, @RequestHeader HttpHeaders headers) {
         try {
-            DTOResponseMaintenance response = maintenanceService.update(id, rDTO);
+            DTOResponseMaintenance response = maintenanceService.update(id, rDTO, headers);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
         }
-    }*/
+    }
 
 ////////////////////////////////////////////FUNCIONALIDADES////////////////////////////////////////////////////////////////////////
 
@@ -153,7 +153,7 @@ public class MaintenanceController {
             @ApiResponse(responseCode = "400", description = "Error al registrar el fin de mantenimiento",
                     content = @Content)
     })
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<?> finishMaintenance(@PathVariable String id,@RequestHeader HttpHeaders headers) {
         try {
             DTOResponseMaintenance response = maintenanceService.endScooterMaintenance(id,headers);
