@@ -1009,7 +1009,28 @@ Ejemplo:
 --------------------------------------------------------------------------------------------------------------------
 #### Crear una cuenta
 
-* 
+* POST   ```http://localhost:8080/api/accounts```
+
+#### Request body
+
+```
+    {
+        "money": 2000.0,
+        "date_of_creation": "2023-11-17T22:39:20.140489500",
+        "phone_number": "154-223344",
+        "active": true
+    }
+```
+
+#### Token
+
+* ejemplo:
+
+```
+    {
+        "id_token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcEBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9BRE1JTixST0xFX01BSU5URU5BTkNFLFJPTEVfVVNFUiIsImV4cCI6MTcwMDA5Njc3N30.HNM_cujayJgqfbqLJdGRPIIqCRI8VF-NkCDNrzdyBFjGmCyVTlELFxQ4d8-J2aF-7vwufsSoa-Xi0usHUqp2nQ"
+    }
+```
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1026,7 +1047,11 @@ Ejemplo:
 * ejemplo:
 
 ```
-   
+   {
+        "money": 3000.0,
+        "date_of_creation": "2023-10-17T22:39:20.140489500",
+        "active": false
+    }
 ```
 
 #### Token
