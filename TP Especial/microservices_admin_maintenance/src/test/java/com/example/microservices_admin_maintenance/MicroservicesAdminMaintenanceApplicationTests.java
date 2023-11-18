@@ -2,9 +2,7 @@ package com.example.microservices_admin_maintenance;
 
 import com.example.microservices_admin_maintenance.controller.AdministrationController;
 import com.example.microservices_admin_maintenance.controller.FareController;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,13 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -64,7 +60,7 @@ class MicroservicesAdminMaintenanceApplicationTests {
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/tarifas/1")
                 .accept(MediaType.APPLICATION_JSON).headers(headers);
 
-        MvcResult result = mockMvc.perform(requestBuilder)
+        mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.id", is("654123")))
@@ -73,6 +69,13 @@ class MicroservicesAdminMaintenanceApplicationTests {
 
     @Test
     public void getAllFares() throws Exception {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Connection", "keep-alive");
+        headers.add("Accept-Encoding", "gzip, deflate, br");
+        headers.add("Accept", "/");
+
         
 
     }

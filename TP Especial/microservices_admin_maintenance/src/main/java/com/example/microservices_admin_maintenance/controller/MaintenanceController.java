@@ -109,6 +109,7 @@ public class MaintenanceController {
             DTOResponseMaintenance response = maintenanceService.update(id, rDTO, headers);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
+            e.getMessage();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontró el registro de mantenimiento con el ID proporcionado.");
         }
     }
