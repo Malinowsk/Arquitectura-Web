@@ -210,11 +210,11 @@ Registrar monopatín en mantenimiento (debe marcarse como no disponible para su 
 --------------------------------------------------------------------------------------------------------------------
 Registrar fin de mantenimiento de monopatín
 
-* PUT   ```http://localhost:8080/api/mantenimientos/{id}```
+* PATCH   ```http://localhost:8080/api/mantenimientos/{id}```
 
 Ejemplo:
 
-* PUT   ```http://localhost:8080/api/mantenimientos/655568a41a12871998c05582```
+* PATCH   ```http://localhost:8080/api/mantenimientos/655568a41a12871998c05582```
 
 #### Token
 
@@ -1107,7 +1107,12 @@ Ejemplo:
 * ejemplo:
 
 ```
-   
+   {
+        "scooter_id": 12,
+        "scooter_station_id": 3,
+        "start_date": "2000-11-17T22:39:20.140489500",
+        "end_date": "2021-11-17T22:39:30.638081"
+    }
 ```
 
 #### Token
