@@ -73,6 +73,7 @@ class MicroservicesAdminMaintenanceApplicationTests {
 
     @Test
     public void getAllFares() throws Exception {
+        
 
     }
 
