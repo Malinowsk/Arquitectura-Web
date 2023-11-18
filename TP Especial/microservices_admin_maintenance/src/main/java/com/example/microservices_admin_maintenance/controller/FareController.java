@@ -180,6 +180,20 @@ public class FareController {
 
     }
 
+    @GetMapping("/programadas/{id}")
+    public ResponseEntity<?> getScheduledFareById(@PathVariable String id, @RequestHeader HttpHeaders headers) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(fareService.findScheduledFareById(id, headers));
+        }catch (Exception e) {
+            if(e.getMessage().contains("403"))
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
+            else if (e.getMessage().contains("401")) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticación no válida.");
+            } else
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ocurrió un error, revise los datos ingresados.");
+        }
+    }
+
     @Operation(summary = "Modificar entidad de ajuste de precio programado",
             description = "Permite a un administrador modificar un ajuste de precios programado.")
     @ApiResponses(value = {

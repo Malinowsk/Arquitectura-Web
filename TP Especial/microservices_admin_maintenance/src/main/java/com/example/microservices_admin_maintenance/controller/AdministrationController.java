@@ -51,6 +51,7 @@ public class AdministrationController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(adminService.assignScooterToStation(station_id, scooterDTO,headers));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             if(e.getMessage().contains("403"))
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No cuenta con el rol necesario.");
             else if (e.getMessage().contains("401")) {

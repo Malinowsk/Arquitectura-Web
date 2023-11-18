@@ -44,7 +44,7 @@
 --------------------------------------------------------------------------------------------------------------------
 a) . Como encargado de mantenimiento quiero poder generar un reporte de uso de monopatines por kilómetros para establecer si un monopatín requiere de mantenimiento. Este reporte debe poder configurarse para incluir (o no) los tiempos de pausa.
 
-* GET   ```http://localhost:8080/api/mantenimiento/reporte-monopatines-por-km/con-pausas/{stringBoolean}```
+* GET   ```http://localhost:8080/api/mantenimientos/reporte-monopatines-por-km/con-pausas/{stringBoolean}```
 
 Ejemplo:
 
@@ -658,7 +658,7 @@ Ejemplo:
 ```
 
 --------------------------------------------------------------------------------------------------------------------
-### ABM Tarifas Programas:
+### ABM Tarifas Programadas:
 
 --------------------------------------------------------------------------------------------------------------------
 #### Recuperar todos las tarifas programas

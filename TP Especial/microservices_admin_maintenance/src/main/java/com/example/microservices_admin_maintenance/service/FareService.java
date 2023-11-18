@@ -8,10 +8,7 @@ import com.example.microservices_admin_maintenance.repository.FareRepository;
 import com.example.microservices_admin_maintenance.repository.ScheduledFareUpdateRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -105,6 +102,16 @@ public class FareService {
                     .toList();
         }
         else throw new NotFoundException("error 500");
+    }
+
+    @Transactional
+    public DTOScheduledFareResponse findScheduledFareById(String id, HttpHeaders headers) {
+        if(checkPermissions(headers).is2xxSuccessful()) {
+            return this.scheduledFareUpdateRepository
+                    .findById(String.valueOf(id))
+                    .map(DTOScheduledFareResponse::new)
+                    .orElseThrow( () -> new NotFoundException("Maintenance", id));
+        } else throw new NotFoundException("error 500");
     }
 
     @Transactional
