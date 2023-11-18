@@ -39,11 +39,9 @@ public class User implements Serializable {
 
 
     @ManyToMany (fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<Account> account_list;
 
     @ManyToMany (fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<Authority> authorities;
 
 
